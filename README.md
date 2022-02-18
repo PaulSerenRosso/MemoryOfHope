@@ -15,6 +15,6 @@ As the prototype explores Lazarus, it will activate Memory Modules that will pro
 
 ## Development Team
 
-![](ReadMe/DevelopmentTeam.PNG)
+![](DevelopmentTeam.PNG)
 
 
