@@ -11,6 +11,10 @@ public class PlayerManager : MonoBehaviour
     public int money;
     [SerializeField] private PlayerController playerController;
     
+    public InputMaster playerActions;
+
+    public List<Glitch> allGlitches;
+    
     public static PlayerManager instance;
     private void Awake()
     {
@@ -20,6 +24,8 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        playerActions = new InputMaster();
     }
 
     public void AddModule(Module mod)
@@ -27,6 +33,16 @@ public class PlayerManager : MonoBehaviour
         mod.LinkModule();
         playerController.activeModules.Add(mod);
         obtainedModule.Add(mod);
+    }
+    
+    private void OnEnable()
+    {
+        playerActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerActions.Disable();
     }
         
 }

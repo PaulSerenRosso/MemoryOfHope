@@ -11,7 +11,8 @@
                     "id": "b4bc967c-b188-4d1e-a590-7a4f7dc46524",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Move",
@@ -19,7 +20,17 @@
                     "id": "cbb6a423-44f6-4b10-8437-001b71891669",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Glitch",
+                    "type": "Button",
+                    "id": "1b413707-be9f-4a18-9441-86349a530a45",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -88,6 +99,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f3401ca8-299c-4304-8661-883d636bfd25",
+                    "path": "<Keyboard>/g",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Glitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
