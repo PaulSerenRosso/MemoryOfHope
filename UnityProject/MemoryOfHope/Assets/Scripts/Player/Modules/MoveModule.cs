@@ -11,8 +11,8 @@ public class MoveModule : Module
     {
         Debug.Log("Linking Inputs for Move Module");
         player = GetComponent<Rigidbody>();
-        playerActions.actionMaps[0].actions[1].performed += context => InputPressed(context);
-        playerActions.actionMaps[0].actions[1].canceled += context => InputReleased(context);
+        PlayerManager.instance.playerActions.Player.Jump.performed += context => InputPressed(context);
+        PlayerManager.instance.playerActions.Player.Jump.canceled += context => InputReleased(context);
     }
     
     public override void InputPressed(InputAction.CallbackContext ctx)
@@ -44,13 +44,4 @@ public class MoveModule : Module
         
     }
     
-    private void OnEnable()
-    {
-        playerActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerActions.Disable();
-    }
 }

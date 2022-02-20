@@ -14,8 +14,8 @@ public class JumpModule : Module
     {
         Debug.Log("Linking Inputs for Jump Module");
         player = GetComponent<Rigidbody>();
-        playerActions.actionMaps[0].actions[0].performed += context => InputPressed(context);
-        playerActions.actionMaps[0].actions[0].canceled += context => InputReleased(context);
+        PlayerManager.instance.playerActions.Player.Jump.performed += context => InputPressed(context);
+        PlayerManager.instance.playerActions.Player.Jump.canceled += context => InputReleased(context);
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)
@@ -48,15 +48,6 @@ public class JumpModule : Module
         
     }
     
-    private void OnEnable()
-    {
-        playerActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerActions.Disable();
-    }
 
     /*public override bool Conditions()
     {
