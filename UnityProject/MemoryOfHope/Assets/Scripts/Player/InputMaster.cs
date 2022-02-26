@@ -53,13 +53,40 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""75bd5528-4e79-4dea-ab6a-7aba45b3089f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenCloseMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""df62dc6e-43dc-4594-83ff-7804a1705148"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MovingOnMap"",
+                    ""type"": ""Value"",
+                    ""id"": ""84429ab2-2968-4199-b8b1-c58219159c38"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""8b633f8c-c5f7-49bd-a38b-de5becec14da"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -68,65 +95,54 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""1874c302-0877-4de2-adc3-03b0ea1d2cba"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""b75cb467-474d-4c68-8287-915b8e147414"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Move"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""e83de52b-8be4-4d22-a68f-c2a8c5ae85c8"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
+                    ""name"": """",
+                    ""id"": ""ec76111c-eade-4157-acd5-5a0aa93f53c3"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""87b83e02-c15a-4ff9-b9ff-88104f3aa149"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""467b1a87-0f8c-4fab-856c-8a90781ee12b"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""50468495-0ffb-4fb1-b678-00bea16e73c4"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f3401ca8-299c-4304-8661-883d636bfd25"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": ""Press"",
+                    ""id"": ""c6a8f7c0-63f1-404e-97d0-b2bfc9f01181"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCloseMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""726261f8-f03b-46b1-b40f-669ab6cc3a38"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovingOnMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""771898e6-9407-420e-8067-77f63e32b670"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Glitch"",
@@ -143,6 +159,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Glitch = m_Player.FindAction("Glitch", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_OpenCloseMap = m_Player.FindAction("OpenCloseMap", throwIfNotFound: true);
+        m_Player_MovingOnMap = m_Player.FindAction("MovingOnMap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +224,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Glitch;
+    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_OpenCloseMap;
+    private readonly InputAction m_Player_MovingOnMap;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -212,6 +234,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Glitch => m_Wrapper.m_Player_Glitch;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @OpenCloseMap => m_Wrapper.m_Player_OpenCloseMap;
+        public InputAction @MovingOnMap => m_Wrapper.m_Player_MovingOnMap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +255,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Glitch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGlitch;
                 @Glitch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGlitch;
                 @Glitch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGlitch;
+                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @OpenCloseMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenCloseMap;
+                @OpenCloseMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenCloseMap;
+                @OpenCloseMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenCloseMap;
+                @MovingOnMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovingOnMap;
+                @MovingOnMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovingOnMap;
+                @MovingOnMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovingOnMap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +277,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Glitch.started += instance.OnGlitch;
                 @Glitch.performed += instance.OnGlitch;
                 @Glitch.canceled += instance.OnGlitch;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @OpenCloseMap.started += instance.OnOpenCloseMap;
+                @OpenCloseMap.performed += instance.OnOpenCloseMap;
+                @OpenCloseMap.canceled += instance.OnOpenCloseMap;
+                @MovingOnMap.started += instance.OnMovingOnMap;
+                @MovingOnMap.performed += instance.OnMovingOnMap;
+                @MovingOnMap.canceled += instance.OnMovingOnMap;
             }
         }
     }
@@ -252,5 +295,8 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnGlitch(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnOpenCloseMap(InputAction.CallbackContext context);
+        void OnMovingOnMap(InputAction.CallbackContext context);
     }
 }

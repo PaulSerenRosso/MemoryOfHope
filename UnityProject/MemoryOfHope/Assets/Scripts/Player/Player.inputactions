@@ -31,13 +31,40 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "75bd5528-4e79-4dea-ab6a-7aba45b3089f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenCloseMap",
+                    "type": "Button",
+                    "id": "df62dc6e-43dc-4594-83ff-7804a1705148",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MovingOnMap",
+                    "type": "Value",
+                    "id": "84429ab2-2968-4199-b8b1-c58219159c38",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "8b633f8c-c5f7-49bd-a38b-de5becec14da",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -46,65 +73,54 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "1874c302-0877-4de2-adc3-03b0ea1d2cba",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "b75cb467-474d-4c68-8287-915b8e147414",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "groups": "",
                     "action": "Move",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "e83de52b-8be4-4d22-a68f-c2a8c5ae85c8",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
+                    "name": "",
+                    "id": "ec76111c-eade-4157-acd5-5a0aa93f53c3",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Attack",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "87b83e02-c15a-4ff9-b9ff-88104f3aa149",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "467b1a87-0f8c-4fab-856c-8a90781ee12b",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "50468495-0ffb-4fb1-b678-00bea16e73c4",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f3401ca8-299c-4304-8661-883d636bfd25",
-                    "path": "<Keyboard>/g",
-                    "interactions": "Press",
+                    "id": "c6a8f7c0-63f1-404e-97d0-b2bfc9f01181",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenCloseMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "726261f8-f03b-46b1-b40f-669ab6cc3a38",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovingOnMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "771898e6-9407-420e-8067-77f63e32b670",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Glitch",
