@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 
 public abstract class Module : MonoBehaviour
 {
+  
     public int index;
     public bool isFixedUpdate;
     public bool isPerformed;
     public List<Module> contrainstModules;
     public List<Module> neededModules;
+ 
 
     public bool inputPressed;
 
@@ -27,7 +29,7 @@ public abstract class Module : MonoBehaviour
             return false; // Faux si un module contraint
         }
         if (!CheckNeededModules())
-        {
+        { 
             return false; // Faux si un module nécessaire est manquant
         }
         if (!CheckInput())
