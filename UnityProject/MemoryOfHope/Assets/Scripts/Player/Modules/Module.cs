@@ -6,15 +6,15 @@ using UnityEngine.InputSystem;
 
 public abstract class Module : MonoBehaviour
 {
+  
     public int index;
     public bool isFixedUpdate;
     public bool isPerformed;
     public List<Module> contrainstModules;
     public List<Module> neededModules;
+ 
 
     public bool inputPressed;
-
-    public InputActionAsset playerActions;
 
     public abstract void LinkModule();
     
@@ -26,17 +26,14 @@ public abstract class Module : MonoBehaviour
     {
         if (!CheckConstraintModules())
         {
-            Debug.Log("Module contraignant pour " + index);
             return false; // Faux si un module contraint
         }
         if (!CheckNeededModules())
-        {
-            Debug.Log("Module manquant pour " + index);
+        { 
             return false; // Faux si un module nécessaire est manquant
         }
         if (!CheckInput())
         { 
-            Debug.Log("Input non pressé pour " + index);
             return false; // Faux si pas d'input pressé
         }
         
