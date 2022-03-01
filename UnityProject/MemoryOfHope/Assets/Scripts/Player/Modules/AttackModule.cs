@@ -59,9 +59,10 @@ public class AttackModule : Module
 
     public override void Release()
     {
+        
+      
     }
 
-    
     private void Update()
     {
         if (inCombo)
@@ -115,6 +116,22 @@ public class AttackModule : Module
 
     void WaitToDamage()
     {
+        List<Module> allModule = new List<Module>();
+        allModule.AddRange(PlayerController.instance.activeModulesFixed);
+        allModule.AddRange(  PlayerController.instance.activeModulesUpdate);
+        
+        for (int i = 0; i < allModule.Count; i++)
+        {   if (allModule[i].inputPressed)
+            {
+                if (allModule[i] != this)
+                {
+                    PlayerController.instance.playerAnimator.Play("Idle");
+                    currentStateCombo = StateCombo.End;
+                    return;
+                }
+            }
+        }
+        
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
             switch (attackList[currentIndexAttack].playerAttackType)
@@ -140,9 +157,12 @@ public class AttackModule : Module
                     break;
                 }
             }
+            
 
             currentStateCombo = StateCombo.InDamage;
         }
+        
+        
     }
 
     void InDamage()
@@ -211,6 +231,7 @@ public class AttackModule : Module
 
     void EndAttack()
     {
+        isPerformed = false;
         canMove = false;
         attackTimer = 0;
         inCombo = false;
