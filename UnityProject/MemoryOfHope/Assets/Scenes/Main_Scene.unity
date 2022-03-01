@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30587295, g: 0.12269637, b: 0.42533475, a: 1}
+  m_IndirectSpecularColor: {r: 0.30587444, g: 0.12269706, b: 0.42533684, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3551,8 +3551,11 @@ MonoBehaviour:
   neededModules: []
   inputPressed: 0
   gravityJump: 0.1
-  maxHeightJump: 2
+  maxHeightJump: 6
   speedJump: 3
+  minHeightJump: 3
+  inputMaxTime: 1.5
+  inputMinTime: 0.05
 --- !u!114 &919132147971902765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3631,7 +3634,7 @@ MonoBehaviour:
   neededModules: []
   inputPressed: 0
   attackList:
-  - startTimeActivateAttack: 0.05
+  - startTimeActivateAttack: 0.08
     endTimeActivateAttack: 1
     startTimeCombo: 1.1
     endTimeCombo: 3
@@ -3662,7 +3665,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     playerAttackType: 0
-  - startTimeActivateAttack: 0.05
+  - startTimeActivateAttack: 0.13
     endTimeActivateAttack: 1
     startTimeCombo: 1.1
     endTimeCombo: 3
@@ -3693,7 +3696,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     playerAttackType: 1
-  - startTimeActivateAttack: 0.05
+  - startTimeActivateAttack: 0.25
     endTimeActivateAttack: 2
     startTimeCombo: 1.1
     endTimeCombo: 3
