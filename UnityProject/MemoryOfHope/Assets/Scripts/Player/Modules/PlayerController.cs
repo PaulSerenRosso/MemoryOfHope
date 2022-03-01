@@ -128,11 +128,14 @@ public class PlayerController : MonoBehaviour
 
     void CalculateUndoVelocity()
     {
-        if (undoVelocity != Vector3.zero)
+        if (undoVelocity != Vector3.zero )
         {
             physicsFactor = oldVelocity - playerRb.velocity;
-            undoVelocity += physicsFactor;
-            finalVelocity += undoVelocity;
+            if (physicsFactor.magnitude <= undoVelocity.magnitude)
+            { 
+                undoVelocity += physicsFactor;
+                finalVelocity += undoVelocity;
+            }
             undoVelocity = Vector3.zero;
         }
     }
@@ -166,16 +169,13 @@ public class PlayerController : MonoBehaviour
 
     void CheckNormals()
     {
-        if (finalVelocity != Vector3.zero)
-        {
-            playerRb.velocity += finalVelocity;
+        playerRb.velocity += finalVelocity;
              oldVelocity = playerRb.velocity;
             if (onGround && stuckGround)
             {
                 projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
                 alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
                 projectionRB *= alignedSpeed;
-
                 playerRb.velocity = projectionRB;
             }
             else if (!onGround && currentWall != null)
@@ -184,10 +184,11 @@ public class PlayerController : MonoBehaviour
                 {
                     projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
                     alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
+                    projectionRB *= alignedSpeed;
+                    playerRb.velocity = projectionRB;
                 }
             }
-        }
-       
+
     }
 
     void CheckModuleUpdate()
