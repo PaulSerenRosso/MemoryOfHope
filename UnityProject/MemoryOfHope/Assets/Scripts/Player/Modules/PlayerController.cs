@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerComponent")] public Rigidbody playerRb;
     public Animator playerAnimator;
     public InputMaster playerActions;
+    public List<Transform> interactiveObjects = new List<Transform>();
+    public GameObject nearestObject;
+    private List<float> distances = new List<float>();
+    public bool isGlitching;
 
     #endregion
     
@@ -102,6 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckModuleUpdate();
         CheckCurrentModuleUpdate();
+        CheckNearestObject();
     }
 
     void FixedUpdate()
@@ -283,6 +289,47 @@ public class PlayerController : MonoBehaviour
                 currentWall = null;
                 currentNormalWall = Vector3.zero;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Ajoute l'objet a une liste : les objets avec lesquels on peut interagir
+        if (other.CompareTag("Interactible") && !interactiveObjects.Contains(other.transform))
+        {
+            interactiveObjects.Add(other.transform);
+        }
+    }
+
+    private void CheckNearestObject() // Check tous les objets interactibles et renvoie le plus proche
+    {
+        if (interactiveObjects.Count != 0)
+        {
+            distances.Clear();
+            for (int i = 0; i < interactiveObjects.Count; i++)
+            {
+                Transform obj = interactiveObjects[i];
+                float distance = Vector3.Distance(transform.position, obj.position);
+                distances.Add(distance);
+                distances.Sort();
+                if (Math.Abs(distances[0] - distance) < 0.001f)
+                {
+                    nearestObject = obj.gameObject;
+                }
+            }
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        // Retire l'objet de la liste d'objets avec lesquels on peut interagir
+        if (other.CompareTag("Interactible") && interactiveObjects.Contains(other.transform))
+        {
+            if (nearestObject == other.gameObject)
+            {
+                nearestObject = null;
+            }
+            interactiveObjects.Remove(other.transform);
         }
     }
 

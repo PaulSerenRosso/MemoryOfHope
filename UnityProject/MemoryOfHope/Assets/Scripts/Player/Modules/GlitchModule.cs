@@ -45,10 +45,8 @@ public class GlitchModule : Module
     
     public override void Execute()
     {
-        Debug.Log("execute");
         if (!isPerformed)
         {
-            Debug.Log("test");
             StartCoroutine(PerformingGlitch());
         }
     }
