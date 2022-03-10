@@ -22,8 +22,9 @@ public static class GizmosParameter
     public class Base
     {
         public GizmosType shapeType;
-        public bool DrawWhenSelect;
-        public Color ColorGizmos;
+          public Color ColorGizmos;
+          public bool DrawWhenSelect;
+      
     }
 
     [Serializable]

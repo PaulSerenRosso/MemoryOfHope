@@ -7,5 +7,7 @@ using UnityEngine;
 public class FastGizmos
 {
  public GizmosType Type;
+ public GizmosDescription Name; 
  public GizmosParameter.Base Parameter;
+
 }
