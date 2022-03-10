@@ -18,6 +18,7 @@ public class JumpModule : Module
     private float yStartPosition;
     private float yEndMinPosition;
 
+    [SerializeField] private MoveModule moveModule;
     [SerializeField]
     private float minHeightJump;
     [SerializeField]
@@ -62,7 +63,8 @@ public class JumpModule : Module
                 yEndMinPosition = yStartPosition + minHeightJump;
                 PlayerController.instance.stuckGround = false;
                 isPerformed = true; 
-                
+                PlayerController.instance.currentGravity = gravityJump;
+                PlayerController.instance.currentVelocity += moveModule.moveVector;
             }  
             if(inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
         }
@@ -82,6 +84,7 @@ public class JumpModule : Module
                  {
                      float factorTime = inputTimer/ inputMaxTime;
                      yCurrentEndMaxPosition = factorTime*maxHeightJump+yStartPosition;
+                     Debug.Log(yCurrentEndMaxPosition);
                  }
                  else if (PlayerController.instance.playerRb.position.y <= yCurrentEndMaxPosition)
                  {

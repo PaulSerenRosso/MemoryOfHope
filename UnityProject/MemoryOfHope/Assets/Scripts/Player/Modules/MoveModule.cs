@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class MoveModule : Module
 {
     private Vector2 inputVector;
-    private Vector3 moveVector;
+    public Vector3 moveVector;
     [SerializeField] private float defaultSpeedMovment;
     [SerializeField] private float defaultSpeedRotationOppositeRun;
     [SerializeField] private float defaultSpeedRotation;
