@@ -1,5 +1,7 @@
 using System;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 [Serializable]
 public class S_PositionState : EnemyState
@@ -24,14 +26,15 @@ public class S_PositionState : EnemyState
     
     public override void UpdateState(EnemyMachine enemyMachine)
     {
+        float distance = enemyMachine.agent.remainingDistance;
+
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, detectionDistance))
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pursuitState);
         }
-        else if(ConditionState.CheckDistance(enemyMachine.transform.position, 
-            PlayerController.instance.transform.position, hidingDistance))
+        else if(!float.IsPositiveInfinity(distance) && enemyMachine.agent.pathStatus == NavMeshPathStatus.PathComplete && distance <= .01f)
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.hidingState);

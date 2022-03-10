@@ -25,10 +25,11 @@ public class S_PursuitState : EnemyState
     }
 
 
-    public override void OnCollisionEnterState(EnemyMachine enemyMachine, Collision other)
+    public override void OnCollisionStayState(EnemyMachine enemyMachine, Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("touched");
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pauseHitState);
         }

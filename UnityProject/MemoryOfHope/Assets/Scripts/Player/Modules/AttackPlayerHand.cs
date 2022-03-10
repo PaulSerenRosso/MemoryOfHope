@@ -24,10 +24,6 @@ public class AttackPlayerHand : MonoBehaviour
     
     public void AddGlitch() // Pour tester
     {
-        PlayerManager.instance.allGlitches.Add(new Glitch
-        {
-            duration = 10f
-        });
-        UIInstance.instance.SetGlitchesOnDisplay(true);
+        PlayerManager.instance.hasGlitch = true; 
     }
 }

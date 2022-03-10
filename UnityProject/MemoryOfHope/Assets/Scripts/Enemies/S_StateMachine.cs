@@ -28,6 +28,7 @@ public class S_StateMachine : EnemyMachine
     
     public void Start()
     {
+        initialPosition = transform.position;
         currentState = defaultState;
         currentState.StartState(this);
     }
@@ -43,8 +44,8 @@ public class S_StateMachine : EnemyMachine
         state.StartState(this);
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnCollisionStay(Collision other)
     {
-        currentState.OnCollisionEnterState(this, other);
+        currentState.OnCollisionStayState(this, other);
     }
 }

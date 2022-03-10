@@ -15,8 +15,6 @@ public class S_DefautState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        Debug.Log("Default state !");
-
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, detectionDistance))
         {
