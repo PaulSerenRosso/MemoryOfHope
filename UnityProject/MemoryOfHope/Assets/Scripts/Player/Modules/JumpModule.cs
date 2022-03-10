@@ -64,6 +64,7 @@ public class JumpModule : Module
                 PlayerController.instance.stuckGround = false;
                 isPerformed = true; 
                 PlayerController.instance.currentGravity = gravityJump;
+                if(moveModule.inputPressed)
                 PlayerController.instance.currentVelocity += moveModule.moveVector;
             }  
             if(inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
@@ -74,10 +75,10 @@ public class JumpModule : Module
         if (isPerformed)
         {
              if (PlayerController.instance.playerRb.position.y <= yEndMinPosition)
-                        {
-                            float currentSpeed = speedJump - PlayerController.instance.playerRb.velocity.y;
-                            PlayerController.instance.currentVelocity += currentSpeed*Vector3.up;
-                        }
+             {
+                 float currentSpeed = speedJump - PlayerController.instance.playerRb.velocity.y;
+                 PlayerController.instance.currentVelocity += currentSpeed*Vector3.up;
+             }
              else if( inputTimer > inputMinTime) 
              {
                  if (yCurrentEndMaxPosition == 0)
@@ -96,6 +97,7 @@ public class JumpModule : Module
                      inputTimer = 0;
                      inExecute = false;
                      PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
+                     PlayerController.instance.currentGravity = 0; 
                      PlayerController.instance.currentGravity = 0; 
                      PlayerController.instance.stuckGround = true;
                      isPerformed = false;
