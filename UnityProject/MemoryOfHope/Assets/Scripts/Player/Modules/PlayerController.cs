@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnimator;
     public InputMaster playerActions;
     public List<Transform> interactiveObjects = new List<Transform>();
-    private GameObject nearestObject;
+    public GameObject nearestObject;
     private List<float> distances = new List<float>();
+    public bool isGlitching;
 
     #endregion
     
@@ -323,6 +324,10 @@ public class PlayerController : MonoBehaviour
         // Retire l'objet de la liste d'objets avec lesquels on peut interagir
         if (other.CompareTag("Interactible") && interactiveObjects.Contains(other.transform))
         {
+            if (nearestObject == other.gameObject)
+            {
+                nearestObject = null;
+            }
             interactiveObjects.Remove(other.transform);
         }
     }

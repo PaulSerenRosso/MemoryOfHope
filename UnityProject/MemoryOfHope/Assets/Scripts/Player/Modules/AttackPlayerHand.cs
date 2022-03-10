@@ -11,11 +11,23 @@ public class AttackPlayerHand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Glitch"))
+        {
+            AddGlitch();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         
+    }
+    
+    public void AddGlitch() // Pour tester
+    {
+        PlayerManager.instance.allGlitches.Add(new Glitch
+        {
+            duration = 10f
+        });
+        UIInstance.instance.SetGlitchesOnDisplay(true);
     }
 }

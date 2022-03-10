@@ -18,8 +18,6 @@ public class MoveModule : Module
 
     public override void LinkModule()
     {
-       
-
         PlayerController.instance.playerActions.Player.Move.performed += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.Move.canceled += context => InputReleased(context);
     }
@@ -97,7 +95,6 @@ public class MoveModule : Module
 
     public override void Release()
     {
-        Debug.Log("release");
         isPerformed = false;
         PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
     }
