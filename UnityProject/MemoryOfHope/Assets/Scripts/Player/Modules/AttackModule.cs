@@ -138,22 +138,22 @@ public class AttackModule : Module
             {
                 case PlayerAttackType.LeftHand:
                 {
-                    leftHand.enabled = true;
+                    leftHand.collider.enabled = true;
                     leftHand.currentDamage = attackList[currentIndexAttack].damage;
                     break;
                 }
                 case PlayerAttackType.RightHand:
                 {
                     rightHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.enabled = true;
+                    rightHand.collider.enabled = true;
                     break;
                 }
                 case PlayerAttackType.Both:
                 {
                     leftHand.currentDamage = attackList[currentIndexAttack].damage;
                     rightHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.enabled = true;
-                    leftHand.enabled = true;
+                    rightHand.collider.enabled = true;
+                    leftHand.collider.enabled = true;
                     break;
                 }
             }
@@ -174,21 +174,21 @@ public class AttackModule : Module
                 case PlayerAttackType.LeftHand:
                 {
                     leftHand.currentDamage = 0;
-                    leftHand.enabled = false;
+                    leftHand.collider.enabled = false;
                     break;
                 }
                 case PlayerAttackType.RightHand:
                 {
                     rightHand.currentDamage = 0;
-                    rightHand.enabled = false;
+                    rightHand.collider.enabled = false;
                     break;
                 }
                 case PlayerAttackType.Both:
                 {
                     leftHand.currentDamage = 0;
                     rightHand.currentDamage = 0;
-                    rightHand.enabled = false;
-                    leftHand.enabled = false;
+                    rightHand.collider.enabled = false;
+                    leftHand.collider.enabled = false;
                     break;
                 }
             }
