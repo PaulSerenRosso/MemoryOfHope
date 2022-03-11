@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public abstract class EnemyState
 {
+
     public virtual void StartState(EnemyMachine enemyMachine)
     {
         

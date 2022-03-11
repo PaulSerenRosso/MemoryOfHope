@@ -4,10 +4,9 @@ using UnityEngine;
 public class PA_PauseAttackState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float durationBeforeAttack;
+    [Range(0, 1)] [SerializeField] private float durationBeforeAttack;
     
-    [Header("Fixed variables")]
-    [SerializeField] private float timer;
+    private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {

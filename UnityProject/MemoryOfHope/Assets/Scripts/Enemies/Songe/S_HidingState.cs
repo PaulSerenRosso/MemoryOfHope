@@ -5,10 +5,9 @@ using UnityEngine;
 public class S_HidingState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float durationBeforeHiding;
+    [Range(0, 1)] [SerializeField] private float durationBeforeHiding;
     
-    [Header("Fixed variables")]
-    [SerializeField] private float timer;
+    private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {

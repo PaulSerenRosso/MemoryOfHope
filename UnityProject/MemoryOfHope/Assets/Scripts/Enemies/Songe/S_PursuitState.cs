@@ -5,19 +5,26 @@ using UnityEngine;
 public class S_PursuitState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float maxDistance;
+    [Range(1, 5)] [SerializeField] private float speed;
+    
+    private float pursuitDistance;
+    private Vector3 initialPos;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        S_StateMachine enemy = (S_StateMachine) enemyMachine;
+        pursuitDistance = enemy.pursuitDistance;
+        initialPos = enemy.initialPosition;
         enemyMachine.material.color = Color.blue;
         enemyMachine.agent.isStopped = false;
+        enemyMachine.agent.speed = speed;
     }
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
         
-        if (!ConditionState.CheckDistance(enemyMachine.transform.position, 
-            PlayerController.instance.transform.position, maxDistance))
+        if (!ConditionState.CheckDistance(initialPos, 
+            PlayerController.instance.transform.position, pursuitDistance))
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.endPursuitState);
@@ -29,7 +36,6 @@ public class S_PursuitState : EnemyState
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("touched");
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pauseHitState);
         }

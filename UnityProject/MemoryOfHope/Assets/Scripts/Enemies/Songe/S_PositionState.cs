@@ -7,20 +7,22 @@ using UnityEngine.AI;
 public class S_PositionState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float detectionDistance;
-    [SerializeField] private float hidingDistance;
-
-    [Header("Fixed variables")] 
-    private Vector3 pos;
+    [Range(1, 5)] [SerializeField] private float speed;
+    
+    private float detectionDistance;
+    private Vector3 initialPos;
+    
 
     public override void StartState(EnemyMachine enemyMachine)
     {
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
-        pos = enemy.initialPosition;
+        detectionDistance = enemy.detectionDistance;
+        initialPos = enemy.initialPosition;
         enemyMachine.material.color = Color.gray;
 
         enemyMachine.agent.isStopped = false;
-        enemyMachine.agent.SetDestination(pos);
+        enemyMachine.agent.speed = speed;
+        enemyMachine.agent.SetDestination(initialPos);
 
     }
     
@@ -28,7 +30,7 @@ public class S_PositionState : EnemyState
     {
         float distance = enemyMachine.agent.remainingDistance;
 
-        if (ConditionState.CheckDistance(enemyMachine.transform.position, 
+        if (ConditionState.CheckDistance(initialPos, 
             PlayerController.instance.transform.position, detectionDistance))
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;

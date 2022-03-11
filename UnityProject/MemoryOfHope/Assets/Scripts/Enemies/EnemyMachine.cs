@@ -10,6 +10,11 @@ public class EnemyMachine : MonoBehaviour
     public NavMeshAgent agent;
 
 
+    public virtual void OnHit() // S'active quand l'ennemi a été touché
+    {
+        Debug.Log("Hit !");
+    }
+    
     public void OnDisable()
     {
         material.color = Color.white;
