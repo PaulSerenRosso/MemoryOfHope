@@ -13,18 +13,18 @@ public class MapModule : Module
             PlayerController.instance.playerActions.Player.OpenCloseMap.canceled += context => InputReleased(context);
         }
     
-        public override void InputPressed(InputAction.CallbackContext ctx)
+    public override void InputPressed(InputAction.CallbackContext ctx)
         {
             inputPressed = ctx.performed;
         }
     
-        public override void InputReleased(InputAction.CallbackContext ctx)
+    public override void InputReleased(InputAction.CallbackContext ctx)
         {
             inputPressed = ctx.performed;
             Release();
         }
         
-        public override bool Conditions()
+    public override bool Conditions()
         {
             if (!base.Conditions())
             {
@@ -34,7 +34,7 @@ public class MapModule : Module
             return true;
         }
         
-        public override void Execute()
+    public override void Execute()
         {
             Debug.Log("Executing Map Module");
 
@@ -45,7 +45,7 @@ public class MapModule : Module
 
         }
 
-        IEnumerator WatchingMap()
+    IEnumerator WatchingMap()
         {
             isPerformed = true;
             UIInstance.instance.OpeningMap();
@@ -56,7 +56,7 @@ public class MapModule : Module
             isPerformed = false;
         }
 
-        public override void Release()
+    public override void Release()
         {
             
         }

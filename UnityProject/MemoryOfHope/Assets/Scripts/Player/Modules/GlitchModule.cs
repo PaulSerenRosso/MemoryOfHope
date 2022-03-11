@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GlitchModule : Module
 {
-    private Glitch glitchUsed;
+    [SerializeField] Glitch glitch;
     
     public override void LinkModule()
     {
@@ -33,22 +33,18 @@ public class GlitchModule : Module
             return false;
         }
 
-        if (PlayerManager.instance.allGlitches.Count == 0)
+        if (!PlayerManager.instance.hasGlitch)
         {
-         
             return false; // Pas de glitch disponibles
         }
-
-     
+        
         return true;
     }
     
     public override void Execute()
     {
-        Debug.Log("execute");
         if (!isPerformed)
         {
-            Debug.Log("test");
             StartCoroutine(PerformingGlitch());
         }
     }
@@ -56,16 +52,12 @@ public class GlitchModule : Module
     IEnumerator PerformingGlitch()
     {
         isPerformed = true;
-        Debug.Log("test");
-        UIInstance.instance.SetGlitchesOnDisplay(false);
-      //  PlayerController.instance.playerRb.Play("Prism");
-        glitchUsed = PlayerManager.instance.allGlitches[0];
-        PlayerManager.instance.allGlitches.Remove(PlayerManager.instance.allGlitches[0]);
-        StartCoroutine(glitchUsed.Execute());
 
-        yield return new WaitWhile(() => glitchUsed.isBeingUsed);
+        PlayerManager.instance.hasGlitch = false;
+        StartCoroutine(glitch.Execute());
+
+        yield return new WaitWhile(() => glitch.isBeingUsed);
         
-       // PlayerManager.instance.animator.Play("Idle");
         isPerformed = false;
     }
 

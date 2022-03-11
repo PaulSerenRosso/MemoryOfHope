@@ -11,11 +11,11 @@ public class Glitch
     public IEnumerator Execute()
     {
         isBeingUsed = true;
-        Debug.Log("Using glitch !");
+        PlayerController.instance.isGlitching = true;
 
         yield return new WaitForSeconds(duration);
-        
-        Debug.Log("Glitch used.");
+
+        PlayerController.instance.isGlitching = false;
         isBeingUsed = false;
     }
 }

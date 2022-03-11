@@ -29,14 +29,6 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private Vector2[] cursorBoundaries = new Vector2[4];
     [SerializeField] private float moveMapSpeed;
 
-    [Header("Glitch")]
-    public GameObject glitchOnDisplayPrefab;
-    [SerializeField] private RectTransform glitchOnDisplayTransform;
-    public List<GameObject> glitchesOnDisplay;
-    [SerializeField] private Vector3 distanceBetweenGlitches;
-    [SerializeField] private int maxGlitchesOnDisplay;
-    [SerializeField] private TextMeshProUGUI stockText;
-
     private void Start()
     {
         LinkInput();
@@ -139,38 +131,6 @@ public class UIInstance : MonoBehaviour
     #endregion
     
     #region Glitches
-
-    public void SetGlitchesOnDisplay(bool isAddingGlitch)
-    {
-        if (isAddingGlitch) // 1 Glitch s'ajoute
-        {
-            glitchesOnDisplay.Add(Instantiate(glitchOnDisplayPrefab, transform.position, Quaternion.identity, glitchOnDisplayTransform));
-        }
-        else // 1 Glitch se retire
-        {
-            Destroy(glitchesOnDisplay[0]);
-            glitchesOnDisplay.Remove(glitchesOnDisplay[0]);
-        }
-
-        for (int i = 0; i < glitchesOnDisplay.Count; i++)
-        {
-            Image glitchImage = glitchesOnDisplay[i].GetComponent<Image>();
-            
-            if (i < maxGlitchesOnDisplay)
-            {
-                stockText.text = null;
-                glitchImage.color = Color.white;
-                Transform glitch = glitchesOnDisplay[i].transform;
-                glitch.position = glitchOnDisplayTransform.position + distanceBetweenGlitches * i;
-            }
-            else
-            {
-                stockText.transform.position = glitchOnDisplayTransform.position + distanceBetweenGlitches * maxGlitchesOnDisplay;
-                stockText.text = $"+{glitchesOnDisplay.Count - maxGlitchesOnDisplay}";
-                glitchImage.color = new Color(1, 1, 1, 0);
-            }
-        }
-    }
 
 
     #endregion

@@ -59,9 +59,10 @@ public class AttackModule : Module
 
     public override void Release()
     {
+        
+      
     }
 
-    
     private void Update()
     {
         if (inCombo)
@@ -115,34 +116,53 @@ public class AttackModule : Module
 
     void WaitToDamage()
     {
+        List<Module> allModule = new List<Module>();
+        allModule.AddRange(PlayerController.instance.activeModulesFixed);
+        allModule.AddRange(  PlayerController.instance.activeModulesUpdate);
+        
+        for (int i = 0; i < allModule.Count; i++)
+        {   if (allModule[i].inputPressed)
+            {
+                if (allModule[i] != this)
+                {
+                    PlayerController.instance.playerAnimator.Play("Idle");
+                    currentStateCombo = StateCombo.End;
+                    return;
+                }
+            }
+        }
+        
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
             switch (attackList[currentIndexAttack].playerAttackType)
             {
                 case PlayerAttackType.LeftHand:
                 {
-                    leftHand.enabled = true;
+                    leftHand.collider.enabled = true;
                     leftHand.currentDamage = attackList[currentIndexAttack].damage;
                     break;
                 }
                 case PlayerAttackType.RightHand:
                 {
                     rightHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.enabled = true;
+                    rightHand.collider.enabled = true;
                     break;
                 }
                 case PlayerAttackType.Both:
                 {
                     leftHand.currentDamage = attackList[currentIndexAttack].damage;
                     rightHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.enabled = true;
-                    leftHand.enabled = true;
+                    rightHand.collider.enabled = true;
+                    leftHand.collider.enabled = true;
                     break;
                 }
             }
+            
 
             currentStateCombo = StateCombo.InDamage;
         }
+        
+        
     }
 
     void InDamage()
@@ -154,21 +174,21 @@ public class AttackModule : Module
                 case PlayerAttackType.LeftHand:
                 {
                     leftHand.currentDamage = 0;
-                    leftHand.enabled = false;
+                    leftHand.collider.enabled = false;
                     break;
                 }
                 case PlayerAttackType.RightHand:
                 {
                     rightHand.currentDamage = 0;
-                    rightHand.enabled = false;
+                    rightHand.collider.enabled = false;
                     break;
                 }
                 case PlayerAttackType.Both:
                 {
                     leftHand.currentDamage = 0;
                     rightHand.currentDamage = 0;
-                    rightHand.enabled = false;
-                    leftHand.enabled = false;
+                    rightHand.collider.enabled = false;
+                    leftHand.collider.enabled = false;
                     break;
                 }
             }
@@ -211,6 +231,7 @@ public class AttackModule : Module
 
     void EndAttack()
     {
+        isPerformed = false;
         canMove = false;
         attackTimer = 0;
         inCombo = false;
