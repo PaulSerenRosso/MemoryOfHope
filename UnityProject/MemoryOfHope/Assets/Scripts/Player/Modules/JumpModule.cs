@@ -30,6 +30,7 @@ public class JumpModule : Module
 
    bool inExecute;
     private float yCurrentEndMaxPosition;
+    private bool isRelease = true;
     
     public override void LinkModule()
     {
@@ -42,15 +43,18 @@ public class JumpModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
-        if (PlayerController.instance.onGround || !PlayerController.instance.onGround && isPerformed) 
-        return true;
+        if ((PlayerController.instance.onGround  && isRelease )|| !PlayerController.instance.onGround && isPerformed)
+            return true;
+        
+       
       
         return false;
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
-        inputPressed = true; 
+        inputPressed = true;
+        
     }
 
     void Update()
@@ -65,10 +69,18 @@ public class JumpModule : Module
                 PlayerController.instance.stuckGround = false;
                 isPerformed = true; 
                 PlayerController.instance.currentGravity = gravityJump;
-                moveModule.maxAirVelocity = moveModule.moveVector;
-                Debug.Log(PlayerController.instance.currentVelocity +
-                          PlayerController.instance.currentVelocityWithUndo);
-                PlayerController.instance.currentVelocity += moveModule.maxAirVelocity ;
+                isRelease = false;
+                if (moveModule.inputPressed)
+                {
+                    moveModule.maxAirVelocity = moveModule.moveVector;
+                                    PlayerController.instance.currentVelocity += moveModule.maxAirVelocity ;
+                }
+                else
+                {
+                    
+                    moveModule.maxAirVelocity = Vector3.zero;
+                }
+                
             }  
             if(inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
         }
@@ -120,13 +132,14 @@ public class JumpModule : Module
     }
 
     public override void InputReleased(InputAction.CallbackContext ctx)
-    {
+    {  isRelease = true;
         inputPressed = false;
         Release();
     }
     
     public override void Execute()
     {
+      
       inExecute = true; 
     }
 

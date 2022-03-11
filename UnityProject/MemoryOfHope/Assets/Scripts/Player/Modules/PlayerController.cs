@@ -260,6 +260,7 @@ public class PlayerController : MonoBehaviour
                     onGround = true;
                     currentGravity = 0;
                     playerAnimator.SetBool("onGround", true);
+                    playerRb.velocity = Vector3.zero;
                 }
 
                 currentNormalGround = normal.normalized;
