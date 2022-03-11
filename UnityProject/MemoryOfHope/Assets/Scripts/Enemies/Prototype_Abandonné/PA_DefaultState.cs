@@ -4,7 +4,7 @@ using UnityEngine;
 public class PA_DefaultState : EnemyState
 {  
     [Header("Parameters")]
-    [SerializeField] private float detectionDistance;
+    [Range(1, 15)] [SerializeField] public float detectionDistance;
 
     public override void StartState(EnemyMachine enemyMachine)
     {

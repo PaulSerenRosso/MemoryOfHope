@@ -4,12 +4,10 @@ using UnityEngine;
 public class PA_EndPursuitState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private int durationEndPursuit;
-    [SerializeField] private float detectionDistance;
-    [SerializeField] private float speed;
+    [Range(1, 4)] [SerializeField] private int durationEndPursuit;
+    [Range(1, 15)] [SerializeField] private float detectionDistance;
 
-    [Header("Fixed variables")]
-    [SerializeField] private float timer;
+    private float timer;
 
     public override void StartState(EnemyMachine enemyMachine)
     {

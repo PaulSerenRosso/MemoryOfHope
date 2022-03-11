@@ -4,20 +4,21 @@ using UnityEngine;
 [Serializable]
 public class S_DefautState : EnemyState
 {
-    [Header("Parameters")]
-    [SerializeField] private float detectionDistance;
+    private float detectionDistance;
+    private Vector3 initialPos;
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        S_StateMachine enemy = (S_StateMachine) enemyMachine;
+        detectionDistance = enemy.detectionDistance;
+        initialPos = enemy.initialPosition;
         enemyMachine.agent.isStopped = true;
-        enemyMachine.material.color = Color.white;
+        enemyMachine.material.color = new Color(1, 1, 1, .05f);
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        Debug.Log("Default state !");
-
-        if (ConditionState.CheckDistance(enemyMachine.transform.position, 
+        if (ConditionState.CheckDistance(initialPos, 
             PlayerController.instance.transform.position, detectionDistance))
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;

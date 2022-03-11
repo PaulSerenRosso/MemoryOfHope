@@ -5,10 +5,9 @@ using UnityEngine;
 public class S_PausePositionState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float durationBeforePosition;
+    [Range(0, 1)] [SerializeField] private float durationBeforePosition;
     
-    [Header("Fixed variables")]
-    [SerializeField] private float timer;
+    private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {

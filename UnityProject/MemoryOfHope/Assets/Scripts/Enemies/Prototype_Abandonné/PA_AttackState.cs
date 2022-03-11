@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class PA_AttackState : EnemyState
 {
-    
     [Header("Parameters")]
-    [SerializeField] private int durationAttack;
+    [Range(0, 2)] [SerializeField] private int durationAttack;
     
-    [Header("Fixed variables")]
-    [SerializeField] private float timer;
+    private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {

@@ -5,10 +5,9 @@ using UnityEngine;
 public class S_PauseHitState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float durationBeforePursuit;
+    [Range(0, 1)] [SerializeField] private float durationBeforePursuit;
     
-    [Header("Fixed variables")]
-    [SerializeField] private float timer;
+    private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {

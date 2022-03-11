@@ -8,6 +8,10 @@ public class S_StateMachine : EnemyMachine
 {
     public Vector3 initialPosition;
     
+    [Header("Parameters")]
+    [Range(1, 15)] public float detectionDistance;
+    [Range(1, 15)] public float pursuitDistance;
+    
     public S_DefautState defaultState = new S_DefautState();
 
     public S_PursuitState pursuitState = new S_PursuitState();
@@ -25,9 +29,22 @@ public class S_StateMachine : EnemyMachine
     public S_PausePursuitState pausePursuitState = new S_PausePursuitState();
 
     public S_HidingState hidingState = new S_HidingState();
-    
+
+    public S_HitState hitState = new S_HitState();
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(initialPosition, detectionDistance);
+        
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(initialPosition, pursuitDistance);
+
+    }
+
     public void Start()
     {
+        initialPosition = transform.position;
         currentState = defaultState;
         currentState.StartState(this);
     }
@@ -40,11 +57,20 @@ public class S_StateMachine : EnemyMachine
     public void SwitchState(EnemyState state)
     {
         currentState = state;
-        state.StartState(this);
+        currentState.StartState(this);
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnCollisionStay(Collision other)
     {
-        currentState.OnCollisionEnterState(this, other);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            currentState.OnCollisionStayState(this, other);
+        }
+    }
+    
+    public override void OnHit()
+    {
+        base.OnHit();
+        SwitchState(hitState);
     }
 }

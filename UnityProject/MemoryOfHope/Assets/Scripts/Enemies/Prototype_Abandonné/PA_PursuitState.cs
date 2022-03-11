@@ -5,11 +5,9 @@ using UnityEngine.InputSystem;
 public class PA_PursuitState : EnemyState
 {
     [Header("Parameters")]
-    [SerializeField] private float minDistance;
-    [SerializeField] private float maxDistance;
-
-    [SerializeField] private float speed;
-
+    [Range(1, 15)] [SerializeField] private float minDistance;
+    [Range(1, 15)] [SerializeField] private float maxDistance;
+    
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.material.color = Color.blue;

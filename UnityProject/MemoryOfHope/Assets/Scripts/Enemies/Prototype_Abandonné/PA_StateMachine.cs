@@ -1,10 +1,10 @@
 
+using System;
 using UnityEngine;
 
 public class PA_StateMachine : EnemyMachine
 {
     public EnemyState currentState;
-    public string stateName;
     
     public PA_DefaultState defaultState;
     
@@ -17,8 +17,17 @@ public class PA_StateMachine : EnemyMachine
     public PA_PauseAttackState pauseAttackState;
     
     public PA_PausePursuitState pausePursuitState;
-    
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, defaultState.detectionDistance);
+    }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+    }
+    
     public void Start()
     {
         currentState = defaultState;
