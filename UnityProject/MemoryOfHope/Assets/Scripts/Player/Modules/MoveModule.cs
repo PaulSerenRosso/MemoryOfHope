@@ -16,6 +16,8 @@ public class MoveModule : Module
     [SerializeField] private float airSpeedRotationOppositeRun;
     [SerializeField] private float airSpeedRotation;
 
+
+    public Vector3 maxAirVelocity;
     public override void LinkModule()
     {
         PlayerController.instance.playerActions.Player.Move.performed += context => InputPressed(context);
@@ -70,10 +72,25 @@ public class MoveModule : Module
             {
                 currentRotationSpeed = airSpeedRotation;
                 currentSpeed = airSpeedMovment;
+                float RbmagnitudeXZ= new Vector3(PlayerController.instance.playerRb.velocity.x, 0, PlayerController.instance.playerRb.velocity.z).magnitude;    
+                float maxAirVelocityMagnitude = maxAirVelocity.magnitude;
+                if (RbmagnitudeXZ + currentSpeed > maxAirVelocityMagnitude)
+                {
+                    currentSpeed = maxAirVelocityMagnitude - RbmagnitudeXZ;
+                }
             }
 
             moveVector *= currentSpeed;
-            PlayerController.instance.currentVelocityWithUndo += moveVector;
+            if (!PlayerController.instance.onGround)
+            {
+                PlayerController.instance.currentVelocity += moveVector;
+            }
+            else
+            {
+                 PlayerController.instance.currentVelocityWithUndo += moveVector;
+            }
+            
+           
             Vector2 rotationVector = Vector3.RotateTowards(angleFoward, inputVector, currentRotationSpeed * 2, 00f);
             PlayerController.instance.playerRb.rotation =
                 Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
