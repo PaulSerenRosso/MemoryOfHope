@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class S_HitState : MonoBehaviour
+[Serializable]
+public class S_HitState : EnemyState
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Parameters")]
+    [Range(0, 1)] [SerializeField] private float durationHitStunned;
+    
+    private float timer;
+    
+    public override void StartState(EnemyMachine enemyMachine)
     {
-        
-    }
+        enemyMachine.agent.isStopped = true;
 
-    // Update is called once per frame
-    void Update()
+        enemyMachine.material.color = Color.red;
+        timer = 0;
+    }
+    
+    public override void UpdateState(EnemyMachine enemyMachine)
     {
+        timer += Time.deltaTime;
         
+        if (ConditionState.Timer(durationHitStunned, timer))
+        {
+            S_StateMachine enemy = (S_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.pursuitState);
+        }
     }
 }

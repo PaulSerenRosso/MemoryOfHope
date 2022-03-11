@@ -7,7 +7,7 @@ public class PlayerManager : EntityDamageable, Damageable
 {
     public List<Module> obtainedModule;
     public int money;
-    public List<Glitch> allGlitches;
+    public bool hasGlitch;
 
     public static PlayerManager instance;
 
