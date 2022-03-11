@@ -28,6 +28,7 @@ public class MoveModule : Module
     {
      
         inputPressed = true;
+        
 
         inputVector = ctx.ReadValue<Vector2>();
     }
@@ -67,26 +68,30 @@ public class MoveModule : Module
             {
                 currentRotationSpeed = defaultSpeedRotation;
                 currentSpeed = defaultSpeedMovment;
+         
+
             }
             else
             {
                 currentRotationSpeed = airSpeedRotation;
                 currentSpeed = airSpeedMovment;
-                float RbmagnitudeXZ= new Vector3(PlayerController.instance.playerRb.velocity.x, 0, PlayerController.instance.playerRb.velocity.z).magnitude;    
-                float maxAirVelocityMagnitude = maxAirVelocity.magnitude;
-                if (RbmagnitudeXZ + currentSpeed > maxAirVelocityMagnitude)
-                {
-                    currentSpeed = maxAirVelocityMagnitude - RbmagnitudeXZ;
+           
+        
                 }
-            }
+            
 
             moveVector *= currentSpeed;
             if (!PlayerController.instance.onGround)
             {
-                PlayerController.instance.currentVelocity += moveVector;
+           Vector3 rbVelocityXZ = Vector3.ClampMagnitude(moveVector+new Vector3(PlayerController.instance.playerRb.velocity.x, 0,PlayerController.instance.playerRb.velocity.z) , maxAirVelocity.magnitude);
+           Debug.Log(rbVelocityXZ);
+           PlayerController.instance.playerRb.velocity = new Vector3(rbVelocityXZ.x,
+               PlayerController.instance.playerRb.velocity.y, rbVelocityXZ.z);
+           
             }
             else
             {
+                
                  PlayerController.instance.currentVelocityWithUndo += moveVector;
             }
             
@@ -108,6 +113,7 @@ public class MoveModule : Module
                 Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
             PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
         }
+        
     }
 
     public override void Release()
