@@ -26,12 +26,12 @@ public class PlayerManager : EntityDamageable, Damageable
     public int maxHealth { get; set; }
     public bool isDead { get; set; }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
         
     }
 
-    public void Heal()
+    public void Heal(int amount)
     {
         
     }

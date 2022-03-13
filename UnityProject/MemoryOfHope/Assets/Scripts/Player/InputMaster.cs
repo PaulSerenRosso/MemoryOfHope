@@ -116,6 +116,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Prism"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe029cfb-9718-4b07-a02a-ea75a2c27689"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -415,6 +424,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""EndInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bc31474-8971-4c04-ae9a-7e94894757fa"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Prism"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -433,6 +453,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_MoveInteract = m_Player.FindAction("MoveInteract", throwIfNotFound: true);
         m_Player_RotateInteract = m_Player.FindAction("RotateInteract", throwIfNotFound: true);
         m_Player_EndInteract = m_Player.FindAction("EndInteract", throwIfNotFound: true);
+        m_Player_Prism = m_Player.FindAction("Prism", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -502,6 +523,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MoveInteract;
     private readonly InputAction m_Player_RotateInteract;
     private readonly InputAction m_Player_EndInteract;
+    private readonly InputAction m_Player_Prism;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -516,6 +538,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @MoveInteract => m_Wrapper.m_Player_MoveInteract;
         public InputAction @RotateInteract => m_Wrapper.m_Player_RotateInteract;
         public InputAction @EndInteract => m_Wrapper.m_Player_EndInteract;
+        public InputAction @Prism => m_Wrapper.m_Player_Prism;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -555,6 +578,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @EndInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndInteract;
                 @EndInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndInteract;
                 @EndInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEndInteract;
+                @Prism.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
+                @Prism.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
+                @Prism.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -589,6 +615,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @EndInteract.started += instance.OnEndInteract;
                 @EndInteract.performed += instance.OnEndInteract;
                 @EndInteract.canceled += instance.OnEndInteract;
+                @Prism.started += instance.OnPrism;
+                @Prism.performed += instance.OnPrism;
+                @Prism.canceled += instance.OnPrism;
             }
         }
     }
@@ -605,5 +634,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnMoveInteract(InputAction.CallbackContext context);
         void OnRotateInteract(InputAction.CallbackContext context);
         void OnEndInteract(InputAction.CallbackContext context);
+        void OnPrism(InputAction.CallbackContext context);
     }
 }

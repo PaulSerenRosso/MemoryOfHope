@@ -25,9 +25,9 @@ public interface Damageable
         set;
     }
 
-    public void TakeDamage();
+    public void TakeDamage(int amount);
 
-    public void Heal();
+    public void Heal(int amount);
 
     public void Death();
 }

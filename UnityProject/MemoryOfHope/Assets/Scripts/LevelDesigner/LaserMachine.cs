@@ -13,8 +13,7 @@ public class LaserMachine : MonoBehaviour
     public  Vector3 Direction;
   public float MaxDistance;
   public LayerMask RayLayer;
-    public int IndexBeginLineRenderer;
-    public int IndexEndLineRenderer;
+
     
     private RaycastHit _hit;
     private Ray _ray;
@@ -25,30 +24,39 @@ public class LaserMachine : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
+
         if (IsActive)
         {
                if (_triggerByLaser)
                              {
-                                 if(LaserLine.GetPosition(IndexEndLineRenderer) == BeginLaser)
+                         
+                                 if(LaserLine.GetPosition(0) == BeginLaser)
                                      LaserLine.enabled = true;
                                  _ray = new Ray(BeginLaser, Direction);
-                                 LaserLine.SetPosition(IndexBeginLineRenderer, BeginLaser);
+                              
                                  Debug.DrawRay(_ray.origin, _ray.direction*MaxDistance, Color.green);
                                  if (Physics.Raycast(_ray, out _hit, MaxDistance, RayLayer))
-                                 {
+                                 {   
+                                    
                                      Debug.DrawRay(_ray.origin, _ray.direction*MaxDistance, Color.red);
-                                     _isTrigger = true;
-                                     LaserLine.SetPosition(IndexEndLineRenderer, _hit.point);
+                           
+                                    
                                      if (_returnableObject == _hit.collider.gameObject)
                                          TriggerSameObject();
                                      else
-                                         TriggerNewObject();
+                                         TriggerNewObject(); 
+                                     _isTrigger = true; 
+                             
+                                     LaserLine.SetPosition(1, _hit.point);
                                  }
                                  else
-                                 { LaserLine.SetPosition(IndexEndLineRenderer, _ray.origin+Direction*MaxDistance);
+                                 {
+                          
+                                     LaserLine.SetPosition(1, _ray.origin+Direction*MaxDistance);
                                      if (_isTrigger) { EndTrigger();
                                      }
-                                 }
+                                 }   
+                                 LaserLine.SetPosition(0, BeginLaser);
                              }
                              else
                              {
@@ -65,9 +73,29 @@ public class LaserMachine : MonoBehaviour
 
     void TriggerSameObject()
     {
+        
         if (_returnable != null )
         {
-            _returnable.Returnable(this, _hit);
+            if (_returnable.IsActiveReturnable)
+            {
+                if (!_returnable.IsReturnLaser)
+                {     _returnable.StartReturnable(this, _hit);
+                }
+                else
+                {
+                     _returnable.Returnable(this, _hit);
+                    
+                }
+                
+            }
+            else  if (_returnable.IsReturnLaser)
+            {
+                
+                      _returnable.Cancel(this);
+                                    
+                
+            }
+
         }
     }
 
@@ -78,13 +106,22 @@ public class LaserMachine : MonoBehaviour
         {
             _returnable.Cancel(this);
         }
-        if (_hit.transform.TryGetComponent(out IReturnable _currentReturnable) && !_currentReturnable.IsReturnLaser ) 
+        
+        if (_returnableObject.TryGetComponent(out IReturnable _currentReturnable))
         {
             _returnable = _currentReturnable;
-            _returnable.StartReturnable(this, _hit);
+            Debug.Log("find here");
+            if (!_currentReturnable.IsReturnLaser && _currentReturnable.IsActiveReturnable)
+            {
+                  Debug.Log("test");
+                            _returnable = _currentReturnable;
+                            _returnable.StartReturnable(this, _hit);
+            }
+          
         }
         else
         {
+            Debug.Log("test");
             _returnable = null;
         }
     }
