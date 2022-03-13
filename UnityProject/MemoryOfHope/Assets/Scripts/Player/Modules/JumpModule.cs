@@ -1,14 +1,11 @@
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class JumpModule : Module
 {
-
+    
     [SerializeField] private float gravityJump;
 //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
     [SerializeField]
@@ -40,6 +37,9 @@ public class JumpModule : Module
         PlayerController.instance.playerActions.Player.Jump.canceled += context => InputReleased(context);
     }
 
+  
+        
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
@@ -53,13 +53,14 @@ public class JumpModule : Module
 
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
+        if(isPerformed ||PlayerController.instance.onGround  )
         inputPressed = true;
         
     }
 
     void Update()
     {
-        if (inExecute && yCurrentEndMaxPosition == 0 )
+        if (inExecute )
         {
             if (PlayerController.instance.onGround && !isPerformed && inputTimer > inputMinTime)
             {
@@ -72,16 +73,12 @@ public class JumpModule : Module
                 isRelease = false;
                 if (moveModule.inputPressed)
                 {
-                    moveModule.maxAirVelocity = moveModule.moveVector;
-                                    PlayerController.instance.currentVelocity += moveModule.maxAirVelocity ;
+                    PlayerController.instance.currentVelocity += moveModule.moveVector ;
                 }
-                else
-                {
-                    
-                    moveModule.maxAirVelocity = Vector3.zero;
-                }
+               
                 
             }  
+            Debug.Log("test");
             if(inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
         }
     }
@@ -96,19 +93,19 @@ public class JumpModule : Module
              }
              else if( inputTimer > inputMinTime) 
              {
-                 if (yCurrentEndMaxPosition == 0)
-                 {
+                 
+                 
                      float factorTime = inputTimer/ inputMaxTime;
-                     yCurrentEndMaxPosition = factorTime*maxHeightJump+yStartPosition;
-                     Debug.Log(yCurrentEndMaxPosition);
-                 }
-                 else if (PlayerController.instance.playerRb.position.y <= yCurrentEndMaxPosition)
+        
+                     yCurrentEndMaxPosition = factorTime*(maxHeightJump+yStartPosition);
+                     if (PlayerController.instance.playerRb.position.y <= yCurrentEndMaxPosition)
                  {
                      float currentSpeed = speedJump - PlayerController.instance.playerRb.velocity.y;
                      PlayerController.instance.currentVelocity += currentSpeed*Vector3.up;
                  }
                  else
                  {
+                     Debug.Log("testqq");
                      inputTimer = 0;
                      inExecute = false;
                      PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
@@ -121,6 +118,7 @@ public class JumpModule : Module
              }
              else
              {
+                 Debug.Log("testqdfqsfsqdfq");
                  inputTimer = 0;
                  inExecute = false;
                  PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
@@ -132,7 +130,7 @@ public class JumpModule : Module
     }
 
     public override void InputReleased(InputAction.CallbackContext ctx)
-    {  isRelease = true;
+    { isRelease = true;
         inputPressed = false;
         Release();
     }
@@ -147,6 +145,7 @@ public class JumpModule : Module
     {
         if (!isPerformed)
         {
+            Debug.Log("testqdfqsfsqdfq");
             inputTimer = 0; 
         }
         inExecute = false;

@@ -15,12 +15,12 @@ public class EnemyManager : EntityDamageable, Damageable
         CorruptedMemory
     }
     
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
         
     }
 
-    public void Heal()
+    public void Heal(int amount)
     {
         
     }

@@ -2,31 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LaserSource : LaserMachine
 {
     [Header("LaserSource Variables")]
     [SerializeField]
     private Transform beginSource;
-
-    public bool SourceisOpen
-    {
-        get
-        {
-            return IsActive;
-        }
-
-        set { IsActive = value;
-            _triggerByLaser = value;
-        }
-    }
+    
     [SerializeField]
     private Vector3 DirectionSource;
     private void Start()
     {
        
     }
-
+    private void OnDrawGizmos()
+    {
+        if (beginSource != null)
+        {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(beginSource.position, beginSource.position+DirectionSource);
+            
+        }
+    }
     private void OnValidate()
     {
         if (beginSource != null)
@@ -43,13 +41,15 @@ public class LaserSource : LaserMachine
    {
        if (IsActive)
        {
+        
+           LaserLine.enabled = true;
            BeginLaser = beginSource.position; 
            Direction = transform.TransformDirection(DirectionSource).normalized;
            
        }
        else
        {
-           LaserLine.SetPosition(IndexEndLineRenderer, BeginLaser);
+           LaserLine.SetPosition(1, BeginLaser);
                LaserLine.enabled = false;
            
        }

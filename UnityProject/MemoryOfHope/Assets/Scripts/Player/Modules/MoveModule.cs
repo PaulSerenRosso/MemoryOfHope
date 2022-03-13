@@ -13,11 +13,10 @@ public class MoveModule : Module
     [SerializeField] private float factorAngleOppositeRun;
     private bool canMove;
     [SerializeField] private float airSpeedMovment;
-    [SerializeField] private float airSpeedRotationOppositeRun;
-    [SerializeField] private float airSpeedRotation;
 
 
-    public Vector3 maxAirVelocity;
+
+    public float maxAirSpeed;
     public override void LinkModule()
     {
         PlayerController.instance.playerActions.Player.Move.performed += context => InputPressed(context);
@@ -26,10 +25,7 @@ public class MoveModule : Module
 
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
-     
         inputPressed = true;
-        
-
         inputVector = ctx.ReadValue<Vector2>();
     }
 
@@ -45,12 +41,13 @@ public class MoveModule : Module
         {
             isPerformed = true;
         }
-
-        Vector2 angleFoward = new Vector2(transform.forward.x,
+        moveVector.x = inputVector.x;
+        moveVector.z = inputVector.y;
+        if (PlayerController.instance.onGround)
+        {
+              Vector2 angleForward = new Vector2(transform.forward.x,
             transform.forward.z);
-        float differenceDir = (angleFoward - inputVector.normalized).magnitude;
-
-
+        float differenceDir = (angleForward - inputVector.normalized).magnitude;
         if (factorAngleOppositeRun < differenceDir)
         {
             canMove = false;
@@ -60,59 +57,19 @@ public class MoveModule : Module
             canMove = true;
         if (canMove)
         {
-            float currentSpeed;
-            float currentRotationSpeed;
-            moveVector.x = inputVector.x;
-            moveVector.z = inputVector.y;
-            if (PlayerController.instance.onGround)
-            {
-                currentRotationSpeed = defaultSpeedRotation;
-                currentSpeed = defaultSpeedMovment;
-         
-
-            }
-            else
-            {
-                currentRotationSpeed = airSpeedRotation;
-                currentSpeed = airSpeedMovment;
-           
-        
-                }
-            
-
-            moveVector *= currentSpeed;
-            if (!PlayerController.instance.onGround)
-            {
-           Vector3 rbVelocityXZ = Vector3.ClampMagnitude(moveVector+new Vector3(PlayerController.instance.playerRb.velocity.x, 0,PlayerController.instance.playerRb.velocity.z) , maxAirVelocity.magnitude);
-           Debug.Log(rbVelocityXZ);
-           PlayerController.instance.playerRb.velocity = new Vector3(rbVelocityXZ.x,
-               PlayerController.instance.playerRb.velocity.y, rbVelocityXZ.z);
-           
-            }
-            else
-            {
-                
-                 PlayerController.instance.currentVelocityWithUndo += moveVector;
-            }
-            
-           
-            Vector2 rotationVector = Vector3.RotateTowards(angleFoward, inputVector, currentRotationSpeed * 2, 00f);
-            PlayerController.instance.playerRb.rotation =
-                Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-            PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", inputVector.magnitude);
+            MoveGround(angleForward);
         }
         else
         {
-            float currentOppositeRotationSpeed;
-            if (PlayerController.instance.onGround)
-                currentOppositeRotationSpeed = defaultSpeedRotationOppositeRun;
-            else
-                currentOppositeRotationSpeed = airSpeedRotationOppositeRun;
-            Vector2 rotationVector = Vector3.RotateTowards(angleFoward, inputVector, currentOppositeRotationSpeed, 00f);
-            PlayerController.instance.playerRb.rotation =
-                Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-            PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
+           Rotate(angleForward);
         }
+        }
+        else
+        {
+            MoveAir();
+        }
+
+      
         
     }
 
@@ -121,4 +78,34 @@ public class MoveModule : Module
         isPerformed = false;
         PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
     }
+
+    void MoveGround(Vector3 angleForward)
+    {
+         moveVector *= defaultSpeedMovment;
+                PlayerController.instance.currentVelocityWithUndo += moveVector;
+                Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputVector, defaultSpeedRotation* 2, 00f);
+                PlayerController.instance.playerRb.rotation =
+                    Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+                PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", inputVector.magnitude);
+    }
+
+    void MoveAir()
+    {
+    
+        moveVector *= airSpeedMovment;;
+        Vector3 rbVelocityXZ = Vector3.ClampMagnitude(moveVector+new Vector3(PlayerController.instance.playerRb.velocity.x, 0,PlayerController.instance.playerRb.velocity.z) , maxAirSpeed);
+        PlayerController.instance.playerRb.velocity = new Vector3(rbVelocityXZ.x, PlayerController.instance.playerRb.velocity.y, rbVelocityXZ.z);
+    }
+
+    void Rotate(Vector3 angleForward)
+    {
+        float currentOppositeRotationSpeed;
+        currentOppositeRotationSpeed = defaultSpeedRotationOppositeRun;
+        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputVector, currentOppositeRotationSpeed, 00f);
+        PlayerController.instance.playerRb.rotation =
+            Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+        PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
+    }
+    
+    
 }
