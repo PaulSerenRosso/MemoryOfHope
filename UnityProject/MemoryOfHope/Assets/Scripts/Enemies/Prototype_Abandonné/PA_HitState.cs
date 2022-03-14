@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class S_HitState : EnemyState // State quand le Songe est attaqué
+public class PA_HitState : EnemyState // State quand le Prototype Abandonné est attaqué
 {
     [Header("Parameters")]
     [Range(0, 1)] [SerializeField] private float durationHitStunned;
@@ -15,7 +15,7 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
     {
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
-        
+
         if (enemyMachine.enemyManager.canBeKnockback)
         {
             enemyMachine.rb.isKinematic = false;
@@ -24,7 +24,7 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
             enemyMachine.rb.AddForce(knockback);
             enemyMachine.rb.drag = drag;
         }
-
+        
         enemyMachine.material.color = Color.red;
         timer = 0;
     }
@@ -35,7 +35,7 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
         
         if (ConditionState.Timer(durationHitStunned, timer))
         {
-            S_StateMachine enemy = (S_StateMachine) enemyMachine;
+            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
             enemyMachine.rb.isKinematic = true;

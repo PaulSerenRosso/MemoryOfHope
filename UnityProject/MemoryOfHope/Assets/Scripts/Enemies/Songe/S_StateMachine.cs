@@ -1,19 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class S_StateMachine : EnemyMachine
 {
+    #region Variables
+
     public Vector3 initialPosition;
     
     [Header("Parameters")]
     [Range(1, 15)] public float detectionDistance;
     [Range(1, 15)] public float pursuitDistance;
-    
-    public S_DefautState defaultState = new S_DefautState();
 
+    #endregion
+
+    #region States
+
+    public S_DefautState defaultState = new S_DefautState();
+    
     public S_PursuitState pursuitState = new S_PursuitState();
 
     public S_EndPursuitState endPursuitState = new S_EndPursuitState();
@@ -31,6 +33,10 @@ public class S_StateMachine : EnemyMachine
     public S_HidingState hidingState = new S_HidingState();
 
     public S_HitState hitState = new S_HitState();
+    
+    #endregion
+
+    #region Gizmos
 
     private void OnDrawGizmosSelected()
     {
@@ -39,38 +45,67 @@ public class S_StateMachine : EnemyMachine
         
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(initialPosition, pursuitDistance);
-
     }
 
-    public void Start()
+    #endregion
+
+    #region State Machine Main Functions
+
+    public override void Start()
     {
         initialPosition = transform.position;
         currentState = defaultState;
-        currentState.StartState(this);
+        base.Start();
     }
     
-    public void Update()
+    public override void OnHitByMelee()
     {
-        currentState.UpdateState(this);
-    }
-    
-    public void SwitchState(EnemyState state)
-    {
-        currentState = state;
-        currentState.StartState(this);
+        base.OnHitByMelee();
+        SwitchState(hitState);
     }
 
-    public void OnCollisionStay(Collision other)
+    #endregion
+
+    #region Trigger & Collision
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerFist") && enemyManager.canBeHitByMelee) // Hit by the player
+        {
+            OnHitByMelee();
+        }
+    }
+
+    public override void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Laser") && enemyManager.canBeHitByLaser) // Hit by the laser
+        {
+            
+        }
+    }
+
+    public override void OnTriggerExit(Collider other)
+    {
+        
+    }
+
+    public override void OnCollisionEnter(Collision other)
+    {
+        
+    }
+
+    public override void OnCollisionStay(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             currentState.OnCollisionStayState(this, other);
         }
     }
-    
-    public override void OnHit()
+
+    public override void OnCollisionExit(Collision other)
     {
-        base.OnHit();
-        SwitchState(hitState);
+        
     }
+
+    #endregion
 }

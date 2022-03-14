@@ -24,6 +24,7 @@ public abstract class Module : MonoBehaviour
 
     public virtual bool Conditions()
     {
+
         if (!CheckConstraintModules())
         {
             return false; // Faux si un module contraint
@@ -36,7 +37,6 @@ public abstract class Module : MonoBehaviour
         { 
             return false; // Faux si pas d'input pressé
         }
-        
         return true;
     }
 
