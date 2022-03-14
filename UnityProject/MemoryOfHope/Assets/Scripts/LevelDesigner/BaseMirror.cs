@@ -40,7 +40,7 @@ public class BaseMirror: LaserMachine, IReturnable
     public virtual void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
         IsActive = true;
-        LaserLineReceiver = laser.LaserLine;
+       LaserLineReceiver = laser.LaserLine;
         Returnable(laser, hit);
         LaserLine.enabled = true;
         LaserLine.SetPosition(1, hit.point); 

@@ -88,25 +88,8 @@ public class JumpModule : Module
     {
         if (isPerformed)
         {
-
-           
-            Debug.Log(yEndMinPosition );
-            Debug.Log(PlayerController.instance.playerRb.position.y >= yCurrentEndMaxPosition);
-            Debug.Log(yCurrentEndMaxPosition != 0 );
             
-            if (inputTimer > inputMinTime  && yCurrentEndMaxPosition == 0 || (yCurrentEndMaxPosition != 0 && PlayerController.instance.playerRb.position.y <= yCurrentEndMaxPosition))
-            {
-
-              float factorTime = inputTimer / inputMaxTime;
-                yCurrentEndMaxPosition = factorTime * (maxHeightJump + yStartPosition);
-                if (yCurrentEndMaxPosition == 0)
-                {
-                    currentSpeed = PlayerController.instance.playerRb.velocity.y;
-                }
-                PlayerController.instance.currentVelocity += (currentSpeed-PlayerController.instance.playerRb.velocity.y) * Vector3.up;
-            }
-            
-            else if(PlayerController.instance.playerRb.position.y >= yEndMinPosition  || (yCurrentEndMaxPosition != 0 && PlayerController.instance.playerRb.position.y >= yCurrentEndMaxPosition))
+            if(PlayerController.instance.playerRb.position.y >= yEndMinPosition)
                      {
                          Debug.Log("testqq");
                      inputTimer = 0;
@@ -115,10 +98,8 @@ public class JumpModule : Module
                      PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
                      PlayerController.instance.stuckGround = true;
                      isPerformed = false;
-                     yCurrentEndMaxPosition = 0;
-                 }
-             
-        
+                     yCurrentEndMaxPosition = 0; 
+                     }
         }
     }
 
