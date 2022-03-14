@@ -28,10 +28,10 @@ public class ShieldManager : MonoBehaviour, Damageable
             _inputShield = value;
             if (!isDead)
             {
-                
-                            _mesh.enabled = value;
+                _mesh.enabled = value;
                             Mirror.IsActiveReturnable = value;
                             _collider.enabled = value;
+                            
             }
            
         }

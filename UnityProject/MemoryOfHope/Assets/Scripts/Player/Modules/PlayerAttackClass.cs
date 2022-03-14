@@ -12,10 +12,7 @@ public class PlayerAttackClass
     public float damage;
    public float maxSpeedDashAttack;
    public AnimationCurve speedDashAttackCurve;
-   public PlayerAttackType playerAttackType; 
+   public AttackPlayerCollider attackPlayerCollider;
 }
 
-public enum PlayerAttackType
-{
-    RightHand, LeftHand, Both
-}
+

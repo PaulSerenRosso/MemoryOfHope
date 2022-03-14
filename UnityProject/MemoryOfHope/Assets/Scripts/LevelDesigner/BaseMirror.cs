@@ -17,8 +17,15 @@ public class BaseMirror: LaserMachine, IReturnable
     public bool IsActiveReturnable
     {
         get => IsActive;
-        set => IsActive = value;
+        set
+        {
+           IsActive = value ; 
+         
+        } 
     }
+
+    public LaserMachine _currentSource;
+    public LaserMachine CurrentSource { get=>_currentSource; set => _currentSource = value; }
 
     public virtual void Returnable(LaserMachine laser, RaycastHit hit)
     {
@@ -31,14 +38,17 @@ public class BaseMirror: LaserMachine, IReturnable
     public virtual void Cancel(LaserMachine laser)
     {   EndTrigger();
         BeginLaser = Vector3.zero;
-      _triggerByLaser = false; 
+      _triggerByLaser = false ; 
         Direction = Vector3.zero;
         LaserLine.enabled = false;
+        _currentSource = null;
         LaserLineReceiver = null;
     }
 
     public virtual void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
+        _triggerByLaser = true; 
+        _currentSource = laser ;
         IsActive = true;
        LaserLineReceiver = laser.LaserLine;
         Returnable(laser, hit);
