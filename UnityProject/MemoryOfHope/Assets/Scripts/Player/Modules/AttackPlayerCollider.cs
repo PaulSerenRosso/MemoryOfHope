@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackPlayerHand : MonoBehaviour
+public class AttackPlayerCollider : MonoBehaviour
 { 
     public float currentDamage;
     public Collider collider;
