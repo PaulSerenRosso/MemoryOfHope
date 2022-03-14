@@ -8,8 +8,6 @@ public class AttackModule : Module
 {
 
     public List<PlayerAttackClass> attackList;
-    [SerializeField] private AttackPlayerHand rightHand;
-    [SerializeField] private AttackPlayerHand leftHand;
     private float attackTimer;
     public int currentIndexAttack = 0;
     bool inCombo;

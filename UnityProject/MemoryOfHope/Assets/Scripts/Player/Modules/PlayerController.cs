@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             module.LinkModule();
         }
 
-        currentGravity = defaultGravity;
+       
     }
 
     void Update()

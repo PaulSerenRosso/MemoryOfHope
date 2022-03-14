@@ -74,7 +74,6 @@ public class LaserMachine : MonoBehaviour
         {
             if (_returnable.IsActiveReturnable)
             {
-                Debug.Log(checkIfStartReturnable && _returnable.CurrentSource == this);
                 if (!_returnable.IsReturnLaser && !checkIfStartReturnable)
                 {
                     _returnable.StartReturnable(this, _hit);
@@ -90,7 +89,6 @@ public class LaserMachine : MonoBehaviour
                 if (_returnable != null && _returnable.CurrentSource == this)
                 {
                     _returnable.Cancel(this);
-                    Debug.Log("teststst");
                 }
 
                 checkIfStartReturnable = false;
@@ -110,7 +108,7 @@ public class LaserMachine : MonoBehaviour
         if (_returnableObject.TryGetComponent(out IReturnable _currentReturnable))
         {
             _returnable = _currentReturnable;
-            Debug.Log("find here");
+           
             if (!_currentReturnable.IsReturnLaser && _currentReturnable.IsActiveReturnable)
             {
                 _returnable.StartReturnable(this, _hit);
@@ -119,7 +117,7 @@ public class LaserMachine : MonoBehaviour
         }
         else
         {
-            Debug.Log("test");
+          
             _returnable = null;
         }
     }
@@ -129,7 +127,6 @@ public class LaserMachine : MonoBehaviour
         if (_returnable != null && _returnable.CurrentSource == this)
         {
             _returnable.Cancel(this);
-            Debug.Log("teststst");
         }
 
         _isTrigger = false;

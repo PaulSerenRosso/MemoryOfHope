@@ -9,7 +9,7 @@ public class PlayerAttackClass
    public float endTimeActivateAttack;
     public float startTimeCombo;
     public float endTimeCombo;
-    public float damage;
+    public int damage;
    public float maxSpeedDashAttack;
    public AnimationCurve speedDashAttackCurve;
    public AttackPlayerCollider attackPlayerCollider;

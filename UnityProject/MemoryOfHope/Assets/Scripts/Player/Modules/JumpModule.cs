@@ -7,16 +7,13 @@ public class JumpModule : Module
     [SerializeField] private float gravityJump;
 
 //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-    [SerializeField] private float maxHeightJump;
-    [SerializeField] private float speedJump;
     private float yStartPosition;
     private float yEndMinPosition;
 
     float currentSpeed = 0;
     [SerializeField] private MoveModule moveModule;
-    [SerializeField] private float minHeightJump;
+    [SerializeField] private float HeightJump;
     [SerializeField] private float inputMaxTime;
-    [SerializeField] private float inputMinTime;
     private float inputTimer;
     private AnimationCurve curveJumpSpeed;
     bool inExecute;
@@ -56,13 +53,12 @@ public class JumpModule : Module
             {
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", true);
                 yStartPosition = PlayerController.instance.playerRb.position.y;
-                yEndMinPosition = yStartPosition + minHeightJump;
+                yEndMinPosition = yStartPosition + HeightJump;
                 PlayerController.instance.stuckGround = false;
                 isPerformed = true;
                 isRelease = false;
-                Debug.Log("testsaaaa");
                 PlayerController.instance.currentGravity = gravityJump;
-                currentSpeed = Mathf.Sqrt(-2f * -PlayerController.instance.currentGravity * minHeightJump);
+                currentSpeed = Mathf.Sqrt(-2f * -PlayerController.instance.currentGravity * HeightJump);
                 ;
 
                 PlayerController.instance.currentVelocity += currentSpeed * Vector3.up;
@@ -71,8 +67,6 @@ public class JumpModule : Module
                     PlayerController.instance.currentVelocity += moveModule.moveVector;
                 }
             }
-
-            Debug.Log("test");
             if (inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
         }
     }
@@ -83,7 +77,6 @@ public class JumpModule : Module
         {
             if (PlayerController.instance.playerRb.position.y >= yEndMinPosition)
             {
-                Debug.Log("testqq");
                 inputTimer = 0;
                 inExecute = false;
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
