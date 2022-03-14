@@ -44,6 +44,11 @@ public class EnemyManager : MonoBehaviour, Damageable
         }
     }
 
+    public void HitNoDamage()
+    {
+        // 
+    }
+
     public void Heal(int heal)
     {
         

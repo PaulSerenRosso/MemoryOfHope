@@ -57,7 +57,9 @@ public class EnemyMachine : MonoBehaviour
     {
         material.color = Color.white;
     }
-
+    
+    #region Trigger & Collision
+    
     public virtual void OnTriggerEnter(Collider other)
     {
 
@@ -87,4 +89,6 @@ public class EnemyMachine : MonoBehaviour
     {
         
     }
+    
+    #endregion
 }
