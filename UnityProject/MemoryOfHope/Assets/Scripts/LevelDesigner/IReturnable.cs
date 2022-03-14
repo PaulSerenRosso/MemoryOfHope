@@ -6,6 +6,9 @@ public interface IReturnable
 {
   public bool IsReturnLaser { get; set; }
   
+  public bool IsActiveReturnable { get; set; }
+  
+  public LaserMachine CurrentSource { get; set; }
   void Returnable(LaserMachine laser, RaycastHit hit);
 
   void Cancel(LaserMachine laser);

@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour, Damageable
         set { healthEnemy = value; }
     }
     public int maxHealth
+
     {
         get { return maxHealthEnemy; }
         set { maxHealthEnemy = value; }
@@ -21,7 +22,6 @@ public class EnemyManager : MonoBehaviour, Damageable
         get { return isDeadEnemy; }
         set { isDeadEnemy = value; }
     }
-
     public int healthEnemy;
     public int maxHealthEnemy;
     public bool isDeadEnemy;

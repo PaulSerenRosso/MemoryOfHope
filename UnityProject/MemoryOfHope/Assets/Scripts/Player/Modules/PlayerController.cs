@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     
     #region Gravity
 
-    [Header("Gravity")] [SerializeField] private float defaultGravity;
+    [Header("Gravity")] [SerializeField] public float defaultGravity;
     public float currentGravity;
 
     #endregion
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             module.LinkModule();
         }
 
-        currentGravity = defaultGravity;
+       
     }
 
     void Update()
@@ -169,8 +169,8 @@ public class PlayerController : MonoBehaviour
         if (!onGround)
         {
             if (currentGravity == 0)
-                currentGravity = defaultGravity;
-            finalVelocity += Vector3.down * currentGravity;
+                currentGravity = defaultGravity; 
+                    playerRb.AddForce(Vector3.down * currentGravity, ForceMode.Acceleration);
         }
     }
 
@@ -261,6 +261,7 @@ public class PlayerController : MonoBehaviour
                     onGround = true;
                     currentGravity = 0;
                     playerAnimator.SetBool("onGround", true);
+                    playerRb.velocity = Vector3.zero;
                 }
 
                 currentNormalGround = normal.normalized;

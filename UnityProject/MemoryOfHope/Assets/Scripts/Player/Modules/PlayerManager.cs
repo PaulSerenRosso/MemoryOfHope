@@ -35,6 +35,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     #region Main Functions
 
+
     public void TakeDamage(int damages)
     {
         

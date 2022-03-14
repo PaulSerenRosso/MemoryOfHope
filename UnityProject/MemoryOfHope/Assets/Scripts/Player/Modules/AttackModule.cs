@@ -6,9 +6,8 @@ using UnityEngine.InputSystem;
 
 public class AttackModule : Module
 {
+
     public List<PlayerAttackClass> attackList;
-    [SerializeField] private AttackPlayerHand rightHand;
-    [SerializeField] private AttackPlayerHand leftHand;
     private float attackTimer;
     public int currentIndexAttack = 0;
     bool inCombo;
@@ -18,6 +17,7 @@ public class AttackModule : Module
     enum StateCombo
     {
         Begin,
+        CantCancel,
         WaitDamage,
         InDamage,
         WaitCombo,
@@ -59,11 +59,18 @@ public class AttackModule : Module
 
     public override void Release()
     {
-        
-      
     }
 
-    private void Update()
+    public void CantCancel()
+    {
+        if (attackTimer >= attackList[currentIndexAttack].cantCancelTime)
+        {
+            currentStateCombo = StateCombo.WaitDamage;
+            return;
+        }
+    }
+
+    void Update()
     {
         if (inCombo)
         {
@@ -72,6 +79,11 @@ public class AttackModule : Module
                 case StateCombo.Begin:
                 {
                     BeginAttack();
+                    break;
+                }
+                case StateCombo.CantCancel:
+                {
+                    CantCancel();
                     break;
                 }
                 case StateCombo.WaitDamage:
@@ -100,6 +112,7 @@ public class AttackModule : Module
                     break;
                 }
             }
+
             attackTimer += Time.deltaTime;
             MoveAttack();
         }
@@ -111,17 +124,18 @@ public class AttackModule : Module
         isPerformed = true;
         PlayerController.instance.playerAnimator.SetBool("inFight", true);
 
-        currentStateCombo = StateCombo.WaitDamage;
+        currentStateCombo = StateCombo.CantCancel;
     }
 
     void WaitToDamage()
     {
         List<Module> allModule = new List<Module>();
         allModule.AddRange(PlayerController.instance.activeModulesFixed);
-        allModule.AddRange(  PlayerController.instance.activeModulesUpdate);
-        
+        allModule.AddRange(PlayerController.instance.activeModulesUpdate);
+
         for (int i = 0; i < allModule.Count; i++)
-        {   if (allModule[i].inputPressed)
+        {
+            if (allModule[i].inputPressed)
             {
                 if (allModule[i] != this)
                 {
@@ -131,73 +145,32 @@ public class AttackModule : Module
                 }
             }
         }
-        
+
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
-            switch (attackList[currentIndexAttack].playerAttackType)
-            {
-                case PlayerAttackType.LeftHand:
-                {
-                    leftHand.collider.enabled = true;
-                    leftHand.currentDamage = attackList[currentIndexAttack].damage;
-                    break;
-                }
-                case PlayerAttackType.RightHand:
-                {
-                    rightHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.collider.enabled = true;
-                    break;
-                }
-                case PlayerAttackType.Both:
-                {
-                    leftHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.currentDamage = attackList[currentIndexAttack].damage;
-                    rightHand.collider.enabled = true;
-                    leftHand.collider.enabled = true;
-                    break;
-                }
-            }
-            
-
-            currentStateCombo = StateCombo.InDamage;
+            attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = true;
+            attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage;
         }
-        
-        
+
+        currentStateCombo = StateCombo.InDamage;
     }
 
     void InDamage()
     {
         if (attackTimer >= attackList[currentIndexAttack].endTimeActivateAttack)
         {
-            switch (attackList[currentIndexAttack].playerAttackType)
+            if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
             {
-                case PlayerAttackType.LeftHand:
-                {
-                    leftHand.currentDamage = 0;
-                    leftHand.collider.enabled = false;
-                    break;
-                }
-                case PlayerAttackType.RightHand:
-                {
-                    rightHand.currentDamage = 0;
-                    rightHand.collider.enabled = false;
-                    break;
-                }
-                case PlayerAttackType.Both:
-                {
-                    leftHand.currentDamage = 0;
-                    rightHand.currentDamage = 0;
-                    rightHand.collider.enabled = false;
-                    leftHand.collider.enabled = false;
-                    break;
-                }
+                attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
+                attackList[currentIndexAttack].attackPlayerCollider.currentDamage =
+                    attackList[currentIndexAttack].damage;
             }
-
-            canMove = false;
-            PlayerController.instance.playerAnimator.SetInteger("currentAttack", currentIndexAttack + 1);
-            currentStateCombo = StateCombo.WaitCombo;
         }
+        canMove = false;
+        PlayerController.instance.playerAnimator.SetInteger("currentAttack", currentIndexAttack + 1);
+        currentStateCombo = StateCombo.WaitCombo;
     }
+
 
     void WaitToCombo()
     {
@@ -224,7 +197,7 @@ public class AttackModule : Module
             canMove = true;
             attackTimer = 0;
             currentIndexAttack++;
-            currentStateCombo = StateCombo.WaitDamage;
+            currentStateCombo = StateCombo.CantCancel;
             PlayerController.instance.playerAnimator.SetInteger("comboCount", currentIndexAttack + 1);
         }
     }

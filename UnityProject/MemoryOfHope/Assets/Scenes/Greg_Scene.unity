@@ -3511,7 +3511,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c6899de980c2c1543a2c3697b8c8c8f3, type: 2}
+  - {fileID: 2100000, guid: 89bcf4bc00d897b44aa053d37a391158, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3932,10 +3932,11 @@ MonoBehaviour:
   neededModules: []
   inputPressed: 0
   attackList:
-  - startTimeActivateAttack: 0.08
-    endTimeActivateAttack: 1
-    startTimeCombo: 1.1
-    endTimeCombo: 3
+  - cantCancelTime: 0.3
+    startTimeActivateAttack: 0.5
+    endTimeActivateAttack: 0.55
+    startTimeCombo: 0.5
+    endTimeCombo: 0.8
     damage: 1
     maxSpeedDashAttack: 0.5
     speedDashAttackCurve:
@@ -3963,10 +3964,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     playerAttackType: 0
-  - startTimeActivateAttack: 0.13
+  - cantCancelTime: 0.3
+    startTimeActivateAttack: 0.5
     endTimeActivateAttack: 1
-    startTimeCombo: 1.1
-    endTimeCombo: 3
+    startTimeCombo: 0.8
+    endTimeCombo: 1.5
     damage: 1
     maxSpeedDashAttack: 0.5
     speedDashAttackCurve:
@@ -3994,10 +3996,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     playerAttackType: 1
-  - startTimeActivateAttack: 0.25
-    endTimeActivateAttack: 2
-    startTimeCombo: 1.1
-    endTimeCombo: 3
+  - cantCancelTime: 0.3
+    startTimeActivateAttack: 0.5
+    endTimeActivateAttack: 1
+    startTimeCombo: 0.8
+    endTimeCombo: 1.5
     damage: 3
     maxSpeedDashAttack: 1
     speedDashAttackCurve:
@@ -4013,7 +4016,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.35929117
       - serializedVersion: 3
-        time: 0.30133268
+        time: 0.3559653
         value: 0
         inSlope: 0.016656077
         outSlope: 0.016656077
@@ -4022,8 +4025,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.18794954
       - serializedVersion: 3
-        time: 0.3532242
-        value: 0.7198769
+        time: 0.38770905
+        value: 0.7108208
         inSlope: 5.7611456
         outSlope: 5.7611456
         tangentMode: 0
