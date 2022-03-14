@@ -1,79 +1,62 @@
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
-public class EnemyManager : EntityDamageable, Damageable
+public class EnemyManager : MonoBehaviour, Damageable
 {
-    public int health { get; set; }
-    public int maxHealth { get; set; }
-    public bool isDead { get; set; }
+    #region Variables
 
-    public EnemyType enemyType;
-    
-    public enum EnemyType
-    {
-        AbandonedPrototype,
-        Dream,
-        CorruptedMemory
+    public int health 
+    { 
+        get { return healthEnemy; }
+        set { healthEnemy = value; }
     }
-    
-    public void TakeDamage()
+    public int maxHealth
     {
-        
+        get { return maxHealthEnemy; }
+        set { maxHealthEnemy = value; }
+    }
+    public bool isDead
+    {
+        get { return isDeadEnemy; }
+        set { isDeadEnemy = value; }
     }
 
-    public void Heal()
+    public int healthEnemy;
+    public int maxHealthEnemy;
+    public bool isDeadEnemy;
+    
+    public bool canBeHitByMelee;
+    public bool canBeHitByLaser;
+    public bool canBeKnockback;
+
+    #endregion
+    
+    #region Main Functions
+
+    public void TakeDamage(int damages)
+    {
+        health -= damages;
+
+        if (health <= 0)
+        {
+            Death();
+        }
+    }
+
+    public void Heal(int heal)
     {
         
     }
 
     public void Death()
     {
-        
+        //Destroy(GetComponent<NavMeshAgent>());
+        Destroy(gameObject);
     }
+
+    #endregion
     
-    
-    public override void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("PlayerFist"))
-        {
-            Debug.Log(other.name);
-            isHitByMelee = true;
-            HitEnemy(this);
-
-        }
-        // Si touché par attaque de mêlée
-        // isHitByMelee = true;
-    }
-
-    public override void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Laser"))
-        {
-            isHitByLaser = true;
-        }
-        // Si touché par laser
-        // isHitByLaser = true;
-    }
-
-    private void HitEnemy(EnemyManager enemyManager)
-    {
-        switch (enemyManager.enemyType)
-        {
-            case EnemyType.AbandonedPrototype:
-                PA_StateMachine PA_enemy = enemyManager.GetComponent<PA_StateMachine>();
-                PA_enemy.OnHit();
-                break;
-            
-            case EnemyType.Dream:
-                S_StateMachine S_enemy = enemyManager.GetComponent<S_StateMachine>();
-                S_enemy.OnHit();
-                break;
-            
-            case EnemyType.CorruptedMemory:
-                
-                break;
-        }
-    }
     
 }
-
 

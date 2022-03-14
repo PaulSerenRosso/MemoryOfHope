@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 
 public class AttackModule : Module
 {
-    [SerializeField] private List<PlayerAttackClass> attackList;
+    public List<PlayerAttackClass> attackList;
     [SerializeField] private AttackPlayerHand rightHand;
     [SerializeField] private AttackPlayerHand leftHand;
     private float attackTimer;
-    private int currentIndexAttack = 0;
+    public int currentIndexAttack = 0;
     bool inCombo;
     private bool canMove;
     private StateCombo currentStateCombo;

@@ -1,47 +1,88 @@
-
-using System;
 using UnityEngine;
 
 public class PA_StateMachine : EnemyMachine
 {
-    public EnemyState currentState;
+    #region States
     
-    public PA_DefaultState defaultState;
+    public PA_DefaultState defaultState = new PA_DefaultState();
     
-    public PA_AttackState attackState;
+    public PA_AttackState attackState = new PA_AttackState();
     
-    public PA_PursuitState pursuitState;
+    public PA_PursuitState pursuitState = new PA_PursuitState();
     
-    public PA_EndPursuitState endPursuitState;
+    public PA_EndPursuitState endPursuitState = new PA_EndPursuitState();
     
-    public PA_PauseAttackState pauseAttackState;
+    public PA_PauseAttackState pauseAttackState = new PA_PauseAttackState();
     
-    public PA_PausePursuitState pausePursuitState;
+    public PA_PausePursuitState pausePursuitState = new PA_PausePursuitState();
+
+    public PA_HitState hitState = new PA_HitState();
+    
+    #endregion
+
+    #region Gizmos
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, defaultState.detectionDistance);
     }
 
-    public override void OnHit()
-    {
-        base.OnHit();
-    }
-    
-    public void Start()
+    #endregion
+
+    #region State Machine Main Functions
+
+    public override void Start()
     {
         currentState = defaultState;
-        currentState.StartState(this);
+        base.Start();
     }
     
-    public void Update()
+    public override void OnHitByMelee()
     {
-        currentState.UpdateState(this);
+        base.OnHitByMelee();
+        SwitchState(hitState);
+    }
+
+    #endregion
+
+    #region Trigger & Collision
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerFist") && enemyManager.canBeHitByMelee) // Hit by the player
+        {
+            OnHitByMelee();
+        }
+    }
+
+    public override void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Laser") && enemyManager.canBeHitByLaser) // Hit by the laser
+        {
+            
+        }
+    }
+
+    public override void OnTriggerExit(Collider other)
+    {
+        
     }
     
-    public void SwitchState(EnemyState state)
+    public override void OnCollisionEnter(Collision other)
     {
-        currentState = state;
-        state.StartState(this);
+        
     }
+
+    public override void OnCollisionStay(Collision other)
+    {
+
+        
+    }
+
+    public override void OnCollisionExit(Collision other)
+    {
+        
+    }
+
+    #endregion
 }

@@ -10,22 +10,11 @@ public class AttackPlayerHand : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Glitch") && !PlayerManager.instance.hasGlitch)
-        {
-            AddGlitch();
-        }
-        
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         
-    }
-
-    
-
-    public void AddGlitch()
-    {
-        PlayerManager.instance.hasGlitch = true; 
     }
 }

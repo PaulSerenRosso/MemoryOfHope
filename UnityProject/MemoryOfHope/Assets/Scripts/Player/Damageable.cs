@@ -4,8 +4,6 @@ using UnityEngine;
 
 public interface Damageable
 {
-
-
     public int health
     {
         get ;
@@ -25,9 +23,9 @@ public interface Damageable
         set;
     }
 
-    public void TakeDamage();
+    public void TakeDamage(int damages);
 
-    public void Heal();
+    public void Heal(int heal);
 
     public void Death();
 }

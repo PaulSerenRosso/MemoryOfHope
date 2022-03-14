@@ -3,14 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : EntityDamageable, Damageable
+public class PlayerManager : MonoBehaviour, Damageable
 {
+    #region Variables
+
     public List<Module> obtainedModule;
     public int money;
     public bool hasGlitch;
+    
+    public int health { get; set; }
+    public int maxHealth { get; set; }
+    public bool isDead { get; set; }
+
+    #endregion
+
+    #region Instance
 
     public static PlayerManager instance;
-
     private void Awake()
     {
         if (instance is { })
@@ -22,16 +31,16 @@ public class PlayerManager : EntityDamageable, Damageable
         instance = this;
     }
 
-    public int health { get; set; }
-    public int maxHealth { get; set; }
-    public bool isDead { get; set; }
+    #endregion
 
-    public void TakeDamage()
+    #region Main Functions
+
+    public void TakeDamage(int damages)
     {
         
     }
 
-    public void Heal()
+    public void Heal(int heal)
     {
         
     }
@@ -40,7 +49,11 @@ public class PlayerManager : EntityDamageable, Damageable
     {
         
     }
-    
+
+    #endregion
+
+    #region Modules
+
     public void AddModule(Module mod)
     {
         mod.LinkModule();
@@ -48,4 +61,42 @@ public class PlayerManager : EntityDamageable, Damageable
         else PlayerController.instance.activeModulesUpdate.Add(mod);
         obtainedModule.Add(mod);
     }
+
+    #endregion
+
+    #region Trigger & Collision
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        
+    }
+
+
+    private void OnCollisionExit(Collision other)
+    {
+        
+    }
+
+    #endregion
+    
 }
