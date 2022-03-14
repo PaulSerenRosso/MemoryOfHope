@@ -431,14 +431,55 @@ MonoBehaviour:
   isFixedUpdate: 1
   isPerformed: 0
   contrainstModules:
-  - {fileID: 7226099581146458022}
-  - {fileID: 7649947021829257087}
+  - {fileID: 0}
+  - {fileID: 0}
   neededModules: []
   inputPressed: 0
-  gravityJump: 9.81
-  moveModule: {fileID: 7226099581146458020}
-  HeightJump: 0
-  inputMaxTime: 1
+  moveModule: {fileID: 0}
+  HeightJump: 0.5
+  MaxSpeedJump: 20
+  CurveJump:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 1.2032304
+      outSlope: 1.2032304
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.7753284
+    - serializedVersion: 3
+      time: 0.07086861
+      value: 0.950098
+      inSlope: -3.724599
+      outSlope: -3.724599
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17867619
+      value: 0.47226125
+      inSlope: -0.44319972
+      outSlope: -0.44319972
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12726857
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9879588
+      value: 0.29718527
+      inSlope: -0.21633479
+      outSlope: -0.21633479
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &7226099581146458022
 MonoBehaviour:
   m_ObjectHideFlags: 0
