@@ -180,7 +180,10 @@ public class PlayerController : MonoBehaviour
              oldVelocity = playerRb.velocity;
             if (onGround && stuckGround)
             {
-                playerRb.velocity = PlayerProjectOnPlane(playerRb.velocity);
+                projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
+                alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
+                projectionRB *= alignedSpeed;
+                playerRb.velocity = projectionRB;
             }
             else if (!onGround && currentWall != null)
             {
@@ -276,6 +279,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+        
             if (currentGround == other.collider)
             {
                 onGround = false;
@@ -284,7 +288,7 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("onGround", false);
                 currentGravity = defaultGravity;
             }
-            else if (currentWall == other.collider)
+           if (currentWall == other.collider)
             {
                 currentWall = null;
                 currentNormalWall = Vector3.zero;
@@ -340,10 +344,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Vector3.Angle(toProject, currentNormalWall) <= 90)
         {
-                projectionRB = Vector3.ProjectOnPlane(toProject, currentNormalGround).normalized;
-                    alignedSpeed = Vector3.Dot(toProject, projectionRB);
-                    projectionRB *= alignedSpeed;
-        return projectionRB;
+            projectionRB = Vector3.ProjectOnPlane(toProject, currentNormalGround).normalized;
+            alignedSpeed = Vector3.Dot(toProject, projectionRB);
+            projectionRB *= alignedSpeed;
+            return projectionRB;
         }
 
         return toProject;
