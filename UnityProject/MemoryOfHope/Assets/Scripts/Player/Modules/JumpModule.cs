@@ -4,21 +4,25 @@ using UnityEngine.InputSystem;
 
 public class JumpModule : Module
 {
-    [SerializeField] private float gravityJump;
+
 
 //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
     private float yStartPosition;
-    private float yEndMinPosition;
+    private float yEndPosition;
 
     float currentSpeed = 0;
+    
     [SerializeField] private MoveModule moveModule;
     [SerializeField] private float HeightJump;
-    [SerializeField] private float inputMaxTime;
-    private float inputTimer;
     private AnimationCurve curveJumpSpeed;
     bool inExecute;
     private float yCurrentEndMaxPosition;
     private bool isRelease = true;
+    [SerializeField]
+    private float MaxSpeedJump;
+
+    [SerializeField]
+    private AnimationCurve CurveJump;
 
     public override void LinkModule()
     {
@@ -53,21 +57,19 @@ public class JumpModule : Module
             {
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", true);
                 yStartPosition = PlayerController.instance.playerRb.position.y;
-                yEndMinPosition = yStartPosition + HeightJump;
+                yEndPosition = yStartPosition + HeightJump;
                 PlayerController.instance.stuckGround = false;
                 isPerformed = true;
                 isRelease = false;
-                PlayerController.instance.currentGravity = gravityJump;
-                currentSpeed = Mathf.Sqrt(-2f * -PlayerController.instance.currentGravity * HeightJump);
-                ;
-
-                PlayerController.instance.currentVelocity += currentSpeed * Vector3.up;
+                PlayerController.instance.currentGravity = 0;
                 if (moveModule.inputPressed)
                 {
-                    PlayerController.instance.currentVelocity += moveModule.moveVector;
+                    PlayerController.instance.currentVelocity += PlayerController.instance.PlayerProjectOnPlane(moveModule.moveVector);
+                   Debug.Log(moveModule.moveVector);
                 }
             }
-            if (inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
+         
+      
         }
     }
 
@@ -75,16 +77,23 @@ public class JumpModule : Module
     {
         if (isPerformed)
         {
-            if (PlayerController.instance.playerRb.position.y >= yEndMinPosition)
+            if (PlayerController.instance.playerRb.position.y >= yEndPosition)
             {
-                inputTimer = 0;
                 inExecute = false;
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
                 PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
                 PlayerController.instance.stuckGround = true;
+                PlayerController.instance.currentVelocity += currentSpeed * Vector3.up;
                 isPerformed = false;
                 yCurrentEndMaxPosition = 0;
             }
+            else
+            {
+                currentSpeed = CurveJump.Evaluate(transform.position.y / yEndPosition) * MaxSpeedJump;
+                PlayerController.instance.currentVelocityWithUndo += currentSpeed * Vector3.up;
+                PlayerController.instance.currentGravity = 0;
+            }
+       
         }
     }
 
@@ -102,12 +111,6 @@ public class JumpModule : Module
 
     public override void Release()
     {
-        if (!isPerformed)
-        {
-            Debug.Log("testqdfqsfsqdfq");
-            inputTimer = 0;
-        }
-
         inExecute = false;
     }
 }

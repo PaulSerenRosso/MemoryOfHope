@@ -168,9 +168,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!onGround)
         {
-            if (currentGravity == 0)
-                currentGravity = defaultGravity; 
-                    playerRb.AddForce(Vector3.down * currentGravity, ForceMode.Acceleration);
+            
+            playerRb.AddForce(Vector3.down * currentGravity, ForceMode.Acceleration);
+                  
         }
     }
 
@@ -180,10 +180,7 @@ public class PlayerController : MonoBehaviour
              oldVelocity = playerRb.velocity;
             if (onGround && stuckGround)
             {
-                projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
-                alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
-                projectionRB *= alignedSpeed;
-                playerRb.velocity = projectionRB;
+                playerRb.velocity = PlayerProjectOnPlane(playerRb.velocity);
             }
             else if (!onGround && currentWall != null)
             {
@@ -259,9 +256,9 @@ public class PlayerController : MonoBehaviour
                 if (!onGround)
                 {
                     onGround = true;
-                    currentGravity = 0;
                     playerAnimator.SetBool("onGround", true);
                     playerRb.velocity = Vector3.zero;
+                    currentGravity = 0;
                 }
 
                 currentNormalGround = normal.normalized;
@@ -285,6 +282,7 @@ public class PlayerController : MonoBehaviour
                 currentGround = null;
                 currentNormalGround = Vector3.zero;
                 playerAnimator.SetBool("onGround", false);
+                currentGravity = defaultGravity;
             }
             else if (currentWall == other.collider)
             {
@@ -336,4 +334,19 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+
+  public  Vector3 PlayerProjectOnPlane(Vector3 toProject)
+    {
+        if (Vector3.Angle(toProject, currentNormalWall) <= 90)
+        {
+                projectionRB = Vector3.ProjectOnPlane(toProject, currentNormalGround).normalized;
+                    alignedSpeed = Vector3.Dot(toProject, projectionRB);
+                    projectionRB *= alignedSpeed;
+        return projectionRB;
+        }
+
+        return toProject;
+
+    }
 }
