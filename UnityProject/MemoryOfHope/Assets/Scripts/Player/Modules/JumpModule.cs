@@ -15,7 +15,7 @@ public class JumpModule : Module
     private float yStartPosition;
     private float yEndMinPosition;
 
-    
+    float currentSpeed = 0;
     [SerializeField] private MoveModule moveModule;
     [SerializeField]
     private float minHeightJump;
@@ -24,11 +24,11 @@ public class JumpModule : Module
     [SerializeField]
     private float inputMinTime;
     private float inputTimer;
-
+    private AnimationCurve curveJumpSpeed;
    bool inExecute;
     private float yCurrentEndMaxPosition;
     private bool isRelease = true;
-    
+   
     public override void LinkModule()
     {
         Debug.Log("Linking Inputs for Jump Module");
@@ -62,21 +62,23 @@ public class JumpModule : Module
     {
         if (inExecute )
         {
-            if (PlayerController.instance.onGround && !isPerformed && inputTimer > inputMinTime)
+            if (PlayerController.instance.onGround && !isPerformed)
             {
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", true);
                 yStartPosition = PlayerController.instance.playerRb.position.y;
                 yEndMinPosition = yStartPosition + minHeightJump;
                 PlayerController.instance.stuckGround = false;
-                isPerformed = true; 
-                PlayerController.instance.currentGravity = gravityJump;
+                isPerformed = true;
                 isRelease = false;
+                Debug.Log("testsaaaa");
+                PlayerController.instance.currentGravity = gravityJump;
+           currentSpeed = Mathf.Sqrt(-2f *  -PlayerController.instance.currentGravity  * minHeightJump);;
+         
+                PlayerController.instance.currentVelocity += currentSpeed*Vector3.up;
                 if (moveModule.inputPressed)
                 {
                     PlayerController.instance.currentVelocity += moveModule.moveVector ;
                 }
-               
-                
             }  
             Debug.Log("test");
             if(inputTimer < inputMaxTime) inputTimer += Time.deltaTime;
@@ -86,46 +88,37 @@ public class JumpModule : Module
     {
         if (isPerformed)
         {
-             if (PlayerController.instance.playerRb.position.y <= yEndMinPosition)
-             {
-                 float currentSpeed = speedJump - PlayerController.instance.playerRb.velocity.y;
-                 PlayerController.instance.currentVelocity += currentSpeed*Vector3.up;
-             }
-             else if( inputTimer > inputMinTime) 
-             {
-                 
-                 
-                     float factorTime = inputTimer/ inputMaxTime;
-        
-                     yCurrentEndMaxPosition = factorTime*(maxHeightJump+yStartPosition);
-                     if (PlayerController.instance.playerRb.position.y <= yCurrentEndMaxPosition)
-                 {
-                     float currentSpeed = speedJump - PlayerController.instance.playerRb.velocity.y;
-                     PlayerController.instance.currentVelocity += currentSpeed*Vector3.up;
-                 }
-                 else
-                 {
-                     Debug.Log("testqq");
+
+           
+            Debug.Log(yEndMinPosition );
+            Debug.Log(PlayerController.instance.playerRb.position.y >= yCurrentEndMaxPosition);
+            Debug.Log(yCurrentEndMaxPosition != 0 );
+            
+            if (inputTimer > inputMinTime  && yCurrentEndMaxPosition == 0 || (yCurrentEndMaxPosition != 0 && PlayerController.instance.playerRb.position.y <= yCurrentEndMaxPosition))
+            {
+
+              float factorTime = inputTimer / inputMaxTime;
+                yCurrentEndMaxPosition = factorTime * (maxHeightJump + yStartPosition);
+                if (yCurrentEndMaxPosition == 0)
+                {
+                    currentSpeed = PlayerController.instance.playerRb.velocity.y;
+                }
+                PlayerController.instance.currentVelocity += (currentSpeed-PlayerController.instance.playerRb.velocity.y) * Vector3.up;
+            }
+            
+            else if(PlayerController.instance.playerRb.position.y >= yEndMinPosition  || (yCurrentEndMaxPosition != 0 && PlayerController.instance.playerRb.position.y >= yCurrentEndMaxPosition))
+                     {
+                         Debug.Log("testqq");
                      inputTimer = 0;
                      inExecute = false;
                      PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
-                     PlayerController.instance.currentGravity = 0; 
-                     PlayerController.instance.currentGravity = 0; 
+                     PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
                      PlayerController.instance.stuckGround = true;
                      isPerformed = false;
                      yCurrentEndMaxPosition = 0;
                  }
-             }
-             else
-             {
-                 Debug.Log("testqdfqsfsqdfq");
-                 inputTimer = 0;
-                 inExecute = false;
-                 PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
-                 PlayerController.instance.currentGravity = 0;
-                 PlayerController.instance.stuckGround = true;
-                 isPerformed = false;
-             }
+             
+        
         }
     }
 
