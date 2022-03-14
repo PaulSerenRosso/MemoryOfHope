@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public GameObject nearestObject;
     private List<float> distances = new List<float>();
     public bool isGlitching;
+    public AttackModule attackModule;
 
     #endregion
     
