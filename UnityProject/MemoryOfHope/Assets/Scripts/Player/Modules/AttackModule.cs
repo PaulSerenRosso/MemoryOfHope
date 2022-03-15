@@ -148,27 +148,28 @@ public class AttackModule : Module
 
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
+            Debug.Log(attackTimer);
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = true;
-            attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage;
+            attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage; 
+            currentStateCombo = StateCombo.InDamage;
         }
 
-        currentStateCombo = StateCombo.InDamage;
+       
     }
 
     void InDamage()
     {
         if (attackTimer >= attackList[currentIndexAttack].endTimeActivateAttack)
         {
-            if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
-            {
-                attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
+            Debug.Log(attackTimer);
+            attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
                 attackList[currentIndexAttack].attackPlayerCollider.currentDamage =
                     attackList[currentIndexAttack].damage;
-            }
-        }
+            
         canMove = false;
         PlayerController.instance.playerAnimator.SetInteger("currentAttack", currentIndexAttack + 1);
         currentStateCombo = StateCombo.WaitCombo;
+        }
     }
 
 
