@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
 public class EnemyManager : MonoBehaviour, Damageable
 {
@@ -19,8 +17,8 @@ public class EnemyManager : MonoBehaviour, Damageable
     }
     public bool isDead
     {
-        get { return isDeadEnemy; }
-        set { isDeadEnemy = value; }
+        get => isDeadEnemy;
+        set => isDeadEnemy = value;
     }
     public int healthEnemy;
     public int maxHealthEnemy;
@@ -29,6 +27,8 @@ public class EnemyManager : MonoBehaviour, Damageable
     public bool canBeHitByMelee;
     public bool canBeHitByLaser;
     public bool canBeKnockback;
+
+    public int damage;
 
     #endregion
     
@@ -61,7 +61,5 @@ public class EnemyManager : MonoBehaviour, Damageable
     }
 
     #endregion
-    
-    
 }
 

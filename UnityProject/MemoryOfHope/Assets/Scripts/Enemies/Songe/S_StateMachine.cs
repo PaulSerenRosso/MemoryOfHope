@@ -91,15 +91,17 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnCollisionEnter(Collision other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.DrawRay(other.contacts[0].point, other.contacts[0].normal, Color.green, 10f);
+            hitDirection = other.contacts[0].normal;
+            currentState.OnCollisionStayState(this, other);
+        }
     }
 
     public override void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentState.OnCollisionStayState(this, other);
-        }
+        
     }
 
     public override void OnCollisionExit(Collision other)
