@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: 6546855627693250739}
   _collider: {fileID: 6725060030925692718}
-  Mirror: {fileID: 0}
+  Mirror: {fileID: 696764172249142509}
   _health: 13
   _maxHealth: 13
   _isDead: 0
@@ -330,7 +330,7 @@ Rigidbody:
   m_GameObject: {fileID: 7226099581146458017}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.03
+  m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -378,8 +378,8 @@ MonoBehaviour:
   interactiveObjects: []
   nearestObject: {fileID: 0}
   isGlitching: 0
-  attackModule: {fileID: 0}
-  defaultGravity: 9.81
+  attackModule: {fileID: 7226099581146458022}
+  defaultGravity: 20
   currentGravity: 0
   currentVelocity: {x: 0, y: 0, z: 0}
   currentVelocityWithUndo: {x: 0, y: 0, z: 0}
@@ -413,7 +413,7 @@ MonoBehaviour:
   defaultSpeedRotation: 0.4
   toleranceRotation: 0.01
   factorAngleOppositeRun: 1
-  airSpeedMovment: 0.1
+  airSpeedMovment: 0.3
   maxAirSpeed: 3.79
 --- !u!114 &7226099581146458021
 MonoBehaviour:
@@ -431,13 +431,14 @@ MonoBehaviour:
   isFixedUpdate: 1
   isPerformed: 0
   contrainstModules:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7226099581146458022}
+  - {fileID: 7649947021829257087}
   neededModules: []
   inputPressed: 0
-  moveModule: {fileID: 0}
-  HeightJump: 0.5
-  MaxSpeedJump: 20
+  moveModule: {fileID: 7226099581146458020}
+  HeightJump: 1
+  MaxSpeedJump: 26
+  speedEndJump: 6
   CurveJump:
     serializedVersion: 2
     m_Curve:
@@ -451,28 +452,19 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.7753284
     - serializedVersion: 3
-      time: 0.07086861
-      value: 0.950098
-      inSlope: -3.724599
-      outSlope: -3.724599
+      time: 0.21808799
+      value: 0.8494995
+      inSlope: -2.1817544
+      outSlope: -2.1817544
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.28939632
+      outWeight: 0.0362801
     - serializedVersion: 3
-      time: 0.17867619
-      value: 0.47226125
-      inSlope: -0.44319972
-      outSlope: -0.44319972
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12726857
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9879588
+      time: 1
       value: 0.29718527
-      inSlope: -0.21633479
-      outSlope: -0.21633479
+      inSlope: -0.70636374
+      outSlope: -0.70636374
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -662,7 +654,6 @@ MonoBehaviour:
   isFixedUpdate: 1
   isPerformed: 0
   contrainstModules:
-  - {fileID: 0}
   - {fileID: 7226099581146458022}
   - {fileID: 7226099581146458021}
   neededModules: []
