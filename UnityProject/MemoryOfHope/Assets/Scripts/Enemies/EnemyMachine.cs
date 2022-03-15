@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +14,8 @@ public class EnemyMachine : MonoBehaviour
     public Rigidbody rb;
     public float enemyWeigth;
     public float attackStrength;
+    public Collider attackCollider;
+    public Vector3 hitDirection;
 
     #endregion
     

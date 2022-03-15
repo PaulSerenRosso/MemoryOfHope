@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class AttackModule : Module
 {
-
     public List<PlayerAttackClass> attackList;
     private float attackTimer;
     public int currentIndexAttack = 0;
@@ -145,7 +144,9 @@ public class AttackModule : Module
                 }
             }
         }
-
+    
+        Debug.Log(attackTimer);
+        Debug.Log(attackList[currentIndexAttack].startTimeActivateAttack);
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
             Debug.Log(attackTimer);

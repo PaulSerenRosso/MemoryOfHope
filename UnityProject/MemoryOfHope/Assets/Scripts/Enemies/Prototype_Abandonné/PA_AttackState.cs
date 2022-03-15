@@ -16,6 +16,8 @@ public class PA_AttackState : EnemyState
         enemyMachine.material.color = Color.red;
         timer = 0;
 
+        enemyMachine.attackCollider.enabled = true;
+
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -24,6 +26,7 @@ public class PA_AttackState : EnemyState
         
         if (ConditionState.Timer(durationAttack, timer))
         {
+            enemyMachine.attackCollider.enabled = false;
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pursuitState);
         }

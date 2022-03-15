@@ -24,7 +24,6 @@ public abstract class Module : MonoBehaviour
 
     public virtual bool Conditions()
     {
-
         if (!CheckConstraintModules())
         {
             return false; // Faux si un module contraint
