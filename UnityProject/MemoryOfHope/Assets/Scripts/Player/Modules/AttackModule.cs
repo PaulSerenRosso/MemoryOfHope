@@ -144,12 +144,9 @@ public class AttackModule : Module
                 }
             }
         }
-    
-        Debug.Log(attackTimer);
-        Debug.Log(attackList[currentIndexAttack].startTimeActivateAttack);
+
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
-            Debug.Log(attackTimer);
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = true;
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage; 
             currentStateCombo = StateCombo.InDamage;
@@ -162,7 +159,6 @@ public class AttackModule : Module
     {
         if (attackTimer >= attackList[currentIndexAttack].endTimeActivateAttack)
         {
-            Debug.Log(attackTimer);
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
                 attackList[currentIndexAttack].attackPlayerCollider.currentDamage =
                     attackList[currentIndexAttack].damage;

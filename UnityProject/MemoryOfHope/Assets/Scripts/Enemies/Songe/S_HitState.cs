@@ -18,7 +18,6 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
         
         if (enemyMachine.enemyManager.canBeKnockback)
         {
-            enemyMachine.rb.isKinematic = false;
             enemyMachine.agent.enabled = false;
             Vector3 knockback = (-enemyMachine.transform.forward * enemyMachine.attackStrength) / enemyMachine.enemyWeigth;
             enemyMachine.rb.AddForce(knockback);
@@ -38,7 +37,6 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
-            enemyMachine.rb.isKinematic = true;
             enemy.SwitchState(enemy.pursuitState);
         }
     }
