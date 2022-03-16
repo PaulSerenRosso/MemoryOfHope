@@ -38,6 +38,12 @@ public class JumpModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
+
+        if (PlayerManager.instance.isHit)
+        {
+            return false; // Ne peut pas sauter si le joueur est knockback
+        }
+        
         if ((PlayerController.instance.onGround && isRelease) || !PlayerController.instance.onGround && isPerformed)
             return true;
 

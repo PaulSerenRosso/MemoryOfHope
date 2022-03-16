@@ -27,6 +27,12 @@ public class PrismModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
+        
+        if (PlayerManager.instance.isHit)
+        {
+            return false; // Ne peut pas sauter si le joueur est knockback
+        }
+        
         if (!PlayerController.instance.onGround || _shield.isDead) return false;
         return true;
     }

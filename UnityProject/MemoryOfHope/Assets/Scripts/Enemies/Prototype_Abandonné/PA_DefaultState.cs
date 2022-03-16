@@ -8,8 +8,6 @@ public class PA_DefaultState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
-        enemyMachine.material.color = Color.white;
-        
         enemyMachine.agent.isStopped = true;
     }
 

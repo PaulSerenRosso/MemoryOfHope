@@ -35,6 +35,12 @@ public class AttackModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
+        
+        if (PlayerManager.instance.isHit)
+        {
+            return false; // Ne peut pas attaquer si le joueur est knockback
+        }
+        
         if (!PlayerController.instance.onGround) return false;
         return true;
     }

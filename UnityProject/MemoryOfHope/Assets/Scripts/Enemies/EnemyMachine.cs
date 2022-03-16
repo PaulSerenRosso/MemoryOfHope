@@ -14,11 +14,10 @@ public class EnemyMachine : MonoBehaviour
     public Rigidbody rb;
     public float enemyWeigth;
     public float attackStrength;
-    public Collider attackCollider;
+    public GameObject attackArea;
     public Vector3 hitDirection;
 
     #endregion
-    
 
     #region State Machine Main Functions
 
@@ -39,6 +38,7 @@ public class EnemyMachine : MonoBehaviour
 
     public void SwitchState(EnemyState state)
     {
+        rb.velocity = Vector3.zero;
         currentState = state;
         currentState.StartState(this);
     }
@@ -72,7 +72,11 @@ public class EnemyMachine : MonoBehaviour
     {
         if (other.CompareTag("PlayerFist")) // Hit by the player
         {
-            hitDirection = -(other.transform.position - transform.position);
+            hitDirection = transform.position - PlayerController.instance.transform.position;
+            Debug.Log(hitDirection);
+            hitDirection = -(PlayerController.instance.transform.position - transform.position);
+            Debug.Log(hitDirection);
+
             OnHitByMelee();
         }
     }

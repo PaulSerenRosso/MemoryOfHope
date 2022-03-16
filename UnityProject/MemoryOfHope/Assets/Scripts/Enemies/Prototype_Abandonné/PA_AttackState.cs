@@ -13,10 +13,8 @@ public class PA_AttackState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        enemyMachine.material.color = Color.red;
         timer = 0;
-
-        enemyMachine.attackCollider.enabled = true;
+        enemyMachine.attackArea.SetActive(true);
 
     }
     
@@ -26,7 +24,7 @@ public class PA_AttackState : EnemyState
         
         if (ConditionState.Timer(durationAttack, timer))
         {
-            enemyMachine.attackCollider.enabled = false;
+            enemyMachine.attackArea.SetActive(false);
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pursuitState);
         }

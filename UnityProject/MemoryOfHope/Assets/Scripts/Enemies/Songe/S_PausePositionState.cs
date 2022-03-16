@@ -12,7 +12,6 @@ public class S_PausePositionState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        enemyMachine.material.color = Color.black;
         timer = 0;
     }
     
