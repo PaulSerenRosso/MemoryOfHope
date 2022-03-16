@@ -24,7 +24,6 @@ public class EnemyMachine : MonoBehaviour
 
     public virtual void Start()
     {
-        Debug.Log(this);
         currentState.StartState(this);
     }
     
@@ -49,7 +48,15 @@ public class EnemyMachine : MonoBehaviour
         AttackModule attackModule = PlayerController.instance.attackModule;
         PlayerAttackClass attack = attackModule.attackList[attackModule.currentIndexAttack];
         attackStrength = attack.attackStrength;
-        enemyManager.TakeDamage(attack.damage);
+
+        if (enemyManager.canBeHitByMelee)
+        {
+            enemyManager.TakeDamage(attack.damage);
+        }
+        else
+        {
+            enemyManager.HitNoDamage();
+        }
     }
 
     #endregion
@@ -63,12 +70,19 @@ public class EnemyMachine : MonoBehaviour
     
     public virtual void OnTriggerEnter(Collider other)
     {
-
+        if (other.CompareTag("PlayerFist")) // Hit by the player
+        {
+            hitDirection = -(other.transform.position - transform.position);
+            OnHitByMelee();
+        }
     }
 
     public virtual void OnTriggerStay(Collider other)
     {
-
+        if (other.CompareTag("Laser")) // Hit by laser
+        {
+            
+        }
     }
 
     public virtual void OnTriggerExit(Collider other)

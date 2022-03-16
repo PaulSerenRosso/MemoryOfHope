@@ -40,5 +40,4 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
             enemy.SwitchState(enemy.pursuitState);
         }
     }
-
 }

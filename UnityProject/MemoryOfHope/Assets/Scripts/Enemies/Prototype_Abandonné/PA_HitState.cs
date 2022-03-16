@@ -15,15 +15,14 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
     {
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
-
-        if (enemyMachine.enemyManager.canBeKnockback)
-        {
-            enemyMachine.agent.enabled = false;
-            Vector3 knockback = ((-enemyMachine.transform.forward * enemyMachine.attackStrength) / enemyMachine.enemyWeigth);
-            enemyMachine.rb.AddForce(knockback);
-            enemyMachine.rb.drag = drag;
-        }
+        enemyMachine.agent.enabled = false;
         
+        Vector3 knockback = enemyMachine.hitDirection * enemyMachine.attackStrength / enemyMachine.enemyWeigth;
+        Debug.DrawRay(enemyMachine.transform.position, knockback, Color.green, 1f);
+        
+        enemyMachine.rb.AddForce(knockback);
+        enemyMachine.rb.drag = drag;
+
         enemyMachine.material.color = Color.red;
         timer = 0;
     }
