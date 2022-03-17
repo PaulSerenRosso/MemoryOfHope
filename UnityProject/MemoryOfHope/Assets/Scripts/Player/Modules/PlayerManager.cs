@@ -127,7 +127,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             EnemyManager enemy = other.GetComponentInParent<EnemyManager>();
             
             hitDirection = transform.position - enemy.transform.position;
-            
+            Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
             StartCoroutine(Hit(enemy));
         }
     }

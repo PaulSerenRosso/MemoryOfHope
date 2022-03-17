@@ -16,6 +16,7 @@ public class EnemyMachine : MonoBehaviour
     public float attackStrength;
     public GameObject attackArea;
     public Vector3 hitDirection;
+    [SerializeField] private bool isHit = false;
 
     #endregion
 
@@ -70,12 +71,10 @@ public class EnemyMachine : MonoBehaviour
     
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerFist")) // Hit by the player
+        if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
             hitDirection = transform.position - PlayerController.instance.transform.position;
-            Debug.Log(hitDirection);
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
-            Debug.Log(hitDirection);
 
             OnHitByMelee();
         }
@@ -83,7 +82,7 @@ public class EnemyMachine : MonoBehaviour
 
     public virtual void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Laser")) // Hit by laser
+        if (other.CompareTag("Laser") && !isHit) // Hit by laser
         {
             
         }

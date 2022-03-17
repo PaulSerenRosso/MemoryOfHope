@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ShieldMirror : BaseMirror
 {
- 
-   
     [Header("ShieldMirror Variables")]
     [SerializeField] private float _offsetBeginPosition;
     
@@ -17,7 +15,4 @@ public class ShieldMirror : BaseMirror
         BeginLaser = transform.position+Direction*_offsetBeginPosition;
         LaserLineReceiver.SetPosition(0, hit.point);
     }
-    
-    
-
 }

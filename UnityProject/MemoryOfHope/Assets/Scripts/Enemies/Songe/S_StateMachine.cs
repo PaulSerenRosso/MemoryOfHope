@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class S_StateMachine : EnemyMachine
 {
@@ -70,7 +71,11 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
+        if (other.CompareTag("Player"))
+        {
+            hitDirection = transform.position - PlayerController.instance.transform.position;
+            SwitchState(pauseHitState);
+        }
     }
 
     public override void OnTriggerStay(Collider other)

@@ -18,15 +18,10 @@ public class S_PauseHitState : EnemyState // Quand le songe a touché l'ennemi
         enemyMachine.agent.enabled = false;
 
         Vector3 knockback = enemyMachine.hitDirection;
-        Debug.Log(knockback);
         knockback.Normalize();
-        Debug.Log(knockback);
         knockback *= hitFactor;
-        Debug.Log(knockback);
         knockback /= enemyMachine.enemyWeigth;
-        Debug.Log(knockback);
 
-        //Vector3 knockback1 = (enemyMachine.hitDirection * hitFactor) / enemyMachine.enemyWeigth;
         enemyMachine.rb.AddForce(knockback);
         enemyMachine.rb.drag = drag;
         timer = 0;
