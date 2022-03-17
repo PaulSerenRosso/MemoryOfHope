@@ -93,6 +93,7 @@ public class JumpModule : Module
             }
             else
             {
+                Debug.Log(PlayerController.instance.playerRb.position.y / yEndPosition);
                 currentSpeed = CurveJump.Evaluate(PlayerController.instance.playerRb.position.y / yEndPosition) * MaxSpeedJump;
                 PlayerController.instance.currentVelocityWithUndo += currentSpeed * Vector3.up;
                 PlayerController.instance.currentGravity = 0;
