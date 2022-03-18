@@ -88,11 +88,13 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void TakeDamage(int damages)
     {
         health -= damages;
-        UIInstance.instance.DisplayLife();
+        StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
         if (health <= 0)
         {
+            health = 0;
             Death();
         }
+        UIInstance.instance.DisplayLife();
     }
 
     public void Heal(int heal)

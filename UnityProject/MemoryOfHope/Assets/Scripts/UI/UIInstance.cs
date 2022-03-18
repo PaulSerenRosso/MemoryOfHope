@@ -141,6 +141,11 @@ public class UIInstance : MonoBehaviour
     public void DisplayLife()
     {
         lifeText.text = $"Life : {PlayerManager.instance.health}";
+        if (PlayerManager.instance.health == 0)
+        {
+            lifeText.text += " ( Dead )";
+            lifeText.color = Color.red;
+        }
     }
 
     #endregion
