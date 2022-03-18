@@ -9,14 +9,14 @@ public class S_PositionState : EnemyState
     [Header("Parameters")]
     [Range(1, 5)] [SerializeField] private float speed;
     
-    private float detectionDistance;
+    private float pursuitDistance;
     private Vector3 initialPos;
     
 
     public override void StartState(EnemyMachine enemyMachine)
     {
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
-        detectionDistance = enemy.detectionDistance;
+        pursuitDistance = enemy.pursuitDistance;
         initialPos = enemy.initialPosition;
 
         enemyMachine.agent.isStopped = false;
@@ -30,7 +30,7 @@ public class S_PositionState : EnemyState
         float distance = enemyMachine.agent.remainingDistance;
 
         if (ConditionState.CheckDistance(initialPos, 
-            PlayerController.instance.transform.position, detectionDistance))
+            PlayerController.instance.transform.position, pursuitDistance))
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pursuitState);
