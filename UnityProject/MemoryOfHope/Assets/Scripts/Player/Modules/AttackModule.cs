@@ -35,6 +35,12 @@ public class AttackModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
+        
+        if (PlayerManager.instance.isHit)
+        {
+            return false; // Ne peut pas attaquer si le joueur est knockback
+        }
+        
         if (!PlayerController.instance.onGround) return false;
         return true;
     }
@@ -144,12 +150,9 @@ public class AttackModule : Module
                 }
             }
         }
-    
-        Debug.Log(attackTimer);
-        Debug.Log(attackList[currentIndexAttack].startTimeActivateAttack);
+
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
-            Debug.Log(attackTimer);
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = true;
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage; 
             currentStateCombo = StateCombo.InDamage;
@@ -162,7 +165,6 @@ public class AttackModule : Module
     {
         if (attackTimer >= attackList[currentIndexAttack].endTimeActivateAttack)
         {
-            Debug.Log(attackTimer);
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
                 attackList[currentIndexAttack].attackPlayerCollider.currentDamage =
                     attackList[currentIndexAttack].damage;

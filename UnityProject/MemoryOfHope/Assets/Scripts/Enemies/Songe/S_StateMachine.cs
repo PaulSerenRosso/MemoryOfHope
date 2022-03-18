@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class S_StateMachine : EnemyMachine
 {
@@ -70,18 +71,16 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerFist") && enemyManager.canBeHitByMelee) // Hit by the player
+        if (other.CompareTag("Player"))
         {
-            OnHitByMelee();
+            hitDirection = transform.position - PlayerController.instance.transform.position;
+            SwitchState(pauseHitState);
         }
     }
 
     public override void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Laser") && enemyManager.canBeHitByLaser) // Hit by the laser
-        {
-            
-        }
+        
     }
 
     public override void OnTriggerExit(Collider other)
@@ -91,12 +90,7 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.DrawRay(other.contacts[0].point, other.contacts[0].normal, Color.green, 10f);
-            hitDirection = other.contacts[0].normal;
-            currentState.OnCollisionStayState(this, other);
-        }
+        
     }
 
     public override void OnCollisionStay(Collision other)

@@ -103,6 +103,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InteractionModule",
+                    "type": "Button",
+                    "id": "d59e9e21-3b38-4794-9627-f5e53fdee26f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InteractionSelect",
+                    "type": "Button",
+                    "id": "4ddd3f0d-af99-47ab-8e03-59b3cbf1ba66",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InteractionMove",
+                    "type": "Value",
+                    "id": "57dfab5c-cb93-497b-b7c0-185bd2334ee8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -411,6 +438,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Prism",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0018cb57-2a93-4ced-9070-c7a579cff19f",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractionModule",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0029b021-8a23-4b43-a666-56ae17ddd458",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractionSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "793f95ae-f673-46e0-b65b-bd5507a32a64",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "",
+                    "action": "InteractionMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

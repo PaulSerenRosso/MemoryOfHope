@@ -14,17 +14,16 @@ public class EnemyMachine : MonoBehaviour
     public Rigidbody rb;
     public float enemyWeigth;
     public float attackStrength;
-    public Collider attackCollider;
+    public GameObject attackArea;
     public Vector3 hitDirection;
+    [SerializeField] private bool isHit = false;
 
     #endregion
-    
 
     #region State Machine Main Functions
 
     public virtual void Start()
     {
-        Debug.Log(this);
         currentState.StartState(this);
     }
     
@@ -40,6 +39,7 @@ public class EnemyMachine : MonoBehaviour
 
     public void SwitchState(EnemyState state)
     {
+        rb.velocity = Vector3.zero;
         currentState = state;
         currentState.StartState(this);
     }
@@ -49,7 +49,15 @@ public class EnemyMachine : MonoBehaviour
         AttackModule attackModule = PlayerController.instance.attackModule;
         PlayerAttackClass attack = attackModule.attackList[attackModule.currentIndexAttack];
         attackStrength = attack.attackStrength;
-        enemyManager.TakeDamage(attack.damage);
+
+        if (enemyManager.canBeHitByMelee)
+        {
+            enemyManager.TakeDamage(attack.damage);
+        }
+        else
+        {
+            enemyManager.HitNoDamage();
+        }
     }
 
     #endregion
@@ -63,12 +71,21 @@ public class EnemyMachine : MonoBehaviour
     
     public virtual void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
+        {
+            hitDirection = transform.position - PlayerController.instance.transform.position;
+            hitDirection = -(PlayerController.instance.transform.position - transform.position);
 
+            OnHitByMelee();
+        }
     }
 
     public virtual void OnTriggerStay(Collider other)
     {
-
+        if (other.CompareTag("Laser") && !isHit) // Hit by laser
+        {
+            
+        }
     }
 
     public virtual void OnTriggerExit(Collider other)

@@ -10,7 +10,6 @@ public class PA_PausePursuitState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
-        enemyMachine.material.color = Color.green;
         timer = 0;
     }
     

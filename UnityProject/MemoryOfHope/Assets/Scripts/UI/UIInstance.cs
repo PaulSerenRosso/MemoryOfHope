@@ -29,10 +29,13 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private Vector2[] cursorBoundaries = new Vector2[4];
     [SerializeField] private float moveMapSpeed;
 
+    [Header("Player Stats")] 
+    [SerializeField] private TextMeshProUGUI lifeText;
+
     private void Start()
     {
         LinkInput();
-        
+        InitializationStats();
         InitializationMap();
     }
 
@@ -43,11 +46,9 @@ public class UIInstance : MonoBehaviour
 
     private void LinkInput()
     {
-      PlayerController.instance.playerActions.Player.MovingOnMap.performed 
-            += InputPressedMovingOnMap;
-      PlayerController.instance.playerActions.Player.MovingOnMap.canceled 
-            += InputPressedMovingOnMap;
-      PlayerController.instance.playerActions.Player.OpenCloseMap.performed += context => ClosingMap();
+      PlayerController.instance.playerActions.Player.MovingOnMap.performed += InputPressedMovingOnMap;
+      PlayerController.instance.playerActions.Player.MovingOnMap.canceled += InputPressedMovingOnMap;
+      PlayerController.instance.playerActions.Player.OpenCloseMap.performed += _ => ClosingMap();
     }
 
     #region Map
@@ -130,8 +131,22 @@ public class UIInstance : MonoBehaviour
 
     #endregion
     
-    #region Glitches
+    #region Player Stats
 
+    public void InitializationStats()
+    {
+        DisplayLife();
+    }
+    
+    public void DisplayLife()
+    {
+        lifeText.text = $"Life : {PlayerManager.instance.health}";
+        if (PlayerManager.instance.health == 0)
+        {
+            lifeText.text += " ( Dead )";
+            lifeText.color = Color.red;
+        }
+    }
 
     #endregion
 }
