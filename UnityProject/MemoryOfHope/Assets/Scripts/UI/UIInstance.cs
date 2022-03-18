@@ -140,6 +140,7 @@ public class UIInstance : MonoBehaviour
     
     public void DisplayLife()
     {
+        if(lifeText != null)
         lifeText.text = $"Life : {PlayerManager.instance.health}";
         if (PlayerManager.instance.health == 0)
         {
