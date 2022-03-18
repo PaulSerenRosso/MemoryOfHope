@@ -74,6 +74,8 @@ public class PrismModule : Module
                 return;
             }
             _shield.InputShield = true;
+            if (_joystickDirection == Vector3.zero)
+                return;
             Vector2 angleFoward = new Vector2(transform.forward.x,
                 transform.forward.z);
             Vector2 _cameraForwardXZ;

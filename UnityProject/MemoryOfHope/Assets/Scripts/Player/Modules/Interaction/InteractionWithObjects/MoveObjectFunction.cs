@@ -8,7 +8,7 @@ public class MoveObjectFunction : Module
     [SerializeField] private MoveObjectData data;
     [SerializeField] private Vector3 joystickDirection;
     private Vector3 moveVector;
-    
+    private Vector2 inputCam;
     public override void LinkModule()
     {
         Debug.Log("Linking Inputs for Moving Function");
@@ -40,8 +40,15 @@ public class MoveObjectFunction : Module
 
     public override void Execute()
     {
-        moveVector = new Vector3(joystickDirection.x, 0, joystickDirection.y);
-        
+        Vector2 _cameraForwardXZ;
+        Vector2 _cameraRightXZ;
+        _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+            MainCameraController.Instance.transform.forward.z).normalized;
+        _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
+            MainCameraController.Instance.transform.right.z).normalized;
+        inputCam = _cameraForwardXZ * joystickDirection.y +
+                   _cameraRightXZ * joystickDirection.x;
+        moveVector = new Vector3(inputCam.x, 0, inputCam.y);
         moveVector.Normalize();
         data.rb.velocity = moveVector * data.moveSpeed * Time.fixedDeltaTime;
         Debug.Log(data.rb.velocity);

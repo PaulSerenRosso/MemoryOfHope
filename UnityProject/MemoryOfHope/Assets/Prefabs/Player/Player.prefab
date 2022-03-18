@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 423913510}
   - component: {fileID: 423913511}
   - component: {fileID: 423913517}
+  - component: {fileID: 8587865940063536777}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -575,6 +576,7 @@ MonoBehaviour:
   - {fileID: 7649947021829257087}
   - {fileID: 423913510}
   - {fileID: 423913511}
+  - {fileID: 8587865940063536777}
   currentModuleUpdate: 
   currentModuleFixed: 
   playerRb: {fileID: 7226099581146458016}
@@ -938,6 +940,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCollider: {fileID: 7226099581146458019}
   blockerCollider: {fileID: 820605110}
+--- !u!114 &8587865940063536777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226099581146458017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e8293f3e9965146bf0075597914b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 90
+  isFixedUpdate: 1
+  isPerformed: 0
+  contrainstModules: []
+  neededModules: []
+  inputPressed: 0
+  minXAngle: 35
+  maxXAngle: 50
+  speedYAngle: 2
+  speedXAngle: 2
 --- !u!1 &7284903415733054223
 GameObject:
   m_ObjectHideFlags: 0
