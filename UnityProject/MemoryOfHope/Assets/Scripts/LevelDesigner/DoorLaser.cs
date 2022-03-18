@@ -38,13 +38,14 @@ public class DoorLaser : MonoBehaviour, IReturnable
 
     public void Cancel(LaserMachine laser)
     {
+        /*
         if (IsActive)
         {
         _meshRenderer.enabled = true;
         _collider.enabled = true;
         }
         _triggerByLaser = false;
-        _currentSource = null;
+        _currentSource = null;*/
     }
 
     public void StartReturnable(LaserMachine laser, RaycastHit hit)
