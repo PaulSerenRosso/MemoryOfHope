@@ -13,7 +13,7 @@ public class PrismModule : Module
     private float _timer;
     private bool isActivate;
     [SerializeField] private float rotationSpeed;
-
+    private Vector2 inputCam;
     public override void LinkModule()
     {
         // joystick
@@ -69,12 +69,19 @@ public class PrismModule : Module
                 Release();
                 return;
             }
-        
-                _shield.InputShield = true;
+            _shield.InputShield = true;
             Vector2 angleFoward = new Vector2(transform.forward.x,
                 transform.forward.z);
+            Vector2 _cameraForwardXZ;
+            Vector2 _cameraRightXZ;
+            _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+                MainCameraController.Instance.transform.forward.z).normalized;
+            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
+                MainCameraController.Instance.transform.right.z).normalized;
+            inputCam = _cameraForwardXZ * _joystickDirection.y +
+                       _cameraRightXZ * _joystickDirection.x;
             Vector2 rotationVector =
-                Vector3.RotateTowards(angleFoward, _joystickDirection.normalized, rotationSpeed, 00f);
+                Vector3.RotateTowards(angleFoward, inputCam.normalized, rotationSpeed, 00f);
             PlayerController.instance.playerRb.rotation =
                 Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
         }

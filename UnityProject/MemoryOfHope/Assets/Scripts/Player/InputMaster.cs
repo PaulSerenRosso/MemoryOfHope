@@ -125,6 +125,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""d9723e69-aa1c-447e-9a6c-de4a755069da"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -435,6 +444,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""Prism"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b42a814-2a76-4dfe-a5a3-d26e7b8947b8"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -454,6 +474,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_RotateInteract = m_Player.FindAction("RotateInteract", throwIfNotFound: true);
         m_Player_EndInteract = m_Player.FindAction("EndInteract", throwIfNotFound: true);
         m_Player_Prism = m_Player.FindAction("Prism", throwIfNotFound: true);
+        m_Player_RotateCamera = m_Player.FindAction("RotateCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -524,6 +545,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RotateInteract;
     private readonly InputAction m_Player_EndInteract;
     private readonly InputAction m_Player_Prism;
+    private readonly InputAction m_Player_RotateCamera;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -539,6 +561,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @RotateInteract => m_Wrapper.m_Player_RotateInteract;
         public InputAction @EndInteract => m_Wrapper.m_Player_EndInteract;
         public InputAction @Prism => m_Wrapper.m_Player_Prism;
+        public InputAction @RotateCamera => m_Wrapper.m_Player_RotateCamera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -581,6 +604,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Prism.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
                 @Prism.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
                 @Prism.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
+                @RotateCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
+                @RotateCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -618,6 +644,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Prism.started += instance.OnPrism;
                 @Prism.performed += instance.OnPrism;
                 @Prism.canceled += instance.OnPrism;
+                @RotateCamera.started += instance.OnRotateCamera;
+                @RotateCamera.performed += instance.OnRotateCamera;
+                @RotateCamera.canceled += instance.OnRotateCamera;
             }
         }
     }
@@ -635,5 +664,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnRotateInteract(InputAction.CallbackContext context);
         void OnEndInteract(InputAction.CallbackContext context);
         void OnPrism(InputAction.CallbackContext context);
+        void OnRotateCamera(InputAction.CallbackContext context);
     }
 }

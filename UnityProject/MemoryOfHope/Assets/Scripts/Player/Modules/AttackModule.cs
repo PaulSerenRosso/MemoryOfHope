@@ -12,7 +12,7 @@ public class AttackModule : Module
     bool inCombo;
     private bool canMove;
     private StateCombo currentStateCombo;
-
+   
     enum StateCombo
     {
         Begin,

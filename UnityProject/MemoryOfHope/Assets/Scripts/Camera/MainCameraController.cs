@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class MainCameraController : MonoBehaviour
 {
+   public static MainCameraController Instance;
+ 
+   
     [SerializeField] Transform viewFinder;
     [SerializeField] Camera cinematicCamera;
-
- 
-
     [SerializeField] private float lerpSpeed;
 [SerializeField]
     private float distance;
@@ -20,6 +20,13 @@ public class MainCameraController : MonoBehaviour
     private float minDistance;
     private void Awake()
     {
+        if (Instance is { })
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        Instance = this;
         focusPoint = viewFinder.position;
     }
 
@@ -30,14 +37,8 @@ public class MainCameraController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         float currentDistance = Vector3.Distance(focusPoint, viewFinder.position);
-            
-       
-            focusPoint = Vector3.Lerp(focusPoint, viewFinder.position, lerpSpeed);
-        
-   
-        
-        transform.position = focusPoint - transform.forward * distance;
+        focusPoint = Vector3.Lerp(focusPoint, viewFinder.position, lerpSpeed);
+            transform.position = focusPoint - transform.forward * distance;
     }
 }
