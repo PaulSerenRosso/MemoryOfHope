@@ -125,6 +125,33 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractionModule"",
+                    ""type"": ""Button"",
+                    ""id"": ""d59e9e21-3b38-4794-9627-f5e53fdee26f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractionSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ddd3f0d-af99-47ab-8e03-59b3cbf1ba66"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractionMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""57dfab5c-cb93-497b-b7c0-185bd2334ee8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -435,6 +462,39 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""Prism"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0018cb57-2a93-4ced-9070-c7a579cff19f"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractionModule"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0029b021-8a23-4b43-a666-56ae17ddd458"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractionSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""793f95ae-f673-46e0-b65b-bd5507a32a64"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""InteractionMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -454,6 +514,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_RotateInteract = m_Player.FindAction("RotateInteract", throwIfNotFound: true);
         m_Player_EndInteract = m_Player.FindAction("EndInteract", throwIfNotFound: true);
         m_Player_Prism = m_Player.FindAction("Prism", throwIfNotFound: true);
+        m_Player_InteractionModule = m_Player.FindAction("InteractionModule", throwIfNotFound: true);
+        m_Player_InteractionSelect = m_Player.FindAction("InteractionSelect", throwIfNotFound: true);
+        m_Player_InteractionMove = m_Player.FindAction("InteractionMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -524,6 +587,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RotateInteract;
     private readonly InputAction m_Player_EndInteract;
     private readonly InputAction m_Player_Prism;
+    private readonly InputAction m_Player_InteractionModule;
+    private readonly InputAction m_Player_InteractionSelect;
+    private readonly InputAction m_Player_InteractionMove;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -539,6 +605,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @RotateInteract => m_Wrapper.m_Player_RotateInteract;
         public InputAction @EndInteract => m_Wrapper.m_Player_EndInteract;
         public InputAction @Prism => m_Wrapper.m_Player_Prism;
+        public InputAction @InteractionModule => m_Wrapper.m_Player_InteractionModule;
+        public InputAction @InteractionSelect => m_Wrapper.m_Player_InteractionSelect;
+        public InputAction @InteractionMove => m_Wrapper.m_Player_InteractionMove;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -581,6 +650,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Prism.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
                 @Prism.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
                 @Prism.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrism;
+                @InteractionModule.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionModule;
+                @InteractionModule.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionModule;
+                @InteractionModule.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionModule;
+                @InteractionSelect.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionSelect;
+                @InteractionSelect.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionSelect;
+                @InteractionSelect.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionSelect;
+                @InteractionMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionMove;
+                @InteractionMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionMove;
+                @InteractionMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractionMove;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -618,6 +696,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Prism.started += instance.OnPrism;
                 @Prism.performed += instance.OnPrism;
                 @Prism.canceled += instance.OnPrism;
+                @InteractionModule.started += instance.OnInteractionModule;
+                @InteractionModule.performed += instance.OnInteractionModule;
+                @InteractionModule.canceled += instance.OnInteractionModule;
+                @InteractionSelect.started += instance.OnInteractionSelect;
+                @InteractionSelect.performed += instance.OnInteractionSelect;
+                @InteractionSelect.canceled += instance.OnInteractionSelect;
+                @InteractionMove.started += instance.OnInteractionMove;
+                @InteractionMove.performed += instance.OnInteractionMove;
+                @InteractionMove.canceled += instance.OnInteractionMove;
             }
         }
     }
@@ -635,5 +722,8 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnRotateInteract(InputAction.CallbackContext context);
         void OnEndInteract(InputAction.CallbackContext context);
         void OnPrism(InputAction.CallbackContext context);
+        void OnInteractionModule(InputAction.CallbackContext context);
+        void OnInteractionSelect(InputAction.CallbackContext context);
+        void OnInteractionMove(InputAction.CallbackContext context);
     }
 }

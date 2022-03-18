@@ -35,6 +35,21 @@ public class MoveModule : Module
         Release();
     }
 
+    public override bool Conditions()
+    {
+        if (!base.Conditions())
+        {
+            return false; 
+        }
+
+        if (PlayerManager.instance.isHit)
+        {
+            return false; // Ne peut pas bouger s'il est knockback
+        }
+        
+        return true;
+    }
+    
     public override void Execute()
     {
         if (!isPerformed)

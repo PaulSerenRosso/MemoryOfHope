@@ -18,7 +18,6 @@ public class S_PositionState : EnemyState
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         detectionDistance = enemy.detectionDistance;
         initialPos = enemy.initialPosition;
-        enemyMachine.material.color = Color.gray;
 
         enemyMachine.agent.isStopped = false;
         enemyMachine.agent.speed = speed;

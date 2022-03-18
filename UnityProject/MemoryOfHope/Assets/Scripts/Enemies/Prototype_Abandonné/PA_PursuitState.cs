@@ -10,7 +10,7 @@ public class PA_PursuitState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
-        enemyMachine.material.color = Color.blue;
+        enemyMachine.attackArea.SetActive(false);
         enemyMachine.agent.isStopped = false;
     }
     public override void UpdateState(EnemyMachine enemyMachine)

@@ -11,7 +11,6 @@ public class PA_EndPursuitState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
-        enemyMachine.material.color = Color.cyan;
         timer = 0;
     }
 

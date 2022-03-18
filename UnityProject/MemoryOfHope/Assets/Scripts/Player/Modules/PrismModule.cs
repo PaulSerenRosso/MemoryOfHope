@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +25,12 @@ public class PrismModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
+        
+        if (PlayerManager.instance.isHit)
+        {
+            return false; // Ne peut pas faire le prisme si le joueur est knockback
+        }
+        
         if (!PlayerController.instance.onGround || _shield.isDead) return false;
         return true;
     }

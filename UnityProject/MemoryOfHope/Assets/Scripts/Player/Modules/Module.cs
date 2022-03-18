@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public abstract class Module : MonoBehaviour
 {
-  
+ 
     public int index;
     public bool isFixedUpdate;
     public bool isPerformed;

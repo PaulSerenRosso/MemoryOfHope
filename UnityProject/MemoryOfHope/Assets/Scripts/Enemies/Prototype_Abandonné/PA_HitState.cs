@@ -1,4 +1,5 @@
 using System;
+using System.Security.AccessControl;
 using UnityEngine;
 
 [Serializable]
@@ -15,17 +16,19 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
     {
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
-
-        if (enemyMachine.enemyManager.canBeKnockback)
-        {
-            enemyMachine.rb.isKinematic = false;
-            enemyMachine.agent.enabled = false;
-            Vector3 knockback = ((-enemyMachine.transform.forward * enemyMachine.attackStrength) / enemyMachine.enemyWeigth);
-            enemyMachine.rb.AddForce(knockback);
-            enemyMachine.rb.drag = drag;
-        }
+        enemyMachine.agent.enabled = false;
         
-        enemyMachine.material.color = Color.red;
+        Vector3 knockback = new Vector3(enemyMachine.hitDirection.x, 0, enemyMachine.hitDirection.z);
+
+        knockback.Normalize();
+        knockback *= enemyMachine.attackStrength;
+        knockback /= enemyMachine.enemyWeigth;
+        
+        Debug.DrawRay(enemyMachine.transform.position, knockback, Color.green, 1f);
+
+        enemyMachine.rb.AddForce(knockback);
+        
+        enemyMachine.rb.drag = drag;
         timer = 0;
     }
     
@@ -38,7 +41,7 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
-            enemyMachine.rb.isKinematic = true;
+            enemyMachine.rb.velocity = Vector3.zero;
             enemy.SwitchState(enemy.pursuitState);
         }
     }

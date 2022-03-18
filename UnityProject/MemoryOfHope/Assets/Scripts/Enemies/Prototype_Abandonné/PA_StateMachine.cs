@@ -49,18 +49,12 @@ public class PA_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerFist") && enemyManager.canBeHitByMelee) // Hit by the player
-        {
-            OnHitByMelee();
-        }
+        base.OnTriggerEnter(other);
     }
 
     public override void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Laser") && enemyManager.canBeHitByLaser) // Hit by the laser
-        {
-            
-        }
+        
     }
 
     public override void OnTriggerExit(Collider other)

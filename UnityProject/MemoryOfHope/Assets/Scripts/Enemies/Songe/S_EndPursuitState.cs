@@ -18,7 +18,6 @@ public class S_EndPursuitState : EnemyState
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         pursuitDistance = enemy.pursuitDistance;
         initialPos = enemy.initialPosition;
-        enemyMachine.material.color = Color.cyan;
         timer = 0;
         enemyMachine.agent.isStopped = false;
         enemyMachine.agent.speed = speed;

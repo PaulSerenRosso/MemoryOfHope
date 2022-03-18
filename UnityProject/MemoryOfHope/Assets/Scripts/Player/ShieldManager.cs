@@ -108,5 +108,12 @@ public class ShieldManager : MonoBehaviour, Damageable
             }
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            // Protège le PJ de l'attaque en cours
+        }
+    }
 }
