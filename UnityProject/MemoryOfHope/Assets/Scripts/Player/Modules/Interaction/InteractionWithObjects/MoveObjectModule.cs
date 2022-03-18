@@ -93,7 +93,7 @@ public class MoveObjectModule : Module
                 00f);
         
             PlayerController.instance.playerRb.rotation = Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-
+            
             line.positionCount = 2;
             line.SetPosition(0, raycastOrigin.transform.position);
             line.SetPosition(1,   transform.position + transform.forward * rayLength);
