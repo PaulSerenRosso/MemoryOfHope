@@ -15,7 +15,7 @@ public class MoveObjectModule : Module
     [SerializeField] private Transform raycastOrigin;
     [SerializeField] private MoveObjectFunction moveFunction;
     [SerializeField] private LineRenderer line;
-    
+
     public override void LinkModule()
     {
         Debug.Log("Linking Inputs for New Interaction Module");
@@ -23,7 +23,7 @@ public class MoveObjectModule : Module
         PlayerController.instance.playerActions.Player.InteractionModule.started += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.InteractionModule.canceled += context => InputReleased(context);
         PlayerController.instance.playerActions.Player.Move.performed += context => Aim(context);
-        PlayerController.instance.playerActions.Player.InteractionSelect.started += context => Selecting(context);
+        PlayerController.instance.playerActions.Player.InteractionSelect.started += _ => Selecting();
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)
@@ -45,7 +45,7 @@ public class MoveObjectModule : Module
         }
     }
 
-    private void Selecting(InputAction.CallbackContext ctx)
+    private void Selecting()
     {
         if (isPerformed)
         {
@@ -110,7 +110,6 @@ public class MoveObjectModule : Module
                 if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
                 currentTargetedObject = null;
             }
-            //Debug.DrawRay(raycastOrigin.position, transform.forward * rayLength, Color.magenta, .1f);
         }
     }
     

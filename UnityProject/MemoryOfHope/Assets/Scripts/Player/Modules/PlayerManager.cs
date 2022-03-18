@@ -88,6 +88,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void TakeDamage(int damages)
     {
         health -= damages;
+        UIInstance.instance.DisplayLife();
         if (health <= 0)
         {
             Death();

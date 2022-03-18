@@ -1,4 +1,6 @@
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour, Damageable
 {
@@ -30,6 +32,7 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public int damage;
     [SerializeField] private Animation anim;
+    [SerializeField] private GameObject deathFeedback;
 
     #endregion
     
@@ -58,6 +61,12 @@ public class EnemyManager : MonoBehaviour, Damageable
     public void Death()
     {
         //Destroy(GetComponent<NavMeshAgent>());
+        for (int i = 0; i < 20; i++)
+        {
+            Debug.Log("spawn");
+            Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
+                Random.Range(2.0f, 3.0f));
+        }
         Destroy(gameObject);
     }
 
