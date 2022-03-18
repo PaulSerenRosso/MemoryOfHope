@@ -50,6 +50,7 @@ public class MoveObjectFunction : Module
     public void Select()
     {
         isPerformed = true;
+        PlayerController.instance.playerRb.isKinematic = true;
         data = moveObjectModule.selectedObject.GetComponent<MoveObjectData>();
         data.GetComponent<Renderer>().material = data.selectedMaterial;
         
@@ -68,7 +69,8 @@ public class MoveObjectFunction : Module
         }
         
         // Deselection feedbacks
-        
+
+        PlayerController.instance.playerRb.isKinematic = false;
         isPerformed = false;
     }
     
