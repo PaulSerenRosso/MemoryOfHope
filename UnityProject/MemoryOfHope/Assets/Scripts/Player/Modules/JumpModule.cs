@@ -16,11 +16,9 @@ public class JumpModule : Module
     [SerializeField] private float HeightJump;
     private AnimationCurve curveJumpSpeed;
     bool inExecute;
-    private float yCurrentEndMaxPosition;
     private bool isRelease = true;
     [SerializeField]
     private float MaxSpeedJump;
-
     [SerializeField] private float speedEndJump;
 
     [SerializeField]
@@ -76,8 +74,6 @@ public class JumpModule : Module
                    Debug.Log(moveModule.moveVector);
                 }
             }
-         
-      
         }
     }
 
@@ -88,18 +84,17 @@ public class JumpModule : Module
             if (PlayerController.instance.playerRb.position.y >= yEndPosition)
             {
                 Debug.Log(yEndPosition);
-                Debug.Log(currentSpeed);
                 inExecute = false;
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
                 PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
                 PlayerController.instance.stuckGround = true;
                 PlayerController.instance.currentVelocity += speedEndJump * Vector3.up;
                 isPerformed = false;
-                yCurrentEndMaxPosition = 0;
             }
             else
             {
-                currentSpeed = CurveJump.Evaluate(PlayerController.instance.playerRb.position.y / yEndPosition) * MaxSpeedJump;
+                Debug.Log(PlayerController.instance.playerRb.position.y-yStartPosition);
+                currentSpeed = CurveJump.Evaluate(PlayerController.instance.playerRb.position.y-yStartPosition / yEndPosition) * MaxSpeedJump;
                 PlayerController.instance.currentVelocityWithUndo += currentSpeed * Vector3.up;
                 PlayerController.instance.currentGravity = 0;
             }

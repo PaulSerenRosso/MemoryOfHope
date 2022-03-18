@@ -13,7 +13,7 @@ public class MoveModule : Module
     [SerializeField] private float factorAngleOppositeRun;
     private bool canMove;
     [SerializeField] private float airSpeedMovment;
-
+    private Vector2 inputCam;
 
     public float maxAirSpeed;
 
@@ -57,13 +57,24 @@ public class MoveModule : Module
             isPerformed = true;
         }
 
-        moveVector.x = inputVector.x;
-        moveVector.z = inputVector.y;
+        Vector2 _cameraForwardXZ;
+        Vector2 _cameraRightXZ;
+        _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+            MainCameraController.Instance.transform.forward.z).normalized;
+        _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
+            MainCameraController.Instance.transform.right.z).normalized;
+        inputCam = _cameraForwardXZ * inputVector.y +
+                   _cameraRightXZ * inputVector.x;
+   
+     
+        
+        moveVector.x = inputCam.x;
+        moveVector.z = inputCam.y;
         if (PlayerController.instance.onGround)
         {
             Vector2 angleForward = new Vector2(transform.forward.x,
                 transform.forward.z);
-            float differenceDir = (angleForward - inputVector.normalized).magnitude;
+            float differenceDir = (angleForward - inputCam.normalized).magnitude;
             if (factorAngleOppositeRun < differenceDir)
             {
                 canMove = false;
@@ -96,16 +107,15 @@ public class MoveModule : Module
     {
         moveVector *= defaultSpeedMovment;
         PlayerController.instance.currentVelocityWithUndo += moveVector;
-        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputVector, defaultSpeedRotation * 2, 00f);
+        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputCam, defaultSpeedRotation * 2, 00f);
         PlayerController.instance.playerRb.rotation =
             Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-        PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", inputVector.magnitude);
+        PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", inputCam.magnitude);
     }
 
     void MoveAir()
     {
         moveVector *= airSpeedMovment;
-        ;
         Vector3 rbVelocityXZ =
             Vector3.ClampMagnitude(
                 moveVector + new Vector3(PlayerController.instance.playerRb.velocity.x, 0,
@@ -118,7 +128,7 @@ public class MoveModule : Module
     {
         float currentOppositeRotationSpeed;
         currentOppositeRotationSpeed = defaultSpeedRotationOppositeRun;
-        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputVector, currentOppositeRotationSpeed, 00f);
+        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputCam, currentOppositeRotationSpeed, 00f);
         PlayerController.instance.playerRb.rotation =
             Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
         PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
