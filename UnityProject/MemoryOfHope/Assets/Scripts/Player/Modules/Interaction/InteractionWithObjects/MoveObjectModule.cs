@@ -9,7 +9,7 @@ public class MoveObjectModule : Module
     [SerializeField] private float rotateSpeed;
     [SerializeField] private Vector3 joystickDirection;
 
-    [SerializeField] [Range(2, 10)] private float rayLength;
+    [Range(2, 10)] public float rayLength;
     [SerializeField] private LayerMask interactiveObjectLayer;
 
     [SerializeField] private Transform raycastOrigin;
