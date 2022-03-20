@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4149756975339343500
 Transform:
   m_ObjectHideFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4149756975339343499}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.11, y: 0.57, z: -0}
+  m_LocalScale: {x: 4.577802, y: 5.4893, z: 1}
   m_Children: []
   m_Father: {fileID: 4149756977109721384}
   m_RootOrder: 1
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4149756975339343499}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -91,7 +91,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4149756975339343499}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 4149756976661573957}
   - component: {fileID: 4149756976661573956}
   - component: {fileID: 4149756976661573955}
+  - component: {fileID: 655328100}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -139,8 +140,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4149756976661573953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.36, y: 0.57, z: 0}
-  m_LocalScale: {x: 2, y: 5, z: 0.5}
+  m_LocalPosition: {x: -1.11, y: 0.57, z: 0}
+  m_LocalScale: {x: 4.440282, y: 5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4149756977109721384}
   m_RootOrder: 0
@@ -207,6 +208,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &655328100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149756976661573953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c0f4ca3c2b30e4393e355168d1e570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 4149756976661573956}
+  _collider: {fileID: 4149756976661573955}
+  IsActive: 1
+  _currentSource: {fileID: 0}
 --- !u!1 &4149756977109721383
 GameObject:
   m_ObjectHideFlags: 0
