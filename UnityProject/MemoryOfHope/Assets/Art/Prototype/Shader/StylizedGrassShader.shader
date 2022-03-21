@@ -1,8 +1,4 @@
-/* Configuration: VegetationStudio */
 
-//Stylized Grass Shader
-//Staggart Creations (http://staggart.xyz)
-//Copyright protected under Unity Asset Store EULA
 
 Shader "Universal Render Pipeline/Nature/Stylized Grass"
 {
@@ -516,6 +512,6 @@ Shader "Universal Render Pipeline/Nature/Stylized Grass"
 	}//Subshader
 
 	FallBack "Hidden/Universal Render Pipeline/FallbackError"
-	CustomEditor "StylizedGrass.StylizedGrassShaderGUI"
+	
 
 }//Shader
