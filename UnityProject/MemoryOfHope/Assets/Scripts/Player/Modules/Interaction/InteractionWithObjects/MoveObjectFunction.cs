@@ -9,7 +9,9 @@ public class MoveObjectFunction : Module
     [SerializeField] private Vector3 joystickDirection;
     private Vector3 moveVector;
     private Vector2 inputCam;
-    
+
+
+    [SerializeField] private float range;
     float leftBound;
     float rightBound;
     float downBound;
@@ -90,10 +92,10 @@ public class MoveObjectFunction : Module
         data = moveObjectModule.selectedObject.GetComponent<MoveObjectData>();
         data.GetComponent<Renderer>().material = data.selectedMaterial;
         
-        leftBound = transform.position.x - moveObjectModule.rayLength;
-        rightBound = transform.position.x + moveObjectModule.rayLength;
-        downBound = transform.position.z - moveObjectModule.rayLength;
-        upBound = transform.position.z + moveObjectModule.rayLength;
+        leftBound = transform.position.x - range;
+        rightBound = transform.position.x + range;
+        downBound = transform.position.z - range;
+        upBound = transform.position.z + range;
         
         // Selection feedbacks
         

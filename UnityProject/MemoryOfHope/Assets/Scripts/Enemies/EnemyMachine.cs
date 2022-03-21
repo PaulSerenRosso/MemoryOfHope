@@ -60,6 +60,11 @@ public class EnemyMachine : MonoBehaviour
         }
     }
 
+    public virtual void OnHitByLaser()
+    {
+        // Inflige damage aux songes
+    }
+
     #endregion
 
     public void OnDisable()
@@ -84,7 +89,7 @@ public class EnemyMachine : MonoBehaviour
     {
         if (other.CompareTag("Laser") && !isHit) // Hit by laser
         {
-            
+            OnHitByLaser();
         }
     }
 
