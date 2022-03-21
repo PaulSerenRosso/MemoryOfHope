@@ -39,7 +39,7 @@ public class CameraRotationModule : Module
     {
         Vector3 currentRotation = MainCameraController.Instance.transform.eulerAngles; 
         
-        MainCameraController.Instance.transform.rotation = Quaternion.Euler(currentRotation.x+ speedXAngle*inputVector.y, 
+        MainCameraController.Instance.transform.rotation = Quaternion.Euler(currentRotation.x+ speedXAngle*-inputVector.y, 
             speedYAngle*inputVector.x+currentRotation.y, currentRotation.z);
         currentRotation = MainCameraController.Instance.transform.eulerAngles;
         currentRotation.x = Mathf.Clamp(currentRotation.x, minXAngle, maxXAngle);

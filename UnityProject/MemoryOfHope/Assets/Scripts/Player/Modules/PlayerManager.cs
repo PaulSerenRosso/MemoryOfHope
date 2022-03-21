@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             health = 0;
             Death();
         }
+        if(UIInstance.instance != null)
         UIInstance.instance.DisplayLife();
     }
 
