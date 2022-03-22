@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        /*
         for (int i = 0; i < activeModulesUpdate.Count; i++)
         {
             Module module = activeModulesUpdate[i];
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
             Module module = activeModulesFixed[i];
             module.LinkModule();
         }
-
+        */
        
     }
 

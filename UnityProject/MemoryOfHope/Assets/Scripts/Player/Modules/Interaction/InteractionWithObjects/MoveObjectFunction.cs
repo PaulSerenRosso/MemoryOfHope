@@ -23,13 +23,6 @@ public class MoveObjectFunction : Module
         
         PlayerController.instance.playerActions.Player.Move.performed += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.Move.canceled += context => InputReleased(context);
-        
-        // Set Needed Modules
-        neededModules.Clear();
-        if(GetComponent<MoveObjectModule>()) neededModules.Add(GetComponent<MoveObjectModule>());
-        
-        // Set other variables referring to the player
-        if(GetComponent<MoveObjectModule>()) moveObjectModule = GetComponent<MoveObjectModule>();
     }
     
     public override void InputPressed(InputAction.CallbackContext ctx)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,7 +60,18 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #region Main Functions
-    
+
+    private void Start()
+    {
+        for (int i = 0; i < obtainedModule.Count; i++)
+        {
+            Module module = obtainedModule[i];
+            module.LinkModule();
+            if (module.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(module);
+            else PlayerController.instance.activeModulesUpdate.Add(module);
+        }
+    }
+
     public IEnumerator Hit(EnemyManager enemy)
     {
         isHit = true;

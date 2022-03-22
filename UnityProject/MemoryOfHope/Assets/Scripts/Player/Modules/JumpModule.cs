@@ -28,12 +28,6 @@ public class JumpModule : Module
 
         PlayerController.instance.playerActions.Player.Jump.performed += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.Jump.canceled += context => InputReleased(context);
-        
-        // Set Constraining Modules
-        constrainingModules.Clear();
-        
-        // Set other variables referring to the player
-        if(GetComponent<MoveModule>()) moveModule = GetComponent<MoveModule>();
     }
 
 
@@ -73,9 +67,8 @@ public class JumpModule : Module
                 isRelease = false;
                 PlayerController.instance.currentGravity = 0;
                 if (moveModule.inputPressed)
-                {
+                { 
                     PlayerController.instance.currentVelocity += PlayerController.instance.PlayerProjectOnPlane(moveModule.moveVector);
-                   Debug.Log(moveModule.moveVector);
                 }
             }
         }
@@ -87,7 +80,6 @@ public class JumpModule : Module
         {
             if (PlayerController.instance.playerRb.position.y >= yEndPosition)
             {
-                Debug.Log(yEndPosition);
                 inExecute = false;
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
                 PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
@@ -97,7 +89,6 @@ public class JumpModule : Module
             }
             else
             {
-                Debug.Log(PlayerController.instance.playerRb.position.y-yStartPosition);
                 currentSpeed = CurveJump.Evaluate(PlayerController.instance.playerRb.position.y-yStartPosition / yEndPosition) * MaxSpeedJump;
                 PlayerController.instance.currentVelocityWithUndo += currentSpeed * Vector3.up;
                 PlayerController.instance.currentGravity = 0;

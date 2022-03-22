@@ -31,19 +31,6 @@ public class AttackModule : Module
 
         PlayerController.instance.playerActions.Player.Attack.started += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.Attack.canceled += context => InputReleased(context);
-            
-        // Set Constraining Modules
-        
-        if(GetComponent<MoveModule>()) constrainingModules.Add(GetComponent<MoveModule>());
-        if(GetComponent<JumpModule>()) constrainingModules.Add(GetComponent<JumpModule>());
-        if(GetComponent<MoveObjectModule>()) constrainingModules.Add(GetComponent<MoveObjectModule>());
-
-        // Sur les précédents modules
-        if(GetComponent<JumpModule>()) GetComponent<JumpModule>().constrainingModules.Add(this);
-        if(GetComponent<MoveObjectModule>()) GetComponent<MoveObjectModule>().constrainingModules.Add(this);
-        
-        // Set other variables referring to the player
-
     }
 
     public override bool Conditions()

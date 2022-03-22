@@ -17,22 +17,12 @@ public class PrismModule : Module
         // joystick
         // bouton qui maintient
         // tu ne bouge tu ne peux faire aucune input pendant ce temps
+        
+        Debug.Log("Linking Inputs for Prism Module");
+
         PlayerController.instance.playerActions.Player.Move.performed += context => JoystickPressed(context);
         PlayerController.instance.playerActions.Player.Prism.canceled += context => InputReleased(context);
         PlayerController.instance.playerActions.Player.Prism.performed += context => InputPressed(context);
-        
-        // Set Constraining Modules
-        if(GetComponent<MoveModule>()) constrainingModules.Add(GetComponent<MoveModule>());
-        if(GetComponent<AttackModule>()) constrainingModules.Add(GetComponent<AttackModule>());
-        if(GetComponent<MoveObjectModule>()) constrainingModules.Add(GetComponent<MoveObjectModule>());
-
-        // Sur les précédents modules
-        if(GetComponent<JumpModule>()) GetComponent<JumpModule>().constrainingModules.Add(this);
-        if(GetComponent<AttackModule>()) GetComponent<AttackModule>().constrainingModules.Add(this);
-        if(GetComponent<MoveObjectModule>()) GetComponent<MoveObjectModule>().constrainingModules.Add(this);
-        
-        // Set other variables referring to the player
-
     }
 
     public override bool Conditions()

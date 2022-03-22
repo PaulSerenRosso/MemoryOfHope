@@ -42,7 +42,7 @@ public class ModuleAcquisition : MonoBehaviour
 
     void ActivateModule()
     {
-        if (canBeActivated)
+        if (canBeActivated && !hasBeenActivated)
         {
             StartCoroutine(ActivatingModule());
         }
@@ -50,6 +50,8 @@ public class ModuleAcquisition : MonoBehaviour
 
     IEnumerator ActivatingModule()
     {
+        hasBeenActivated = true;
+        
         PlayerManager.instance.isInCutscene = true;
         
         // Cinématique, dialogues, feedbacks ?
