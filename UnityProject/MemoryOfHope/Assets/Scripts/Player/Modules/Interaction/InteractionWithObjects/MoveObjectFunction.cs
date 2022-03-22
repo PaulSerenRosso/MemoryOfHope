@@ -9,6 +9,14 @@ public class MoveObjectFunction : Module
     [SerializeField] private Vector3 joystickDirection;
     private Vector3 moveVector;
     private Vector2 inputCam;
+
+
+    [SerializeField] private float range;
+    float leftBound;
+    float rightBound;
+    float downBound;
+    float upBound;
+    
     public override void LinkModule()
     {
         Debug.Log("Linking Inputs for Moving Function");
@@ -50,8 +58,31 @@ public class MoveObjectFunction : Module
                    _cameraRightXZ * joystickDirection.x;
         moveVector = new Vector3(inputCam.x, 0, inputCam.y);
         moveVector.Normalize();
+        
+        CheckBoundaries();
         data.rb.velocity = moveVector * data.moveSpeed * Time.fixedDeltaTime;
-        Debug.Log(data.rb.velocity);
+    }
+
+    void CheckBoundaries()
+    {
+        Transform dataTransform = data.transform;
+        if (dataTransform.position.x < leftBound)
+        {
+            dataTransform.position = new Vector3(leftBound, dataTransform.position.y, dataTransform.position.z);
+        }
+        else if (dataTransform.position.x > rightBound)
+        {
+            dataTransform.position = new Vector3(rightBound, dataTransform.position.y, dataTransform.position.z);
+        }
+
+        if (dataTransform.position.z < downBound)
+        {
+            dataTransform.position = new Vector3(dataTransform.position.x, dataTransform.position.y, downBound);
+        }
+        else if (dataTransform.position.z > upBound)
+        {
+            dataTransform.position = new Vector3(dataTransform.position.x, dataTransform.position.y, upBound);
+        }
     }
 
     public void Select()
@@ -60,6 +91,11 @@ public class MoveObjectFunction : Module
         PlayerController.instance.playerRb.isKinematic = true;
         data = moveObjectModule.selectedObject.GetComponent<MoveObjectData>();
         data.GetComponent<Renderer>().material = data.selectedMaterial;
+        
+        leftBound = transform.position.x - range;
+        rightBound = transform.position.x + range;
+        downBound = transform.position.z - range;
+        upBound = transform.position.z + range;
         
         // Selection feedbacks
         

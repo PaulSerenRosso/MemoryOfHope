@@ -6,14 +6,12 @@ using UnityEngine.InputSystem;
 
 public abstract class Module : MonoBehaviour
 {
- 
     public int index;
     public bool isFixedUpdate;
     public bool isPerformed;
-    public List<Module> contrainstModules;
+    public List<Module> constrainingModules;
     public List<Module> neededModules;
- 
-
+    
     public bool inputPressed;
 
     public abstract void LinkModule();
@@ -36,6 +34,12 @@ public abstract class Module : MonoBehaviour
         { 
             return false; // Faux si pas d'input pressé
         }
+
+        if (PlayerManager.instance.isInCutscene)
+        {
+            return false; // Joueur immobile en cutscene
+        }
+        
         return true;
     }
 
@@ -46,11 +50,11 @@ public abstract class Module : MonoBehaviour
      bool CheckConstraintModules()
     {
         // Check des modules en cours d'utilisation
-        if (contrainstModules.Count != 0)
+        if (constrainingModules.Count != 0)
         {
-            for (int i = 0; i < contrainstModules.Count; i++)
+            for (int i = 0; i < constrainingModules.Count; i++)
             {
-                Module module = contrainstModules[i];
+                Module module = constrainingModules[i];
                 if (module.isPerformed)
                 {
                     return false;
