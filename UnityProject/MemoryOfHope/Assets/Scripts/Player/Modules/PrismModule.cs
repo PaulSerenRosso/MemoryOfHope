@@ -17,6 +17,9 @@ public class PrismModule : Module
         // joystick
         // bouton qui maintient
         // tu ne bouge tu ne peux faire aucune input pendant ce temps
+        
+        Debug.Log("Linking Inputs for Prism Module");
+
         PlayerController.instance.playerActions.Player.Move.performed += context => JoystickPressed(context);
         PlayerController.instance.playerActions.Player.Prism.canceled += context => InputReleased(context);
         PlayerController.instance.playerActions.Player.Prism.performed += context => InputPressed(context);
