@@ -37,6 +37,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     public bool isHit = false;
     [SerializeField] private float drag;
 
+    public bool isInModule;
+    public bool isInCutscene;
+
     #endregion
 
     #region Instance

@@ -4,9 +4,7 @@ using UnityEngine.InputSystem;
 
 public class JumpModule : Module
 {
-
-
-//velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+    //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
     private float yStartPosition;
     private float yEndPosition;
 
@@ -30,6 +28,12 @@ public class JumpModule : Module
 
         PlayerController.instance.playerActions.Player.Jump.performed += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.Jump.canceled += context => InputReleased(context);
+        
+        // Set Constraining Modules
+        constrainingModules.Clear();
+        
+        // Set other variables referring to the player
+        if(GetComponent<MoveModule>()) moveModule = GetComponent<MoveModule>();
     }
 
 

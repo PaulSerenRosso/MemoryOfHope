@@ -24,6 +24,14 @@ public class MoveObjectModule : Module
         PlayerController.instance.playerActions.Player.InteractionModule.canceled += context => InputReleased(context);
         PlayerController.instance.playerActions.Player.Move.performed += context => Aim(context);
         PlayerController.instance.playerActions.Player.InteractionSelect.started += _ => Selecting();
+        
+        // Set Constraining Modules
+        if(GetComponent<JumpModule>()) constrainingModules.Add(GetComponent<JumpModule>());
+        
+        // Sur les précédents modules
+        if(GetComponent<JumpModule>()) GetComponent<JumpModule>().constrainingModules.Add(this);
+        
+        // Set other variables referring to the player
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)
