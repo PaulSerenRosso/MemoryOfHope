@@ -32,7 +32,7 @@ public class ModuleAcquisition : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasBeenActivated)
         {
             canBeActivated = false;
             PlayerManager.instance.isInModule = false;
@@ -53,6 +53,9 @@ public class ModuleAcquisition : MonoBehaviour
         hasBeenActivated = true;
         
         PlayerManager.instance.isInCutscene = true;
+        canBeActivated = false;
+        PlayerManager.instance.isInModule = false;
+        UIInstance.instance.SetNotification(null, false);
         
         // Cinématique, dialogues, feedbacks ?
 
