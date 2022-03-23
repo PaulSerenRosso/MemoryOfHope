@@ -71,6 +71,8 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
+        
         if (other.CompareTag("Player"))
         {
             hitDirection = transform.position - PlayerController.instance.transform.position;
