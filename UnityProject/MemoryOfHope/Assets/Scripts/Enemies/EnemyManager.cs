@@ -50,7 +50,7 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void HitNoDamage()
     {
-        // 
+        
     }
 
     public void Heal(int heal)
@@ -60,10 +60,8 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void Death()
     {
-        //Destroy(GetComponent<NavMeshAgent>());
         for (int i = 0; i < 20; i++)
         {
-            Debug.Log("spawn");
             Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
                 Random.Range(2.0f, 3.0f));
         }

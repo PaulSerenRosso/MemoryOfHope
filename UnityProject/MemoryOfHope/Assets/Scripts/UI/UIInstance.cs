@@ -32,6 +32,10 @@ public class UIInstance : MonoBehaviour
     [Header("Player Stats")] 
     [SerializeField] private TextMeshProUGUI lifeText;
 
+    [Header("Notification")] 
+    [SerializeField] private GameObject notificationBox;
+    [SerializeField] private TextMeshProUGUI notificationText;
+
     private void Start()
     {
         LinkInput();
@@ -147,6 +151,16 @@ public class UIInstance : MonoBehaviour
             lifeText.text += " ( Dead )";
             lifeText.color = Color.red;
         }
+    }
+
+    #endregion
+
+    #region Notification
+
+    public void SetNotification(string message, bool active)
+    {
+        notificationText.text = message;
+        notificationBox.SetActive(active);
     }
 
     #endregion

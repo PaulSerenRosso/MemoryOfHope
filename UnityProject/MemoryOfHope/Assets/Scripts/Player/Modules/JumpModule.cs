@@ -4,9 +4,7 @@ using UnityEngine.InputSystem;
 
 public class JumpModule : Module
 {
-
-
-//velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+    //velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
     private float yStartPosition;
     private float yEndPosition;
 
@@ -69,9 +67,8 @@ public class JumpModule : Module
                 isRelease = false;
                 PlayerController.instance.currentGravity = 0;
                 if (moveModule.inputPressed)
-                {
+                { 
                     PlayerController.instance.currentVelocity += PlayerController.instance.PlayerProjectOnPlane(moveModule.moveVector);
-                   Debug.Log(moveModule.moveVector);
                 }
             }
         }
@@ -83,7 +80,6 @@ public class JumpModule : Module
         {
             if (PlayerController.instance.playerRb.position.y >= yEndPosition)
             {
-                Debug.Log(yEndPosition);
                 inExecute = false;
                 PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
                 PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
@@ -93,7 +89,6 @@ public class JumpModule : Module
             }
             else
             {
-                Debug.Log(PlayerController.instance.playerRb.position.y-yStartPosition);
                 currentSpeed = CurveJump.Evaluate(PlayerController.instance.playerRb.position.y-yStartPosition / yEndPosition) * MaxSpeedJump;
                 PlayerController.instance.currentVelocityWithUndo += currentSpeed * Vector3.up;
                 PlayerController.instance.currentGravity = 0;
