@@ -2,15 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // S'il y a un objet ciblé dans MoveObjectModule, alors on peut le sélectionner et le déplacer
-public class MoveObjectFunction : Module
+public class MoveObjectFunction : InteractiveObjectFunction
 {
-    [SerializeField] private MoveObjectModule moveObjectModule;
-    [SerializeField] private MoveObjectData data;
-    [SerializeField] private Vector3 joystickDirection;
-    private Vector3 moveVector;
-    private Vector2 inputCam;
-
-
+    private MoveObjectData data;
     [SerializeField] private float range;
     float leftBound;
     float rightBound;
@@ -19,8 +13,6 @@ public class MoveObjectFunction : Module
     
     public override void LinkModule()
     {
-        Debug.Log("Linking Inputs for Moving Function");
-        
         PlayerController.instance.playerActions.Player.Move.performed += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.Move.canceled += context => InputReleased(context);
     }
@@ -35,15 +27,6 @@ public class MoveObjectFunction : Module
     {
         inputPressed = false;
         Release();
-    }
-
-    public override bool Conditions()
-    {
-        if (!base.Conditions()) return false;
-
-        if (moveObjectModule.selectedObject != null) return true;
-        
-        return false;
     }
 
     public override void Execute()
@@ -85,24 +68,31 @@ public class MoveObjectFunction : Module
         }
     }
 
-    public void Select()
+    public override void Select()
     {
-        isPerformed = true;
-        PlayerController.instance.playerRb.isKinematic = true;
-        data = moveObjectModule.selectedObject.GetComponent<MoveObjectData>();
-        data.GetComponent<Renderer>().material = data.selectedMaterial;
+        base.Select();
         
+        Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
+        var interactive = (InteractiveObjectData) component;
+
+        data = (MoveObjectData) interactive;
+        
+        data = interactionModule.selectedObject.GetComponent<MoveObjectData>();
+        data.GetComponent<Renderer>().material = data.selectedMaterial;
+            
+        // Selection feedbacks
+        
+        data.rb.isKinematic = false;
+            
         leftBound = transform.position.x - range;
         rightBound = transform.position.x + range;
         downBound = transform.position.z - range;
         upBound = transform.position.z + range;
         
-        // Selection feedbacks
-        
-        data.rb.isKinematic = false;
+        isPerformed = true;
     }
 
-    public void Deselect()
+    public override void Deselect()
     {
         if (data != null)
         {
@@ -113,8 +103,8 @@ public class MoveObjectFunction : Module
         
         // Deselection feedbacks
 
-        PlayerController.instance.playerRb.isKinematic = false;
-        isPerformed = false;
+        base.Deselect();
+
     }
     
     public override void Release()
