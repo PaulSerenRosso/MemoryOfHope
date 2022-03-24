@@ -6,8 +6,16 @@ public class S_StateMachine : EnemyMachine
     #region Variables
 
     public Vector3 initialPosition;
+
+ 
+    float _damageLaserTimer;
+    
     
     [Header("Parameters")]
+    [SerializeField]
+    float _damageLaserTime;
+    [SerializeField]
+    int _laserDamageAmount;
     [Range(1, 15)] public float detectionDistance;
     [Range(1, 15)] public float pursuitDistance;
 
@@ -80,6 +88,21 @@ public class S_StateMachine : EnemyMachine
         }
     }
 
+    public override void OnHitByLaser()
+    {
+        if (_damageLaserTimer < _damageLaserTime)
+            _damageLaserTimer += Time.deltaTime;
+        else
+        {
+            enemyManager.TakeDamage(_laserDamageAmount);
+            _damageLaserTimer = 0; 
+        }
+    }
+
+    public void CancelHitLaser()
+    {
+        _damageLaserTimer = 0; 
+    }
     public override void OnTriggerStay(Collider other)
     {
         
@@ -104,6 +127,7 @@ public class S_StateMachine : EnemyMachine
     {
         
     }
+
 
     #endregion
 }

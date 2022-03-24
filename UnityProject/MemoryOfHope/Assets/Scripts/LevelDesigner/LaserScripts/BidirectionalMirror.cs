@@ -47,7 +47,7 @@ base.Cancel(laser);
     public override void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
           base.StartReturnable(laser, hit);
-        otherEntry.IsReturnLaser = false;
+          otherEntry.IsReturnLaser = false;
         otherEntry.IsActive = false;
       
      
