@@ -40,6 +40,7 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
+        Debug.Log("test");
         anim.Play("TakeDamage");
         health -= damages;
         if (health <= 0)

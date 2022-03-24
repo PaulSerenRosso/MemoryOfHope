@@ -38,9 +38,9 @@ public class BaseMirror: LaserMachine, IReturnable
     public virtual void Cancel(LaserMachine laser)
     {   EndTrigger();
         BeginLaser = Vector3.zero;
-      _triggerByLaser = false ; 
         Direction = Vector3.zero;
         LaserLine.enabled = false;
+      _triggerByLaser = false ; 
         _currentSource = null;
         LaserLineReceiver = null;
     }
@@ -49,8 +49,7 @@ public class BaseMirror: LaserMachine, IReturnable
     {
         _triggerByLaser = true; 
         _currentSource = laser ;
-        IsActive = true;
-       LaserLineReceiver = laser.LaserLine;
+        LaserLineReceiver = laser.LaserLine;
         Returnable(laser, hit);
         LaserLine.enabled = true;
         LaserLine.SetPosition(1, hit.point); 

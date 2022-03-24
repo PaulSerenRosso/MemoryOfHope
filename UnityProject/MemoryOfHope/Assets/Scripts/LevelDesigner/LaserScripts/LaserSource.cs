@@ -7,11 +7,10 @@ using UnityEngine.InputSystem;
 public class LaserSource : LaserMachine
 {
     [Header("LaserSource Variables")]
-    [SerializeField]
-    private Transform beginSource;
+    public Transform beginSource;
     
-    [SerializeField]
-    private Vector3 DirectionSource;
+   
+    public Vector3 DirectionSource;
     private void Start()
     {
        
@@ -21,7 +20,7 @@ public class LaserSource : LaserMachine
         if (beginSource != null)
         {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(beginSource.position, beginSource.position+DirectionSource);
+        Gizmos.DrawLine(beginSource.position, beginSource.position+transform.TransformDirection(DirectionSource).normalized);
             
         }
     }
@@ -33,22 +32,22 @@ public class LaserSource : LaserMachine
         DirectionSource = DirectionSource.normalized;
         if (IsActive) _triggerByLaser = true;
         else _triggerByLaser = false;
-
-
     }
 
     public override void FixedUpdate()
    {
        if (IsActive)
        {
-        
+           
+           _triggerByLaser = true;
            LaserLine.enabled = true;
            BeginLaser = beginSource.position; 
            Direction = transform.TransformDirection(DirectionSource).normalized;
-           
+
        }
        else
        {
+           _triggerByLaser = false;
            LaserLine.SetPosition(1, BeginLaser);
                LaserLine.enabled = false;
            
