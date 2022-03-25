@@ -14,7 +14,8 @@ public class ShieldMirror : BaseMirror
     {
         _triggerByLaser = true;   
         Direction = transform.forward;
-        BeginLaser = new Vector3(transform.position.x, Yoffset, transform.position.z) +Direction*_offsetDistanceBeginPosition;
+        Vector3 upOffset = PlayerController.instance.transform.TransformPoint(Vector3.up * Yoffset);
+        BeginLaser = new Vector3(transform.position.x, upOffset.y, transform.position.z) +Direction*_offsetDistanceBeginPosition;
         LaserLineReceiver.SetPosition(0, hit.point);
     }
 }
