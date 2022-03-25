@@ -5,11 +5,11 @@ using UnityEngine;
 
 
 [Serializable]
-public class RiposteDialogue
+public class DialogueLine
 {
     public CharacterDialogueProfil CharacterProfil;
     [TextArea] public string RiposteText;
-    public float WaitTimeForNext;
+    public float WaitTimeBeforeLine;
     public float SpeedSubtitles;
     public AudioClip AudioRiposte;
 }

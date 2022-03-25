@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
             CharacterAudioSourcesDic.Add(CharacterAudioSources[i].Character, CharacterAudioSources[i].AudioSource);
         }
     }
-    public RiposteDialogue currentRisposte;
+    public DialogueLine currentLine;
     public DialogueGameEvent currentDialogue;
     public bool InGameDialogue;
     public bool InCinematicDialogue;
