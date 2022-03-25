@@ -113,7 +113,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         
         Debug.DrawRay(transform.position, knockback, Color.yellow, 1f);
 
-        PlayerController.instance.playerRb.AddForce(knockback);
+       PlayerController.instance.currentVelocity += knockback;
         PlayerController.instance.playerRb.drag = drag;
     }
     
