@@ -16,13 +16,20 @@ public class InteractionModule : Module
     public InteractiveObjectFunction[] interactiveFunction;
     [SerializeField] private LineRenderer line;
     private Vector2 inputCam;
+    private bool joystickIsPressed;
     
     public override void LinkModule()
     {
         PlayerController.instance.playerActions.Player.InteractionModule.started += context => InputPressed(context);
         PlayerController.instance.playerActions.Player.InteractionModule.canceled += context => InputReleased(context);
         PlayerController.instance.playerActions.Player.Move.performed += context => Aim(context);
+        PlayerController.instance.playerActions.Player.Move.canceled += context => AimCancel(context);
         PlayerController.instance.playerActions.Player.InteractionSelect.started += _ => Selecting();
+    }
+
+    private void AimCancel(InputAction.CallbackContext context)
+    {
+        joystickIsPressed = false;
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)
@@ -38,6 +45,7 @@ public class InteractionModule : Module
 
     private void Aim(InputAction.CallbackContext ctx)
     {
+        joystickIsPressed = true;
         if (isPerformed)
         {
             joystickDirection = ctx.ReadValue<Vector2>();
@@ -95,7 +103,7 @@ public class InteractionModule : Module
         {
             isPerformed = true;
             
-            if (joystickDirection != Vector3.zero)
+            if (joystickIsPressed)
             {
                 Vector2 angleFoward = new Vector2(transform.forward.x, transform.forward.z);
                        

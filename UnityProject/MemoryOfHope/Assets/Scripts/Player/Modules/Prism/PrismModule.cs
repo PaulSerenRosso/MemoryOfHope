@@ -12,6 +12,7 @@ public class PrismModule : Module
     private bool isActivate;
     [SerializeField] private float rotationSpeed;
     private Vector2 inputCam;
+    private bool joystickPressed ;
     public override void LinkModule()
     {
         // joystick
@@ -21,8 +22,14 @@ public class PrismModule : Module
         Debug.Log("Linking Inputs for Prism Module");
 
         PlayerController.instance.playerActions.Player.Move.performed += context => JoystickPressed(context);
+        PlayerController.instance.playerActions.Player.Move.canceled += context => JoystickReleased(context);
         PlayerController.instance.playerActions.Player.Prism.canceled += context => InputReleased(context);
         PlayerController.instance.playerActions.Player.Prism.performed += context => InputPressed(context);
+    }
+
+    private void JoystickReleased(InputAction.CallbackContext context)
+    {
+        joystickPressed = false;
     }
 
     public override bool Conditions()
@@ -45,6 +52,7 @@ public class PrismModule : Module
 
     public void JoystickPressed(InputAction.CallbackContext ctx)
     {
+        joystickPressed = true;
         _joystickDirection = ctx.ReadValue<Vector2>();
     }
 
@@ -77,7 +85,8 @@ public class PrismModule : Module
                 return;
             }
             _shield.InputShield = true;
-            if (_joystickDirection == Vector3.zero)
+            
+            if (!joystickPressed)
                 return;
             Vector2 angleFoward = new Vector2(transform.forward.x,
                 transform.forward.z);
