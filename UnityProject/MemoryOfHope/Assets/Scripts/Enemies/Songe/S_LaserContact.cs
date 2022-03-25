@@ -41,9 +41,7 @@ public class S_LaserContact : MonoBehaviour, IReturnable
 
     public void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
-        
         _currentSource = laser;
         _triggerByLaser = true;
-
     }
 }

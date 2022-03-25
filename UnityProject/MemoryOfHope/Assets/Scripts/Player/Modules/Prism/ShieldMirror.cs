@@ -6,13 +6,15 @@ using UnityEngine;
 public class ShieldMirror : BaseMirror
 {
     [Header("ShieldMirror Variables")]
-    [SerializeField] private float _offsetBeginPosition;
+    [SerializeField] private float _offsetDistanceBeginPosition;
+
+    [SerializeField] private float Yoffset;
     
     public override void Returnable(LaserMachine laser, RaycastHit hit)
     {
         _triggerByLaser = true;   
         Direction = transform.forward;
-        BeginLaser = transform.position+Direction*_offsetBeginPosition;
+        BeginLaser = new Vector3(transform.position.x, Yoffset, transform.position.z) +Direction*_offsetDistanceBeginPosition;
         LaserLineReceiver.SetPosition(0, hit.point);
     }
 }
