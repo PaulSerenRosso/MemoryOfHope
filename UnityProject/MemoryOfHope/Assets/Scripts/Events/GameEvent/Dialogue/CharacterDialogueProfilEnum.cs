@@ -4,6 +4,6 @@ using UnityEngine;
 
 public enum CharacterDialogueProfilEnum 
 {
-    Hope, Father 
+    Hope, Father, PNJruin 
 
 }
