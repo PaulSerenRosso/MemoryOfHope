@@ -6,10 +6,12 @@ public class EnemyMachine : MonoBehaviour
     #region Main Variables
 
     public EnemyManager enemyManager;
-    
+   
     public EnemyState currentState;
     public Material material;
 
+   
+    public float PlayerKnockBackFactor;
     public NavMeshAgent agent;
     public Rigidbody rb;
     public float enemyWeigth;

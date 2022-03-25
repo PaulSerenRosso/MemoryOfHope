@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 8187002710246371113}
   material: {fileID: 2100000, guid: 4c5ebb1d005ae544ba0f7300a7ede8e5, type: 2}
+  PlayerKnockBackFactor: 2
   agent: {fileID: 8187002710246371107}
   rb: {fileID: 8187002710246371106}
   enemyWeigth: 1
@@ -208,12 +209,14 @@ MonoBehaviour:
   healthEnemy: 10
   maxHealthEnemy: 10
   isDeadEnemy: 0
+  isBlocked: 0
   canBeHitByMelee: 0
   canBeHitByLaser: 1
   canBeKnockback: 0
   damage: 1
   anim: {fileID: 8187002710246371112}
   deathFeedback: {fileID: 5238717765216865771, guid: 054d49276841b34459f6ec11c8c0cec4, type: 3}
+  Machine: {fileID: 0}
 --- !u!111 &8187002710246371112
 Animation:
   m_ObjectHideFlags: 0
