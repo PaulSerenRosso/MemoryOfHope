@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 {
     #region Variables
 
+    [SerializeField] private ShieldManager _shield;
     public List<Module> obtainedModule;
     public int money;
     public bool hasGlitch;
@@ -34,13 +35,16 @@ public class PlayerManager : MonoBehaviour, Damageable
     
     public Vector3 hitDirection;
     [SerializeField] private float knockbackStrength;
+    [SerializeField] private float _blockedKnockbackStrength;
     [SerializeField] private float hitDuration;
     public bool isHit = false;
-    [SerializeField] private float drag;
-
+    [SerializeField] private float _drag;
+    [SerializeField] private float _blockedDrag;
     public bool isInModule;
     public bool isInCutscene;
+    public bool isBlocked;
 
+    [SerializeField] float blockedDuration;
     #endregion
 
     #region Instance
@@ -74,30 +78,43 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public IEnumerator Hit(EnemyManager enemy)
     {
+        yield return new WaitForFixedUpdate();
+        if (enemy.isBlocked)
+        {
+            isBlocked = true;
+            _shield.TakeDamage(1);
+            KnockBack(enemy, _blockedDrag, _blockedKnockbackStrength);
+            yield return new WaitForSeconds(blockedDuration);
+            isBlocked = false;
+            PlayerController.instance.playerRb.drag = 0;
+            PlayerController.instance.playerRb.velocity = Vector3.zero;
+            yield break;
+        }
+        
         isHit = true;
-
-        PlayerController.instance.playerRb.velocity = Vector3.zero;
-        
-        Vector3 knockback = new Vector3(hitDirection.x, 0, hitDirection.z);
-        knockback.Normalize();
-        knockback *= knockbackStrength;
-        
-        Debug.DrawRay(transform.position, knockback, Color.yellow, 1f);
-
-        PlayerController.instance.playerRb.AddForce(knockback);
-        PlayerController.instance.playerRb.drag = drag;
-
-        int damage = enemy.damage;
+        KnockBack(enemy, _drag, knockbackStrength);
+       int damage = enemy.damage;
         Debug.Log($"{enemy.name} a infligé {damage} dégâts");
-
         TakeDamage(damage);
-
         yield return new WaitForSeconds(hitDuration);
-
         PlayerController.instance.playerRb.drag = 0;
         PlayerController.instance.playerRb.velocity = Vector3.zero;
 
         isHit = false;
+    }
+
+    void KnockBack(EnemyManager enemy, float drag, float strengh)
+    {
+        PlayerController.instance.playerRb.velocity = Vector3.zero;
+        
+        Vector3 knockback = new Vector3(hitDirection.x, 0, hitDirection.z);
+        knockback.Normalize();
+        knockback *= strengh*enemy.Machine.PlayerKnockBackFactor;
+        
+        Debug.DrawRay(transform.position, knockback, Color.yellow, 1f);
+
+       PlayerController.instance.currentVelocity += knockback;
+        PlayerController.instance.playerRb.drag = drag;
     }
     
     public void TakeDamage(int damages)
@@ -141,7 +158,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isHit)
+        if (other.CompareTag("Enemy") && !isHit && !isBlocked)
         {
             EnemyManager enemy = other.GetComponentInParent<EnemyManager>();
             
@@ -149,16 +166,26 @@ public class PlayerManager : MonoBehaviour, Damageable
             Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
             StartCoroutine(Hit(enemy));
         }
+        if (other.CompareTag("EventTrigger"))
+        {
+            other.gameObject.GetComponent<ListenerTrigger>().Raise();
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        
+        if (other.CompareTag("EventTriggerStay"))
+        {
+            other.gameObject.GetComponent<ListenerTriggerStay>().Raise();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("EventTriggerStay"))
+        {
+            other.gameObject.GetComponent<ListenerTriggerStay>().EndRaise();
+        }
     }
 
     private void OnCollisionEnter(Collision other)

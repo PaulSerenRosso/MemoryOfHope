@@ -87,7 +87,6 @@ public class RotateObjectFunction : InteractiveObjectFunction
     
     public override void Release()
     {
-        Debug.Log("release");
         timer = 0;
     }
 }

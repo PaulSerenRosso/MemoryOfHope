@@ -64,6 +64,7 @@ public class ShieldManager : MonoBehaviour, Damageable
         health -= amount;
         if (health <= 0)
         {
+       
             isDead = true;
             health = 0;
             Death();
@@ -83,6 +84,7 @@ public class ShieldManager : MonoBehaviour, Damageable
         _mesh.enabled = false; 
         Mirror.IsActiveReturnable = false;
         _collider.enabled = false ; 
+   
     }
 
     private void Update()
@@ -91,14 +93,16 @@ public class ShieldManager : MonoBehaviour, Damageable
         {
             if (timeDeath > timerDeath)
             {
+             
                 timerDeath += Time.deltaTime;
             }
             else
             { 
                 _isDead = false;
+                timerDeath = 0;
                 if (_inputShield)
                 {
-                        
+                       
                                     _mesh.enabled = true;
                                     _collider.enabled = true; 
                                     Mirror.IsActiveReturnable = true;
@@ -108,12 +112,5 @@ public class ShieldManager : MonoBehaviour, Damageable
             }
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            // Protège le PJ de l'attaque en cours
-        }
-    }
+    
 }

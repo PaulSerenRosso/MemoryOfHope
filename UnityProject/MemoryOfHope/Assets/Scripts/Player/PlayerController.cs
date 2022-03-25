@@ -327,10 +327,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("EventTriggerStay"))
-        {
-            other.gameObject.GetComponent<ListenerTriggerStay>().EndRaise();
-        }
+    
         // Retire l'objet de la liste d'objets avec lesquels on peut interagir
         if (other.CompareTag("Interactible") && interactiveObjects.Contains(other.transform))
         {

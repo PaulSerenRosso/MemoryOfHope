@@ -81,7 +81,12 @@ public class S_StateMachine : EnemyMachine
     {
         base.OnTriggerEnter(other);
         
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Shield"))
+        {
+            enemyManager.isBlocked = true;
+            PlayerManager.instance.Hit(enemyManager);
+        }
+        if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             hitDirection = transform.position - PlayerController.instance.transform.position;
             SwitchState(pauseHitState);
@@ -110,7 +115,10 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("Shield"))
+        {
+            enemyManager.isBlocked = false;
+        }
     }
 
     public override void OnCollisionEnter(Collision other)

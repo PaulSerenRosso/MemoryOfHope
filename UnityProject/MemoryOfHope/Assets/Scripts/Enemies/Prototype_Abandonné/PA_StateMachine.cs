@@ -50,6 +50,10 @@ public class PA_StateMachine : EnemyMachine
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+        if (other.CompareTag("Shield"))
+        {
+            enemyManager.isBlocked = true;
+        }
     }
 
     public override void OnTriggerStay(Collider other)

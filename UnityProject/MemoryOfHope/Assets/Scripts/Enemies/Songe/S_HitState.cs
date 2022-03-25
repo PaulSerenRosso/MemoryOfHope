@@ -37,11 +37,13 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
         
         if (ConditionState.Timer(durationHitStunned, timer))
         {
+            enemyMachine.enemyManager.isBlocked = false; 
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
             enemyMachine.rb.velocity = Vector3.zero;
             enemy.SwitchState(enemy.pursuitState);
+            
         }
     }
 }
