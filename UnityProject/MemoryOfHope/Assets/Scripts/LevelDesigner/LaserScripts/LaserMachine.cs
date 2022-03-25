@@ -24,7 +24,7 @@ public class LaserMachine : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        Debug.Log(_returnable);
+  
         if (IsActive)
         {
             if (_triggerByLaser)
