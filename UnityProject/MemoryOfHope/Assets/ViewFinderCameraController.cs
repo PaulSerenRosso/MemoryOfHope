@@ -17,5 +17,6 @@ public class ViewFinderCameraController : MonoBehaviour
     {
         if(focusPlayer)
         transform.position = player.position + offSet;
+        
     }
 }

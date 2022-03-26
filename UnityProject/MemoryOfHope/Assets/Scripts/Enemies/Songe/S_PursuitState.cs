@@ -31,6 +31,7 @@ public class S_PursuitState : EnemyState
         }
     }
     
+    
     public override void OnCollisionStayState(EnemyMachine enemyMachine, Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
