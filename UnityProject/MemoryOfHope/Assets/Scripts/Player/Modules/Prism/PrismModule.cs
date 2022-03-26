@@ -41,7 +41,7 @@ public class PrismModule : Module
             return false; // Ne peut pas faire le prisme si le joueur est knockback
         }
         
-        if (!PlayerController.instance.onGround || _shield.isDead) return false;
+        if (!PlayerController.instance.onGround || (_shield.isDead&& !isActivate)) return false;
         return true;
     }
 
@@ -64,6 +64,12 @@ public class PrismModule : Module
 
     public override void Execute()
     {
+        if (_shield.isDead)
+        {
+            Release();
+              
+            return;
+        }
         isPerformed = true;
         if (!isActivate)
         {
@@ -79,11 +85,7 @@ public class PrismModule : Module
         }
         else
         {
-            if (_shield.isDead)
-            {
-                Release();
-                return;
-            }
+           
             _shield.InputShield = true;
             
             if (!joystickPressed)
