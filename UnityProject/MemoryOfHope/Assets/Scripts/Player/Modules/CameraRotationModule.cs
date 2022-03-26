@@ -11,7 +11,7 @@ public class CameraRotationModule : Module
     public float maxXAngle;
     public float speedYAngle;
     public float speedXAngle;
-
+    
     public void OnValidate()
     {
         Debug.Log(Camera.main.transform.forward);
@@ -37,6 +37,20 @@ public class CameraRotationModule : Module
 
     public override void Execute()
     {
+        isPerformed = true;
+
+
+    }
+
+    public override void Release()
+    {
+        
+        isPerformed = false;
+    }
+
+    public void LateUpdate()
+    {
+        if(!isPerformed) return;
         Vector3 currentRotation = MainCameraController.Instance.transform.eulerAngles; 
         
         MainCameraController.Instance.transform.rotation = Quaternion.Euler(currentRotation.x+ speedXAngle*-inputVector.y, 
@@ -44,12 +58,5 @@ public class CameraRotationModule : Module
         currentRotation = MainCameraController.Instance.transform.eulerAngles;
         currentRotation.x = Mathf.Clamp(currentRotation.x, minXAngle, maxXAngle);
         MainCameraController.Instance.transform.eulerAngles = currentRotation;
-
-
-    }
-
-    public override void Release()
-    {
-        isPerformed = false;
     }
 }
