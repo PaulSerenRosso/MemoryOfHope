@@ -8,10 +8,11 @@ using UnityEngine;
 public class DialogueGameEvent : ScriptableObject
 {
    public List<DialogueLine> Lines;
-   public void LaunchDialogue()
+   public void SetUpDialogue()
   {
       DialogueManager.Instance.InGameDialogue = true;
-      DialogueManager.Instance.currentDialogue = this;
-      DialogueManager.Instance.currentLine = Lines[0];
+      DialogueManager.Instance.CurrentDialogue = this;
+      DialogueManager.Instance.CurrentLine = Lines[0];
+      DialogueManager.Instance.StartDialogue();
   }
 }

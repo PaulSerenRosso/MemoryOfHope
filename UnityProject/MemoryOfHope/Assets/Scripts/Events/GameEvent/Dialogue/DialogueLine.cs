@@ -8,8 +8,10 @@ using UnityEngine;
 public class DialogueLine
 {
     public CharacterDialogueProfil CharacterProfil;
-    [TextArea] public string RiposteText;
+    [TextArea] public string FrenchLineText;
+    [TextArea] public string EnglishLineText;
     public float WaitTimeBeforeLine;
-    public float SpeedSubtitles;
-    public AudioClip AudioRiposte;
+    public AudioClip VoiceLine;
+    public bool IsAudioTime;
+    public float CustomWaitTimeLine;
 }

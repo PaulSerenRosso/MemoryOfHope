@@ -25,14 +25,16 @@ public class EnemyManager : MonoBehaviour, Damageable
     public int healthEnemy;
     public int maxHealthEnemy;
     public bool isDeadEnemy;
-    
+    public bool isBlocked;
     public bool canBeHitByMelee;
     public bool canBeHitByLaser;
     public bool canBeKnockback;
 
+    //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
     [SerializeField] private Animation anim;
     [SerializeField] private GameObject deathFeedback;
+    public EnemyMachine Machine;
 
     #endregion
     
