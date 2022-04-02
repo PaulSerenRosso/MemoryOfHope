@@ -11,13 +11,13 @@ public class PA_EndPursuitState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.agent.isStopped = false;
         timer = 0;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         timer += Time.deltaTime;
-        enemyMachine.agent.isStopped = false;
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
 
         if (ConditionState.Timer(durationEndPursuit, timer))

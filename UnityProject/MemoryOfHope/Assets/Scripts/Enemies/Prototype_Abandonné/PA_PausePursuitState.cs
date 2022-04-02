@@ -10,6 +10,7 @@ public class PA_PausePursuitState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.agent.isStopped = true;
         timer = 0;
     }
     

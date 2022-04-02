@@ -20,7 +20,6 @@ public class S_EndPursuitState : EnemyState
         initialPos = enemy.initialPosition;
         enemyMachine.agent.isStopped = false;
         enemyMachine.agent.speed = speed;
-
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

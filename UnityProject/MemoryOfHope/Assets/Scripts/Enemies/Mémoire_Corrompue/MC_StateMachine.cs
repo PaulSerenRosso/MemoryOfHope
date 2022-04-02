@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MC_StateMachine : EnemyMachine
 {
-    
     #region States
     
     public MC_DefaultState defaultState = new MC_DefaultState();

@@ -9,7 +9,7 @@ public class MC_DefaultState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        Debug.Log("agent is stopped");
+        Debug.Log("agent is in default state");
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -18,7 +18,7 @@ public class MC_DefaultState : EnemyState
             PlayerController.instance.transform.position, detectionDistance))
         {
             MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-            //enemy.SwitchState(enemy.pausePursuitState);
+            enemy.SwitchState(enemy.pausePositionState);
         }
     }
 }

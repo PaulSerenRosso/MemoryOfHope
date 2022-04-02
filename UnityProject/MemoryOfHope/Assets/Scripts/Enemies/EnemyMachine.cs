@@ -9,8 +9,7 @@ public class EnemyMachine : MonoBehaviour
    
     public EnemyState currentState;
     public Material material;
-
-   
+    
     public float PlayerKnockBackFactor;
     public NavMeshAgent agent;
     public Rigidbody rb;
