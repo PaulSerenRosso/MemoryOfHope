@@ -1,8 +1,8 @@
-using System;
 using UnityEngine;
+using System;
 
 [Serializable]
-public class S_HitState : EnemyState // State quand le Songe est attaqué
+public class MC_HitState : EnemyState // State quand le Songe est attaqué
 {
     [Header("Parameters")]
     [Range(0, 1)] [SerializeField] private float durationHitStunned;
@@ -39,12 +39,12 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
         if (ConditionState.Timer(durationHitStunned, timer))
         {
             enemyMachine.enemyManager.isBlocked = false; 
-            S_StateMachine enemy = (S_StateMachine) enemyMachine;
+            MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
             enemyMachine.rb.isKinematic = true;
             enemyMachine.rb.velocity = Vector3.zero;
-            enemy.SwitchState(enemy.pursuitState);
+            enemy.SwitchState(enemy.positionState);
             
         }
     }

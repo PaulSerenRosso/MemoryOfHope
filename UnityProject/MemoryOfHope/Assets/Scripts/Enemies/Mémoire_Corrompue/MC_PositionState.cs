@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
+
+[Serializable]
 public class MC_PositionState : EnemyState
 {
     public override void StartState(EnemyMachine enemyMachine)

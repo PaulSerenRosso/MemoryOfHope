@@ -13,6 +13,12 @@ public class MC_StateMachine : EnemyMachine
 
     public MC_ShockWaveState shockWaveState = new MC_ShockWaveState();
 
+    public MC_HitState hitState = new MC_HitState();
+
+    public MC_PausePositionState pausePositionState = new MC_PausePositionState();
+
+    public MC_PauseShockWaveState pauseShockWaveState = new MC_PauseShockWaveState();
+
     #endregion
 
     #region Gizmos
@@ -32,7 +38,12 @@ public class MC_StateMachine : EnemyMachine
         base.Start();
     }
     
-
+    public override void OnHitByMelee()
+    {
+        base.OnHitByMelee();
+        SwitchState(hitState);
+    }
+    
     #endregion
 
     #region Trigger & Collision
@@ -40,6 +51,7 @@ public class MC_StateMachine : EnemyMachine
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+        
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
@@ -53,7 +65,10 @@ public class MC_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("Shield"))
+        {
+            enemyManager.isBlocked = false;
+        }
     }
     
     public override void OnCollisionEnter(Collision other)

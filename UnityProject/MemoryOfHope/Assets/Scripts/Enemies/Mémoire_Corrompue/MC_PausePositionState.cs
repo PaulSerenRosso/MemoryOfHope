@@ -1,24 +1,27 @@
 using UnityEngine;
 
 [System.Serializable]
-public class MC_DefaultState : EnemyState
+public class MC_PausePositionState : EnemyState
 {  
     [Header("Parameters")]
-    [Range(1, 15)] [SerializeField] public float detectionDistance;
+    [Range(0, 1)] [SerializeField] private float durationBeforePosition;
+
+    private float timer;
 
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        Debug.Log("agent is stopped");
+        timer = 0;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        if (ConditionState.CheckDistance(enemyMachine.transform.position, 
-            PlayerController.instance.transform.position, detectionDistance))
+        timer += Time.deltaTime;
+        
+        if (ConditionState.Timer(durationBeforePosition, timer))
         {
             MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-            //enemy.SwitchState(enemy.pausePursuitState);
+            enemy.SwitchState(enemy.positionState);
         }
     }
 }
