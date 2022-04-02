@@ -12,10 +12,7 @@ public class CameraRotationModule : Module
     public float speedYAngle;
     public float speedXAngle;
     
-    public void OnValidate()
-    {
-        Debug.Log(Camera.main.transform.forward);
-    }
+  
     public override void LinkModule()
     {
         PlayerController.instance.playerActions.Player.RotateCamera.performed += context => InputPressed(context);
