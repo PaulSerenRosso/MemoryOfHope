@@ -161,10 +161,37 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (other.CompareTag("Enemy") && !isHit && !isBlocked)
         {
             EnemyManager enemy = other.GetComponentInParent<EnemyManager>();
-            
-            hitDirection = transform.position - enemy.transform.position;
-            Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
-            StartCoroutine(Hit(enemy));
+
+            if (enemy.Machine.GetType() == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
+            {
+                MC_StateMachine machine = other.GetComponentInParent<MC_StateMachine>();
+                var sphere = (SphereCollider) other;
+                
+                float distance = Vector3.Magnitude(other.transform.position - transform.position);
+                
+                if (distance > sphere.radius - machine.attackAreaLength)
+                {
+                    // Le joueur est dans la zone d'impact
+                    Debug.Log("Player in area");
+
+                    if (transform.position.y < machine.attackArea.transform.position.y + machine.attackAreaHeight)
+                    {
+                        // Le joueur est à une altitude d'impact
+                        Debug.Log("Player pas assez haut");
+
+                        hitDirection = transform.position - enemy.transform.position;
+                        Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
+                        StartCoroutine(Hit(enemy));
+                        
+                    }
+                }
+            }
+            else
+            {
+                hitDirection = transform.position - enemy.transform.position;
+                Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
+                StartCoroutine(Hit(enemy));
+            }
         }
         if (other.CompareTag("EventTrigger"))
         {

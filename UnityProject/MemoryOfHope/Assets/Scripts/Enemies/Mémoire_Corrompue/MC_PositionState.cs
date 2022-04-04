@@ -17,8 +17,6 @@ public class MC_PositionState : EnemyState
     {
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
         
-        Debug.Log(Vector3.Distance(enemyMachine.transform.position, PlayerController.instance.transform.position));
-        
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, minDistance))
         {

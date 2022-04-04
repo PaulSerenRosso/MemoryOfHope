@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MC_StateMachine : EnemyMachine
 {
+    public float attackAreaLength;
+    public float attackAreaHeight;
+
     #region States
     
     public MC_DefaultState defaultState = new MC_DefaultState();
