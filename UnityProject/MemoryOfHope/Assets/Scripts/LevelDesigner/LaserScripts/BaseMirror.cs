@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BaseMirror: LaserMachine, IReturnable
 {
+    
+    void Start()
+    {
+        LaserLine.enabled = false;
+    }
       public LineRenderer LaserLineReceiver;
     public virtual bool IsReturnLaser
     {
@@ -36,7 +41,8 @@ public class BaseMirror: LaserMachine, IReturnable
     }
 
     public virtual void Cancel(LaserMachine laser)
-    {   EndTrigger();
+    {   LaserLine.enabled = false;
+        EndTrigger();
         BeginLaser = Vector3.zero;
         Direction = Vector3.zero;
         LaserLine.enabled = false;
@@ -47,6 +53,7 @@ public class BaseMirror: LaserMachine, IReturnable
 
     public virtual void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
+        LaserLine.enabled = true;
         _triggerByLaser = true; 
         _currentSource = laser ;
         LaserLineReceiver = laser.LaserLine;

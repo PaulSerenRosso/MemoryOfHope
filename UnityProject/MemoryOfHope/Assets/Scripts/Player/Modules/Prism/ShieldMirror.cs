@@ -9,7 +9,8 @@ public class ShieldMirror : BaseMirror
     [SerializeField] private float _offsetDistanceBeginPosition;
 
     [SerializeField] private float Yoffset;
-    
+
+
     public override void Returnable(LaserMachine laser, RaycastHit hit)
     {
         _triggerByLaser = true;   

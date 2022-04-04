@@ -114,7 +114,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         Debug.DrawRay(transform.position, knockback, Color.yellow, 1f);
 
        PlayerController.instance.currentVelocity += knockback;
-        PlayerController.instance.playerRb.drag = drag;
+       PlayerController.instance.playerRb.drag = drag;
     }
     
     public void TakeDamage(int damages)
