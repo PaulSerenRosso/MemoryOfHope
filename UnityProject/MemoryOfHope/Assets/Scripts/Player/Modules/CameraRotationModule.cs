@@ -12,10 +12,7 @@ public class CameraRotationModule : Module
     public float speedYAngle;
     public float speedXAngle;
     
-    public void OnValidate()
-    {
-        Debug.Log(Camera.main.transform.forward);
-    }
+  
     public override void LinkModule()
     {
         PlayerController.instance.playerActions.Player.RotateCamera.performed += context => InputPressed(context);
@@ -53,8 +50,8 @@ public class CameraRotationModule : Module
         if(!isPerformed) return;
         Vector3 currentRotation = MainCameraController.Instance.transform.eulerAngles; 
         
-        MainCameraController.Instance.transform.rotation = Quaternion.Euler(currentRotation.x+ speedXAngle*-inputVector.y, 
-            speedYAngle*inputVector.x+currentRotation.y, currentRotation.z);
+        MainCameraController.Instance.transform.rotation = Quaternion.Euler(currentRotation.x+ speedXAngle*Time.deltaTime*-inputVector.y, 
+            speedYAngle*Time.deltaTime*inputVector.x+currentRotation.y, currentRotation.z);
         currentRotation = MainCameraController.Instance.transform.eulerAngles;
         currentRotation.x = Mathf.Clamp(currentRotation.x, minXAngle, maxXAngle);
         MainCameraController.Instance.transform.eulerAngles = currentRotation;
