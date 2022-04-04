@@ -84,7 +84,10 @@ public class DialogueManager : MonoBehaviour
         _textDialogueHolder.text = CurrentLine.CharacterProfil.Name + _doublePoint + currentLineText;
         Canvas.ForceUpdateCanvases();
         if (CurrentLine.VoiceLine != null)
+        {
+            Debug.Log(CurrentLine.VoiceLine);
             CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine);
+        }
     }
 
     void UpdateBackgroundSize()
