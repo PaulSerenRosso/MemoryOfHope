@@ -72,30 +72,8 @@ public class PlayerController : MonoBehaviour
     private Collider currentWall;
 
     private bool _useCheckGround;
-    public bool firstCheckGround = true;
-    public bool useCheckGround
-    {
-        get
-        {
-            return _useCheckGround;
-        }
-        set
-        {
-            _useCheckGround = value;
-            if (value == false)
-            {
-                 onGround = false;
-                 stuckGround = false;
-            }
-            else
-            {
-                firstCheckGround = false;
-                stuckGround = true;
-                
-            }
-               
-        }
-    }
+
+  
     private Vector3 currentNormalWall;
     public bool stuckGround = true;
     public bool onGround;
@@ -138,9 +116,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         useGravity = true;
-        useCheckGround = true;
-        firstCheckGround = true;
-
 
     }
 
@@ -230,7 +205,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
                 {
-                 
+                    
                     projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
                     alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
                     projectionRB *= alignedSpeed;
@@ -300,29 +275,18 @@ public class PlayerController : MonoBehaviour
             Vector3 normal = other.GetContact(0).normal;
             if (normal.y >= angleGround)
             {
-                if (useCheckGround)
-                {
+               
                     if (!onGround)
                     {
                         onGround = true;
                         playerAnimator.SetBool("onGround", true);
-                        if (firstCheckGround)
-                        {
                         playerRb.velocity = Vector3.zero;
-                
-                        }
-                        else
-                        {
-                        firstCheckGround = true;
-                            
-                        }
-                        
                         currentGravity = 0;
                     }
 
                     currentNormalGround = normal.normalized;
                     currentGround = other.collider;
-                }
+                
             }
             else
             {
@@ -338,8 +302,7 @@ public class PlayerController : MonoBehaviour
       
         if (other.gameObject.CompareTag("Ground"))
         {
-            if (useCheckGround)
-            {
+           
             if (currentGround == other.collider)
             {
                 onGround = false;
@@ -348,7 +311,7 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("onGround", false);
                 currentGravity = defaultGravity;
             }
-            }
+            
            if (currentWall == other.collider)
             {
                 currentWall = null;

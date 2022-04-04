@@ -16,6 +16,7 @@ public class DashModule : Module
     private bool joystickPressed;
     private int oldHealth;
     private Vector2 inputCam;
+    private float Yposition;
 
     [SerializeField]
    float cooldownDash;
@@ -81,6 +82,7 @@ public class DashModule : Module
             Vector3.RotateTowards(angleFoward, inputCam.normalized, speedRotation, 00f);
         PlayerController.instance.playerRb.rotation =
             Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+     
     }
 
     public override void LinkModule()
@@ -132,7 +134,7 @@ public class DashModule : Module
         PlayerController.instance.useGravity = false;
         dashReady = false;
         cooldownDashTimer = 0;
-        PlayerController.instance.useCheckGround = false;
+      
         PlayerController.instance.playerRb.velocity = new Vector3(PlayerController.instance.playerRb.velocity.x, 0,
             PlayerController.instance.playerRb.velocity.z);
     }
@@ -147,15 +149,10 @@ public class DashModule : Module
         timerDash = 0;
         isPerformed = false;
         PlayerController.instance.useGravity = true; 
-        PlayerController.instance.useCheckGround = true;
-        StartCoroutine(WaitForFirstCheckGround());
+       
+        
     }
-
-     IEnumerator WaitForFirstCheckGround()
-     {
-         yield return new WaitForFixedUpdate();
-         PlayerController.instance.firstCheckGround = true;
-     }
+     
     
     
 }
