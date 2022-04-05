@@ -7,6 +7,8 @@ public class MC_StateMachine : EnemyMachine
     public float attackAreaLength;
     public float attackAreaHeight;
 
+    public MC_CorruptedTower[] corruptedTowers;
+
     #region States
     
     public MC_DefaultState defaultState = new MC_DefaultState();
