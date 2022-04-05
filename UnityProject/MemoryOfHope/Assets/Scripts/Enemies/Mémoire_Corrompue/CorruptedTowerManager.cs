@@ -3,8 +3,10 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MC_CorruptedTower : EnemyManager
+public class CorruptedTowerManager : EnemyManager
 {
+    public Transform linkedCorruptedMemory;
+    
     private void Update()
     {
         
