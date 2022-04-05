@@ -1,8 +1,8 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-[System.Serializable]
-public class PA_PursuitState : EnemyState
+[Serializable]
+public class MC_PositionState : EnemyState
 {
     [Header("Parameters")]
     [Range(1, 15)] [SerializeField] private float minDistance;
@@ -11,8 +11,8 @@ public class PA_PursuitState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = false;
-        enemyMachine.attackArea.SetActive(false);
     }
+
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
@@ -20,14 +20,14 @@ public class PA_PursuitState : EnemyState
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, minDistance))
         {
-            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
-            enemy.SwitchState(enemy.pauseAttackState);
+            MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.pauseShockWaveState);
         }
         else if (!ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, maxDistance))
         {
-            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
-            enemy.SwitchState(enemy.endPursuitState);
+            MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.defaultState);
         }
     }
 }
