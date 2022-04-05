@@ -120,8 +120,6 @@ public class InteractionModule : Module
             }
             else
             {
-                //if (!joystickIsPressed) return;
-                
                 Vector2 angleFoward = new Vector2(transform.forward.x,
                     transform.forward.z);
                 Vector2 _cameraForwardXZ;
@@ -154,39 +152,6 @@ public class InteractionModule : Module
                     currentTargetedObject = null;
                 }
             }
-            
-            /*
-            
-            isPerformed = true;
-            
-            if (joystickIsPressed)
-            {
-                Vector2 angleFoward = new Vector2(transform.forward.x, transform.forward.z);
-                       
-                Vector2 _cameraForwardXZ;
-                Vector2 _cameraRightXZ;
-                
-                _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
-                               MainCameraController.Instance.transform.forward.z).normalized;
-                
-                _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
-                               MainCameraController.Instance.transform.right.z).normalized;
-                
-                inputCam = _cameraForwardXZ * joystickDirection.y +
-                           _cameraRightXZ * joystickDirection.x;
-                
-                Vector2 rotationVector = Vector3.RotateTowards(
-                    angleFoward,
-                    inputCam.normalized,
-                    rotateSpeed,
-                    00f);
-
-                PlayerController.instance.playerRb.rotation = Quaternion.Euler(Vector3.up * Mathf.Atan2(inputCam.x, inputCam.y) * Mathf.Rad2Deg); 
-            }
-            
-            */
-            
-            
         }
     }
     
