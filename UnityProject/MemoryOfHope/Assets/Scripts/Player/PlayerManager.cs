@@ -213,6 +213,13 @@ public class PlayerManager : MonoBehaviour, Damageable
         {
             other.gameObject.GetComponent<ListenerTriggerStay>().EndRaise();
         }
+
+        if (other.CompareTag("EventTrigger"))
+        {
+      
+            other.gameObject.GetComponent<ListenerTrigger>().EndRaise();
+        }
+        
     }
 
     private void OnCollisionEnter(Collision other)
