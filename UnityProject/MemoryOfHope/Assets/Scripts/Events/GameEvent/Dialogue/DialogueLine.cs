@@ -14,4 +14,5 @@ public class DialogueLine
     public AudioClip VoiceLine;
     public bool IsAudioTime;
     public float CustomWaitTimeLine;
+    public float VolumeScale;
 }
