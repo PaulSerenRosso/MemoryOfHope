@@ -9,7 +9,6 @@ public class MC_DefaultState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        Debug.Log("agent is in default state");
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
