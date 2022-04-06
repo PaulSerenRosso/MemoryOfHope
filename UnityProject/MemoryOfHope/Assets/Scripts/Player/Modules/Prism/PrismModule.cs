@@ -85,7 +85,6 @@ public class PrismModule : Module
         }
         else
         {
-           
             _shield.InputShield = true;
             
             if (!joystickPressed)

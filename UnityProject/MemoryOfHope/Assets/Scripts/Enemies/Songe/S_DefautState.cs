@@ -9,11 +9,10 @@ public class S_DefautState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.agent.isStopped = true;
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         detectionDistance = enemy.detectionDistance;
         initialPos = enemy.initialPosition;
-        enemyMachine.agent.isStopped = true;
-        enemyMachine.material.color = new Color(1, 1, 1, .05f);
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

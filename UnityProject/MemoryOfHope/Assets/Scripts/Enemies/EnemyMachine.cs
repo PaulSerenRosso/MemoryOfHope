@@ -9,8 +9,7 @@ public class EnemyMachine : MonoBehaviour
    
     public EnemyState currentState;
     public Material material;
-
-   
+    
     public float PlayerKnockBackFactor;
     public NavMeshAgent agent;
     public Rigidbody rb;
@@ -18,7 +17,7 @@ public class EnemyMachine : MonoBehaviour
     public float attackStrength;
     public GameObject attackArea;
     public Vector3 hitDirection;
-    [SerializeField] private bool isHit = false;
+    public bool isHit = false;
 
     #endregion
 

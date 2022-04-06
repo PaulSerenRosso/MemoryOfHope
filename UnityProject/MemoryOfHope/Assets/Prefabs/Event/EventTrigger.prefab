@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7471123416969587382}
   - component: {fileID: 7471123416969587383}
   m_Layer: 11
-  m_Name: DialogueTrigger
+  m_Name: EventTrigger
   m_TagString: EventTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,5 +72,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _endTriggerListeners:
+    m_PersistentCalls:
+      m_Calls: []
   _destroyWhenTrigger: 1
-  _timeToDestroy: 0.1
+  _timeToDestroyWhenTrigger: 0
+  _destroyWhenEndTrigger: 0
+  _timeToDestroyWhenEndTrigger: 0

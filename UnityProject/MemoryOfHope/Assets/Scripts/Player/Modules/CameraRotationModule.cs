@@ -35,8 +35,6 @@ public class CameraRotationModule : Module
     public override void Execute()
     {
         isPerformed = true;
-
-
     }
 
     public override void Release()
@@ -45,11 +43,10 @@ public class CameraRotationModule : Module
         isPerformed = false;
     }
 
-    public void LateUpdate()
+    public void Update()
     {
         if(!isPerformed) return;
-        Vector3 currentRotation = MainCameraController.Instance.transform.eulerAngles; 
-        
+        Vector3 currentRotation = MainCameraController.Instance.transform.eulerAngles;
         MainCameraController.Instance.transform.rotation = Quaternion.Euler(currentRotation.x+ speedXAngle*Time.deltaTime*-inputVector.y, 
             speedYAngle*Time.deltaTime*inputVector.x+currentRotation.y, currentRotation.z);
         currentRotation = MainCameraController.Instance.transform.eulerAngles;
