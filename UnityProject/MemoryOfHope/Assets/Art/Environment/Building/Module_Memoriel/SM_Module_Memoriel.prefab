@@ -1,5 +1,111 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1242358479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1242358480}
+  - component: {fileID: 1242358482}
+  - component: {fileID: 1242358481}
+  m_Layer: 11
+  m_Name: TriggerModule
+  m_TagString: EventTrigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1242358480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242358479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5892920895972110026}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1242358482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242358479}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8806455, y: 4.0495872, z: 4.505556}
+  m_Center: {x: -0.940323, y: 3.8600798, z: -0.10406721}
+--- !u!114 &1242358481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242358479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b743c58696363434e8e9e841dfc0f874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Listeners:
+    m_PersistentCalls:
+      m_Calls: []
+  _endTriggerListeners:
+    m_PersistentCalls:
+      m_Calls: []
+  _destroyWhenTrigger: 0
+  _timeToDestroyWhenTrigger: 0
+  _destroyWhenEndTrigger: 0
+  _timeToDestroyWhenEndTrigger: 0
+  isActivate: 0
+  ActivateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  message: 'Press Y for activate Module ! '
+  _destroyWhenActivate: 0
+  SpawnPosition: {fileID: 1891728367}
+  moduleToLearn:
+  - {fileID: 0}
+--- !u!1 &1891728366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1891728367}
+  m_Layer: 0
+  m_Name: SpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1891728367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891728366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.6, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5892920895972110026}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3043168627092136900
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,9 +475,10 @@ GameObject:
   - component: {fileID: 351228445773869982}
   - component: {fileID: 9185790104168969605}
   - component: {fileID: 1651973328620874877}
+  - component: {fileID: 1531451003}
   m_Layer: 0
   m_Name: SM_Module_Memoriel
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -385,10 +492,12 @@ Transform:
   m_GameObject: {fileID: 6524604226680960112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.723885, y: 3.0669718, z: -23.49131}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6999999, y: 0.7, z: 0.6999999}
   m_Children:
   - {fileID: 4065912944187340530}
   - {fileID: 3097798430515227521}
+  - {fileID: 1891728367}
+  - {fileID: 1242358480}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -450,6 +559,37 @@ LODGroup:
     - renderer: {fileID: 1044513596320573359}
     - renderer: {fileID: 6591886565685803505}
   m_Enabled: 1
+--- !u!114 &1531451003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6524604226680960112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b743c58696363434e8e9e841dfc0f874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Listeners:
+    m_PersistentCalls:
+      m_Calls: []
+  _endTriggerListeners:
+    m_PersistentCalls:
+      m_Calls: []
+  _destroyWhenTrigger: 0
+  _timeToDestroyWhenTrigger: 0
+  _destroyWhenEndTrigger: 0
+  _timeToDestroyWhenEndTrigger: 0
+  isActivate: 0
+  ActivateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  message: 
+  _destroyWhenActivate: 0
+  SpawnPosition: {fileID: 1891728367}
+  moduleToLearn:
+  - {fileID: 0}
 --- !u!1 &6955983047291489298
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,7 +118,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Activate"",
                     ""type"": ""Button"",
                     ""id"": ""39873438-dc12-4275-b24a-704fffb8ae7a"",
                     ""expectedControlType"": ""Button"",
@@ -305,11 +305,11 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9a918800-e10b-45e2-b521-b1ba3e12224e"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""Activate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -341,7 +341,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_InteractionSelect = m_Player.FindAction("InteractionSelect", throwIfNotFound: true);
         m_Player_InteractionMove = m_Player.FindAction("InteractionMove", throwIfNotFound: true);
         m_Player_RotateCamera = m_Player.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Activate = m_Player.FindAction("Activate", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
@@ -412,7 +412,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InteractionSelect;
     private readonly InputAction m_Player_InteractionMove;
     private readonly InputAction m_Player_RotateCamera;
-    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Activate;
     private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
@@ -428,7 +428,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @InteractionSelect => m_Wrapper.m_Player_InteractionSelect;
         public InputAction @InteractionMove => m_Wrapper.m_Player_InteractionMove;
         public InputAction @RotateCamera => m_Wrapper.m_Player_RotateCamera;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Activate => m_Wrapper.m_Player_Activate;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -469,9 +469,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @RotateCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
                 @RotateCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
                 @RotateCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
-                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Activate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivate;
+                @Activate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivate;
+                @Activate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivate;
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
@@ -509,9 +509,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @RotateCamera.started += instance.OnRotateCamera;
                 @RotateCamera.performed += instance.OnRotateCamera;
                 @RotateCamera.canceled += instance.OnRotateCamera;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
+                @Activate.started += instance.OnActivate;
+                @Activate.performed += instance.OnActivate;
+                @Activate.canceled += instance.OnActivate;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
@@ -531,7 +531,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnInteractionSelect(InputAction.CallbackContext context);
         void OnInteractionMove(InputAction.CallbackContext context);
         void OnRotateCamera(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
+        void OnActivate(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
     }
 }
