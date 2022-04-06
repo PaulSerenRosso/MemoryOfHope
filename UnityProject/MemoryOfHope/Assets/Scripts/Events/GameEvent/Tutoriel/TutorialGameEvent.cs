@@ -6,5 +6,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "GameEvent", menuName = "Event/GameEvent/Tutorial/TutorialGameEvent", order = 1)]
 public class TutorialGameEvent : ScriptableObject
 {
-    public TutorialInputData[] tutorialSteps;
+    public Sprite inputSprite;
+    
+    public string frenchAction;
+    public string englishAction;
 }
