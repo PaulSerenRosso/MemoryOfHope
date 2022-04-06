@@ -70,12 +70,14 @@ public class AttackModule : Module
     public void CantCancel()
     {
         currentStateCombo = StateCombo.WaitDamage;
-      /*  if (attackTimer >= attackList[currentIndexAttack].cantCancelTime)
+        /*
+        if (attackTimer >= attackList[currentIndexAttack].cantCancelTime)
         {
             currentStateCombo = StateCombo.WaitDamage;
             return;
         }
         */
+        
     }
 
     void Update()
