@@ -35,18 +35,16 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < CharacterAudioSources.Count; i++)
         {
             CharacterAudioSourcesDic.Add(CharacterAudioSources[i].Character, CharacterAudioSources[i].AudioSource);
-        Debug.Log(CharacterAudioSources[i].Character);
         }
     }
 
     [HideInInspector] public DialogueLine CurrentLine;
-    
     [HideInInspector] public DialogueGameEvent CurrentDialogue;
     [HideInInspector] public bool InGameDialogue;
     [HideInInspector] public bool InCinematicDialogue;
     string currentLineText;
     public List<CharacterDialogueProfilAudioSource> CharacterAudioSources;
-    public Dictionary<CharacterDialogueProfilEnum, AudioSource> CharacterAudioSourcesDic = new Dictionary<CharacterDialogueProfilEnum, AudioSource>();
+    public Dictionary<CharacterDialogueProfilEnum, AudioSource> CharacterAudioSourcesDic;
 
     public void StartDialogue()
     {
@@ -86,7 +84,10 @@ public class DialogueManager : MonoBehaviour
         _textDialogueHolder.text = CurrentLine.CharacterProfil.Name + _doublePoint + currentLineText;
         Canvas.ForceUpdateCanvases();
         if (CurrentLine.VoiceLine != null)
-            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine, CurrentLine.VolumeScale);
+        {
+            Debug.Log(CurrentLine.VoiceLine);
+            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine);
+        }
     }
 
     void UpdateBackgroundSize()
