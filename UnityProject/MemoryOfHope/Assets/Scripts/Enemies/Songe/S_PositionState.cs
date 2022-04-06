@@ -15,14 +15,13 @@ public class S_PositionState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.agent.isStopped = false;
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         pursuitDistance = enemy.pursuitDistance;
         initialPos = enemy.initialPosition;
 
-        enemyMachine.agent.isStopped = false;
         enemyMachine.agent.speed = speed;
         enemyMachine.agent.SetDestination(initialPos);
-
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)

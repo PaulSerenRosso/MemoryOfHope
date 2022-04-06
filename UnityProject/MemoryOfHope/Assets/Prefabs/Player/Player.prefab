@@ -202,9 +202,9 @@ GameObject:
   - component: {fileID: 6546855627693250739}
   - component: {fileID: 6725060030925692718}
   - component: {fileID: 2201645785281637263}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: 'Shield '
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,10 +300,10 @@ MonoBehaviour:
   _mesh: {fileID: 6546855627693250739}
   _collider: {fileID: 6725060030925692718}
   Mirror: {fileID: 696764172249142509}
-  _health: 13
-  _maxHealth: 13
+  _health: 1
+  _maxHealth: 1
   _isDead: 0
-  timeDeath: 2
+  timeDeath: 5
 --- !u!1 &4801644067418484979
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,10 +431,11 @@ MonoBehaviour:
   MaxDistance: 100
   RayLayer:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 1527
   LaserLineReceiver: {fileID: 0}
   _currentSource: {fileID: 0}
-  _offsetBeginPosition: 0
+  _offsetDistanceBeginPosition: 0
+  Yoffset: 1
 --- !u!136 &5026034841179207460
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -530,7 +531,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 3
 --- !u!114 &7226099581146458018
@@ -545,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3533e98e240fd894ba2a38997bb711ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shield: {fileID: 2201645785281637263}
   obtainedModule:
   - {fileID: 7226099581146458020}
   - {fileID: 8587865940063536777}
@@ -552,18 +554,24 @@ MonoBehaviour:
   - {fileID: 423913510}
   - {fileID: 423913511}
   - {fileID: 8141380071056486680}
+  - {fileID: 7226099581146458021}
+  - {fileID: 7226099581146458022}
   money: 0
   hasGlitch: 0
   healthPlayer: 5
   maxHealthPlayer: 5
   isDeadPlayer: 0
   hitDirection: {x: 0, y: 0, z: 0}
-  knockbackStrength: 350
+  knockbackStrength: 10
+  _blockedKnockbackStrength: 5
   hitDuration: 1
   isHit: 0
-  drag: 5
+  _drag: 5
+  _blockedDrag: 3
   isInModule: 0
   isInCutscene: 0
+  isBlocked: 0
+  blockedDuration: 0.5
 --- !u!114 &7226099581146458023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +645,10 @@ MonoBehaviour:
   index: 0
   isFixedUpdate: 1
   isPerformed: 0
-  constrainingModules: []
+  constrainingModules:
+  - {fileID: 7226099581146458022}
+  - {fileID: 7649947021829257087}
+  - {fileID: 423913510}
   neededModules: []
   inputPressed: 0
   moveModule: {fileID: 7226099581146458020}
@@ -692,7 +703,10 @@ MonoBehaviour:
   index: 0
   isFixedUpdate: 1
   isPerformed: 0
-  constrainingModules: []
+  constrainingModules:
+  - {fileID: 7226099581146458021}
+  - {fileID: 423913510}
+  - {fileID: 7649947021829257087}
   neededModules: []
   inputPressed: 0
   attackList:
@@ -857,7 +871,9 @@ MonoBehaviour:
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
-  - {fileID: 0}
+  - {fileID: 7226099581146458021}
+  - {fileID: 7226099581146458022}
+  - {fileID: 423913510}
   neededModules: []
   inputPressed: 0
   _playerMirror: {fileID: 696764172249142509}
@@ -887,7 +903,7 @@ MonoBehaviour:
   selectedObject: {fileID: 0}
   rotateSpeed: 0.3
   joystickDirection: {x: 0, y: 0, z: 0}
-  rayLength: 5
+  rayLength: 8
   interactiveObjectLayer:
     serializedVersion: 2
     m_Bits: 16384
@@ -951,13 +967,14 @@ MonoBehaviour:
   index: 90
   isFixedUpdate: 1
   isPerformed: 0
-  constrainingModules: []
+  constrainingModules:
+  - {fileID: 7226099581146458040}
   neededModules: []
   inputPressed: 0
-  minXAngle: 35
+  minXAngle: 40
   maxXAngle: 50
-  speedYAngle: 2
-  speedXAngle: 2
+  speedYAngle: 150
+  speedXAngle: 150
 --- !u!114 &8141380071056486680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1251,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5878199804038998784, guid: 295e8ef384fa3c846a4df09bdb6d2b40, type: 3}
       propertyPath: m_Positions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878199804038998784, guid: 295e8ef384fa3c846a4df09bdb6d2b40, type: 3}
+      propertyPath: m_Positions.Array.data[1].z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6795432102761745256, guid: 295e8ef384fa3c846a4df09bdb6d2b40, type: 3}

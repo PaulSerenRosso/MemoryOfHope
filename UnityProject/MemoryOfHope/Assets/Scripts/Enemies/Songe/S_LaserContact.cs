@@ -28,7 +28,6 @@ public class S_LaserContact : MonoBehaviour, IReturnable
     }
     public void Returnable(LaserMachine laser, RaycastHit hit)
     {
-        Debug.Log("teststststst");
        _stateMachine.OnHitByLaser();
     }
 

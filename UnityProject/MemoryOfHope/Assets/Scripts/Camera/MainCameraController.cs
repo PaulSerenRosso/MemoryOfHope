@@ -5,19 +5,16 @@ using UnityEngine;
 
 public class MainCameraController : MonoBehaviour
 {
-   public static MainCameraController Instance;
- 
-   
+    public static MainCameraController Instance;
     [SerializeField] Transform viewFinder;
-    [SerializeField] Camera cinematicCamera;
-    [SerializeField] private float lerpSpeed;
-[SerializeField]
-    private float distance;
-    private Vector3 focusPoint;
-    [SerializeField, Range(0f, 1f)]
-    float focusCentering = 0.5f;
-[SerializeField]
-    private float minDistance;
+    public float Distance;
+    [SerializeField] Vector3 offSet;
+
+    public bool FovIsSet = true;
+    public bool DistanceIsSet = true;
+    public bool OffsetIsSet = true;
+    public CameraZoomGameEvent CurrentZoom;
+
     private void Awake()
     {
         if (Instance is { })
@@ -27,18 +24,59 @@ public class MainCameraController : MonoBehaviour
         }
 
         Instance = this;
-        focusPoint = viewFinder.position;
     }
 
-
-    // Start is called before the first frame update
-   
-
-    // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
-        float currentDistance = Vector3.Distance(focusPoint, viewFinder.position);
-        focusPoint = Vector3.Lerp(focusPoint, viewFinder.position, lerpSpeed);
-            transform.position = focusPoint - transform.forward * distance;
+        if (CurrentZoom != null)
+            Zoom();
+        Debug.Log(CurrentZoom);
+        transform.position = viewFinder.position + offSet - transform.forward * Distance;
+    }
+
+    void Zoom()
+    {
+        if (FovIsSet && DistanceIsSet && OffsetIsSet)
+        {
+            CurrentZoom = null;
+            return;
+        }
+
+        if (!DistanceIsSet)
+        {
+            if (LerpZoom(Distance, CurrentZoom.Distance, CurrentZoom.DistanceSpeed, out Distance))
+            {
+                DistanceIsSet = true;
+            }
+        }
+
+        if (!FovIsSet)
+        {
+            var mainFieldOfView = Camera.main.fieldOfView;
+            if (LerpZoom(mainFieldOfView, CurrentZoom.Fov, CurrentZoom.FovSpeed, out mainFieldOfView))
+            {
+                FovIsSet = true;
+            }
+            else
+            {
+                Camera.main.fieldOfView = mainFieldOfView;
+            }
+        }
+
+        if (!OffsetIsSet)
+        {
+            if (LerpZoom(offSet.y, CurrentZoom.Offset, CurrentZoom.OffsetSpeed, out offSet.y))
+            {
+                OffsetIsSet = true;
+            }
+        }
+    }
+
+    bool LerpZoom(float _base, float _target, float _speed, out float _value)
+    {
+        _value = Mathf.Lerp(_base, _target, _speed * Time.deltaTime);
+        if (Mathf.Abs(_target - _value) < 0.1f)
+            return true;
+        return false;
     }
 }

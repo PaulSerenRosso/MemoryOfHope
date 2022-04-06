@@ -22,7 +22,7 @@ public class S_PursuitState : EnemyState
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
-        
+
         if (!ConditionState.CheckDistance(initialPos, 
             PlayerController.instance.transform.position, pursuitDistance))
         {
@@ -30,6 +30,7 @@ public class S_PursuitState : EnemyState
             enemy.SwitchState(enemy.endPursuitState);
         }
     }
+    
     
     public override void OnCollisionStayState(EnemyMachine enemyMachine, Collision other)
     {

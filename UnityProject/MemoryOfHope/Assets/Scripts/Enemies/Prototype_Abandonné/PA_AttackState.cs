@@ -13,9 +13,8 @@ public class PA_AttackState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        timer = 0;
         enemyMachine.attackArea.SetActive(true);
-
+        timer = 0;
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -25,8 +24,10 @@ public class PA_AttackState : EnemyState
         if (ConditionState.Timer(durationAttack, timer))
         {
             enemyMachine.attackArea.SetActive(false);
-            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
+            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;  
+            enemyMachine.enemyManager.isBlocked = false;
             enemy.SwitchState(enemy.pursuitState);
         }
     }
+    
 }

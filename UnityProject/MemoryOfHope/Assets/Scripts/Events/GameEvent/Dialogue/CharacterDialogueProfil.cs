@@ -5,5 +5,5 @@ using UnityEngine;
 public class CharacterDialogueProfil : ScriptableObject
 {
     public string Name;
-    
+    public CharacterDialogueProfilEnum Character;
 }

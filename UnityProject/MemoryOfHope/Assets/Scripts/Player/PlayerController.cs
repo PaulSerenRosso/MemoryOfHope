@@ -28,6 +28,28 @@ public class PlayerController : MonoBehaviour
 
     [Header("Gravity")] [SerializeField] public float defaultGravity;
     public float currentGravity;
+    private bool  _useGravity;
+    public bool useGravity
+    {
+        get
+        {
+            return _useGravity;
+        }
+        set
+        {
+            _useGravity = value;
+            if (value)
+            {
+         
+                if (!onGround)
+                {
+               
+                    currentGravity = defaultGravity;
+                }
+            }
+
+        }
+    }
 
     #endregion
 
@@ -48,6 +70,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 currentNormalGround;
     private Collider currentGround;
     private Collider currentWall;
+
+    private bool _useCheckGround;
+
+  
     private Vector3 currentNormalWall;
     public bool stuckGround = true;
     public bool onGround;
@@ -89,20 +115,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        /*
-        for (int i = 0; i < activeModulesUpdate.Count; i++)
-        {
-            Module module = activeModulesUpdate[i];
-            module.LinkModule();
-        }
+        useGravity = true;
 
-        for (int i = 0; i < activeModulesFixed.Count; i++)
-        {
-            Module module = activeModulesFixed[i];
-            module.LinkModule();
-        }
-        */
-       
     }
 
     void Update()
@@ -167,7 +181,7 @@ public class PlayerController : MonoBehaviour
     }
     void CalculateGravity()
     {
-        if (!onGround)
+        if (!onGround && useGravity)
         {
             
             playerRb.AddForce(Vector3.down * currentGravity, ForceMode.Acceleration);
@@ -179,6 +193,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.velocity += finalVelocity;
              oldVelocity = playerRb.velocity;
+
             if (onGround && stuckGround)
             {
                 projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
@@ -190,6 +205,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
                 {
+                    
                     projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
                     alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
                     projectionRB *= alignedSpeed;
@@ -252,21 +268,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
+        
         if (other.gameObject.CompareTag("Ground"))
         {
+          
             Vector3 normal = other.GetContact(0).normal;
             if (normal.y >= angleGround)
             {
-                if (!onGround)
-                {
-                    onGround = true;
-                    playerAnimator.SetBool("onGround", true);
-                    playerRb.velocity = Vector3.zero;
-                    currentGravity = 0;
-                }
+               
+                    if (!onGround)
+                    {
+                        onGround = true;
+                        playerAnimator.SetBool("onGround", true);
+                        playerRb.velocity = Vector3.zero;
+                        currentGravity = 0;
+                    }
 
-                currentNormalGround = normal.normalized;
-                currentGround = other.collider;
+                    currentNormalGround = normal.normalized;
+                    currentGround = other.collider;
+                
             }
             else
             {
@@ -274,13 +294,15 @@ public class PlayerController : MonoBehaviour
                 currentWall = other.collider;
             }
         }
+       
     }
 
     private void OnCollisionExit(Collision other)
     {
+      
         if (other.gameObject.CompareTag("Ground"))
         {
-        
+           
             if (currentGround == other.collider)
             {
                 onGround = false;
@@ -289,6 +311,7 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("onGround", false);
                 currentGravity = defaultGravity;
             }
+            
            if (currentWall == other.collider)
             {
                 currentWall = null;
@@ -327,10 +350,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("EventTriggerStay"))
-        {
-            other.gameObject.GetComponent<ListenerTriggerStay>().EndRaise();
-        }
+    
         // Retire l'objet de la liste d'objets avec lesquels on peut interagir
         if (other.CompareTag("Interactible") && interactiveObjects.Contains(other.transform))
         {

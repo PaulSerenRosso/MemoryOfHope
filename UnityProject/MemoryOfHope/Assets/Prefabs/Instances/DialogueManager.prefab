@@ -43,13 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b7ac38af05f6e45bc9df15714a4671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRisposte:
+  _textDialogueHolder: {fileID: 0}
+  _background: {fileID: 0}
+  _dialogueWindows: {fileID: 0}
+  _xOffsetBackground: 20
+  _yOffsetBackground: 20
+  CurrentLine:
     CharacterProfil: {fileID: 0}
-    RiposteText: 
-    WaitTimeForNext: 0
-    SpeedSubtitles: 0
-    AudioRiposte: {fileID: 0}
-  currentDialogue: {fileID: 0}
+    LineText: 
+    WaitTimeBeforeLine: 0
+    VoiceLine: {fileID: 0}
+    IsAudioTime: 0
+    CustomWaitTimeLine: 0
+  CurrentDialogue: {fileID: 0}
   InGameDialogue: 0
   InCinematicDialogue: 0
   CharacterAudioSources: []
