@@ -1,26 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3189253543235440822
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
---- !u!21 &2100000
+--- !u!21 &-1365000446752246242
 Material:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Brick_01
+  m_Name: MI_Wood_01Instance
   m_Shader: {fileID: -6465566751694194690, guid: 47003fdf163f11241a4a958f084977e2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,23 +20,23 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_2fa40997f18a4e1896304d41875f26e3:
-        m_Texture: {fileID: 2800000, guid: 8dfd028194522794f8d2a66cdf6ae854, type: 3}
+        m_Texture: {fileID: 2800000, guid: 59aa71ea844d20745a513f3ad5545731, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_493630ee39824f4db16ec7c180a61232:
-        m_Texture: {fileID: 2800000, guid: c99f86059ab92ac41a7131c483bf5222, type: 3}
+        m_Texture: {fileID: 2800000, guid: 209327c686d4a064481ee9e00d74b265, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_5da9c70c86774a3288522311788291ce:
-        m_Texture: {fileID: 2800000, guid: 44e322b6615b6924ea824776d8ce7486, type: 3}
+        m_Texture: {fileID: 2800000, guid: c580c36fd8ee1fb4caf0dc0033acfa51, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_aba71874c1764ddcb29490bcbee71d74:
-        m_Texture: {fileID: 2800000, guid: 2d04b1dc91008ef4f95f7c999aafc69e, type: 3}
+        m_Texture: {fileID: 2800000, guid: cae274ba93ab1424d9b14c6d2b61907a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_d7a9126d86f94ba2be4d7535968a3f45:
-        m_Texture: {fileID: 2800000, guid: 288297f3d0d7c504498a88c47b748773, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8ccb5636d9f5b89469db8db7d5891295, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -112,7 +99,7 @@ Material:
     - Boolean_c351e9c13bce4ecf9abfff9156355fde: 0
     - Vector1_26c7db5aa2964c53be8a057f07422291: 0.5
     - Vector1_84dd6badd2ad4f3888ed4527b22ee98b: 0.5
-    - Vector1_d8f3e38b73d1410097cf71cee6045407: 1
+    - Vector1_d8f3e38b73d1410097cf71cee6045407: 0.36
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -140,9 +127,40 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_b10fa79b8bcb4d2b9693800a79df035a: {r: 1, g: 1, b: 1, a: 0}
+    - Color_b10fa79b8bcb4d2b9693800a79df035a: {r: 0.3349607, g: 0.9137255, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fbb352189210b408ccf9a29097145a, type: 3}
+  m_Name: MI_Wood_01Instance
+  m_EditorClassIdentifier: 
+  master: {fileID: 2100000, guid: 09898d5a07f912248bb59caecae470f7, type: 2}
+  instance: {fileID: -1365000446752246242}
+  overrides:
+  - name: Vector1_84dd6badd2ad4f3888ed4527b22ee98b
+    type: 2
+    isKeyword: 0
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0.5
+    textureValue: {fileID: 0}
+    active: 1
+  - name: Color_b10fa79b8bcb4d2b9693800a79df035a
+    type: 0
+    isKeyword: 0
+    colorValue: {r: 0.3349607, g: 0.9137255, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0.5
+    textureValue: {fileID: 0}
+    active: 1
