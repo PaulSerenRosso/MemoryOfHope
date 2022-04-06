@@ -6,11 +6,11 @@ using Random = UnityEngine.Random;
 public class CorruptedTowerManager : EnemyManager
 {
     public Transform linkedCorruptedMemory;
-    
-    private void Update()
+
+    public override void Death()
     {
-        
+        base.Death();
+        MC_StateMachine machine = linkedCorruptedMemory.GetComponent<MC_StateMachine>();
+        machine.isProtected = machine.IsProtected();
     }
-    
-    
 }
