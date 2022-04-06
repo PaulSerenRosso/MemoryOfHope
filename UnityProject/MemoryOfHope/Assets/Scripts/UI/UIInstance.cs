@@ -160,8 +160,15 @@ public class UIInstance : MonoBehaviour
     public void SetNotification(string message, bool active)
     {
         notificationText.text = message;
+        Debug.Log("je suis lu");
         notificationBox.SetActive(active);
     }
-
+    
+    public IEnumerator SetNotificationTime(string message,float time)
+    {
+     SetNotification("Life Max improved", true);
+        yield return new WaitForSeconds(time);
+       SetNotification(null, false);
+    }
     #endregion
 }

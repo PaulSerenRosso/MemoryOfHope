@@ -69,11 +69,13 @@ public class AttackModule : Module
 
     public void CantCancel()
     {
-        if (attackTimer >= attackList[currentIndexAttack].cantCancelTime)
+        currentStateCombo = StateCombo.WaitDamage;
+      /*  if (attackTimer >= attackList[currentIndexAttack].cantCancelTime)
         {
             currentStateCombo = StateCombo.WaitDamage;
             return;
         }
+        */
     }
 
     void Update()
@@ -135,10 +137,12 @@ public class AttackModule : Module
 
     void WaitToDamage()
     {
+        /*
         List<Module> allModule = new List<Module>();
         allModule.AddRange(PlayerController.instance.activeModulesFixed);
         allModule.AddRange(PlayerController.instance.activeModulesUpdate);
 
+       
         for (int i = 0; i < allModule.Count; i++)
         {
             if (allModule[i].inputPressed)
@@ -151,6 +155,7 @@ public class AttackModule : Module
                 }
             }
         }
+        */
 
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {

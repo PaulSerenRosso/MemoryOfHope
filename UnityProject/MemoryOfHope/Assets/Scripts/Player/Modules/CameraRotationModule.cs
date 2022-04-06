@@ -35,8 +35,6 @@ public class CameraRotationModule : Module
     public override void Execute()
     {
         isPerformed = true;
-
-
     }
 
     public override void Release()
