@@ -44,7 +44,7 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public bool InCinematicDialogue;
     string currentLineText;
     public List<CharacterDialogueProfilAudioSource> CharacterAudioSources;
-    public Dictionary<CharacterDialogueProfilEnum, AudioSource> CharacterAudioSourcesDic;
+    public Dictionary<CharacterDialogueProfilEnum, AudioSource> CharacterAudioSourcesDic = new Dictionary<CharacterDialogueProfilEnum, AudioSource>();
 
     public void StartDialogue()
     {
@@ -83,7 +83,7 @@ public class DialogueManager : MonoBehaviour
         _dialogueWindows.gameObject.SetActive(true);
         _textDialogueHolder.text = CurrentLine.CharacterProfil.Name + _doublePoint + currentLineText;
         Canvas.ForceUpdateCanvases();
-        if (CurrentLine.VoiceLine != null)
+        if (CurrentLine.VoiceLine != null && CharacterAudioSourcesDic.ContainsKey(CurrentLine.CharacterProfil.Character) )
         {
             Debug.Log(CurrentLine.VoiceLine);
             CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine);

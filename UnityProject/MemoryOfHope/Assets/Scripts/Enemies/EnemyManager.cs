@@ -29,6 +29,10 @@ public class EnemyManager : MonoBehaviour, Damageable
     public bool canBeHitByMelee;
     public bool canBeHitByLaser;
     public bool canBeKnockback;
+    public Vector3 SpawnPosition;
+    public Quaternion SpawnRotation; 
+    public bool IsBaseEnemy = true;
+   
 
     //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
@@ -40,7 +44,16 @@ public class EnemyManager : MonoBehaviour, Damageable
     
     #region Main Functions
 
-    public virtual void TakeDamage(int damages)
+    void Start()
+    {
+        if (IsBaseEnemy)
+        {
+            SpawnRotation = transform.rotation;
+            SpawnPosition = transform.position;
+            EnemiesManager.Instance.BaseEnemies.Add(this);
+        }
+    }
+    public void TakeDamage(int damages)
     {
         anim.Play("TakeDamage");
         health -= damages;
@@ -67,11 +80,9 @@ public class EnemyManager : MonoBehaviour, Damageable
             Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
                 Random.Range(2.0f, 3.0f));
         }
-
-        isDead = true;
-        Destroy(gameObject);
+       gameObject.SetActive(false);
     }
-
+    
     #endregion
 }
 

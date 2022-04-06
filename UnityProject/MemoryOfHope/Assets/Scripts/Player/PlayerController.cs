@@ -16,9 +16,11 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerComponent")] public Rigidbody playerRb;
     public Animator playerAnimator;
     public InputMaster playerActions;
+    /*
     public List<Transform> interactiveObjects = new List<Transform>();
     public GameObject nearestObject;
     private List<float> distances = new List<float>();
+    */
     public bool isGlitching;
     public AttackModule attackModule;
 
@@ -121,15 +123,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        CheckModuleUpdate();
-        CheckCurrentModuleUpdate();
-        CheckNearestObject();
+        if (PlayerManager.instance.isActive)
+        {
+             CheckModuleUpdate();
+                   CheckCurrentModuleUpdate();
+        }
+      
+        // CheckNearestObject();
     }
 
     void FixedUpdate()
     {
+        if (PlayerManager.instance.isActive)
+        {
         CheckModuleFixed();
         CheckCurrentModuleFixed();
+        }
         CalculateVelocity();
     }
 
@@ -319,7 +328,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+    /*
     private void OnTriggerEnter(Collider other)
     {
         // Ajoute l'objet a une liste : les objets avec lesquels on peut interagir
@@ -361,7 +370,7 @@ public class PlayerController : MonoBehaviour
             interactiveObjects.Remove(other.transform);
         }
     }
-
+ */
     #endregion
 
 
@@ -378,4 +387,5 @@ public class PlayerController : MonoBehaviour
         return toProject;
 
     }
+   
 }
