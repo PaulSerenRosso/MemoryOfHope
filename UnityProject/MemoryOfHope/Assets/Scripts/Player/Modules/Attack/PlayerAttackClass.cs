@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerAttackClass
 {
-    public float cantCancelTime;
+    //public float cantCancelTime;
    public  float startTimeActivateAttack;
    public float endTimeActivateAttack;
     public float startTimeCombo;

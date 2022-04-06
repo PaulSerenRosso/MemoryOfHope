@@ -34,11 +34,7 @@ public abstract class Module : MonoBehaviour
         { 
             return false; // Faux si pas d'input pressé
         }
-
-        if (PlayerManager.instance.isInCutscene)
-        {
-            return false; // Joueur immobile en cutscene
-        }
+        
         
         return true;
     }
