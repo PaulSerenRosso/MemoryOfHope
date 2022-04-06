@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     
     #region Main Functions
 
-    public void TakeDamage(int damages)
+    public virtual void TakeDamage(int damages)
     {
         anim.Play("TakeDamage");
         health -= damages;
@@ -50,23 +50,25 @@ public class EnemyManager : MonoBehaviour, Damageable
         }
     }
 
-    public void HitNoDamage()
+    public virtual void HitNoDamage()
     {
         
     }
 
-    public void Heal(int heal)
+    public virtual void Heal(int heal)
     {
         
     }
 
-    public void Death()
+    public virtual void Death()
     {
         for (int i = 0; i < 20; i++)
         {
             Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
                 Random.Range(2.0f, 3.0f));
         }
+
+        isDead = true;
         Destroy(gameObject);
     }
 
