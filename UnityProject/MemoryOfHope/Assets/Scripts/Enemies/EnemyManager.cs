@@ -42,6 +42,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     [SerializeField] private Animation anim;
     [SerializeField] private GameObject deathFeedback;
     public EnemyMachine Machine;
+    public ListenerWaveEnemy WaveListener;
 
     #endregion
 
@@ -59,6 +60,7 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
+        
         anim.Play("TakeDamage");
         health -= damages;
         if (health <= 0)
@@ -84,7 +86,11 @@ public class EnemyManager : MonoBehaviour, Damageable
         }
 
         isDeadEnemy = true;
+
+        if (WaveListener != null)
+            WaveListener.Raise(this);
         gameObject.SetActive(false);
+    
     }
 
     #endregion
