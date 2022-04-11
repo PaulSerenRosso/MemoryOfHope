@@ -7,13 +7,26 @@ using UnityEngine.UI;
 public class TutorialGameEvent : ScriptableObject
 {
     public Sprite inputSprite;
+    public TutorialPriority priority;
     
     public string frenchAction;
     public string englishAction;
 
     public void SetTutorial()
     {
-        TutorialManager.instance.currentTutorialGameEvent = this;
-        TutorialManager.instance.SetDisplay();
+        TutorialManager.instance.activeTutorialGameEvents.Add(this);
+        TutorialManager.instance.SetCurrentEvent();
     }
+
+    public void RemoveTutorial()
+    {
+        TutorialManager.instance.activeTutorialGameEvents.Remove(this);
+        TutorialManager.instance.currentTutorialGameEvent = null;
+        TutorialManager.instance.SetCurrentEvent();
+    }
+}
+
+public enum TutorialPriority
+{
+    Light, Medium, High
 }

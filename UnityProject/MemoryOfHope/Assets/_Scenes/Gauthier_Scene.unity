@@ -792,17 +792,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6263367257576782187, guid: ee80bbb77fe0f4e4ba004dd21955bcb6, type: 3}
   m_PrefabInstance: {fileID: 1037242876}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1200371399 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7649947021829257087, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-  m_PrefabInstance: {fileID: 1332395194}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22f24bd910f75464382c9a591ac4846c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1230085112
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,53 +932,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1270472717}
     m_Modifications:
-    - target: {fileID: 423913510, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: rayLength
-      value: 6
+    - target: {fileID: 1735945226244798610, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
+      propertyPath: BeginLaser.x
+      value: 9.75
       objectReference: {fileID: 0}
-    - target: {fileID: 423913510, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: _activationTime
-      value: 0.5
+    - target: {fileID: 1735945226244798610, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
+      propertyPath: BeginLaser.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 815248622, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.17000079
-      objectReference: {fileID: 0}
-    - target: {fileID: 4801644067418484979, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: m_Layer
-      value: 18
+    - target: {fileID: 1735945226244798610, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
+      propertyPath: BeginLaser.z
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 7226099581146458017, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7226099581146458018, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: healthPlayer
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 7226099581146458018, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: maxHealthPlayer
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 7226099581146458018, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: defaultMaxHealthPlayer
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 7226099581146458018, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: obtainedModule.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7226099581146458018, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: obtainedModule.Array.data[8]
-      value: 
-      objectReference: {fileID: 1200371399}
-    - target: {fileID: 7284903415733054223, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: m_Layer
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7538550139986524934, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: m_Layer
-      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7999399970860252443, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
       propertyPath: m_RootOrder
@@ -1034,14 +991,6 @@ PrefabInstance:
     - target: {fileID: 7999399970860252443, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8587865940063536777, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: speedXAngle
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 8587865940063536777, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
-      propertyPath: speedYAngle
-      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
@@ -2525,6 +2474,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1183338415778056119, guid: b3d38848ada35174f88cb81708802d33, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865172653513394142, guid: b3d38848ada35174f88cb81708802d33, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865172653513394142, guid: b3d38848ada35174f88cb81708802d33, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

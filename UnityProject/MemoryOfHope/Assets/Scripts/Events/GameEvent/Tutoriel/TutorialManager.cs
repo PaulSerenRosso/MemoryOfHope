@@ -28,6 +28,7 @@ public class TutorialManager : MonoBehaviour
 
     public LanguageSubTitles currentLanguage;
 
+    public List<TutorialGameEvent> activeTutorialGameEvents;
     public TutorialGameEvent currentTutorialGameEvent;
 
     [SerializeField] private GameObject tutorialWindow;
@@ -37,6 +38,29 @@ public class TutorialManager : MonoBehaviour
     #endregion
 
     #region Functions
+    
+    public void SetCurrentEvent()
+    {
+        if (activeTutorialGameEvents.Count == 0)
+        {
+            Debug.LogError("No Event has been set");
+            return;
+        }
+        
+        foreach (var gameEvent in activeTutorialGameEvents)
+        {
+            if (currentTutorialGameEvent == null)
+            {
+                currentTutorialGameEvent = gameEvent;
+            }
+            else
+            {
+                if (gameEvent.priority < currentTutorialGameEvent.priority) continue;
+                currentTutorialGameEvent = gameEvent;
+                SetDisplay();
+            }
+        }
+    } // Set le tutoriel actuel selon les priorités des événements en cours
 
     public void SetDisplay()
     {

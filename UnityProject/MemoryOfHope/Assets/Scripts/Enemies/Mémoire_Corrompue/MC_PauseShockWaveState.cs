@@ -21,25 +21,12 @@ public class MC_PauseShockWaveState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        /*
-        RaycastHit hit;
-        Debug.DrawRay(enemyMachine.transform.position, enemyMachine.transform.forward * 10, Color.green);
-        
-        if (Physics.Raycast(enemyMachine.transform.position - Vector3.up, enemyMachine.transform.forward, 
-            out hit, 10, playerLayers))
-        {
-            
-        }
-        else
-        {
-            lookAtTransform.LookAt(PlayerController.instance.transform);
-            enemyMachine.transform.rotation = Quaternion.Slerp(enemyMachine.transform.rotation, 
-                lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
-        }*/
-        
         lookAtTransform.LookAt(PlayerController.instance.transform);
-        enemyMachine.transform.rotation = Quaternion.Slerp(enemyMachine.transform.rotation, 
+        
+        var tr = enemyMachine.transform;
+        tr.rotation = Quaternion.Slerp(tr.rotation, 
             lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
+        tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
         
         timer += Time.deltaTime;
 

@@ -29,6 +29,8 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
     public override void Execute()
     {
+        base.Execute();
+        
         Vector2 _cameraForwardXZ;
         Vector2 _cameraRightXZ;
         _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
