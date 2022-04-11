@@ -6,6 +6,7 @@ public class MC_StateMachine : EnemyMachine
 {
     public float attackAreaLength;
     public float attackAreaHeight;
+    public Vector3 initialPos;
 
     public CorruptedTowerManager[] corruptedTowers;
 
@@ -40,6 +41,7 @@ public class MC_StateMachine : EnemyMachine
 
     public override void Start()
     {
+        initialPos = transform.position;
         currentState = defaultState;
         base.Start();
     }

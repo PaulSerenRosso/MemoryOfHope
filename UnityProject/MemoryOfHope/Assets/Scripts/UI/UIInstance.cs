@@ -5,6 +5,7 @@ using System.Security;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UIInstance : MonoBehaviour
@@ -19,6 +20,9 @@ public class UIInstance : MonoBehaviour
         }
         instance = this;
     }
+
+    [Header("Canvas")]
+    public UICanvasType[] canvases;
 
     [Header("Map")]
     public GameObject map;
@@ -54,6 +58,24 @@ public class UIInstance : MonoBehaviour
       PlayerController.instance.playerActions.Player.MovingOnMap.canceled += InputPressedMovingOnMap;
       PlayerController.instance.playerActions.Player.OpenCloseMap.performed += _ => ClosingMap();
     }
+
+    #region CanvasManagement
+
+    public void SetCanvasOnDisplay(InGameCanvasType[] canvasesToSet, bool activate)
+    {
+        foreach (var canvasType in canvases)
+        {
+            foreach (var canvas in canvasesToSet)
+            {
+                if (canvas == canvasType.canvasType)
+                {
+                    canvasType.canvas.gameObject.SetActive(activate);
+                }
+            }
+        }
+    } // Active ou désactive les canvas que l'on renseigne en paramètres
+
+    #endregion
 
     #region Map
 
@@ -171,4 +193,9 @@ public class UIInstance : MonoBehaviour
        SetNotification(null, false);
     }
     #endregion
+}
+
+public enum InGameCanvasType
+{
+    HUDCanvas, DataMenuCanvas, DialoguesCanvas, PauseMenuCanvas, OptionsMenuCanvas
 }

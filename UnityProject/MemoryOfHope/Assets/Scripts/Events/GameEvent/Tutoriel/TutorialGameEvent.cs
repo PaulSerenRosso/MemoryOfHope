@@ -10,4 +10,10 @@ public class TutorialGameEvent : ScriptableObject
     
     public string frenchAction;
     public string englishAction;
+
+    public void SetTutorial()
+    {
+        TutorialManager.instance.currentTutorialGameEvent = this;
+        TutorialManager.instance.SetDisplay();
+    }
 }
