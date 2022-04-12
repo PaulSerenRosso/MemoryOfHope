@@ -81,7 +81,7 @@ Material:
     - _BillboardShadowFade: 0.5
     - _Blend: 0
     - _BumpScale: 1
-    - _ColorMapHeight: 1
+    - _ColorMapHeight: 0.244
     - _ColorMapStrength: 1
     - _Cull: 0
     - _Cutoff: 0
@@ -96,13 +96,13 @@ Material:
     - _LightingMode: 2
     - _Metallic: 0
     - _NormalMapKwToggle: 0
-    - _OcclusionStrength: 1
+    - _OcclusionStrength: 0.5
     - _PerspectiveCorrection: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Scalemap: 1
     - _ShadowBiasCorrection: 1
-    - _Smoothness: 0.25
+    - _Smoothness: 0.15
     - _SmoothnessTextureChannel: 0
     - _SpecularAmount: 0
     - _SpecularHighlights: 1
@@ -114,9 +114,9 @@ Material:
     - _Translucency: 1
     - _TwoSided: 0
     - _VertexDarkening: 0.25
-    - _WindAmbientStrength: 0.15
+    - _WindAmbientStrength: 0.25
     - _WindFlutter: 0.559
-    - _WindGustFreq: 1
+    - _WindGustFreq: 5
     - _WindGustSpeed: 5
     - _WindGustStrength: 0.25
     - _WindGustTint: 0.04
@@ -124,12 +124,12 @@ Material:
     - _WindQuality: 0
     - _WindRandSpeed: 1
     - _WindRandStrength: 0.5
-    - _WindSpeed: 8.77
+    - _WindSpeed: 6
     - _WindStr: 0.067
     - _WindStrength: 0.227
     - _WindStrengths: 1
     - _WindSwinging: 0.5
-    - _WindVertexRand: 0.5
+    - _WindVertexRand: 0.75
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -141,7 +141,7 @@ Material:
     - _HeightmapScaleInfluence: {r: 0.5, g: 1, b: 0.5, a: 0}
     - _HueVariation: {r: 0.3492346, g: 0.67631364, b: 0.6792453, a: 0.7254902}
     - _HueVariationColor: {r: 1, g: 0.5, b: 0, a: 0.1}
-    - _NormalParams: {r: 0, g: 0, b: 0, a: 0}
+    - _NormalParams: {r: 1, g: 1, b: 1, a: 0}
     - _ScalemapInfluence: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
@@ -185,5 +185,21 @@ MonoBehaviour:
     colorValue: {r: 0.3492346, g: 0.67631364, b: 0.6792453, a: 0.7254902}
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
     floatValue: 0
+    textureValue: {fileID: 0}
+    active: 1
+  - name: _WindGustFreq
+    type: 3
+    isKeyword: 0
+    colorValue: {r: 0.3492346, g: 0.67631364, b: 0.6792453, a: 0.7254902}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 5
+    textureValue: {fileID: 0}
+    active: 1
+  - name: _WindSpeed
+    type: 3
+    isKeyword: 0
+    colorValue: {r: 0.3492346, g: 0.67631364, b: 0.6792453, a: 0.7254902}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 6
     textureValue: {fileID: 0}
     active: 1
