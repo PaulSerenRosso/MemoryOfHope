@@ -13,6 +13,7 @@ public class PrismModule : Module
     [SerializeField] private float rotationSpeed;
     private Vector2 inputCam;
     private bool joystickPressed ;
+    
     public override void LinkModule()
     {
         // joystick
@@ -81,12 +82,13 @@ public class PrismModule : Module
             {
                 _timer = 0;
                 isActivate = true;
+                _shield.InputShield = true;
             }
         }
         else
         {
-            _shield.InputShield = true;
             
+          
             if (!joystickPressed)
                 return;
             Vector2 angleFoward = new Vector2(transform.forward.x,

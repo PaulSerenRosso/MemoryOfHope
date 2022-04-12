@@ -118,7 +118,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Activate"",
                     ""type"": ""Button"",
                     ""id"": ""39873438-dc12-4275-b24a-704fffb8ae7a"",
                     ""expectedControlType"": ""Button"",
@@ -130,6 +130,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""a32ebeac-0599-46f7-aa34-cc3704e01d5a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Laser"",
+                    ""type"": ""Button"",
+                    ""id"": ""68cf975d-66e2-48c6-86e0-f310b3bc209a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -250,7 +259,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3bc31474-8971-4c04-ae9a-7e94894757fa"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -261,7 +270,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0018cb57-2a93-4ced-9070-c7a579cff19f"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -305,11 +314,11 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9a918800-e10b-45e2-b521-b1ba3e12224e"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""Activate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -321,6 +330,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""375e0f69-cc9b-4c45-bd43-fa977778d486"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Laser"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -341,8 +361,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_InteractionSelect = m_Player.FindAction("InteractionSelect", throwIfNotFound: true);
         m_Player_InteractionMove = m_Player.FindAction("InteractionMove", throwIfNotFound: true);
         m_Player_RotateCamera = m_Player.FindAction("RotateCamera", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Activate = m_Player.FindAction("Activate", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Laser = m_Player.FindAction("Laser", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -412,8 +433,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InteractionSelect;
     private readonly InputAction m_Player_InteractionMove;
     private readonly InputAction m_Player_RotateCamera;
-    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Activate;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Laser;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -428,8 +450,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @InteractionSelect => m_Wrapper.m_Player_InteractionSelect;
         public InputAction @InteractionMove => m_Wrapper.m_Player_InteractionMove;
         public InputAction @RotateCamera => m_Wrapper.m_Player_RotateCamera;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Activate => m_Wrapper.m_Player_Activate;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Laser => m_Wrapper.m_Player_Laser;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -469,12 +492,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @RotateCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
                 @RotateCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
                 @RotateCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateCamera;
-                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Activate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivate;
+                @Activate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivate;
+                @Activate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivate;
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Laser.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLaser;
+                @Laser.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLaser;
+                @Laser.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLaser;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -509,12 +535,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @RotateCamera.started += instance.OnRotateCamera;
                 @RotateCamera.performed += instance.OnRotateCamera;
                 @RotateCamera.canceled += instance.OnRotateCamera;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
+                @Activate.started += instance.OnActivate;
+                @Activate.performed += instance.OnActivate;
+                @Activate.canceled += instance.OnActivate;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Laser.started += instance.OnLaser;
+                @Laser.performed += instance.OnLaser;
+                @Laser.canceled += instance.OnLaser;
             }
         }
     }
@@ -531,7 +560,8 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnInteractionSelect(InputAction.CallbackContext context);
         void OnInteractionMove(InputAction.CallbackContext context);
         void OnRotateCamera(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
+        void OnActivate(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnLaser(InputAction.CallbackContext context);
     }
 }

@@ -29,19 +29,34 @@ public class EnemyManager : MonoBehaviour, Damageable
     public bool canBeHitByMelee;
     public bool canBeHitByLaser;
     public bool canBeKnockback;
+    public Vector3 SpawnPosition;
+    public Quaternion SpawnRotation; 
+    public bool IsBaseEnemy = true;
+   
 
     //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
     [SerializeField] private Animation anim;
     [SerializeField] private GameObject deathFeedback;
     public EnemyMachine Machine;
+    public ListenerWaveEnemy WaveListener;
 
     #endregion
     
     #region Main Functions
 
-    public virtual void TakeDamage(int damages)
+    void Start()
     {
+        if (IsBaseEnemy)
+        {
+            SpawnRotation = transform.rotation;
+            SpawnPosition = transform.position;
+            EnemiesManager.Instance.BaseEnemies.Add(this);
+        }
+    }
+    public void TakeDamage(int damages)
+    {
+        
         anim.Play("TakeDamage");
         health -= damages;
         if (health <= 0)
@@ -68,10 +83,12 @@ public class EnemyManager : MonoBehaviour, Damageable
                 Random.Range(2.0f, 3.0f));
         }
 
-        isDead = true;
-        Destroy(gameObject);
+        if (WaveListener != null)
+            WaveListener.Raise(this);
+        gameObject.SetActive(false);
+     
     }
-
+    
     #endregion
 }
 

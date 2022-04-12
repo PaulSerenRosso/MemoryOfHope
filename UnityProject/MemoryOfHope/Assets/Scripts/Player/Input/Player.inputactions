@@ -96,7 +96,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
+                    "name": "Activate",
                     "type": "Button",
                     "id": "39873438-dc12-4275-b24a-704fffb8ae7a",
                     "expectedControlType": "Button",
@@ -108,6 +108,15 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "a32ebeac-0599-46f7-aa34-cc3704e01d5a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Laser",
+                    "type": "Button",
+                    "id": "68cf975d-66e2-48c6-86e0-f310b3bc209a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -228,7 +237,7 @@
                 {
                     "name": "",
                     "id": "3bc31474-8971-4c04-ae9a-7e94894757fa",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -239,7 +248,7 @@
                 {
                     "name": "",
                     "id": "0018cb57-2a93-4ced-9070-c7a579cff19f",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -283,11 +292,11 @@
                 {
                     "name": "",
                     "id": "9a918800-e10b-45e2-b521-b1ba3e12224e",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "Activate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -299,6 +308,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "375e0f69-cc9b-4c45-bd43-fa977778d486",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Laser",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
