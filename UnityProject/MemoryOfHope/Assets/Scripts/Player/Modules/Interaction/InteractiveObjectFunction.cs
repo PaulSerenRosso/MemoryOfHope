@@ -39,7 +39,10 @@ public class InteractiveObjectFunction : Module
 
     public override void Execute()
     {
-        interactionModule.line.SetPosition(1, interactionModule.selectedObject.transform.position);
+        if (interactionModule.line.positionCount == 2)
+        {
+            interactionModule.line.SetPosition(1, interactionModule.selectedObject.transform.position);
+        }
         
         var tr = PlayerController.instance.transform;
         tr.LookAt(interactionModule.selectedObject.transform);
@@ -58,6 +61,7 @@ public class InteractiveObjectFunction : Module
         PlayerController.instance.playerRb.isKinematic = false;
         isSelected = false;
         isPerformed = false;
+        
     }
     
     public override void Release()
