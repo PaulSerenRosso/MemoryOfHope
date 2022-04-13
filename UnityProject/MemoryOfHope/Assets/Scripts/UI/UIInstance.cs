@@ -36,6 +36,11 @@ public class UIInstance : MonoBehaviour
     [Header("Player Stats")] 
     [SerializeField] private TextMeshProUGUI lifeText;
 
+    [SerializeField] private RectTransform firstHeartContainerTransform;
+    [SerializeField] private float distanceBetweenHeartContainers;
+    [SerializeField] private GameObject heartContainerPrefab;
+    [SerializeField] private List<UIHeart> heartContainers;
+
     [Header("Notification")] 
     [SerializeField] private GameObject notificationBox;
     [SerializeField] private TextMeshProUGUI notificationText;
@@ -161,7 +166,9 @@ public class UIInstance : MonoBehaviour
 
     public void InitializationStats()
     {
-        DisplayLife();
+        SetInitHealth();
+        DisplayHealth();
+        //DisplayLife();
     }
     
     public void DisplayLife()
@@ -172,6 +179,53 @@ public class UIInstance : MonoBehaviour
         {
             lifeText.text += " ( Dead )";
             lifeText.color = Color.red;
+        }
+    }
+
+    public void SetInitHealth()
+    {
+        heartContainers.Clear();
+        
+        if (PlayerManager.instance.maxHealth % 4 != 0)
+        {
+            Debug.LogError("Player Health must be a multiple of 4");
+            return;
+        }
+
+        float heartsContainersNumberFloat = PlayerManager.instance.health / 4f;
+        int heartsContainersNumber = (int) heartsContainersNumberFloat;
+        var pos = firstHeartContainerTransform.position;
+        for (int i = 0; i < heartsContainersNumber; i++)
+        {
+            heartContainers.Add(Instantiate(heartContainerPrefab, pos, Quaternion.identity,
+                firstHeartContainerTransform).GetComponent<UIHeart>());
+            pos += Vector3.right * distanceBetweenHeartContainers;
+        }
+    }
+
+    public void DisplayHealth()
+    {
+        int life = 0;
+        foreach (var container in heartContainers)
+        {
+            foreach (var part in container.heartParts)
+            {
+                part.color = Color.black;
+                
+            }
+        }
+
+        int heartContainer = 0;
+        int heartPart = 0;
+        while (life != PlayerManager.instance.health)
+        {
+            life++;
+            heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
+            heartPart++;
+
+            if (heartPart <= 3) continue;
+            heartPart = 0;
+            heartContainer++;
         }
     }
 

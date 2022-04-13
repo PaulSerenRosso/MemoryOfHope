@@ -163,7 +163,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (isDead)
             return;
         health -= damages;
-        StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
+        //StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
         if (health <= 0)
         {
             health = 0;
@@ -171,14 +171,22 @@ public class PlayerManager : MonoBehaviour, Damageable
         }
 
         if (UIInstance.instance != null)
-            UIInstance.instance.DisplayLife();
+        {
+           //UIInstance.instance.DisplayLife(); 
+           UIInstance.instance.DisplayHealth();
+        }
+            
     }
 
     public void Heal(int heal)
     {
         health += heal;
         if (UIInstance.instance != null)
-            UIInstance.instance.DisplayLife();
+        {
+            //UIInstance.instance.DisplayLife();
+            UIInstance.instance.DisplayHealth();
+
+        }
     }
 
     #endregion
