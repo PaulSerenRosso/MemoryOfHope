@@ -7,12 +7,6 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public enum LanguageSubTitles
-    {
-        French,
-        English,
-    }
-
     public LanguageSubTitles currentLanguage;
     [SerializeField] private TextMeshProUGUI _textDialogueHolder;
     [SerializeField] private RectTransform _background;
@@ -106,4 +100,9 @@ public class DialogueManager : MonoBehaviour
     //comporter l'ui
     // avoir le dialogue actuel 
     // list des audio source perszonnages class relié avec enum
+}
+public enum LanguageSubTitles
+{
+    French,
+    English,
 }

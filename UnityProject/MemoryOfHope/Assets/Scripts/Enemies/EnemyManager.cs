@@ -6,22 +6,25 @@ public class EnemyManager : MonoBehaviour, Damageable
 {
     #region Variables
 
-    public int health 
-    { 
+    public int health
+    {
         get { return healthEnemy; }
         set { healthEnemy = value; }
     }
+
     public int maxHealth
 
     {
         get { return maxHealthEnemy; }
         set { maxHealthEnemy = value; }
     }
+
     public bool isDead
     {
         get => isDeadEnemy;
         set => isDeadEnemy = value;
     }
+
     public int healthEnemy;
     public int maxHealthEnemy;
     public bool isDeadEnemy;
@@ -30,9 +33,9 @@ public class EnemyManager : MonoBehaviour, Damageable
     public bool canBeHitByLaser;
     public bool canBeKnockback;
     public Vector3 SpawnPosition;
-    public Quaternion SpawnRotation; 
+    public Quaternion SpawnRotation;
     public bool IsBaseEnemy = true;
-   
+
 
     //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
@@ -42,7 +45,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     public ListenerWaveEnemy WaveListener;
 
     #endregion
-    
+
     #region Main Functions
 
     void Start()
@@ -54,6 +57,7 @@ public class EnemyManager : MonoBehaviour, Damageable
             EnemiesManager.Instance.BaseEnemies.Add(this);
         }
     }
+
     public void TakeDamage(int damages)
     {
         
@@ -67,12 +71,10 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public virtual void HitNoDamage()
     {
-        
     }
 
     public virtual void Heal(int heal)
     {
-        
     }
 
     public virtual void Death()
@@ -83,12 +85,13 @@ public class EnemyManager : MonoBehaviour, Damageable
                 Random.Range(2.0f, 3.0f));
         }
 
+        isDeadEnemy = true;
+
         if (WaveListener != null)
             WaveListener.Raise(this);
         gameObject.SetActive(false);
-     
-    }
     
+    }
+
     #endregion
 }
-

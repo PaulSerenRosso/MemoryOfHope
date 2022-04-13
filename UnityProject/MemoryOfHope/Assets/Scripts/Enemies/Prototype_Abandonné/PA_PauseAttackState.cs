@@ -37,8 +37,10 @@ public class PA_PauseAttackState : EnemyState
         {
             lookAtTransform.LookAt(PlayerController.instance.transform);
 
-            enemyMachine.transform.rotation = Quaternion.Slerp(enemyMachine.transform.rotation, 
+            var tr = enemyMachine.transform;
+            tr.rotation = Quaternion.Slerp(tr.rotation, 
                 lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
+            tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
         }
     }
 }

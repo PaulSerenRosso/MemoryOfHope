@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815248621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.09, z: 1.05}
+  m_LocalPosition: {x: 0, y: 1.09, z: 0.17000079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7999399970860252443}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 4936362461314419530}
   - component: {fileID: 1738982276577939607}
   - component: {fileID: 951075502359957142}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FinalAttackCollider
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -566,17 +566,15 @@ MonoBehaviour:
   - {fileID: 8141380071056486680}
   - {fileID: 7226099581146458021}
   - {fileID: 7226099581146458022}
-  - {fileID: 4272034707977539781}
-  - {fileID: 8256235213664230015}
-  - {fileID: 8509076338704852473}
+  - {fileID: 7649947021829257087}
   money: 0
   hasGlitch: 0
   isActive: 1
   CurrentCheckpoint: {fileID: 0}
   CurrentListenerActivate: {fileID: 0}
-  defaultMaxHealthPlayer: 5
-  healthPlayer: 5
-  maxHealthPlayer: 5
+  defaultMaxHealthPlayer: 100
+  healthPlayer: 100
+  maxHealthPlayer: 100
   isDeadPlayer: 0
   _timeDeath: 2
   _timeRespawn: 2
@@ -930,7 +928,7 @@ MonoBehaviour:
   selectedObject: {fileID: 0}
   rotateSpeed: 0.3
   joystickDirection: {x: 0, y: 0, z: 0}
-  _activationTime: 0
+  _activationTime: 0.5
   rayLength: 8
   interactiveObjectLayer:
     serializedVersion: 2
@@ -1114,7 +1112,7 @@ GameObject:
   - component: {fileID: 5114926677628109173}
   - component: {fileID: 1551929044269769104}
   - component: {fileID: 5789878978574619094}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SecondAttackCollider
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -1234,7 +1232,7 @@ GameObject:
   - component: {fileID: 2538312755308490602}
   - component: {fileID: 6854493005277391123}
   - component: {fileID: 4183998170893442620}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FirstAttackCollider
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -1383,15 +1381,15 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 6.86
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: 1.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 8.61
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: DirectionSource.z
