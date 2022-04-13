@@ -110,6 +110,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             module.LinkModule();
             if (module.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(module);
             else PlayerController.instance.activeModulesUpdate.Add(module);
+            UIInstance.instance.AddModuleIcon(module);
         }
 
         maxHealth = defaultMaxHealthPlayer;
@@ -231,6 +232,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (mod.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(mod);
         else PlayerController.instance.activeModulesUpdate.Add(mod);
         obtainedModule.Add(mod);
+        UIInstance.instance.AddModuleIcon(mod);
     }
 
     #endregion

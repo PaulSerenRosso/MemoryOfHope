@@ -41,6 +41,12 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject heartContainerPrefab;
     [SerializeField] private List<UIHeart> heartContainers;
 
+    [Header("Player Module")]
+    [SerializeField] private RectTransform firstIconTransform;
+    [SerializeField] private float distanceBetweenIcons;
+    [SerializeField] private GameObject iconPrefab;
+    private int displayedModule;
+    
     [Header("Notification")] 
     [SerializeField] private GameObject notificationBox;
     [SerializeField] private TextMeshProUGUI notificationText;
@@ -227,6 +233,19 @@ public class UIInstance : MonoBehaviour
             heartPart = 0;
             heartContainer++;
         }
+    }
+
+    public void AddModuleIcon(Module module)
+    {
+        if (!module.isDisplayed) return;
+
+        Vector3 pos = firstIconTransform.position + Vector3.right * distanceBetweenIcons * displayedModule;
+        
+        Image icon = Instantiate(iconPrefab, pos, Quaternion.identity, firstIconTransform).GetComponent<Image>();
+
+        icon.sprite = module.moduleIconGUI;
+        
+        displayedModule++;
     }
 
     #endregion
