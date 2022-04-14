@@ -25,9 +25,7 @@ public class TutorialManager : MonoBehaviour
     
 
     #region Variables
-
-    public LanguageSubTitles currentLanguage;
-
+    
     public List<TutorialGameEvent> activeTutorialGameEvents;
     public TutorialGameEvent currentTutorialGameEvent;
 
@@ -41,9 +39,10 @@ public class TutorialManager : MonoBehaviour
     
     public void SetCurrentEvent()
     {
+        Debug.Log(activeTutorialGameEvents.Count);
         if (activeTutorialGameEvents.Count == 0)
         {
-            Debug.LogError("No Event has been set");
+            tutorialWindow.SetActive(false);
             return;
         }
         
@@ -55,11 +54,15 @@ public class TutorialManager : MonoBehaviour
             }
             else
             {
+                Debug.Log($"{gameEvent.priority} / {currentTutorialGameEvent.priority}");
                 if (gameEvent.priority < currentTutorialGameEvent.priority) continue;
                 currentTutorialGameEvent = gameEvent;
-                SetDisplay();
             }
         }
+
+        if (currentTutorialGameEvent == null) return;
+        SetDisplay();
+
     } // Set le tutoriel actuel selon les priorités des événements en cours
 
     public void SetDisplay()
@@ -70,13 +73,13 @@ public class TutorialManager : MonoBehaviour
         tutorialImage.sprite = currentTutorialGameEvent.inputSprite;
 
         string text;
-        switch (currentLanguage)
+        switch (SettingsManager.instance.gameLanguage)
         {
-            case LanguageSubTitles.French:
+            case Language.French:
                 text = currentTutorialGameEvent.frenchAction;
                 break;
             
-            case LanguageSubTitles.English:
+            case Language.English:
                 text = currentTutorialGameEvent.englishAction;
                 break;
             

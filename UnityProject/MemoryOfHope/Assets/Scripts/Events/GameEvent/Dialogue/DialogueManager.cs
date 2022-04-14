@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public LanguageSubTitles currentLanguage;
     [SerializeField] private TextMeshProUGUI _textDialogueHolder;
     [SerializeField] private RectTransform _background;
     [SerializeField] private RectTransform _dialogueWindows;
@@ -66,9 +65,9 @@ public class DialogueManager : MonoBehaviour
     {
         _dialogueWindows.gameObject.SetActive(false);
         CurrentLine = CurrentDialogue.Lines[index];
-        if (currentLanguage == LanguageSubTitles.English)
+        if (SettingsManager.instance.gameLanguage == Language.English)
             currentLineText = CurrentLine.EnglishLineText;
-        else if (currentLanguage == LanguageSubTitles.French)
+        else if (SettingsManager.instance.gameLanguage == Language.French)
             currentLineText = CurrentLine.FrenchLineText;
     }
 
@@ -100,9 +99,4 @@ public class DialogueManager : MonoBehaviour
     //comporter l'ui
     // avoir le dialogue actuel 
     // list des audio source perszonnages class relié avec enum
-}
-public enum LanguageSubTitles
-{
-    French,
-    English,
 }

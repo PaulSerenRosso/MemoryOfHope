@@ -51,6 +51,8 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject notificationBox;
     [SerializeField] private TextMeshProUGUI notificationText;
 
+    public List<TextMeshProUGUI> allTextsOnScreen;
+
     private void Start()
     {
         LinkInput();
@@ -266,6 +268,7 @@ public class UIInstance : MonoBehaviour
        SetNotification(null, false);
     }
     #endregion
+    
 }
 
 public enum InGameCanvasType
