@@ -6,6 +6,11 @@ public class MC_StateMachine : EnemyMachine
 {
     public float attackAreaLength;
     public float attackAreaHeight;
+    public Vector3 initialPos;
+
+    public CorruptedTowerManager[] corruptedTowers;
+
+    public bool isProtected;
 
     #region States
     
@@ -36,6 +41,7 @@ public class MC_StateMachine : EnemyMachine
 
     public override void Start()
     {
+        initialPos = transform.position;
         currentState = defaultState;
         base.Start();
     }
@@ -45,6 +51,18 @@ public class MC_StateMachine : EnemyMachine
         base.OnHitByMelee();
         SwitchState(hitState);
     }
+
+    public bool IsProtected()
+    {
+        foreach (var towers in corruptedTowers)
+        {
+            if (!towers.isDeadEnemy)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     
     #endregion
 
@@ -52,7 +70,17 @@ public class MC_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
+        if (other.CompareTag("PlayerFist") && !isHit && !isProtected) // Hit by the player
+        {
+            hitDirection = transform.position - PlayerController.instance.transform.position;
+            hitDirection = -(PlayerController.instance.transform.position - transform.position);
+
+            OnHitByMelee();
+        }
+        else if (isProtected)
+        {
+            Debug.Log("Corrupted Memory is protected");
+        }
         
         if (other.CompareTag("Shield"))
         {

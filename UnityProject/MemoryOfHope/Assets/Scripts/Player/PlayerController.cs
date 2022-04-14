@@ -5,49 +5,50 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Modules
+
     [Header("Modules")] public List<Module> activeModulesUpdate;
     public List<Module> activeModulesFixed;
     [SerializeField] private List<int> currentModuleUpdate;
     [SerializeField] private List<int> currentModuleFixed;
+
     #endregion
 
     #region PlayerComponent
 
     [Header("PlayerComponent")] public Rigidbody playerRb;
     public Animator playerAnimator;
+
     public InputMaster playerActions;
+
+    /*
     public List<Transform> interactiveObjects = new List<Transform>();
     public GameObject nearestObject;
     private List<float> distances = new List<float>();
+    */
     public bool isGlitching;
     public AttackModule attackModule;
 
     #endregion
-    
+
     #region Gravity
 
     [Header("Gravity")] [SerializeField] public float defaultGravity;
     public float currentGravity;
-    private bool  _useGravity;
+    private bool _useGravity;
+
     public bool useGravity
     {
-        get
-        {
-            return _useGravity;
-        }
+        get { return _useGravity; }
         set
         {
             _useGravity = value;
             if (value)
             {
-         
                 if (!onGround)
                 {
-               
                     currentGravity = defaultGravity;
                 }
             }
-
         }
     }
 
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 physicsFactor;
 
     #endregion
-    
+
     #region Detect Ground
 
     [Header("Detect Ground")] public float angleGround;
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _useCheckGround;
 
-  
+
     private Vector3 currentNormalWall;
     public bool stuckGround = true;
     public bool onGround;
@@ -116,20 +117,27 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         useGravity = true;
-
     }
 
     void Update()
     {
-        CheckModuleUpdate();
-        CheckCurrentModuleUpdate();
-        CheckNearestObject();
+        if (PlayerManager.instance.isActive)
+        {
+            CheckModuleUpdate();
+            CheckCurrentModuleUpdate();
+        }
+
+        // CheckNearestObject();
     }
 
     void FixedUpdate()
     {
-        CheckModuleFixed();
-        CheckCurrentModuleFixed();
+        if (PlayerManager.instance.isActive)
+        {
+            CheckModuleFixed();
+            CheckCurrentModuleFixed();
+        }
+
         CalculateVelocity();
     }
 
@@ -150,14 +158,15 @@ public class PlayerController : MonoBehaviour
 
     void CalculateUndoVelocity()
     {
-        if (undoVelocity != Vector3.zero )
+        if (undoVelocity != Vector3.zero)
         {
             physicsFactor = oldVelocity - playerRb.velocity;
             if (physicsFactor.magnitude <= undoVelocity.magnitude)
-            { 
+            {
                 undoVelocity += physicsFactor;
                 finalVelocity += undoVelocity;
             }
+
             undoVelocity = Vector3.zero;
         }
     }
@@ -170,6 +179,7 @@ public class PlayerController : MonoBehaviour
             currentVelocity = Vector3.zero;
         }
     }
+
     void CalculateVelocityWithUndo()
     {
         if (currentVelocityWithUndo != Vector3.zero)
@@ -179,40 +189,37 @@ public class PlayerController : MonoBehaviour
             currentVelocityWithUndo = Vector3.zero;
         }
     }
+
     void CalculateGravity()
     {
         if (!onGround && useGravity)
         {
-            
             playerRb.AddForce(Vector3.down * currentGravity, ForceMode.Acceleration);
-                  
         }
     }
 
     void CheckNormals()
     {
         playerRb.velocity += finalVelocity;
-             oldVelocity = playerRb.velocity;
+        oldVelocity = playerRb.velocity;
 
-            if (onGround && stuckGround)
+        if (onGround && stuckGround)
+        {
+            projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
+            alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
+            projectionRB *= alignedSpeed;
+            playerRb.velocity = projectionRB;
+        }
+        else if (!onGround && currentWall != null)
+        {
+            if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
             {
-                projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
+                projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
                 alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
                 projectionRB *= alignedSpeed;
                 playerRb.velocity = projectionRB;
             }
-            else if (!onGround && currentWall != null)
-            {
-                if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
-                {
-                    
-                    projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
-                    alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
-                    projectionRB *= alignedSpeed;
-                    playerRb.velocity = projectionRB;
-                }
-            }
-
+        }
     }
 
     void CheckModuleUpdate()
@@ -221,7 +228,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!activeModulesUpdate[i].Conditions())
                 continue;
-                currentModuleUpdate.Add(i);
+            currentModuleUpdate.Add(i);
         }
     }
 
@@ -243,7 +250,6 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < currentModuleUpdate.Count; i++)
         {
             activeModulesUpdate[currentModuleUpdate[i]].Execute();
-            
         }
 
         currentModuleUpdate.Clear();
@@ -268,25 +274,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        
         if (other.gameObject.CompareTag("Ground"))
         {
-          
             Vector3 normal = other.GetContact(0).normal;
             if (normal.y >= angleGround)
             {
-               
-                    if (!onGround)
-                    {
-                        onGround = true;
-                        playerAnimator.SetBool("onGround", true);
-                        playerRb.velocity = Vector3.zero;
-                        currentGravity = 0;
-                    }
+                if (!onGround)
+                {
+                    onGround = true;
+                    playerAnimator.SetBool("onGround", true);
+                    playerRb.velocity = Vector3.zero;
+                    currentGravity = 0;
+                }
 
-                    currentNormalGround = normal.normalized;
-                    currentGround = other.collider;
-                
+                currentNormalGround = normal.normalized;
+                currentGround = other.collider;
             }
             else
             {
@@ -294,15 +296,12 @@ public class PlayerController : MonoBehaviour
                 currentWall = other.collider;
             }
         }
-       
     }
 
     private void OnCollisionExit(Collision other)
     {
-      
         if (other.gameObject.CompareTag("Ground"))
         {
-           
             if (currentGround == other.collider)
             {
                 onGround = false;
@@ -311,15 +310,16 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("onGround", false);
                 currentGravity = defaultGravity;
             }
-            
-           if (currentWall == other.collider)
+
+            if (currentWall == other.collider)
             {
                 currentWall = null;
                 currentNormalWall = Vector3.zero;
             }
         }
     }
-    
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         // Ajoute l'objet a une liste : les objets avec lesquels on peut interagir
@@ -361,11 +361,12 @@ public class PlayerController : MonoBehaviour
             interactiveObjects.Remove(other.transform);
         }
     }
+ */
 
     #endregion
 
 
-  public  Vector3 PlayerProjectOnPlane(Vector3 toProject)
+    public Vector3 PlayerProjectOnPlane(Vector3 toProject)
     {
         if (Vector3.Angle(toProject, currentNormalWall) <= 90)
         {
@@ -376,6 +377,5 @@ public class PlayerController : MonoBehaviour
         }
 
         return toProject;
-
     }
 }

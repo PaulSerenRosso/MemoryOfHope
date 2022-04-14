@@ -17,7 +17,7 @@ public class EnemyMachine : MonoBehaviour
     public float attackStrength;
     public GameObject attackArea;
     public Vector3 hitDirection;
-    [SerializeField] private bool isHit = false;
+    public bool isHit = false;
 
     #endregion
 
@@ -40,9 +40,12 @@ public class EnemyMachine : MonoBehaviour
 
     public void SwitchState(EnemyState state)
     {
-        rb.velocity = Vector3.zero;
-        currentState = state;
-        currentState.StartState(this);
+        if (gameObject.activeSelf)
+        {
+            rb.velocity = Vector3.zero;
+            currentState = state;
+            currentState.StartState(this);
+        }
     }
     
     public virtual void OnHitByMelee()

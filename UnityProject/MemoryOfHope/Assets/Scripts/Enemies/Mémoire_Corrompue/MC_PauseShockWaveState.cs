@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public class MC_PauseShockWaveState : EnemyState
@@ -6,8 +7,11 @@ public class MC_PauseShockWaveState : EnemyState
     [Header("Parameters")]
     [Range(0, 1)] [SerializeField] private float durationBeforeShockWave;
     [SerializeField] private float rotateSpeed;
-
+    
+    [Header("Fixed variables")]
+    [SerializeField] private LayerMask playerLayers;
     private float timer;
+    [SerializeField] private Transform lookAtTransform;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
@@ -17,23 +21,19 @@ public class MC_PauseShockWaveState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        Vector3 targetDir = PlayerController.instance.transform.position - enemyMachine.transform.position;
+        lookAtTransform.LookAt(PlayerController.instance.transform);
         
-        if (Vector3.Angle(targetDir, enemyMachine.transform.forward) < 60)
-        {
-            timer += Time.deltaTime;
+        var tr = enemyMachine.transform;
+        tr.rotation = Quaternion.Slerp(tr.rotation, 
+            lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
+        tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
+        
+        timer += Time.deltaTime;
 
-            if (ConditionState.Timer(durationBeforeShockWave, timer))
-            {
-                MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-                enemy.SwitchState(enemy.shockWaveState);
-            }
-        }
-        else
+        if (ConditionState.Timer(durationBeforeShockWave, timer))
         {
-            enemyMachine.transform.eulerAngles += new Vector3(0, rotateSpeed, 0) * Time.deltaTime;
+            MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.shockWaveState);
         }
-        
-        
     }
 }

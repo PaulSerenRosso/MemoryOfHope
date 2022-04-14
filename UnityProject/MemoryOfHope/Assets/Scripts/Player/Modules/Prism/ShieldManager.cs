@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
+
 
 public class ShieldManager : MonoBehaviour, Damageable
 {
@@ -10,12 +8,33 @@ public class ShieldManager : MonoBehaviour, Damageable
     private MeshRenderer _mesh;
     [SerializeField]
     private Collider _collider;
+
+    [SerializeField] private float _maxLaserCharge;
+   private float _laserCharge;
+    public float  LaserCharge
+    {
+        get
+        {
+            return _laserCharge;
+        }
+        set
+        {
+            _laserCharge = Mathf.Min(value, _maxLaserCharge);
+
+        }
+    }
+
+    public float LaserChargeRegeneration;
+    public float LaserChargeCost;
+  
     private void OnValidate()
     {
         _health = _maxHealth;
     }
 
+    public LaserSource Laser;
     public ShieldMirror Mirror;
+    public bool inputLaser;
     private bool _inputShield;
     public bool InputShield
     {
@@ -29,8 +48,7 @@ public class ShieldManager : MonoBehaviour, Damageable
             if (!isDead)
             {
                 _mesh.enabled = value;
-                            Mirror.IsActiveReturnable = value;
-                            _collider.enabled = value;
+                _collider.enabled = value;
                             
             }
            
@@ -81,8 +99,8 @@ public class ShieldManager : MonoBehaviour, Damageable
 
     public void Death()
     {
-        _mesh.enabled = false; 
-        Mirror.IsActiveReturnable = false;
+        _mesh.enabled = false;
+        Laser.IsActive = false;
         _collider.enabled = false ; 
    
     }
@@ -105,7 +123,7 @@ public class ShieldManager : MonoBehaviour, Damageable
                        
                                     _mesh.enabled = true;
                                     _collider.enabled = true; 
-                                    Mirror.IsActiveReturnable = true;
+                                    
                 }
            
                 Heal(maxHealth);

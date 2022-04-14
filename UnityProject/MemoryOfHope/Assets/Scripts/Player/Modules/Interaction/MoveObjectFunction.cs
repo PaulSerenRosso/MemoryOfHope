@@ -31,6 +31,8 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
     public override void Execute()
     {
+        base.Execute();
+
         Vector2 _cameraForwardXZ;
         Vector2 _cameraRightXZ;
         _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
@@ -77,6 +79,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
         data = (MoveObjectData) interactive;
         
+        data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<MoveObjectData>();
         data.GetComponent<Renderer>().material = data.selectedMaterial;
             
@@ -99,6 +102,8 @@ public class MoveObjectFunction : InteractiveObjectFunction
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Renderer>().material = data.defaultMaterial;
             data.rb.isKinematic = true;
+            data.interactiveParticleSystem.transform.position = data.transform.position;
+            data.interactiveParticleSystem.Play();
         }
         
         // Deselection feedbacks

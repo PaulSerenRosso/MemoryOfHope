@@ -1,5 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7080478553355161082
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 0.25
+  contrast:
+    m_OverrideState: 1
+    m_Value: -15
+    min: -100
+    max: 100
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  hueShift:
+    m_OverrideState: 0
+    m_Value: -4
+    min: -180
+    max: 180
+  saturation:
+    m_OverrideState: 1
+    m_Value: 15
+    min: -100
+    max: 100
 --- !u!114 &-7040755842589057392
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -55,23 +93,23 @@ MonoBehaviour:
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 12
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 60
+    m_Value: 32
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 0
-    m_Value: 0.922
+    m_Value: 1.206
     min: 0.5
     max: 1.5
   highQualitySampling:
     m_OverrideState: 0
     m_Value: 0
   focusDistance:
-    m_OverrideState: 0
-    m_Value: 10
+    m_OverrideState: 1
+    m_Value: 1.1
     min: 0.1
   aperture:
     m_OverrideState: 0
@@ -114,6 +152,25 @@ MonoBehaviour:
   - {fileID: 6577631668629404422}
   - {fileID: -4228655555962518659}
   - {fileID: -7040755842589057392}
+  - {fileID: 4283859733369386152}
+  - {fileID: -7080478553355161082}
+--- !u!114 &4283859733369386152
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  mode:
+    m_OverrideState: 1
+    m_Value: 2
 --- !u!114 &6577631668629404422
 MonoBehaviour:
   m_ObjectHideFlags: 3

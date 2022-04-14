@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 public abstract class Module : MonoBehaviour
 {
     public int index;
+
+    public bool isDisplayed;
+    public Sprite moduleIconGUI;
+    
     public bool isFixedUpdate;
     public bool isPerformed;
     public List<Module> constrainingModules;
@@ -34,11 +38,7 @@ public abstract class Module : MonoBehaviour
         { 
             return false; // Faux si pas d'input pressé
         }
-
-        if (PlayerManager.instance.isInCutscene)
-        {
-            return false; // Joueur immobile en cutscene
-        }
+        
         
         return true;
     }

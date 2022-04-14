@@ -7,8 +7,11 @@ public class PA_PauseAttackState : EnemyState
     [Range(0, 1)] [SerializeField] private float durationBeforeAttack;
     [SerializeField] private float rotateSpeed;
     
+    [Header("Fixed variables")]
+    [SerializeField] private LayerMask playerLayers;
     private float timer;
-    
+    [SerializeField] private Transform lookAtTransform;
+
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
@@ -17,9 +20,10 @@ public class PA_PauseAttackState : EnemyState
     
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        Vector3 targetDir = PlayerController.instance.transform.position - enemyMachine.transform.position;
-        
-        if (Vector3.Angle(targetDir, enemyMachine.transform.forward) < 60)
+        RaycastHit hit;
+        Debug.DrawRay(enemyMachine.transform.position, enemyMachine.transform.forward * 10, Color.green);
+        if (Physics.Raycast(enemyMachine.transform.position, enemyMachine.transform.forward, 
+            out hit, 10, playerLayers))
         {
             timer += Time.deltaTime;
 
@@ -31,7 +35,12 @@ public class PA_PauseAttackState : EnemyState
         }
         else
         {
-            enemyMachine.transform.eulerAngles += new Vector3(0, rotateSpeed, 0) * Time.deltaTime;
+            lookAtTransform.LookAt(PlayerController.instance.transform);
+
+            var tr = enemyMachine.transform;
+            tr.rotation = Quaternion.Slerp(tr.rotation, 
+                lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
+            tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
         }
     }
 }

@@ -30,7 +30,7 @@ public class MainCameraController : MonoBehaviour
     {
         if (CurrentZoom != null)
             Zoom();
-        Debug.Log(CurrentZoom);
+       
         transform.position = viewFinder.position + offSet - transform.forward * Distance;
     }
 

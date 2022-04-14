@@ -7,13 +7,6 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public enum LanguageSubTitles
-    {
-        French,
-        English,
-    }
-
-    public LanguageSubTitles currentLanguage;
     [SerializeField] private TextMeshProUGUI _textDialogueHolder;
     [SerializeField] private RectTransform _background;
     [SerializeField] private RectTransform _dialogueWindows;
@@ -35,12 +28,10 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < CharacterAudioSources.Count; i++)
         {
             CharacterAudioSourcesDic.Add(CharacterAudioSources[i].Character, CharacterAudioSources[i].AudioSource);
-        Debug.Log(CharacterAudioSources[i].Character);
         }
     }
 
     [HideInInspector] public DialogueLine CurrentLine;
-    
     [HideInInspector] public DialogueGameEvent CurrentDialogue;
     [HideInInspector] public bool InGameDialogue;
     [HideInInspector] public bool InCinematicDialogue;
@@ -74,9 +65,9 @@ public class DialogueManager : MonoBehaviour
     {
         _dialogueWindows.gameObject.SetActive(false);
         CurrentLine = CurrentDialogue.Lines[index];
-        if (currentLanguage == LanguageSubTitles.English)
+        if (SettingsManager.instance.gameLanguage == Language.English)
             currentLineText = CurrentLine.EnglishLineText;
-        else if (currentLanguage == LanguageSubTitles.French)
+        else if (SettingsManager.instance.gameLanguage == Language.French)
             currentLineText = CurrentLine.FrenchLineText;
     }
 
@@ -85,8 +76,11 @@ public class DialogueManager : MonoBehaviour
         _dialogueWindows.gameObject.SetActive(true);
         _textDialogueHolder.text = CurrentLine.CharacterProfil.Name + _doublePoint + currentLineText;
         Canvas.ForceUpdateCanvases();
-        if (CurrentLine.VoiceLine != null)
-            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine, CurrentLine.VolumeScale);
+        if (CurrentLine.VoiceLine != null && CharacterAudioSourcesDic.ContainsKey(CurrentLine.CharacterProfil.Character) )
+        {
+            Debug.Log(CurrentLine.VoiceLine);
+            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine);
+        }
     }
 
     void UpdateBackgroundSize()
