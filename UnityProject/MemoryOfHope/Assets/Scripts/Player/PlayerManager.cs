@@ -98,8 +98,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #endregion
-
-
+    
     #region Main Functions
 
     private void Start()
@@ -111,6 +110,8 @@ public class PlayerManager : MonoBehaviour, Damageable
             if (module.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(module);
             else PlayerController.instance.activeModulesUpdate.Add(module);
             UIInstance.instance.AddModuleIcon(module);
+            Debug.Log(module.index);
+            UIInstance.instance.AddModuleGUI(module);
         }
 
         maxHealth = defaultMaxHealthPlayer;
@@ -233,6 +234,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         else PlayerController.instance.activeModulesUpdate.Add(mod);
         obtainedModule.Add(mod);
         UIInstance.instance.AddModuleIcon(mod);
+        UIInstance.instance.AddModuleGUI(mod);
     }
 
     #endregion

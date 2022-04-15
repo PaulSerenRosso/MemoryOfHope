@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,26 +9,35 @@ public class UIModule : MonoBehaviour
 {
     public int index;
     
-    public Sprite moduleIcon;
-
     public string nonAcquiredText;
+
+    public Module associatedModule;
     
-    public string frenchModuleName;
-    public string englishModuleName;
+    public TextMeshProUGUI moduleNameText;
+    
+    public Image moduleImage;
 
-    [TextArea(5, 10)] public string frenchModuleInfo;
-    [TextArea(5, 10)] public string englishModuleInfo;
-
-    private Image moduleImage;
-
-
-    private void SetData()
+    public bool isUnlocked;
+    
+    public void SetData(Module module)
     {
-        moduleImage.sprite = moduleIcon;
+        isUnlocked = true;
 
-        switch (index)
+        associatedModule = module;
+        
+        if(module.moduleIconGUI != null) moduleImage.sprite = module.moduleIconGUI;
+
+        switch (SettingsManager.instance.gameLanguage)
         {
-            // Set si on a le module ou pas
+            case Language.French:
+                moduleNameText.text = module.frenchModuleName;
+                break;
+            case Language.English:
+                moduleNameText.text = module.englishModuleName;
+                break;
         }
+
+        GetComponent<Button>().interactable = true;
     }
+    
 }

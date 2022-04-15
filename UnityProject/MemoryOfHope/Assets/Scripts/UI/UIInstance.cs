@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class UIInstance : MonoBehaviour
 {
     public static UIInstance instance;
+
     private void Awake()
     {
         if (instance is { })
@@ -18,14 +19,13 @@ public class UIInstance : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
+
         instance = this;
     }
 
-    [Header("Canvas")]
-    public UICanvasType[] canvases;
+    [Header("Canvas")] public UICanvasType[] canvases;
 
-    [Header("Map")]
-    public GameObject map;
+    [Header("Map")] public GameObject map;
     public bool canMoveOnMap;
     private bool isMovingOnMap;
     private Vector2 moveOnMapVector;
@@ -33,22 +33,30 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private Vector2[] cursorBoundaries = new Vector2[4];
     [SerializeField] private float moveMapSpeed;
 
-    [Header("Player Stats")] 
-    [SerializeField] private TextMeshProUGUI lifeText;
+    public UIModule[] modulesGUI;
+    public GameObject moduleGUIInformationBox;
+    public TextMeshProUGUI moduleAbilityText;
+    public TextMeshProUGUI moduleInputText;
+    public TextMeshProUGUI moduleLoreText;
+
+    [Header("Player Stats")] [SerializeField]
+    private TextMeshProUGUI lifeText;
 
     [SerializeField] private RectTransform firstHeartContainerTransform;
     [SerializeField] private float distanceBetweenHeartContainers;
     [SerializeField] private GameObject heartContainerPrefab;
     [SerializeField] private List<UIHeart> heartContainers;
 
-    [Header("Player Module")]
-    [SerializeField] private RectTransform firstIconTransform;
+    [Header("Player Module")] [SerializeField]
+    private RectTransform firstIconTransform;
+
     [SerializeField] private float distanceBetweenIcons;
     [SerializeField] private GameObject iconPrefab;
     private int displayedModule;
-    
-    [Header("Notification")] 
-    [SerializeField] private GameObject notificationBox;
+
+    [Header("Notification")] [SerializeField]
+    private GameObject notificationBox;
+
     [SerializeField] private TextMeshProUGUI notificationText;
 
     public List<TextMeshProUGUI> allTextsOnScreen;
@@ -57,19 +65,19 @@ public class UIInstance : MonoBehaviour
     {
         LinkInput();
         InitializationStats();
-        InitializationMap();
+        //InitializationMap();
     }
 
     private void Update()
     {
-        MovingOnMap();
+        //MovingOnMap();
     }
 
     private void LinkInput()
     {
-      PlayerController.instance.playerActions.Player.MovingOnMap.performed += InputPressedMovingOnMap;
-      PlayerController.instance.playerActions.Player.MovingOnMap.canceled += InputPressedMovingOnMap;
-      PlayerController.instance.playerActions.Player.OpenCloseMap.performed += _ => ClosingMap();
+        PlayerController.instance.playerActions.Player.MovingOnMap.performed += InputPressedMovingOnMap;
+        PlayerController.instance.playerActions.Player.MovingOnMap.canceled += InputPressedMovingOnMap;
+        PlayerController.instance.playerActions.Player.OpenCloseMap.performed += _ => ClosingMap();
     }
 
     #region CanvasManagement
@@ -97,18 +105,16 @@ public class UIInstance : MonoBehaviour
         RectTransform rt = map.GetComponent<RectTransform>();
         var sizeDelta = rt.sizeDelta;
         var delta = cursorOnMap.sizeDelta;
-        
+
         Vector2 couple = new Vector2
         ((sizeDelta.x - delta.x) / 2,
             (sizeDelta.y - delta.y) / 2);
-        
-  
+
 
         cursorBoundaries[0] = new Vector2(couple.x, couple.y);
         cursorBoundaries[1] = new Vector2(-couple.x, couple.y);
         cursorBoundaries[2] = new Vector2(couple.x, -couple.y);
         cursorBoundaries[3] = new Vector2(-couple.x, -couple.y);
-
     }
 
     public void OpeningMap()
@@ -148,6 +154,7 @@ public class UIInstance : MonoBehaviour
         {
             posX = cursorBoundaries[1].x;
         }
+
         if (cursorOnMap.localPosition.y > cursorBoundaries[0].y)
         {
             posY = cursorBoundaries[0].y;
@@ -158,7 +165,6 @@ public class UIInstance : MonoBehaviour
         }
 
         cursorOnMap.localPosition = new Vector3(posX, posY);
-
     }
 
     private void ClosingMap()
@@ -169,7 +175,7 @@ public class UIInstance : MonoBehaviour
     }
 
     #endregion
-    
+
     #region Player Stats
 
     public void InitializationStats()
@@ -178,11 +184,11 @@ public class UIInstance : MonoBehaviour
         DisplayHealth();
         //DisplayLife();
     }
-    
+
     public void DisplayLife()
     {
-        if(lifeText != null)
-        lifeText.text = $"Life : {PlayerManager.instance.health}";
+        if (lifeText != null)
+            lifeText.text = $"Life : {PlayerManager.instance.health}";
         if (PlayerManager.instance.health == 0)
         {
             lifeText.text += " ( Dead )";
@@ -193,7 +199,7 @@ public class UIInstance : MonoBehaviour
     public void SetInitHealth()
     {
         heartContainers.Clear();
-        
+
         if (PlayerManager.instance.maxHealth % 4 != 0)
         {
             Debug.LogError("Player Health must be a multiple of 4");
@@ -219,7 +225,6 @@ public class UIInstance : MonoBehaviour
             foreach (var part in container.heartParts)
             {
                 part.color = Color.black;
-                
             }
         }
 
@@ -242,12 +247,82 @@ public class UIInstance : MonoBehaviour
         if (!module.isDisplayed) return;
 
         Vector3 pos = firstIconTransform.position + Vector3.right * distanceBetweenIcons * displayedModule;
-        
+
         Image icon = Instantiate(iconPrefab, pos, Quaternion.identity, firstIconTransform).GetComponent<Image>();
 
         icon.sprite = module.moduleIconGUI;
-        
+
         displayedModule++;
+    }
+
+    public void AddModuleGUI(Module module)
+    {
+        if (!module.isDisplayed) return;
+        
+        UIModule UImodule;
+        foreach (var moduleGUI in modulesGUI)
+        {
+            if (moduleGUI.isUnlocked) continue;
+            UImodule = moduleGUI;
+            UImodule.SetData(module);
+            break;
+        }
+    }
+
+    public void SelectModuleGUI(UIModule UImodule)
+    {
+        // Retirer contrôle au joueur
+
+        
+        // Faire disparaitre les autres zones de Module GUI
+        foreach (var modGUI in modulesGUI)
+        {
+            if (modGUI == UImodule) continue;
+            modGUI.gameObject.SetActive(false);
+        }
+
+        // Faire monter la zone sélectionnée en haut
+        
+        
+        // Set les valeurs du selectedModuleGUI
+        
+        switch (SettingsManager.instance.gameLanguage)
+        {
+            case Language.French:
+                moduleAbilityText.text = UImodule.associatedModule.frenchAbilityText;
+                moduleInputText.text = UImodule.associatedModule.frenchInputText;
+                moduleLoreText.text = UImodule.associatedModule.frenchLoreText;
+                break;
+            
+            case Language.English:
+                moduleAbilityText.text = UImodule.associatedModule.englishAbilityText;
+                moduleInputText.text = UImodule.associatedModule.englishInputText;
+                moduleLoreText.text = UImodule.associatedModule.englishLoreText;
+                break;
+        }
+        
+        // Animation d'apparition de la zone d'informations
+        
+        moduleGUIInformationBox.SetActive(true);
+    }
+
+    public void UnselectModuleGUI(UIModule UImodule)
+    {
+        // Faire disparaitre la zone d'informations
+        
+        moduleGUIInformationBox.SetActive(false);
+        
+        // Faire redescendre la zone à sa place
+        
+        // Faire réapparaître les autres zones de module GUI
+        foreach (var modGUI in modulesGUI)
+        {
+            if (modGUI == UImodule) continue;
+            modGUI.gameObject.SetActive(false);
+        }
+        
+        // Redonner contrôle au joueur
+
     }
 
     #endregion
@@ -260,18 +335,22 @@ public class UIInstance : MonoBehaviour
         Debug.Log("je suis lu");
         notificationBox.SetActive(active);
     }
-    
-    public IEnumerator SetNotificationTime(string message,float time)
+
+    public IEnumerator SetNotificationTime(string message, float time)
     {
-     SetNotification("Life Max improved", true);
+        SetNotification("Life Max improved", true);
         yield return new WaitForSeconds(time);
-       SetNotification(null, false);
+        SetNotification(null, false);
     }
+
     #endregion
-    
 }
 
 public enum InGameCanvasType
 {
-    HUDCanvas, DataMenuCanvas, DialoguesCanvas, PauseMenuCanvas, OptionsMenuCanvas
+    HUDCanvas,
+    DataMenuCanvas,
+    DialoguesCanvas,
+    PauseMenuCanvas,
+    OptionsMenuCanvas
 }
