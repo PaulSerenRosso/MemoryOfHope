@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 public abstract class Module : MonoBehaviour
 {
     public int index;
+
+    public bool isDisplayed;
+    public Sprite moduleIconGUI;
+    
     public bool isFixedUpdate;
     public bool isPerformed;
     public List<Module> constrainingModules;
