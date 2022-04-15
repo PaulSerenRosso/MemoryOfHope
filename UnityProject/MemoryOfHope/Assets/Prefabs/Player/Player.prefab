@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815248621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.09, z: 1.05}
+  m_LocalPosition: {x: 0, y: 1.09, z: 0.17000079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7999399970860252443}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 4936362461314419530}
   - component: {fileID: 1738982276577939607}
   - component: {fileID: 951075502359957142}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FinalAttackCollider
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -337,8 +337,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4801644067418484979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.931, z: 0.70999956}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.931, z: 0.82500124}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 7999399970860252443}
   m_RootOrder: 6
@@ -566,17 +566,15 @@ MonoBehaviour:
   - {fileID: 8141380071056486680}
   - {fileID: 7226099581146458021}
   - {fileID: 7226099581146458022}
-  - {fileID: 4272034707977539781}
-  - {fileID: 8256235213664230015}
-  - {fileID: 8509076338704852473}
+  - {fileID: 7649947021829257087}
   money: 0
   hasGlitch: 0
   isActive: 1
   CurrentCheckpoint: {fileID: 0}
   CurrentListenerActivate: {fileID: 0}
-  defaultMaxHealthPlayer: 5
-  healthPlayer: 5
-  maxHealthPlayer: 5
+  defaultMaxHealthPlayer: 100
+  healthPlayer: 100
+  maxHealthPlayer: 100
   isDeadPlayer: 0
   _timeDeath: 2
   _timeRespawn: 2
@@ -637,6 +635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -667,6 +667,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -726,6 +728,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -736,9 +740,9 @@ MonoBehaviour:
   neededModules: []
   inputPressed: 0
   attackList:
-  - startTimeActivateAttack: 0.4
-    endTimeActivateAttack: 0.55
-    startTimeCombo: 0.5
+  - startTimeActivateAttack: 0.2
+    endTimeActivateAttack: 0.3
+    startTimeCombo: 0.3
     endTimeCombo: 0.8
     damage: 1
     maxSpeedDashAttack: 0.5
@@ -767,11 +771,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     attackPlayerCollider: {fileID: 4183998170893442620}
-    attackStrength: 1000
-  - startTimeActivateAttack: 0.4
-    endTimeActivateAttack: 1
-    startTimeCombo: 0.8
-    endTimeCombo: 1.5
+    attackStrength: 0
+  - startTimeActivateAttack: 0.2
+    endTimeActivateAttack: 0.3
+    startTimeCombo: 0.3
+    endTimeCombo: 0.8
     damage: 1
     maxSpeedDashAttack: 0.5
     speedDashAttackCurve:
@@ -799,13 +803,13 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     attackPlayerCollider: {fileID: 5789878978574619094}
-    attackStrength: 1150
-  - startTimeActivateAttack: 0.4
-    endTimeActivateAttack: 1
-    startTimeCombo: 0.8
-    endTimeCombo: 1.5
-    damage: 3
-    maxSpeedDashAttack: 1
+    attackStrength: 0
+  - startTimeActivateAttack: 0.2
+    endTimeActivateAttack: 0.3
+    startTimeCombo: 0.3
+    endTimeCombo: 0.8
+    damage: 1
+    maxSpeedDashAttack: 5
     speedDashAttackCurve:
       serializedVersion: 2
       m_Curve:
@@ -819,37 +823,28 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.35929117
       - serializedVersion: 3
-        time: 0.3559653
-        value: 0
-        inSlope: 0.016656077
-        outSlope: 0.016656077
+        time: 0.07037784
+        value: 0.5476404
+        inSlope: 2.3754241
+        outSlope: 2.3754241
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.18794954
+        inWeight: 0.49721593
+        outWeight: 0.16925427
       - serializedVersion: 3
-        time: 0.38770905
-        value: 0.7108208
-        inSlope: 5.7611456
-        outSlope: 5.7611456
+        time: 0.89965254
+        value: 0.65134436
+        inSlope: -2.4616559
+        outSlope: -2.4616559
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.05135714
-        outWeight: 0.12302063
+        outWeight: 1
       - serializedVersion: 3
-        time: 0.42904454
-        value: -0.001582125
-        inSlope: 0.00229931
-        outSlope: 0.00229931
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.5381957
-      - serializedVersion: 3
-        time: 0.48638916
+        time: 1
         value: 0
-        inSlope: 0.027589774
-        outSlope: 0.027589774
+        inSlope: -6.4908905
+        outSlope: -6.4908905
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -873,6 +868,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules: []
@@ -891,6 +888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -917,6 +916,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -928,10 +929,10 @@ MonoBehaviour:
   inputPressed: 0
   currentTargetedObject: {fileID: 0}
   selectedObject: {fileID: 0}
-  rotateSpeed: 0.3
+  rotateSpeed: 0.1
   joystickDirection: {x: 0, y: 0, z: 0}
-  _activationTime: 0
-  rayLength: 8
+  _activationTime: 0.5
+  rayLength: 10
   interactiveObjectLayer:
     serializedVersion: 2
     m_Bits: 16384
@@ -953,6 +954,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules: []
@@ -993,6 +996,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 90
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -1016,6 +1021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules: []
@@ -1043,6 +1050,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules:
@@ -1066,6 +1075,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules:
@@ -1074,10 +1085,10 @@ MonoBehaviour:
   - {fileID: 423913510}
   neededModules: []
   inputPressed: 0
-  timeDash: 2.3
-  speedDash: 10
-  speedRotation: 0.05
-  cooldownDash: 2
+  timeDash: 0.5
+  speedDash: 20
+  speedRotation: 0.5
+  cooldownDash: 0.5
 --- !u!114 &8509076338704852473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,6 +1102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isDisplayed: 0
+  moduleIconGUI: {fileID: 0}
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules:
@@ -1114,7 +1127,7 @@ GameObject:
   - component: {fileID: 5114926677628109173}
   - component: {fileID: 1551929044269769104}
   - component: {fileID: 5789878978574619094}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SecondAttackCollider
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -1129,8 +1142,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7284903415733054223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.931, z: 0.71}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.931, z: 0.82500166}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 7999399970860252443}
   m_RootOrder: 5
@@ -1234,7 +1247,7 @@ GameObject:
   - component: {fileID: 2538312755308490602}
   - component: {fileID: 6854493005277391123}
   - component: {fileID: 4183998170893442620}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FirstAttackCollider
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -1249,8 +1262,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7538550139986524934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.931, z: 0.70999956}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.931, z: 0.825}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 7999399970860252443}
   m_RootOrder: 4
@@ -1383,15 +1396,19 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 6.86
+      value: 108.5
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: 1.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 8.61
+      value: 153.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
+      propertyPath: RayLayer.m_Bits
+      value: 1574903
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: DirectionSource.z

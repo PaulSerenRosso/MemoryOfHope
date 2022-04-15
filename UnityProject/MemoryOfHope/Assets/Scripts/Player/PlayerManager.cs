@@ -110,6 +110,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             module.LinkModule();
             if (module.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(module);
             else PlayerController.instance.activeModulesUpdate.Add(module);
+            UIInstance.instance.AddModuleIcon(module);
         }
 
         maxHealth = defaultMaxHealthPlayer;
@@ -163,7 +164,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (isDead)
             return;
         health -= damages;
-        StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
+        //StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
         if (health <= 0)
         {
             health = 0;
@@ -171,14 +172,22 @@ public class PlayerManager : MonoBehaviour, Damageable
         }
 
         if (UIInstance.instance != null)
-            UIInstance.instance.DisplayLife();
+        {
+           //UIInstance.instance.DisplayLife(); 
+           UIInstance.instance.DisplayHealth();
+        }
+            
     }
 
     public void Heal(int heal)
     {
         health += heal;
         if (UIInstance.instance != null)
-            UIInstance.instance.DisplayLife();
+        {
+            //UIInstance.instance.DisplayLife();
+            UIInstance.instance.DisplayHealth();
+
+        }
     }
 
     #endregion
@@ -223,6 +232,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (mod.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(mod);
         else PlayerController.instance.activeModulesUpdate.Add(mod);
         obtainedModule.Add(mod);
+        UIInstance.instance.AddModuleIcon(mod);
     }
 
     #endregion
@@ -231,6 +241,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.CompareTag("MaxLifeItem"))
         {
             maxHealth += 1;
@@ -239,6 +250,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             Destroy(other.gameObject);
             return;
         }
+        */
 
         if (other.CompareTag("Enemy") && !isHit && !isBlocked)
         {

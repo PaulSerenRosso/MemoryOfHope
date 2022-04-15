@@ -39,7 +39,14 @@ public class InteractiveObjectFunction : Module
 
     public override void Execute()
     {
+        if (interactionModule.line.positionCount == 2)
+        {
+            interactionModule.line.SetPosition(1, interactionModule.selectedObject.transform.position);
+        }
         
+        var tr = PlayerController.instance.transform;
+        tr.LookAt(interactionModule.selectedObject.transform);
+        tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
     }
 
     public virtual void Select()
@@ -54,6 +61,7 @@ public class InteractiveObjectFunction : Module
         PlayerController.instance.playerRb.isKinematic = false;
         isSelected = false;
         isPerformed = false;
+        
     }
     
     public override void Release()

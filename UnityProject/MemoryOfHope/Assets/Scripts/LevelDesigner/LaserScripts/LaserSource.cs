@@ -8,7 +8,9 @@ public class LaserSource : LaserMachine
 {
     [Header("LaserSource Variables")]
     public Transform beginSource;
-    
+
+    private bool _doActivation;
+    private bool _doDesactivation;
    
     public Vector3 DirectionSource;
     private void Start()
@@ -38,17 +40,23 @@ public class LaserSource : LaserMachine
    {
        if (IsActive)
        {
-           
-           _triggerByLaser = true;
-           LaserLine.enabled = true;
            BeginLaser = beginSource.position; 
            Direction = transform.TransformDirection(DirectionSource).normalized;
+       }
+       if (IsActive && !_doActivation)
+       {
+           _doActivation = true;
+           _doDesactivation = false;
+           _triggerByLaser = true;
+           LaserLine.enabled = true;
 
        }
-       else
+       else if(!_doDesactivation && !IsActive)
        {
+           _doActivation = false;
+           _doDesactivation = true;
            _triggerByLaser = false;
-           LaserLine.SetPosition(1, BeginLaser);
+          
                LaserLine.enabled = false;
            
        }

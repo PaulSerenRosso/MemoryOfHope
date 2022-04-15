@@ -46,18 +46,31 @@ public class LaserModule : Module
 
     public override void Execute()
     {
+        
         isPerformed = true;
-        _shield.inputLaser = true;
-        _shield.Laser.IsActive = true;
-        _shield.LaserCharge -= _shield.LaserChargeCost * Time.deltaTime;
+        if (_shield.InputShield)
+        {
+        
+            _shield.inputLaser = true;
+            _shield.Laser.enabled = true;
+                    _shield.Laser.IsActive = true;
+                    _shield.LaserCharge -= _shield.LaserChargeCost * Time.deltaTime;
+        }
+        
+        
     }
 
     public override void Release()
     {
+     
         _shield.inputLaser = false;
         _shield.Laser.IsActive = false; 
         isPerformed = false;
+  
+
     }
+
+
 
     
 }

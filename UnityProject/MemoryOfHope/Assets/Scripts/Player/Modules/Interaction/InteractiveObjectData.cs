@@ -9,6 +9,7 @@ public class InteractiveObjectData : MonoBehaviour
     public Material defaultMaterial;
     public Material selectedMaterial;
     public Rigidbody rb;
+    public ParticleSystem interactiveParticleSystem;
     
     public virtual void Start()
     {

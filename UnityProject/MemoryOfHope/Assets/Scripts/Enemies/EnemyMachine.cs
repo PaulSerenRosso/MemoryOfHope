@@ -40,9 +40,12 @@ public class EnemyMachine : MonoBehaviour
 
     public void SwitchState(EnemyState state)
     {
-        rb.velocity = Vector3.zero;
-        currentState = state;
-        currentState.StartState(this);
+        if (gameObject.activeSelf)
+        {
+            rb.velocity = Vector3.zero;
+            currentState = state;
+            currentState.StartState(this);
+        }
     }
     
     public virtual void OnHitByMelee()
