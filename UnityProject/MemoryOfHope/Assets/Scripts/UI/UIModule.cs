@@ -14,11 +14,20 @@ public class UIModule : MonoBehaviour
     public Module associatedModule;
     
     public TextMeshProUGUI moduleNameText;
+
+    public Vector3 initialPos;
     
     public Image moduleImage;
 
     public bool isUnlocked;
-    
+
+    public bool isOpened;
+
+    private void Start()
+    {
+        initialPos = GetComponent<RectTransform>().anchoredPosition;
+    }
+
     public void SetData(Module module)
     {
         isUnlocked = true;
@@ -36,8 +45,5 @@ public class UIModule : MonoBehaviour
                 moduleNameText.text = module.englishModuleName;
                 break;
         }
-
-        GetComponent<Button>().interactable = true;
     }
-    
 }

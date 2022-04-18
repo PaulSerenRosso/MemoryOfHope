@@ -437,7 +437,7 @@ MonoBehaviour:
   MaxDistance: 100
   RayLayer:
     serializedVersion: 2
-    m_Bits: 1527
+    m_Bits: 1574391
   LaserLineReceiver: {fileID: 0}
   _currentSource: {fileID: 0}
   _offsetDistanceBeginPosition: 1.05
@@ -473,7 +473,6 @@ GameObject:
   - component: {fileID: 7226099581146458020}
   - component: {fileID: 7226099581146458021}
   - component: {fileID: 7226099581146458022}
-  - component: {fileID: 7226099581146458040}
   - component: {fileID: 7649947021829257087}
   - component: {fileID: 423913510}
   - component: {fileID: 423913511}
@@ -560,21 +559,21 @@ MonoBehaviour:
   obtainedModule:
   - {fileID: 7226099581146458020}
   - {fileID: 8587865940063536777}
-  - {fileID: 7226099581146458040}
   - {fileID: 423913510}
   - {fileID: 423913511}
   - {fileID: 8141380071056486680}
   - {fileID: 7226099581146458021}
   - {fileID: 7226099581146458022}
   - {fileID: 7649947021829257087}
+  - {fileID: 4272034707977539781}
   money: 0
   hasGlitch: 0
   isActive: 1
   CurrentCheckpoint: {fileID: 0}
   CurrentListenerActivate: {fileID: 0}
-  defaultMaxHealthPlayer: 100
-  healthPlayer: 100
-  maxHealthPlayer: 100
+  defaultMaxHealthPlayer: 20
+  healthPlayer: 20
+  maxHealthPlayer: 20
   isDeadPlayer: 0
   _timeDeath: 2
   _timeRespawn: 2
@@ -637,6 +636,14 @@ MonoBehaviour:
   index: 0
   isDisplayed: 0
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: 
+  englishModuleName: 
+  frenchAbilityText: 
+  englishAbilityText: 
+  frenchInputText: 
+  englishInputText: 
+  frenchLoreText: 
+  englishLoreText: 
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -666,9 +673,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e3b7aa1c4e75440944959e68c235e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
+  index: 1
+  isDisplayed: 1
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: '?'
+  englishModuleName: '?'
+  frenchAbilityText: Ce module permet au prototype d'effectuer un saut.
+  englishAbilityText: This module allows the prototype to jump.
+  frenchInputText: Pressez A pour sauter.
+  englishInputText: Press A to jump.
+  frenchLoreText: Lore du module...
+  englishLoreText: Lore about this module...
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -727,9 +742,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef1f8061e6214849b8ee2818817cb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
+  index: 3
+  isDisplayed: 1
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: '?'
+  englishModuleName: '?'
+  frenchAbilityText: '?'
+  englishAbilityText: '?'
+  frenchInputText: '?'
+  englishInputText: '?'
+  frenchLoreText: '?'
+  englishLoreText: '?'
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -771,7 +794,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     attackPlayerCollider: {fileID: 4183998170893442620}
-    attackStrength: 0
+    attackStrength: 1000
   - startTimeActivateAttack: 0.2
     endTimeActivateAttack: 0.3
     startTimeCombo: 0.3
@@ -803,7 +826,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
     attackPlayerCollider: {fileID: 5789878978574619094}
-    attackStrength: 0
+    attackStrength: 1000
   - startTimeActivateAttack: 0.2
     endTimeActivateAttack: 0.3
     startTimeCombo: 0.3
@@ -855,26 +878,6 @@ MonoBehaviour:
     attackPlayerCollider: {fileID: 951075502359957142}
     attackStrength: 1300
   currentIndexAttack: 0
---- !u!114 &7226099581146458040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7226099581146458017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a07532c4b705e94a9c7aaa198e539df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
-  moduleIconGUI: {fileID: 0}
-  isFixedUpdate: 0
-  isPerformed: 0
-  constrainingModules: []
-  neededModules: []
-  inputPressed: 0
 --- !u!114 &7649947021829257087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,9 +890,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f24bd910f75464382c9a591ac4846c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
+  index: 4
+  isDisplayed: 1
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: '?'
+  englishModuleName: '?'
+  frenchAbilityText: '?'
+  englishAbilityText: '?'
+  frenchInputText: '?'
+  englishInputText: '?'
+  frenchLoreText: '?'
+  englishLoreText: '?'
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -915,9 +926,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32d5d4a8263db844b00a824d800141a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
+  index: 2
+  isDisplayed: 1
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: '?'
+  englishModuleName: '?'
+  frenchAbilityText: '?'
+  englishAbilityText: '?'
+  frenchInputText: '?'
+  englishInputText: '?'
+  frenchLoreText: '?'
+  englishLoreText: '?'
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
@@ -956,6 +975,14 @@ MonoBehaviour:
   index: 0
   isDisplayed: 0
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: 
+  englishModuleName: 
+  frenchAbilityText: 
+  englishAbilityText: 
+  frenchInputText: 
+  englishInputText: 
+  frenchLoreText: 
+  englishLoreText: 
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules: []
@@ -968,7 +995,7 @@ MonoBehaviour:
   joystickDirection: {x: 0, y: 0, z: 0}
   moveVector: {x: 0, y: 0, z: 0}
   inputCam: {x: 0, y: 0}
-  range: 7.5
+  range: 15
 --- !u!114 &423913517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,10 +1025,18 @@ MonoBehaviour:
   index: 90
   isDisplayed: 0
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: 
+  englishModuleName: 
+  frenchAbilityText: 
+  englishAbilityText: 
+  frenchInputText: 
+  englishInputText: 
+  frenchLoreText: 
+  englishLoreText: 
   isFixedUpdate: 1
   isPerformed: 0
   constrainingModules:
-  - {fileID: 7226099581146458040}
+  - {fileID: 0}
   neededModules: []
   inputPressed: 0
   minXAngle: 40
@@ -1023,6 +1058,14 @@ MonoBehaviour:
   index: 0
   isDisplayed: 0
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: 
+  englishModuleName: 
+  frenchAbilityText: 
+  englishAbilityText: 
+  frenchInputText: 
+  englishInputText: 
+  frenchLoreText: 
+  englishLoreText: 
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules: []
@@ -1052,6 +1095,14 @@ MonoBehaviour:
   index: 0
   isDisplayed: 0
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: 
+  englishModuleName: 
+  frenchAbilityText: 
+  englishAbilityText: 
+  frenchInputText: 
+  englishInputText: 
+  frenchLoreText: 
+  englishLoreText: 
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules:
@@ -1074,9 +1125,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542d78c99c3253b46a855cad2fa454b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
+  index: 5
+  isDisplayed: 1
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: '?'
+  englishModuleName: '?'
+  frenchAbilityText: '?'
+  englishAbilityText: '?'
+  frenchInputText: '?'
+  englishInputText: '?'
+  frenchLoreText: '?'
+  englishLoreText: '?'
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules:
@@ -1101,9 +1160,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa70983a0285754c9fe72a5164c77eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  isDisplayed: 0
+  index: 6
+  isDisplayed: 1
   moduleIconGUI: {fileID: 0}
+  frenchModuleName: '?'
+  englishModuleName: '?'
+  frenchAbilityText: '?'
+  englishAbilityText: '?'
+  frenchInputText: '?'
+  englishInputText: '?'
+  frenchLoreText: '?'
+  englishLoreText: '?'
   isFixedUpdate: 0
   isPerformed: 0
   constrainingModules:
@@ -1396,15 +1463,15 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 108.5
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: 1
+      value: 7.57
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 153.55
+      value: -43.45
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: RayLayer.m_Bits
