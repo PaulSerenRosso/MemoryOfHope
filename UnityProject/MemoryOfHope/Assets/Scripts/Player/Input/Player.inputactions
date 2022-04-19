@@ -323,6 +323,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MainMenuUI",
+            "id": "faf62642-af1c-4a4f-b2e6-018b6f507abb",
+            "actions": [
+                {
+                    "name": "MainMenuGoLeft",
+                    "type": "Button",
+                    "id": "21aedb6f-9e75-4496-bf2b-f1be82b79b57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MainMenuGoRight",
+                    "type": "Button",
+                    "id": "ee6105ac-a37a-4801-bbb6-931d9f791477",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f5d109a1-50b8-41ff-b710-e92b5509e8c1",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MainMenuGoRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44b88efb-b9b2-4661-93eb-23587a3e55d4",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MainMenuGoLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

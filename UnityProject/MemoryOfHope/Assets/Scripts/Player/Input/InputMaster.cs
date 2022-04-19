@@ -345,6 +345,54 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MainMenuUI"",
+            ""id"": ""faf62642-af1c-4a4f-b2e6-018b6f507abb"",
+            ""actions"": [
+                {
+                    ""name"": ""MainMenuGoLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""21aedb6f-9e75-4496-bf2b-f1be82b79b57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenuGoRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee6105ac-a37a-4801-bbb6-931d9f791477"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f5d109a1-50b8-41ff-b710-e92b5509e8c1"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenuGoRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44b88efb-b9b2-4661-93eb-23587a3e55d4"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenuGoLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -364,6 +412,10 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Activate = m_Player.FindAction("Activate", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Laser = m_Player.FindAction("Laser", throwIfNotFound: true);
+        // MainMenuUI
+        m_MainMenuUI = asset.FindActionMap("MainMenuUI", throwIfNotFound: true);
+        m_MainMenuUI_MainMenuGoLeft = m_MainMenuUI.FindAction("MainMenuGoLeft", throwIfNotFound: true);
+        m_MainMenuUI_MainMenuGoRight = m_MainMenuUI.FindAction("MainMenuGoRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -548,6 +600,47 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // MainMenuUI
+    private readonly InputActionMap m_MainMenuUI;
+    private IMainMenuUIActions m_MainMenuUIActionsCallbackInterface;
+    private readonly InputAction m_MainMenuUI_MainMenuGoLeft;
+    private readonly InputAction m_MainMenuUI_MainMenuGoRight;
+    public struct MainMenuUIActions
+    {
+        private @InputMaster m_Wrapper;
+        public MainMenuUIActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MainMenuGoLeft => m_Wrapper.m_MainMenuUI_MainMenuGoLeft;
+        public InputAction @MainMenuGoRight => m_Wrapper.m_MainMenuUI_MainMenuGoRight;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenuUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuUIActions set) { return set.Get(); }
+        public void SetCallbacks(IMainMenuUIActions instance)
+        {
+            if (m_Wrapper.m_MainMenuUIActionsCallbackInterface != null)
+            {
+                @MainMenuGoLeft.started -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
+                @MainMenuGoLeft.performed -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
+                @MainMenuGoLeft.canceled -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
+                @MainMenuGoRight.started -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoRight;
+                @MainMenuGoRight.performed -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoRight;
+                @MainMenuGoRight.canceled -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoRight;
+            }
+            m_Wrapper.m_MainMenuUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MainMenuGoLeft.started += instance.OnMainMenuGoLeft;
+                @MainMenuGoLeft.performed += instance.OnMainMenuGoLeft;
+                @MainMenuGoLeft.canceled += instance.OnMainMenuGoLeft;
+                @MainMenuGoRight.started += instance.OnMainMenuGoRight;
+                @MainMenuGoRight.performed += instance.OnMainMenuGoRight;
+                @MainMenuGoRight.canceled += instance.OnMainMenuGoRight;
+            }
+        }
+    }
+    public MainMenuUIActions @MainMenuUI => new MainMenuUIActions(this);
     public interface IPlayerActions
     {
         void OnJump(InputAction.CallbackContext context);
@@ -563,5 +656,10 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnActivate(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnLaser(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuUIActions
+    {
+        void OnMainMenuGoLeft(InputAction.CallbackContext context);
+        void OnMainMenuGoRight(InputAction.CallbackContext context);
     }
 }
