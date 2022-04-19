@@ -45,10 +45,12 @@ public class LaserMachine : MonoBehaviour
                         TriggerNewObject();
                     _isTrigger = true;
 
-                    LaserLine.SetPosition(1, _hit.point);
+              
+                        LaserLine.SetPosition(1, _hit.point);
                 }
                 else
                 {
+              
                     LaserLine.SetPosition(1, _ray.origin + Direction * MaxDistance);
                     if (_isTrigger)
                     {

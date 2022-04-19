@@ -243,6 +243,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.CompareTag("MaxLifeItem"))
         {
             maxHealth += 1;
@@ -251,6 +252,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             Destroy(other.gameObject);
             return;
         }
+        */
 
         if (other.CompareTag("Enemy") && !isHit && !isBlocked)
         {

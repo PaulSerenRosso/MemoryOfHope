@@ -276,8 +276,45 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            Vector3 normal = other.GetContact(0).normal;
-            if (normal.y >= angleGround)
+            ContactPoint[] points = new ContactPoint[10];
+            other.GetContacts(points);
+
+            bool _isGround = false;
+            bool _isWall = false;
+            for (int i = 0; i < points.Length; i++)
+            {
+                Vector3 normal = points[i].normal;
+
+                if (normal.y >= angleGround)
+                {
+                    _isGround = true;
+                    currentNormalGround = normal.normalized;
+                }
+
+                if (normal.y <= angleGround && normal != Vector3.zero)
+                {
+                    _isWall = true;
+                    currentNormalWall = normal.normalized;
+                }
+            }
+
+            if (!_isWall && currentWall == other.collider)
+            {
+                currentWall = null;
+                currentNormalWall = Vector3.zero;
+            }
+            else if (_isWall)
+            currentWall = other.collider;
+
+            if (!_isGround && currentGround == other.collider)
+            {
+                onGround = false;
+                currentGround = null;
+                currentNormalGround = Vector3.zero;
+                playerAnimator.SetBool("onGround", false);
+                currentGravity = defaultGravity;
+            }
+            else if (_isGround)
             {
                 if (!onGround)
                 {
@@ -286,14 +323,7 @@ public class PlayerController : MonoBehaviour
                     playerRb.velocity = Vector3.zero;
                     currentGravity = 0;
                 }
-
-                currentNormalGround = normal.normalized;
                 currentGround = other.collider;
-            }
-            else
-            {
-                currentNormalWall = normal.normalized;
-                currentWall = other.collider;
             }
         }
     }
