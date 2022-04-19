@@ -28,6 +28,7 @@ public class ShieldMirror : BaseMirror
                     Vector3 upOffset = PlayerController.instance.transform.TransformPoint(Vector3.up * Yoffset);
                     BeginLaser = new Vector3(transform.position.x, upOffset.y, transform.position.z) +Direction*_offsetDistanceBeginPosition;
                     LaserLineReceiver.SetPosition(0, hit.point);
+                    Debug.Log("test");
         }
         else if (!_shield.InputShield && !_shield.inputLaser)
         {
