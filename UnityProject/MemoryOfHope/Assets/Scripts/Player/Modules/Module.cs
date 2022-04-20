@@ -8,14 +8,28 @@ public abstract class Module : MonoBehaviour
 {
     public int index;
 
+    [Header("UI")]
     public bool isDisplayed;
     public Sprite moduleIconGUI;
+    
+    public string frenchModuleName;
+    public string englishModuleName;
+
+    [TextArea(3, 3)] public string frenchAbilityText;
+    [TextArea(3, 3)] public string englishAbilityText;
+
+    [TextArea(3, 3)] public string frenchInputText;
+    [TextArea(3, 3)] public string englishInputText;
+    
+    [TextArea(3, 3)] public string frenchLoreText;
+    [TextArea(3, 3)] public string englishLoreText;
+    
+    [Header("Module information")]
     
     public bool isFixedUpdate;
     public bool isPerformed;
     public List<Module> constrainingModules;
     public List<Module> neededModules;
-    
     public bool inputPressed;
 
     public abstract void LinkModule();
