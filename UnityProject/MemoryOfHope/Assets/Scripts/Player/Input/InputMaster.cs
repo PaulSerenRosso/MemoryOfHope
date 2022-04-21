@@ -55,15 +55,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""OpenCloseMap"",
-                    ""type"": ""Button"",
-                    ""id"": ""df62dc6e-43dc-4594-83ff-7804a1705148"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MovingOnMap"",
                     ""type"": ""Value"",
                     ""id"": ""84429ab2-2968-4199-b8b1-c58219159c38"",
@@ -236,17 +227,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c6a8f7c0-63f1-404e-97d0-b2bfc9f01181"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenCloseMap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""726261f8-f03b-46b1-b40f-669ab6cc3a38"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -347,22 +327,90 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""MainMenuUI"",
+            ""name"": ""UI"",
             ""id"": ""faf62642-af1c-4a4f-b2e6-018b6f507abb"",
             ""actions"": [
                 {
-                    ""name"": ""MainMenuGoLeft"",
+                    ""name"": ""Return"",
                     ""type"": ""Button"",
-                    ""id"": ""21aedb6f-9e75-4496-bf2b-f1be82b79b57"",
+                    ""id"": ""c7d2ded5-ed53-42f5-a174-88813c2e62be"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""OpenInformationMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""7beb839e-928d-4189-860b-abbfde494ba5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenPauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""e01521fc-fd0f-401d-b86e-d2ddd8fc4d4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f2e73b73-b991-4b80-9ccd-50f24d232a6c"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3341b3a-41bc-4268-93bd-8f5709fa801b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenPauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffc8fa13-4ae3-4154-90e0-c5ff8dcc71ee"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenInformationMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""MainMenuUI"",
+            ""id"": ""2810612b-4414-42b0-808f-963dd5ebd342"",
+            ""actions"": [
+                {
                     ""name"": ""MainMenuGoRight"",
                     ""type"": ""Button"",
-                    ""id"": ""ee6105ac-a37a-4801-bbb6-931d9f791477"",
+                    ""id"": ""4e254f84-7c00-4303-92ad-bc43b999da95"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenuGoLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a419309-098b-43dc-8e82-738c5c10fbc4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -372,7 +420,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""f5d109a1-50b8-41ff-b710-e92b5509e8c1"",
+                    ""id"": ""add5f1b8-f9b8-47a3-a709-4346297591e1"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
@@ -383,7 +431,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""44b88efb-b9b2-4661-93eb-23587a3e55d4"",
+                    ""id"": ""4e535083-c36b-40eb-afa3-d330861feb81"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
@@ -402,7 +450,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_OpenCloseMap = m_Player.FindAction("OpenCloseMap", throwIfNotFound: true);
         m_Player_MovingOnMap = m_Player.FindAction("MovingOnMap", throwIfNotFound: true);
         m_Player_Prism = m_Player.FindAction("Prism", throwIfNotFound: true);
         m_Player_InteractionModule = m_Player.FindAction("InteractionModule", throwIfNotFound: true);
@@ -412,10 +459,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Activate = m_Player.FindAction("Activate", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Laser = m_Player.FindAction("Laser", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Return = m_UI.FindAction("Return", throwIfNotFound: true);
+        m_UI_OpenInformationMenu = m_UI.FindAction("OpenInformationMenu", throwIfNotFound: true);
+        m_UI_OpenPauseMenu = m_UI.FindAction("OpenPauseMenu", throwIfNotFound: true);
         // MainMenuUI
         m_MainMenuUI = asset.FindActionMap("MainMenuUI", throwIfNotFound: true);
-        m_MainMenuUI_MainMenuGoLeft = m_MainMenuUI.FindAction("MainMenuGoLeft", throwIfNotFound: true);
         m_MainMenuUI_MainMenuGoRight = m_MainMenuUI.FindAction("MainMenuGoRight", throwIfNotFound: true);
+        m_MainMenuUI_MainMenuGoLeft = m_MainMenuUI.FindAction("MainMenuGoLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -478,7 +530,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_OpenCloseMap;
     private readonly InputAction m_Player_MovingOnMap;
     private readonly InputAction m_Player_Prism;
     private readonly InputAction m_Player_InteractionModule;
@@ -495,7 +546,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @OpenCloseMap => m_Wrapper.m_Player_OpenCloseMap;
         public InputAction @MovingOnMap => m_Wrapper.m_Player_MovingOnMap;
         public InputAction @Prism => m_Wrapper.m_Player_Prism;
         public InputAction @InteractionModule => m_Wrapper.m_Player_InteractionModule;
@@ -523,9 +573,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @OpenCloseMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenCloseMap;
-                @OpenCloseMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenCloseMap;
-                @OpenCloseMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenCloseMap;
                 @MovingOnMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovingOnMap;
                 @MovingOnMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovingOnMap;
                 @MovingOnMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovingOnMap;
@@ -566,9 +613,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @OpenCloseMap.started += instance.OnOpenCloseMap;
-                @OpenCloseMap.performed += instance.OnOpenCloseMap;
-                @OpenCloseMap.canceled += instance.OnOpenCloseMap;
                 @MovingOnMap.started += instance.OnMovingOnMap;
                 @MovingOnMap.performed += instance.OnMovingOnMap;
                 @MovingOnMap.canceled += instance.OnMovingOnMap;
@@ -601,17 +645,66 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Return;
+    private readonly InputAction m_UI_OpenInformationMenu;
+    private readonly InputAction m_UI_OpenPauseMenu;
+    public struct UIActions
+    {
+        private @InputMaster m_Wrapper;
+        public UIActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Return => m_Wrapper.m_UI_Return;
+        public InputAction @OpenInformationMenu => m_Wrapper.m_UI_OpenInformationMenu;
+        public InputAction @OpenPauseMenu => m_Wrapper.m_UI_OpenPauseMenu;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Return.started -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                @Return.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                @Return.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                @OpenInformationMenu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenInformationMenu;
+                @OpenInformationMenu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenInformationMenu;
+                @OpenInformationMenu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenInformationMenu;
+                @OpenPauseMenu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenPauseMenu;
+                @OpenPauseMenu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenPauseMenu;
+                @OpenPauseMenu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenPauseMenu;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Return.started += instance.OnReturn;
+                @Return.performed += instance.OnReturn;
+                @Return.canceled += instance.OnReturn;
+                @OpenInformationMenu.started += instance.OnOpenInformationMenu;
+                @OpenInformationMenu.performed += instance.OnOpenInformationMenu;
+                @OpenInformationMenu.canceled += instance.OnOpenInformationMenu;
+                @OpenPauseMenu.started += instance.OnOpenPauseMenu;
+                @OpenPauseMenu.performed += instance.OnOpenPauseMenu;
+                @OpenPauseMenu.canceled += instance.OnOpenPauseMenu;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
+
     // MainMenuUI
     private readonly InputActionMap m_MainMenuUI;
     private IMainMenuUIActions m_MainMenuUIActionsCallbackInterface;
-    private readonly InputAction m_MainMenuUI_MainMenuGoLeft;
     private readonly InputAction m_MainMenuUI_MainMenuGoRight;
+    private readonly InputAction m_MainMenuUI_MainMenuGoLeft;
     public struct MainMenuUIActions
     {
         private @InputMaster m_Wrapper;
         public MainMenuUIActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MainMenuGoLeft => m_Wrapper.m_MainMenuUI_MainMenuGoLeft;
         public InputAction @MainMenuGoRight => m_Wrapper.m_MainMenuUI_MainMenuGoRight;
+        public InputAction @MainMenuGoLeft => m_Wrapper.m_MainMenuUI_MainMenuGoLeft;
         public InputActionMap Get() { return m_Wrapper.m_MainMenuUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -621,22 +714,22 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_MainMenuUIActionsCallbackInterface != null)
             {
-                @MainMenuGoLeft.started -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
-                @MainMenuGoLeft.performed -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
-                @MainMenuGoLeft.canceled -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
                 @MainMenuGoRight.started -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoRight;
                 @MainMenuGoRight.performed -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoRight;
                 @MainMenuGoRight.canceled -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoRight;
+                @MainMenuGoLeft.started -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
+                @MainMenuGoLeft.performed -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
+                @MainMenuGoLeft.canceled -= m_Wrapper.m_MainMenuUIActionsCallbackInterface.OnMainMenuGoLeft;
             }
             m_Wrapper.m_MainMenuUIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @MainMenuGoLeft.started += instance.OnMainMenuGoLeft;
-                @MainMenuGoLeft.performed += instance.OnMainMenuGoLeft;
-                @MainMenuGoLeft.canceled += instance.OnMainMenuGoLeft;
                 @MainMenuGoRight.started += instance.OnMainMenuGoRight;
                 @MainMenuGoRight.performed += instance.OnMainMenuGoRight;
                 @MainMenuGoRight.canceled += instance.OnMainMenuGoRight;
+                @MainMenuGoLeft.started += instance.OnMainMenuGoLeft;
+                @MainMenuGoLeft.performed += instance.OnMainMenuGoLeft;
+                @MainMenuGoLeft.canceled += instance.OnMainMenuGoLeft;
             }
         }
     }
@@ -646,7 +739,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnOpenCloseMap(InputAction.CallbackContext context);
         void OnMovingOnMap(InputAction.CallbackContext context);
         void OnPrism(InputAction.CallbackContext context);
         void OnInteractionModule(InputAction.CallbackContext context);
@@ -657,9 +749,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnLaser(InputAction.CallbackContext context);
     }
+    public interface IUIActions
+    {
+        void OnReturn(InputAction.CallbackContext context);
+        void OnOpenInformationMenu(InputAction.CallbackContext context);
+        void OnOpenPauseMenu(InputAction.CallbackContext context);
+    }
     public interface IMainMenuUIActions
     {
-        void OnMainMenuGoLeft(InputAction.CallbackContext context);
         void OnMainMenuGoRight(InputAction.CallbackContext context);
+        void OnMainMenuGoLeft(InputAction.CallbackContext context);
     }
 }

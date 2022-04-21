@@ -86,11 +86,11 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void Awake()
     {
-        if (instance is { })
+        /*if (instance is { })
         {
             DestroyImmediate(gameObject);
             return;
-        }
+        }*/
 
         instance = this;
     }

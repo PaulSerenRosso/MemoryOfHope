@@ -15,8 +15,21 @@ public class CameraRotationModule : Module
   
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.RotateCamera.performed += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.RotateCamera.canceled += context => InputReleased(context);
+        GameManager.instance.inputs.Player.RotateCamera.performed += InputPressed;
+        GameManager.instance.inputs.Player.RotateCamera.canceled += InputReleased;
+        isLinked = true;
+    }
+    
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.RotateCamera.performed -= InputPressed;
+        GameManager.instance.inputs.Player.RotateCamera.canceled -= InputReleased;
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)

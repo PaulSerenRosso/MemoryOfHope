@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "OpenCloseMap",
-                    "type": "Button",
-                    "id": "df62dc6e-43dc-4594-83ff-7804a1705148",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MovingOnMap",
                     "type": "Value",
                     "id": "84429ab2-2968-4199-b8b1-c58219159c38",
@@ -214,17 +205,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c6a8f7c0-63f1-404e-97d0-b2bfc9f01181",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenCloseMap",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "726261f8-f03b-46b1-b40f-669ab6cc3a38",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -325,22 +305,90 @@
             ]
         },
         {
-            "name": "MainMenuUI",
+            "name": "UI",
             "id": "faf62642-af1c-4a4f-b2e6-018b6f507abb",
             "actions": [
                 {
-                    "name": "MainMenuGoLeft",
+                    "name": "Return",
                     "type": "Button",
-                    "id": "21aedb6f-9e75-4496-bf2b-f1be82b79b57",
+                    "id": "c7d2ded5-ed53-42f5-a174-88813c2e62be",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
+                    "name": "OpenInformationMenu",
+                    "type": "Button",
+                    "id": "7beb839e-928d-4189-860b-abbfde494ba5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenPauseMenu",
+                    "type": "Button",
+                    "id": "e01521fc-fd0f-401d-b86e-d2ddd8fc4d4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f2e73b73-b991-4b80-9ccd-50f24d232a6c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3341b3a-41bc-4268-93bd-8f5709fa801b",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenPauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ffc8fa13-4ae3-4154-90e0-c5ff8dcc71ee",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInformationMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "MainMenuUI",
+            "id": "2810612b-4414-42b0-808f-963dd5ebd342",
+            "actions": [
+                {
                     "name": "MainMenuGoRight",
                     "type": "Button",
-                    "id": "ee6105ac-a37a-4801-bbb6-931d9f791477",
+                    "id": "4e254f84-7c00-4303-92ad-bc43b999da95",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MainMenuGoLeft",
+                    "type": "Button",
+                    "id": "6a419309-098b-43dc-8e82-738c5c10fbc4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -350,7 +398,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "f5d109a1-50b8-41ff-b710-e92b5509e8c1",
+                    "id": "add5f1b8-f9b8-47a3-a709-4346297591e1",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "Press",
                     "processors": "",
@@ -361,7 +409,7 @@
                 },
                 {
                     "name": "",
-                    "id": "44b88efb-b9b2-4661-93eb-23587a3e55d4",
+                    "id": "4e535083-c36b-40eb-afa3-d330861feb81",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "Press",
                     "processors": "",

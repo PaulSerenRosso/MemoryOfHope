@@ -13,11 +13,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance is { })
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }
+        if (instance != null && instance != this) Destroy(gameObject);
         instance = this;
     }
 

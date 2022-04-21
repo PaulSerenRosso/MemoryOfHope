@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public abstract class Module : MonoBehaviour
 {
     public int index;
+    public bool isLinked;
 
     [Header("UI")]
     public bool isDisplayed;
@@ -33,6 +34,8 @@ public abstract class Module : MonoBehaviour
     public bool inputPressed;
 
     public abstract void LinkModule();
+
+    public abstract void UnlinkModule();
     
     public abstract void InputPressed(InputAction.CallbackContext ctx);
 

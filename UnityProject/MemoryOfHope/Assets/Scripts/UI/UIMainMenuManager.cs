@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class UIMainMenuManager : MonoBehaviour
 {
-    public InputMaster inputMaster;
     private MainMenuSection actualSection; 
     [SerializeField] private GameObject mainSection;
     [SerializeField] private GameObject mainSectionButton;
@@ -20,17 +18,15 @@ public class UIMainMenuManager : MonoBehaviour
 
     private Dictionary<MainMenuSection, GameObject> allSections = new Dictionary<MainMenuSection, GameObject>();
     [SerializeField] private EventSystem eventSystem;
-    
+
     private void Awake()
     {
-        // A terme : mettre l'Input Master dans le GameManager
-        inputMaster = new InputMaster();
+        LinkInputs();
     }
 
     public void Start()
     {
         Initialization();
-        LinkInputs();
     }
 
     private void Initialization()
@@ -40,25 +36,28 @@ public class UIMainMenuManager : MonoBehaviour
         allSections.Add(MainMenuSection.OptionsSection, optionsSection);
         actualSection = MainMenuSection.MainSection;
     }
+    
     private void LinkInputs()
     {
-        inputMaster.MainMenuUI.MainMenuGoRight.performed += _ => GoingRight();
-        inputMaster.MainMenuUI.MainMenuGoLeft.performed += _ => GoingLeft();
-    }
-
-    private void OnEnable()
-    {
-        inputMaster.Enable();
+        GameManager.instance.inputs.MainMenuUI.MainMenuGoRight.performed += GoingRight;
+        GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed += GoingLeft;
     }
     
-    private void OnDisable()
+    private void OnEnable()
     {
-        inputMaster.Disable();
+        GameManager.instance.inputs.MainMenuUI.Enable();
     }
 
-    private void GoingRight()
+    private void OnDisable()
     {
-        Debug.Log("going right");
+        GameManager.instance.inputs.MainMenuUI.Disable();
+        GameManager.instance.inputs.MainMenuUI.MainMenuGoRight.performed -= GoingRight;
+        GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed -= GoingLeft;
+
+    }
+
+    private void GoingRight(InputAction.CallbackContext ctx)
+    {
         switch (actualSection)
         {
             case MainMenuSection.MainSection:
@@ -75,9 +74,8 @@ public class UIMainMenuManager : MonoBehaviour
         }
     }
 
-    private void GoingLeft()
+    private void GoingLeft(InputAction.CallbackContext ctx)
     {
-        Debug.Log("going left");
         switch (actualSection)
         {
             case MainMenuSection.MainSection:
@@ -127,6 +125,17 @@ public class UIMainMenuManager : MonoBehaviour
                 Debug.LogError("Can't set any object");
                 return null;
         }
+    }
+
+    public void OnPlayClick()
+    {
+        if (SceneManager.instance == null) return;
+        SceneManager.instance.LoadingScene(2);
+    }
+
+    public void OnQuitClick()
+    {
+        
     }
 }
 

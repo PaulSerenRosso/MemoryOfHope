@@ -14,6 +14,8 @@ public class SettingsManager : MonoBehaviour
             return;
         }
         instance = this;
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     public Language gameLanguage;

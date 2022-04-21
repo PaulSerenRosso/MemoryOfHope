@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,8 +16,21 @@ public class ActivateModule : Module
 
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.Activate.performed += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.Activate.canceled += context => InputReleased(context);
+        GameManager.instance.inputs.Player.Activate.performed += InputPressed;
+        GameManager.instance.inputs.Player.Activate.canceled += InputReleased;
+        isLinked = true;
+    }
+
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Activate.performed -= InputPressed;
+        GameManager.instance.inputs.Player.Activate.canceled -= InputReleased;
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)

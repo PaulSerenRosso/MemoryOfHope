@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,10 +23,25 @@ public class PrismModule : Module
         
         Debug.Log("Linking Inputs for Prism Module");
 
-        PlayerController.instance.playerActions.Player.Move.performed += context => JoystickPressed(context);
-        PlayerController.instance.playerActions.Player.Move.canceled += context => JoystickReleased(context);
-        PlayerController.instance.playerActions.Player.Prism.canceled += context => InputReleased(context);
-        PlayerController.instance.playerActions.Player.Prism.performed += context => InputPressed(context);
+        GameManager.instance.inputs.Player.Move.performed += JoystickPressed;
+        GameManager.instance.inputs.Player.Move.canceled += JoystickReleased;
+        GameManager.instance.inputs.Player.Prism.canceled += InputReleased;
+        GameManager.instance.inputs.Player.Prism.performed += InputPressed;
+        isLinked = true;
+    }
+
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Move.performed -= JoystickPressed;
+        GameManager.instance.inputs.Player.Move.canceled -= JoystickReleased;
+        GameManager.instance.inputs.Player.Prism.canceled -= InputReleased;
+        GameManager.instance.inputs.Player.Prism.performed -= InputPressed;
     }
 
     private void JoystickReleased(InputAction.CallbackContext context)

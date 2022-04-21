@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIInstance : MonoBehaviour
 {
@@ -14,12 +14,7 @@ public class UIInstance : MonoBehaviour
     
         private void Awake()
         {
-            if (instance is { })
-            {
-                DestroyImmediate(gameObject);
-                return;
-            }
-    
+            if (instance != null && instance != this) Destroy(gameObject);
             instance = this;
         }
 
@@ -56,10 +51,21 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject iconPrefab;
     private int displayedModule;
 
-    [Header("Notification")] [SerializeField]
-    private GameObject notificationBox;
+    [Header("Notification")] 
+    [SerializeField] private GameObject notificationBox;
     [SerializeField] private TextMeshProUGUI notificationText;
-    
+
+    [Header("Pause Menu")]
+    public InGameCanvasType[] pauseMenuHiddenCanvas;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenuFirstSelected;
+    [SerializeField] private GameObject optionButton;
+
+    [Header("Options Menu")]
+    public InGameCanvasType[] optionMenuHiddenCanvas;
+    [SerializeField] private GameObject optionMenu;
+    [SerializeField] private GameObject optionMenuFirstSelected;
+
     [Header("Navigation")]
     public EventSystem eventSystem;
     
@@ -69,14 +75,38 @@ public class UIInstance : MonoBehaviour
     
     private void Start()
     {
-        LinkInput();
         InformationMenuInitialization();
         InitializationStats();
     }
 
     private void LinkInput()
     {
-        PlayerController.instance.playerActions.Player.OpenCloseMap.performed += _ => InformationMenuInputPressed();
+        GameManager.instance.inputs.UI.OpenInformationMenu.performed += InformationMenuInputPressed;
+        GameManager.instance.inputs.UI.OpenPauseMenu.performed += PauseMenuInputPressed;
+        GameManager.instance.inputs.UI.Return.performed += ClosingInformationMenu;
+        GameManager.instance.inputs.UI.Return.performed += ClosingOptionMenu;
+        GameManager.instance.inputs.UI.Return.performed += ClosingPauseMenu;
+    }
+
+    private void UnlinkInput()
+    {
+        GameManager.instance.inputs.UI.OpenInformationMenu.performed -= InformationMenuInputPressed;
+        GameManager.instance.inputs.UI.OpenPauseMenu.performed -= PauseMenuInputPressed;
+        GameManager.instance.inputs.UI.Return.performed -= ClosingInformationMenu;
+        GameManager.instance.inputs.UI.Return.performed -= ClosingOptionMenu;
+        GameManager.instance.inputs.UI.Return.performed -= ClosingPauseMenu;
+    }
+    
+    private void OnEnable()
+    {
+        LinkInput();
+        GameManager.instance.inputs.UI.Enable();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.inputs.UI.Disable();
+        UnlinkInput();
     }
 
     #region Canvas Management
@@ -96,7 +126,76 @@ public class UIInstance : MonoBehaviour
     } // Active ou désactive les canvas que l'on renseigne en paramètres
 
     #endregion
+    
+    #region HUD
 
+    public void InitializationStats()
+    {
+        SetInitHealth();
+        DisplayHealth();
+    }
+
+    public void SetInitHealth()
+    {
+        heartContainers.Clear();
+
+        if (PlayerManager.instance.maxHealth % 4 != 0)
+        {
+            Debug.LogError("Player Health must be a multiple of 4");
+            return;
+        }
+
+        float heartsContainersNumberFloat = PlayerManager.instance.health / 4f;
+        int heartsContainersNumber = (int) heartsContainersNumberFloat;
+        var pos = firstHeartContainerTransform.position;
+        for (int i = 0; i < heartsContainersNumber; i++)
+        {
+            heartContainers.Add(Instantiate(heartContainerPrefab, pos, Quaternion.identity,
+                firstHeartContainerTransform).GetComponent<UIHeart>());
+            pos += Vector3.right * distanceBetweenHeartContainers;
+        }
+    }
+
+    public void DisplayHealth()
+    {
+        int life = 0;
+        foreach (var container in heartContainers)
+        {
+            foreach (var part in container.heartParts)
+            {
+                part.color = Color.black;
+            }
+        }
+
+        int heartContainer = 0;
+        int heartPart = 0;
+        while (life != PlayerManager.instance.health)
+        {
+            life++;
+            heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
+            heartPart++;
+
+            if (heartPart <= 3) continue;
+            heartPart = 0;
+            heartContainer++;
+        }
+    }
+
+    public void AddModuleIcon(Module module)
+    {
+        if (!module.isDisplayed) return;
+
+        Vector3 pos = firstIconTransform.position + Vector3.right * distanceBetweenIcons * displayedModule;
+
+        Image icon = Instantiate(iconPrefab, pos, Quaternion.identity, firstIconTransform).GetComponent<Image>();
+
+        icon.sprite = module.moduleIconGUI;
+
+        displayedModule++;
+    }
+
+    #endregion
+    
     #region Information Menu
 
     private void InformationMenuInitialization()
@@ -104,28 +203,28 @@ public class UIInstance : MonoBehaviour
         selectedModulePos = modulesGUI[0].GetComponent<RectTransform>().anchoredPosition;
     }
 
-    private void InformationMenuInputPressed()
+    private void InformationMenuInputPressed(InputAction.CallbackContext ctx)
     {
-        if (informationWindow.activeSelf) ClosingInformationMenu();
+        if (informationWindow.activeSelf) ClosingInformationMenu(ctx);
         else OpeningInformationMenu();
     }
 
     private void OpeningInformationMenu()
     {
-        //SettingTimeScale(true);
+        if (informationWindow.activeSelf) return;
         blackFilter.SetActive(true);
         SetCanvasOnDisplay(informationMenuHiddenCanvas, false);
         informationWindow.SetActive(true);
         eventSystem.SetSelectedGameObject(informationMenuFirstSelected);
     }
 
-    private void ClosingInformationMenu()
+    private void ClosingInformationMenu(InputAction.CallbackContext ctx)
     {
+        if (!informationWindow.activeSelf) return;
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         blackFilter.SetActive(false);
-        //SettingTimeScale(false);
     }
 
     public void AddModuleGUI(Module module)
@@ -247,75 +346,6 @@ public class UIInstance : MonoBehaviour
 
     #endregion
 
-    #region Player Stats
-
-    public void InitializationStats()
-    {
-        SetInitHealth();
-        DisplayHealth();
-    }
-
-    public void SetInitHealth()
-    {
-        heartContainers.Clear();
-
-        if (PlayerManager.instance.maxHealth % 4 != 0)
-        {
-            Debug.LogError("Player Health must be a multiple of 4");
-            return;
-        }
-
-        float heartsContainersNumberFloat = PlayerManager.instance.health / 4f;
-        int heartsContainersNumber = (int) heartsContainersNumberFloat;
-        var pos = firstHeartContainerTransform.position;
-        for (int i = 0; i < heartsContainersNumber; i++)
-        {
-            heartContainers.Add(Instantiate(heartContainerPrefab, pos, Quaternion.identity,
-                firstHeartContainerTransform).GetComponent<UIHeart>());
-            pos += Vector3.right * distanceBetweenHeartContainers;
-        }
-    }
-
-    public void DisplayHealth()
-    {
-        int life = 0;
-        foreach (var container in heartContainers)
-        {
-            foreach (var part in container.heartParts)
-            {
-                part.color = Color.black;
-            }
-        }
-
-        int heartContainer = 0;
-        int heartPart = 0;
-        while (life != PlayerManager.instance.health)
-        {
-            life++;
-            heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
-            heartPart++;
-
-            if (heartPart <= 3) continue;
-            heartPart = 0;
-            heartContainer++;
-        }
-    }
-
-    public void AddModuleIcon(Module module)
-    {
-        if (!module.isDisplayed) return;
-
-        Vector3 pos = firstIconTransform.position + Vector3.right * distanceBetweenIcons * displayedModule;
-
-        Image icon = Instantiate(iconPrefab, pos, Quaternion.identity, firstIconTransform).GetComponent<Image>();
-
-        icon.sprite = module.moduleIconGUI;
-
-        displayedModule++;
-    }
-
-    #endregion
-
     #region Notification
 
     public void SetNotification(string message, bool active)
@@ -330,6 +360,66 @@ public class UIInstance : MonoBehaviour
         SetNotification("Life Max improved", true);
         yield return new WaitForSeconds(time);
         SetNotification(null, false);
+    }
+
+    #endregion
+
+    #region Pause Menu
+
+    private void PauseMenuInputPressed(InputAction.CallbackContext ctx)
+    {
+        if (pauseMenu.activeSelf || optionMenu.activeSelf)
+        {
+            ClosingOptionMenu(ctx);
+            ClosingPauseMenu(ctx);
+        }
+        else OpeningPauseMenu();
+    }
+    
+    public void OpeningPauseMenu()
+    {
+        if (pauseMenu.activeSelf) return;
+        blackFilter.SetActive(true);
+        pauseMenu.SetActive(true);
+        eventSystem.SetSelectedGameObject(pauseMenuFirstSelected);
+    }
+
+    public void ClosingPauseMenu(InputAction.CallbackContext ctx)
+    {
+        if (!pauseMenu.activeSelf) return;
+        blackFilter.SetActive(false);
+        pauseMenu.SetActive(false);
+        eventSystem.SetSelectedGameObject(null);
+    }
+
+    public void GoingBackMainMenu()
+    {
+        SceneManager.instance.LoadingScene(1);
+    }
+
+    #endregion
+
+    #region Options Menu
+
+    public void OpeningOptionMenu()
+    {
+        if (optionMenu.activeSelf) return;
+        pauseMenu.SetActive(false);
+        optionMenu.SetActive(true);
+        eventSystem.SetSelectedGameObject(optionMenuFirstSelected);
+    }
+
+    public void OnCloseOptionMenu()
+    {
+        ClosingOptionMenu(new InputAction.CallbackContext());
+    }
+
+    public void ClosingOptionMenu(InputAction.CallbackContext ctx)
+    {
+        if (!optionMenu.activeSelf) return;
+        optionMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        eventSystem.SetSelectedGameObject(optionButton);
     }
 
     #endregion

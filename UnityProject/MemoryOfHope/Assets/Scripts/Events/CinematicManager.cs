@@ -23,11 +23,7 @@ public class CinematicManager : MonoBehaviour
     public static CinematicManager Instance;
     private void Awake()
     {
-        if (Instance is { })
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) Destroy(gameObject);
         Instance = this;
     }
 
