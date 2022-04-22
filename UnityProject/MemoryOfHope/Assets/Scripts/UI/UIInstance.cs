@@ -65,6 +65,7 @@ public class UIInstance : MonoBehaviour
     public InGameCanvasType[] optionMenuHiddenCanvas;
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject optionMenuFirstSelected;
+    [SerializeField] private TMP_Dropdown languageDropdown;
 
     [Header("Navigation")]
     public EventSystem eventSystem;
@@ -77,6 +78,7 @@ public class UIInstance : MonoBehaviour
     {
         InformationMenuInitialization();
         InitializationStats();
+        InitializationOption();
     }
 
     private void LinkInput()
@@ -401,6 +403,28 @@ public class UIInstance : MonoBehaviour
 
     #region Options Menu
 
+    public void InitializationOption()
+    {
+        if (SettingsManager.instance == null) return;
+        
+        switch (SettingsManager.instance.gameLanguage)
+        {
+            case Language.French:
+                languageDropdown.value = 0;
+                break;
+            
+            case Language.English:
+                languageDropdown.value = 1;
+                break;
+            
+            default:
+                Debug.LogError("Invalide language");
+                break;
+        }
+        
+        // Audio initialization values
+
+    }
     public void OpeningOptionMenu()
     {
         if (optionMenu.activeSelf) return;
@@ -420,6 +444,26 @@ public class UIInstance : MonoBehaviour
         optionMenu.SetActive(false);
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(optionButton);
+    }
+    
+    public void OnLanguageChange(int index)
+    {
+        if (SettingsManager.instance == null) return;
+        
+        switch (index)
+        {
+            case 0:
+                SettingsManager.instance.SetLanguage(Language.French);
+                break;
+            
+            case 1:
+                SettingsManager.instance.SetLanguage(Language.English);
+                break;
+  
+            default:
+                Debug.LogError("Index invalide");
+                break;
+        }
     }
 
     #endregion

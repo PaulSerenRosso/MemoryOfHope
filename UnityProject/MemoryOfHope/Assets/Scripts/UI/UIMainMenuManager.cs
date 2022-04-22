@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class UIMainMenuManager : MonoBehaviour
 {
@@ -15,18 +15,15 @@ public class UIMainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject optionsSection;
     [SerializeField] private GameObject optionsButton;
+    [SerializeField] private TMP_Dropdown languageDropdown;
 
     private Dictionary<MainMenuSection, GameObject> allSections = new Dictionary<MainMenuSection, GameObject>();
     [SerializeField] private EventSystem eventSystem;
 
-    private void Awake()
-    {
-        LinkInputs();
-    }
-
     public void Start()
     {
         Initialization();
+        InitializationOption();
     }
 
     private void Initialization()
@@ -43,17 +40,22 @@ public class UIMainMenuManager : MonoBehaviour
         GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed += GoingLeft;
     }
     
+    private void UnlinkInputs()
+    {
+        GameManager.instance.inputs.MainMenuUI.MainMenuGoRight.performed -= GoingRight;
+        GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed -= GoingLeft;
+    }
+    
     private void OnEnable()
     {
         GameManager.instance.inputs.MainMenuUI.Enable();
+        LinkInputs();
     }
 
     private void OnDisable()
     {
         GameManager.instance.inputs.MainMenuUI.Disable();
-        GameManager.instance.inputs.MainMenuUI.MainMenuGoRight.performed -= GoingRight;
-        GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed -= GoingLeft;
-
+        UnlinkInputs();
     }
 
     private void GoingRight(InputAction.CallbackContext ctx)
@@ -127,6 +129,8 @@ public class UIMainMenuManager : MonoBehaviour
         }
     }
 
+    #region Main Section
+
     public void OnPlayClick()
     {
         if (SceneManager.instance == null) return;
@@ -137,6 +141,55 @@ public class UIMainMenuManager : MonoBehaviour
     {
         
     }
+
+    #endregion
+
+    #region Options Section
+
+    public void InitializationOption()
+    {
+        if (SettingsManager.instance == null) return;
+        
+        switch (SettingsManager.instance.gameLanguage)
+        {
+            case Language.French:
+                languageDropdown.value = 0;
+                break;
+            
+            case Language.English:
+                languageDropdown.value = 1;
+                break;
+            
+            default:
+                Debug.LogError("Invalide language");
+                break;
+        }
+        
+        // Audio initialization values
+    }
+    
+    public void OnLanguageChange(int index)
+    {
+        if (SettingsManager.instance == null) return;
+        
+        switch (index)
+        {
+            case 0:
+                SettingsManager.instance.SetLanguage(Language.French);
+                break;
+            
+            case 1:
+                SettingsManager.instance.SetLanguage(Language.English);
+                break;
+  
+            default:
+                Debug.LogError("Index invalide");
+                break;
+        }
+    }
+
+    #endregion
+    
 }
 
 public enum MainMenuSection
