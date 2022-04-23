@@ -110,7 +110,6 @@ public class PlayerManager : MonoBehaviour, Damageable
             if (module.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(module);
             else PlayerController.instance.activeModulesUpdate.Add(module);
             UIInstance.instance.AddModuleIcon(module);
-            Debug.Log(module.index);
             UIInstance.instance.AddModuleGUI(module);
         }
 

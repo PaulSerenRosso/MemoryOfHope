@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        
         DontDestroyOnLoad(gameObject);
         inputs = new InputMaster();
 
