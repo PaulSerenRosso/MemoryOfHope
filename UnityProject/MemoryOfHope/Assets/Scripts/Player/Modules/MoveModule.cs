@@ -19,10 +19,23 @@ public class MoveModule : Module
 
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.Move.performed += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.Move.canceled += context => InputReleased(context);
+        GameManager.instance.inputs.Player.Move.performed += InputPressed;
+        GameManager.instance.inputs.Player.Move.canceled += InputReleased;
+        isLinked = true;
     }
 
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Move.performed -= InputPressed;
+        GameManager.instance.inputs.Player.Move.canceled -= InputReleased;
+    }
+    
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
         inputPressed = true;

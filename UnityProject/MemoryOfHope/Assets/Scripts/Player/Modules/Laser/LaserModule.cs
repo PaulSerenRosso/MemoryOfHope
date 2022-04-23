@@ -30,8 +30,21 @@ public class LaserModule : Module
     }
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.Laser.canceled += context => InputReleased(context);
-        PlayerController.instance.playerActions.Player.Laser.performed += context => InputPressed(context);
+        GameManager.instance.inputs.Player.Laser.canceled += InputReleased;
+        GameManager.instance.inputs.Player.Laser.performed += InputPressed;
+        isLinked = true;
+    }
+    
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Laser.canceled -= InputReleased;
+        GameManager.instance.inputs.Player.Laser.performed -= InputPressed;
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)
