@@ -70,7 +70,7 @@ public class UIInstance : MonoBehaviour
     [Header("Navigation")]
     public EventSystem eventSystem;
     
-    public List<TextMeshProUGUI> allTextsOnScreen;
+    public List<UIDisplayText> allTextsOnScreen;
 
     #endregion
     
@@ -79,6 +79,7 @@ public class UIInstance : MonoBehaviour
         InformationMenuInitialization();
         InitializationStats();
         InitializationOption();
+        SetTextLanguageOnDisplay();
     }
 
     private void LinkInput()
@@ -425,6 +426,7 @@ public class UIInstance : MonoBehaviour
         // Audio initialization values
 
     }
+    
     public void OpeningOptionMenu()
     {
         if (optionMenu.activeSelf) return;
@@ -464,9 +466,19 @@ public class UIInstance : MonoBehaviour
                 Debug.LogError("Index invalide");
                 break;
         }
+        
+        SetTextLanguageOnDisplay();
     }
 
     #endregion
+
+    public void SetTextLanguageOnDisplay()
+    {
+        foreach (var text in allTextsOnScreen)
+        {
+            text.SettingText();
+        }
+    }
 
     public void SettingTimeScale(bool froze)
     {

@@ -18,12 +18,16 @@ public class UIMainMenuManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown languageDropdown;
 
     private Dictionary<MainMenuSection, GameObject> allSections = new Dictionary<MainMenuSection, GameObject>();
+    
+    public List<UIDisplayText> allTextsOnScreen;
+
     [SerializeField] private EventSystem eventSystem;
 
     public void Start()
     {
         Initialization();
         InitializationOption();
+        SetTextLanguageOnDisplay();
     }
 
     private void Initialization()
@@ -128,6 +132,14 @@ public class UIMainMenuManager : MonoBehaviour
                 return null;
         }
     }
+    
+    public void SetTextLanguageOnDisplay()
+    {
+        foreach (var text in allTextsOnScreen)
+        {
+            text.SettingText();
+        }
+    }
 
     #region Main Section
 
@@ -135,6 +147,12 @@ public class UIMainMenuManager : MonoBehaviour
     {
         if (SceneManager.instance == null) return;
         SceneManager.instance.LoadingScene(2);
+    }
+
+    public void LaunchSpecificScene(int index)
+    {
+        if (SceneManager.instance == null) return;
+        SceneManager.instance.LoadingScene(index);
     }
 
     public void OnQuitClick()
@@ -186,6 +204,8 @@ public class UIMainMenuManager : MonoBehaviour
                 Debug.LogError("Index invalide");
                 break;
         }
+        
+        SetTextLanguageOnDisplay();
     }
 
     #endregion
