@@ -469,6 +469,16 @@ public class UIInstance : MonoBehaviour
         
         SetTextLanguageOnDisplay();
     }
+    
+    public void OnMusicChange(Slider music)
+    {
+        Debug.Log(music.value);
+    } // Quand la valeur de l'audio (musique) est changée
+
+    public void OnSfxChange(Slider sfx)
+    {
+        Debug.Log(sfx.value);
+    } // Quand la valeur de l'audio (SFX) est changée
 
     #endregion
 

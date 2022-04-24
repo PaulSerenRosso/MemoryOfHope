@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIMainMenuManager : MonoBehaviour
 {
@@ -157,7 +158,7 @@ public class UIMainMenuManager : MonoBehaviour
 
     public void OnQuitClick()
     {
-        
+        Application.Quit();
     }
 
     #endregion
@@ -206,7 +207,17 @@ public class UIMainMenuManager : MonoBehaviour
         }
         
         SetTextLanguageOnDisplay();
-    }
+    } // Quand la langue est changée
+
+    public void OnMusicChange(Slider music)
+    {
+        Debug.Log(music.value);
+    } // Quand la valeur de l'audio (musique) est changée
+
+    public void OnSfxChange(Slider sfx)
+    {
+        Debug.Log(sfx.value);
+    } // Quand la valeur de l'audio (SFX) est changée
 
     #endregion
     
