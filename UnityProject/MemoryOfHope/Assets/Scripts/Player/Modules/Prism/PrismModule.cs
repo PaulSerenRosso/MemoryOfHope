@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,12 +16,6 @@ public class PrismModule : Module
     
     public override void LinkModule()
     {
-        // joystick
-        // bouton qui maintient
-        // tu ne bouge tu ne peux faire aucune input pendant ce temps
-        
-        Debug.Log("Linking Inputs for Prism Module");
-
         GameManager.instance.inputs.Player.Move.performed += JoystickPressed;
         GameManager.instance.inputs.Player.Move.canceled += JoystickReleased;
         GameManager.instance.inputs.Player.Prism.canceled += InputReleased;

@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [System.Serializable]
 public class MC_PauseShockWaveState : EnemyState
 {  
     [Header("Parameters")]
-    [Range(0, 1)] [SerializeField] private float durationBeforeShockWave;
+    [Range(0, 10)] [SerializeField] private float durationBeforeShockWave;
     [SerializeField] private float rotateSpeed;
     
     [Header("Fixed variables")]

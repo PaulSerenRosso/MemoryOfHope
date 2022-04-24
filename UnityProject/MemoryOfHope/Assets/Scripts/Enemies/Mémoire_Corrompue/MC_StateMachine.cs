@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MC_StateMachine : EnemyMachine
@@ -77,11 +75,7 @@ public class MC_StateMachine : EnemyMachine
 
             OnHitByMelee();
         }
-        else if (isProtected)
-        {
-            Debug.Log("Corrupted Memory is protected");
-        }
-        
+
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
