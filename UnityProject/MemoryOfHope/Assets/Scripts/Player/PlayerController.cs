@@ -18,13 +18,7 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerComponent")] public Rigidbody playerRb;
     public Animator playerAnimator;
 
-    public InputMaster playerActions;
-
-    /*
-    public List<Transform> interactiveObjects = new List<Transform>();
-    public GameObject nearestObject;
-    private List<float> distances = new List<float>();
-    */
+    
     public bool isGlitching;
     public AttackModule attackModule;
 
@@ -89,25 +83,24 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance is { })
+        /*if (instance is { })
         {
             DestroyImmediate(gameObject);
             return;
-        }
+        }*/
 
         instance = this;
 
-        playerActions = new InputMaster();
     }
-
+    
     private void OnEnable()
     {
-        playerActions.Enable();
+        GameManager.instance.inputs.Player.Enable();
     }
 
     private void OnDisable()
     {
-        playerActions.Disable();
+        GameManager.instance.inputs.Player.Disable();
     }
 
     #endregion

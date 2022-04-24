@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,11 +24,27 @@ public class InteractionModule : Module
     
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.InteractionModule.started += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.InteractionModule.canceled += context => InputReleased(context);
-        PlayerController.instance.playerActions.Player.Move.performed += context => Aim(context);
-        PlayerController.instance.playerActions.Player.Move.canceled += context => AimCancel(context);
-        PlayerController.instance.playerActions.Player.InteractionSelect.started += _ => Selecting();
+        GameManager.instance.inputs.Player.InteractionModule.started += InputPressed;
+        GameManager.instance.inputs.Player.InteractionModule.canceled += InputReleased;
+        GameManager.instance.inputs.Player.Move.performed += Aim;
+        GameManager.instance.inputs.Player.Move.canceled += AimCancel;
+        GameManager.instance.inputs.Player.InteractionSelect.started += Selecting;
+        isLinked = true;
+    }
+
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.InteractionModule.started -= InputPressed;
+        GameManager.instance.inputs.Player.InteractionModule.canceled -= InputReleased;
+        GameManager.instance.inputs.Player.Move.performed -= Aim;
+        GameManager.instance.inputs.Player.Move.canceled -= AimCancel;
+        GameManager.instance.inputs.Player.InteractionSelect.started -= Selecting;
     }
 
     private void AimCancel(InputAction.CallbackContext context)
@@ -54,7 +71,7 @@ public class InteractionModule : Module
         
     }
 
-    private void Selecting()
+    private void Selecting(InputAction.CallbackContext ctx)
     {
         if (isPerformed)
         {

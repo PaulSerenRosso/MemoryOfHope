@@ -1,8 +1,6 @@
-using System.Net.Cache;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// S'il y a un objet ciblé dans RotateObjectModule, alors on peut le sélectionner et le rotate
 public class RotateObjectFunction : InteractiveObjectFunction
 {
     private RotateObjectData data;
@@ -11,8 +9,21 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.InteractionMove.performed += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.InteractionMove.canceled += context => InputReleased(context);
+        GameManager.instance.inputs.Player.InteractionMove.performed += InputPressed;
+        GameManager.instance.inputs.Player.InteractionMove.canceled += InputReleased;
+        isLinked = true;
+    }
+    
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.InteractionMove.performed -= InputPressed;
+        GameManager.instance.inputs.Player.InteractionMove.canceled -= InputReleased;
     }
     
     public override void InputPressed(InputAction.CallbackContext ctx)

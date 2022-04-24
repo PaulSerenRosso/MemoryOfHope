@@ -17,12 +17,7 @@ public class MainCameraController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance is { })
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }
-
+        if (Instance != null && Instance != this) Destroy(gameObject);
         Instance = this;
     }
 
