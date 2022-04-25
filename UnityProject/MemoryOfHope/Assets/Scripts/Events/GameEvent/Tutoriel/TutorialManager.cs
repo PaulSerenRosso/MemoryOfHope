@@ -18,7 +18,6 @@ public class TutorialManager : MonoBehaviour
     }
 
     #endregion
-    
 
     #region Variables
     
@@ -50,7 +49,6 @@ public class TutorialManager : MonoBehaviour
             }
             else
             {
-                Debug.Log($"{gameEvent.priority} / {currentTutorialGameEvent.priority}");
                 if (gameEvent.priority < currentTutorialGameEvent.priority) continue;
                 currentTutorialGameEvent = gameEvent;
             }
@@ -65,6 +63,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (currentTutorialGameEvent == null) return;
 
+        Debug.Log("Activé");
         tutorialWindow.SetActive(true);
         tutorialImage.sprite = currentTutorialGameEvent.inputSprite;
 

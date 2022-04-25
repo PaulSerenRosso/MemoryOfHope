@@ -12,6 +12,7 @@ public class Checkpoint : ListenerActivate
             PlayerManager.instance.CurrentCheckpoint = this;
 
         base.Raise();
+        Debug.Log("Checkpoint");
     }
 
 
