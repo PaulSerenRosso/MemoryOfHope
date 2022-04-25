@@ -92,10 +92,6 @@ public class PlayerController : MonoBehaviour
 
     }
     
-    private void OnEnable()
-    {
-        GameManager.instance.inputs.Player.Enable();
-    }
 
     private void OnDisable()
     {
@@ -108,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.inputs.Player.Enable();
+
         useGravity = true;
     }
 
