@@ -147,7 +147,7 @@ public class UIMainMenuManager : MonoBehaviour
     public void OnPlayClick()
     {
         if (SceneManager.instance == null) return;
-        SceneManager.instance.LoadingScene(2);
+        SceneManager.instance.LoadingScene(6);
     }
 
     public void LaunchSpecificScene(int index)
