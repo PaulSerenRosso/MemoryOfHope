@@ -87,10 +87,25 @@ public class DashModule : Module
 
     public override void LinkModule()
     {
-        PlayerController.instance.playerActions.Player.Move.performed += context => JoystickPressed(context);
-        PlayerController.instance.playerActions.Player.Move.canceled += context => JoystickReleased(context);
-        PlayerController.instance.playerActions.Player.Dash.canceled += context => InputReleased(context);
-        PlayerController.instance.playerActions.Player.Dash.performed += context => InputPressed(context);
+        GameManager.instance.inputs.Player.Move.performed += JoystickPressed;
+        GameManager.instance.inputs.Player.Move.canceled += JoystickReleased;
+        GameManager.instance.inputs.Player.Dash.canceled += InputReleased;
+        GameManager.instance.inputs.Player.Dash.performed += InputPressed;
+        isLinked = true;
+    }
+    
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
+
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Move.performed -= JoystickPressed;
+        GameManager.instance.inputs.Player.Move.canceled -= JoystickReleased;
+        GameManager.instance.inputs.Player.Dash.canceled -= InputReleased;
+        GameManager.instance.inputs.Player.Dash.performed -= InputPressed;
     }
 
     public override bool Conditions()

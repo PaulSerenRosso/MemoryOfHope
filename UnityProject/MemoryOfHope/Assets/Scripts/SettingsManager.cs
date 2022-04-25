@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
@@ -14,6 +12,8 @@ public class SettingsManager : MonoBehaviour
             return;
         }
         instance = this;
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     public Language gameLanguage;
@@ -22,6 +22,8 @@ public class SettingsManager : MonoBehaviour
     public void SetLanguage(Language language)
     {
         gameLanguage = language;
+        
+        // Set les textes présents
     }
     
 }

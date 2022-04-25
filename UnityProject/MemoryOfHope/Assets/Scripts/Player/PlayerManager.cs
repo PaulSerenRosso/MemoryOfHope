@@ -1,10 +1,7 @@
-using System;
-using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -86,11 +83,11 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void Awake()
     {
-        if (instance is { })
+        /*if (instance is { })
         {
             DestroyImmediate(gameObject);
             return;
-        }
+        }*/
 
         instance = this;
     }
@@ -110,7 +107,6 @@ public class PlayerManager : MonoBehaviour, Damageable
             if (module.isFixedUpdate) PlayerController.instance.activeModulesFixed.Add(module);
             else PlayerController.instance.activeModulesUpdate.Add(module);
             UIInstance.instance.AddModuleIcon(module);
-            Debug.Log(module.index);
             UIInstance.instance.AddModuleGUI(module);
         }
 
@@ -137,7 +133,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         isHit = true;
         KnockBack(enemy, _drag, knockbackStrength);
         int damage = enemy.damage;
-        Debug.Log($"{enemy.name} a infligé {damage} dégâts");
         TakeDamage(damage);
         yield return new WaitForSeconds(hitDuration);
         PlayerController.instance.playerRb.drag = 0;
@@ -265,31 +260,20 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void CheckShockWaveTrigger(Collider other, EnemyManager enemy)
     {
-        MC_StateMachine machine = other.GetComponentInParent<MC_StateMachine>();
+        var machine = other.GetComponentInParent<MC_StateMachine>();
         var sphere = (SphereCollider) other;
 
-        float distance = Vector3.Magnitude(other.transform.position - transform.position);
+        var distance = Vector3.Magnitude(other.transform.position - transform.position);
 
-        if (distance > sphere.radius - machine.attackAreaLength)
-        {
-            // Le joueur est dans la zone d'impact
-            Debug.Log("Player in area");
-
-            if (transform.position.y < machine.attackArea.transform.position.y + machine.attackAreaHeight)
-            {
-                // Le joueur est à une altitude d'impact
-                Debug.Log("Player pas assez haut");
-
-                hitDirection = transform.position - enemy.transform.position;
-                Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
-                StartCoroutine(Hit(enemy));
-            }
-        }
+        if (!(distance > sphere.radius - machine.attackAreaLength)) return;
+        if (!(transform.position.y < machine.attackArea.transform.position.y + machine.attackAreaHeight)) return;
+        hitDirection = transform.position - enemy.transform.position;
+        StartCoroutine(Hit(enemy));
     }
 
     private void CheckEnemyTrigger(Collider other)
     {
-        EnemyManager enemy = other.GetComponentInParent<EnemyManager>();
+        var enemy = other.GetComponentInParent<EnemyManager>();
 
         if (enemy.Machine.GetType() == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
         {
@@ -298,7 +282,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         else
         {
             hitDirection = transform.position - enemy.transform.position;
-            Debug.DrawRay(transform.position, hitDirection, Color.magenta, 1);
             StartCoroutine(Hit(enemy));
         }
     }

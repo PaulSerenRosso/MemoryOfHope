@@ -27,10 +27,21 @@ public class AttackModule : Module
 
     public override void LinkModule()
     {
-        Debug.Log("Linking Inputs for Attack Module");
+        GameManager.instance.inputs.Player.Attack.started += InputPressed;
+        GameManager.instance.inputs.Player.Attack.canceled += InputReleased;
+        isLinked = true;
+    }
+    
+    private void OnDisable()
+    {
+        UnlinkModule();
+    }
 
-        PlayerController.instance.playerActions.Player.Attack.started += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.Attack.canceled += context => InputReleased(context);
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Attack.started -= InputPressed;
+        GameManager.instance.inputs.Player.Attack.canceled -= InputReleased;
     }
 
     public override bool Conditions()

@@ -24,13 +24,23 @@ public class JumpModule : Module
 
     public override void LinkModule()
     {
-        Debug.Log("Linking Inputs for Jump Module");
-
-        PlayerController.instance.playerActions.Player.Jump.performed += context => InputPressed(context);
-        PlayerController.instance.playerActions.Player.Jump.canceled += context => InputReleased(context);
+        GameManager.instance.inputs.Player.Jump.performed += InputPressed;
+        GameManager.instance.inputs.Player.Jump.canceled += InputReleased;
+        isLinked = true;
+    }
+    
+    private void OnDisable()
+    {
+        UnlinkModule();
     }
 
-
+    public override void UnlinkModule()
+    {
+        if (!isLinked) return;
+        GameManager.instance.inputs.Player.Jump.performed -= InputPressed;
+        GameManager.instance.inputs.Player.Jump.canceled -= InputReleased;
+    }
+    
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
