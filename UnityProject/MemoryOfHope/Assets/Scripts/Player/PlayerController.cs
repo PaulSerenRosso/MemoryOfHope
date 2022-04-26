@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("PlayerComponent")] public Rigidbody playerRb;
     public Animator playerAnimator;
 
-    
+
     public bool isGlitching;
     public AttackModule attackModule;
 
@@ -90,9 +89,8 @@ public class PlayerController : MonoBehaviour
         }*/
 
         instance = this;
-
     }
-    
+
     private void OnEnable()
     {
         GameManager.instance.inputs.Player.Enable();
@@ -267,57 +265,56 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (!other.gameObject.CompareTag("Ground")) return;
+        var points = new ContactPoint[10];
+        other.GetContacts(points);
+
+        var _isGround = false;
+        var _isWall = false;
+        for (int i = 0; i < points.Length; i++)
         {
-            ContactPoint[] points = new ContactPoint[10];
-            other.GetContacts(points);
+            Vector3 normal = points[i].normal;
 
-            bool _isGround = false;
-            bool _isWall = false;
-            for (int i = 0; i < points.Length; i++)
+            if (normal.y >= angleGround)
             {
-                Vector3 normal = points[i].normal;
-
-                if (normal.y >= angleGround)
-                {
-                    _isGround = true;
-                    currentNormalGround = normal.normalized;
-                }
-
-                if (normal.y <= angleGround && normal != Vector3.zero)
-                {
-                    _isWall = true;
-                    currentNormalWall = normal.normalized;
-                }
+                _isGround = true;
+                currentNormalGround = normal.normalized;
             }
 
-            if (!_isWall && currentWall == other.collider)
+            if (normal.y <= angleGround && normal != Vector3.zero)
             {
-                currentWall = null;
-                currentNormalWall = Vector3.zero;
+                _isWall = true;
+                currentNormalWall = normal.normalized;
             }
-            else if (_isWall)
+        }
+
+        if (!_isWall && currentWall == other.collider)
+        {
+            currentWall = null;
+            currentNormalWall = Vector3.zero;
+        }
+        else if (_isWall)
             currentWall = other.collider;
 
-            if (!_isGround && currentGround == other.collider)
+        if (!_isGround && currentGround == other.collider)
+        {
+            onGround = false;
+            currentGround = null;
+            currentNormalGround = Vector3.zero;
+            playerAnimator.SetBool("onGround", false);
+            currentGravity = defaultGravity;
+        }
+        else if (_isGround)
+        {
+            if (!onGround)
             {
-                onGround = false;
-                currentGround = null;
-                currentNormalGround = Vector3.zero;
-                playerAnimator.SetBool("onGround", false);
-                currentGravity = defaultGravity;
+                onGround = true;
+                playerAnimator.SetBool("onGround", true);
+                playerRb.velocity = Vector3.zero;
+                currentGravity = 0;
             }
-            else if (_isGround)
-            {
-                if (!onGround)
-                {
-                    onGround = true;
-                    playerAnimator.SetBool("onGround", true);
-                    playerRb.velocity = Vector3.zero;
-                    currentGravity = 0;
-                }
-                currentGround = other.collider;
-            }
+
+            currentGround = other.collider;
         }
     }
 

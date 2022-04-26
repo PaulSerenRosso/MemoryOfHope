@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TC_StateMachine : EnemyMachine
@@ -10,7 +8,6 @@ public class TC_StateMachine : EnemyMachine
 
     #endregion
     
-
     #region State Machine Main Functions
 
     public override void Start()

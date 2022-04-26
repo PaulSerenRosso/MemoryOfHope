@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 7393812187423247962}
   - component: {fileID: 3047204124224261165}
   - component: {fileID: 4500627938466954965}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UCX_SM_Plateform_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &7393812187423247962
 Transform:
@@ -92,13 +92,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6838990548588617101}
   - component: {fileID: 9164866001099119272}
-  - component: {fileID: 8127396947752973899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_SM_Plateform_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6838990548588617101
 Transform:
@@ -144,20 +143,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5050151493501045100}
   m_Enabled: 1
---- !u!64 &8127396947752973899
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1762161923763720848}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5184852521128528477, guid: 9f874f045b0fe32428c5a71f6f61c19a, type: 3}
 --- !u!1 &1878392019583113494
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,12 +154,12 @@ GameObject:
   - component: {fileID: 5680019649615365586}
   - component: {fileID: 4641609210485023993}
   - component: {fileID: 5050151493501045100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plateforme_A 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5680019649615365586
 Transform:
@@ -251,12 +236,12 @@ GameObject:
   - component: {fileID: 4875395530034052852}
   - component: {fileID: 9116168724452161403}
   - component: {fileID: 3632523357509646403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plateforme_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4875395530034052852
 Transform:
@@ -332,12 +317,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 995741796756887321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &995741796756887321
 Transform:
@@ -363,12 +348,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526331733056893125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1526331733056893125
 Transform:
@@ -394,12 +379,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7804826778240043502}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &7804826778240043502
 Transform:
@@ -425,12 +410,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7408801764575577945}
-  m_Layer: 0
+  - component: {fileID: 4800081590541153842}
+  m_Layer: 6
   m_Name: SM_Plateform_D
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &7408801764575577945
 Transform:
@@ -441,13 +427,27 @@ Transform:
   m_GameObject: {fileID: 7897775938037931491}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.042141, y: 12.82392, z: -36.092186}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1034212, y: 0.9859178, z: 1.103421}
   m_Children:
   - {fileID: 6838990548588617101}
   - {fileID: 7393812187423247962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &4800081590541153842
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897775938037931491}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5184852521128528477, guid: 9f874f045b0fe32428c5a71f6f61c19a, type: 3}
 --- !u!1 &8840112821340828532
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,12 +459,12 @@ GameObject:
   - component: {fileID: 7936688493378019437}
   - component: {fileID: 9133144085640445210}
   - component: {fileID: 9010249382577910969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plateforme_A 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &7936688493378019437
 Transform:
