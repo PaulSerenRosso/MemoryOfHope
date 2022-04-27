@@ -14,18 +14,19 @@ public class GameManager : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
-
         instance = this;
         DontDestroyOnLoad(gameObject);
         inputs = new InputMaster();
+        inputs.Enable();
+
 
     }
     
     public InputMaster inputs;
     
+    
     private void OnEnable()
     {
-        inputs.Enable();
     }
 
     private void OnDisable()
