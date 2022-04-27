@@ -73,7 +73,10 @@ public class DialogueManager : MonoBehaviour
     void UpdateLine()
     {
         _dialogueWindows.gameObject.SetActive(true);
-        _textDialogueHolder.text = CurrentLine.CharacterProfil.Name + _doublePoint + currentLineText;
+        string currentCharacterName = SettingsManager.instance.gameLanguage == Language.English
+            ? CurrentLine.CharacterProfil.EnglishName
+            : CurrentLine.CharacterProfil.FrenchName;
+        _textDialogueHolder.text = currentCharacterName + _doublePoint + currentLineText;
         Canvas.ForceUpdateCanvases();
         if (CurrentLine.VoiceLine != null && CharacterAudioSourcesDic.ContainsKey(CurrentLine.CharacterProfil.Character) )
         {

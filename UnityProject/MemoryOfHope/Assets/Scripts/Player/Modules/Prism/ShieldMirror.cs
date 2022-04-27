@@ -48,14 +48,14 @@ public class ShieldMirror : BaseMirror
         
     }
     
-    public virtual void Cancel(LaserMachine laser)
+    public override void Cancel(LaserMachine laser)
     {
         _triggerByLaser = false ; 
         _currentSource = null;
         LaserLineReceiver = null;
     }
 
-    public virtual void StartReturnable(LaserMachine laser, RaycastHit hit)
+    public override void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
         
         _triggerByLaser = true; 
