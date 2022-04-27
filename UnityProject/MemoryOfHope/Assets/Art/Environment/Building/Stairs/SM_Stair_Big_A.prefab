@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 590317552310359249}
   - component: {fileID: 4042700529699839705}
   - component: {fileID: 578845595208265109}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Stairs_01 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6958120037464340845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1907129922225929971}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 2722527600187070113}
   - component: {fileID: 244356222329158527}
   - component: {fileID: 1042334171935011677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Stairs_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,9 +234,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7294775049515102926}
   - component: {fileID: 4541988975600839842}
-  m_Layer: 0
+  - component: {fileID: 6296525666160835804}
+  m_Layer: 6
   m_Name: SM_Stair_Big_A
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,9 +249,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7960094674231404660}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 75.799706, y: 0.9741324, z: -31.259129}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 1, z: 1}
   m_Children:
   - {fileID: 3470758326895736777}
   - {fileID: 6958120037464340845}
@@ -285,6 +286,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 3375049761808603442}
   m_Enabled: 1
+--- !u!64 &6296525666160835804
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960094674231404660}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4624009021692464851, guid: cb991e5d867557143926b014cd043a0d, type: 3}
 --- !u!1 &8350821721112185812
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +311,7 @@ GameObject:
   - component: {fileID: 4808900110178188538}
   - component: {fileID: 4952677262074847552}
   - component: {fileID: 3375049761808603442}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Stairs_01 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3470758326895736777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LOD_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
