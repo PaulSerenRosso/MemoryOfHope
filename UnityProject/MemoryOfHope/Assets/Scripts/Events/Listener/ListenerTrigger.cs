@@ -13,6 +13,7 @@ public class ListenerTrigger : MonoBehaviour
     [SerializeField] protected bool _destroyWhenEndTrigger;
     [SerializeField] protected float _timeToDestroyWhenEndTrigger;
 
+    public bool IsActive;
     public virtual void Raise()
     {
         Listeners?.Invoke();
@@ -26,4 +27,7 @@ public class ListenerTrigger : MonoBehaviour
         if (_destroyWhenEndTrigger)
             Destroy(gameObject, _timeToDestroyWhenEndTrigger);
     }
+    public void Activate() => IsActive = true; 
+   
+    public void Desactivate() => IsActive = false;
 }

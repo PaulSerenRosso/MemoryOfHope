@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -300,7 +301,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTrigger"))
         {
-            other.gameObject.GetComponent<ListenerTrigger>().Raise();
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
+            if(listenerTrigger.IsActive)
+           listenerTrigger.Raise();
         }
     }
 
@@ -308,7 +311,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTriggerStay"))
         {
-            other.gameObject.GetComponent<ListenerTriggerStay>().Raise();
+            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>(); 
+            if(listenerTriggerStay.IsActive)
+        listenerTriggerStay.Raise();
         }
     }
 
@@ -316,12 +321,16 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTriggerStay"))
         {
-            other.gameObject.GetComponent<ListenerTriggerStay>().EndRaise();
+            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>(); 
+            if(listenerTriggerStay.IsActive)
+                listenerTriggerStay.EndRaise();
         }
 
         if (other.CompareTag("EventTrigger"))
         {
-            other.gameObject.GetComponent<ListenerTrigger>().EndRaise();
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
+            if(listenerTrigger.IsActive)
+            listenerTrigger.EndRaise();
         }
     }
 

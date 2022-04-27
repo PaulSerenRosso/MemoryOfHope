@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterDialogueProfil", menuName = "Event/GameEvent/Dialogue/CharacterDialogueProfil", order = 1)]
 public class CharacterDialogueProfil : ScriptableObject
 {
-    public string Name;
+    public string FrenchName;
+    public string EnglishName;
     public CharacterDialogueProfilEnum Character;
 }
