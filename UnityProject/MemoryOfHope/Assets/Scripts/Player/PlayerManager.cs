@@ -240,17 +240,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        /*
-        if (other.CompareTag("MaxLifeItem"))
-        {
-            maxHealth += 1;
-
-            StartCoroutine(UIInstance.instance.SetNotificationTime("Max Health Improved", timeNotificationMaxHeart));
-            Destroy(other.gameObject);
-            return;
-        }
-        */
-
         if (other.CompareTag("Enemy") && !isHit && !isBlocked)
         {
             CheckEnemyTrigger(other);
@@ -291,6 +280,10 @@ public class PlayerManager : MonoBehaviour, Damageable
     private void OnTriggerStay(Collider other)
     {
         CheckEventTriggerStay(other);
+        if (other.CompareTag("MaxLifeItem"))
+        {
+            other.GetComponent<HeartItem>().GetItem();
+        }
     }
 
     private void OnTriggerExit(Collider other)
