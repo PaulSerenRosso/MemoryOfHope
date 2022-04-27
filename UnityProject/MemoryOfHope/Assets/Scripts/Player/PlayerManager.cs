@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public int money;
     public bool hasGlitch;
     public bool isActive = true;
-    public Checkpoint CurrentCheckpoint;
+    public CheckPoint currentCheckPoint;
     public ListenerActivate CurrentListenerActivate;
 
     #endregion
@@ -164,7 +164,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         //StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
         if (health <= 0)
         {
-            health = 0;
             Death();
         }
 
@@ -193,6 +192,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void Death()
     {
+        health = 0;
+        UIInstance.instance.DisplayHealth();
         StartCoroutine(DeathTime());
     }
 
@@ -207,13 +208,13 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     IEnumerator Respawn()
     {
-        transform.position = CurrentCheckpoint.SpawnPosition.position;
-        transform.rotation = CurrentCheckpoint.SpawnPosition.rotation;
+        transform.position = currentCheckPoint.SpawnPosition.position;
+        transform.rotation = currentCheckPoint.SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
+        Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
         isActive = true;
-        Heal(maxHealth);
         isDead = false;
     }
 
