@@ -14,7 +14,7 @@ public class ListenerActivate : ListenerTrigger
     public override void Raise()
     {
         if (isActivate) return;
-        UIInstance.instance.SetNotification(message, true);
+
         Debug.Log("tesfdqsft");
         PlayerManager.instance.CurrentListenerActivate = this;
         base.Raise();
@@ -23,7 +23,7 @@ public class ListenerActivate : ListenerTrigger
     public override void EndRaise()
     {
         if (isActivate) return;
-        UIInstance.instance.SetNotification(null, false);
+      
         PlayerManager.instance.CurrentListenerActivate = null;
         Debug.Log("tesfdqsftdfdfsfdfqsqs");
         base.EndRaise();
@@ -31,7 +31,6 @@ public class ListenerActivate : ListenerTrigger
 
     public virtual void Activate()
     {
-        UIInstance.instance.SetNotification(null, false);
         ActivateEvent?.Invoke();
         PlayerManager.instance.CurrentListenerActivate = null;
         if (_destroyWhenActivate)
