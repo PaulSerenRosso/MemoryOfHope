@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +15,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public int money;
     public bool hasGlitch;
     public bool isActive = true;
-    public Checkpoint CurrentCheckpoint;
+    public CheckPoint currentCheckPoint;
     public ListenerActivate CurrentListenerActivate;
 
     #endregion
@@ -163,7 +164,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         //StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
         if (health <= 0)
         {
-            health = 0;
             Death();
         }
 
@@ -192,6 +192,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void Death()
     {
+        health = 0;
+        UIInstance.instance.DisplayHealth();
         StartCoroutine(DeathTime());
     }
 
@@ -206,13 +208,13 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     IEnumerator Respawn()
     {
-        transform.position = CurrentCheckpoint.SpawnPosition.position;
-        transform.rotation = CurrentCheckpoint.SpawnPosition.rotation;
+        transform.position = currentCheckPoint.SpawnPosition.position;
+        transform.rotation = currentCheckPoint.SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
+        Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
         isActive = true;
-        Heal(maxHealth);
         isDead = false;
     }
 
@@ -238,17 +240,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        /*
-        if (other.CompareTag("MaxLifeItem"))
-        {
-            maxHealth += 1;
-
-            StartCoroutine(UIInstance.instance.SetNotificationTime("Max Health Improved", timeNotificationMaxHeart));
-            Destroy(other.gameObject);
-            return;
-        }
-        */
-
         if (other.CompareTag("Enemy") && !isHit && !isBlocked)
         {
             CheckEnemyTrigger(other);
@@ -289,6 +280,10 @@ public class PlayerManager : MonoBehaviour, Damageable
     private void OnTriggerStay(Collider other)
     {
         CheckEventTriggerStay(other);
+        if (other.CompareTag("MaxLifeItem"))
+        {
+            other.GetComponent<HeartItem>().GetItem();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -300,7 +295,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTrigger"))
         {
-            other.gameObject.GetComponent<ListenerTrigger>().Raise();
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
+            if(listenerTrigger.IsActive)
+           listenerTrigger.Raise();
         }
     }
 
@@ -308,7 +305,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTriggerStay"))
         {
-            other.gameObject.GetComponent<ListenerTriggerStay>().Raise();
+            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>(); 
+            if(listenerTriggerStay.IsActive)
+        listenerTriggerStay.Raise();
         }
     }
 
@@ -316,12 +315,16 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTriggerStay"))
         {
-            other.gameObject.GetComponent<ListenerTriggerStay>().EndRaise();
+            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>(); 
+            if(listenerTriggerStay.IsActive)
+                listenerTriggerStay.EndRaise();
         }
 
         if (other.CompareTag("EventTrigger"))
         {
-            other.gameObject.GetComponent<ListenerTrigger>().EndRaise();
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
+            if(listenerTrigger.IsActive)
+            listenerTrigger.EndRaise();
         }
     }
 

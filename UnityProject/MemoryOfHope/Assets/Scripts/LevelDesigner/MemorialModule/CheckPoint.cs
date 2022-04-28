@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Checkpoint : ListenerActivate
+public class CheckPoint : ListenerActivate
 {
     public Transform SpawnPosition;
 
     public override void Raise()
     {
         if (isActivate)
-            PlayerManager.instance.CurrentCheckpoint = this;
+            PlayerManager.instance.currentCheckPoint = this;
 
         base.Raise();
         Debug.Log("Checkpoint");
@@ -19,7 +19,7 @@ public class Checkpoint : ListenerActivate
     public override void Activate()
     {
         isActivate = true;
-        PlayerManager.instance.CurrentCheckpoint = this;
+        PlayerManager.instance.currentCheckPoint = this;
         base.Activate();
     }
 }
