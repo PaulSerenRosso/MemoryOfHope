@@ -79,7 +79,6 @@ public class RotateObjectFunction : InteractiveObjectFunction
         data.GetComponent<Outline>().OutlineColor = Color.yellow;
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<RotateObjectData>();
-        data.GetComponent<Renderer>().material = data.selectedMaterial;
             
         // Selection feedbacks
         
@@ -92,7 +91,6 @@ public class RotateObjectFunction : InteractiveObjectFunction
         {
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = Color.white;
-            data.GetComponent<Renderer>().material = data.defaultMaterial;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
