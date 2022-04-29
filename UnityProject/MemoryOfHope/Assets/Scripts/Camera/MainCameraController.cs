@@ -10,6 +10,7 @@ public class MainCameraController : MonoBehaviour
     public float Distance;
     [SerializeField] Vector3 offSet;
 
+    public Camera MainCamera;
     public bool FovIsSet = true;
     public bool DistanceIsSet = true;
     public bool OffsetIsSet = true;
