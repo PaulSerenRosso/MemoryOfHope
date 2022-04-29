@@ -82,6 +82,7 @@ public class DashModule : Module
             Vector3.RotateTowards(angleFoward, inputCam.normalized, speedRotation, 00f);
         PlayerController.instance.playerRb.rotation =
             Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+        
      
     }
 
@@ -149,7 +150,8 @@ public class DashModule : Module
         PlayerController.instance.useGravity = false;
         dashReady = false;
         cooldownDashTimer = 0;
-      
+        PlayerController.instance.playerAnimator.SetBool("isDash", true);
+
         PlayerController.instance.playerRb.velocity = new Vector3(PlayerController.instance.playerRb.velocity.x, 0,
             PlayerController.instance.playerRb.velocity.z);
     }
@@ -161,6 +163,7 @@ public class DashModule : Module
 
      void EndDash()
     {
+        PlayerController.instance.playerAnimator.SetBool("isDash", false);
         timerDash = 0;
         isPerformed = false;
         PlayerController.instance.useGravity = true; 
