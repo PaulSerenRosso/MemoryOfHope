@@ -115,7 +115,7 @@ public class UIInstance : MonoBehaviour
 
     #region Canvas Management
 
-    private void SetCanvasOnDisplay(InGameCanvasType[] canvasesToSet, bool activate)
+    public void SetCanvasOnDisplay(InGameCanvasType[] canvasesToSet, bool activate)
     {
         foreach (var canvasType in canvases)
         {
@@ -512,5 +512,5 @@ public enum InGameCanvasType
     DialoguesCanvas,
     TutorialCanvas,
     PauseMenuCanvas,
-    OptionsMenuCanvas
+    OptionsMenuCanvas, CinematicCanvas
 }
