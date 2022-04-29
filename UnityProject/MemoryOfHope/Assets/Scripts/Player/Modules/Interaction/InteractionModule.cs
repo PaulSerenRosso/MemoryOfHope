@@ -107,6 +107,11 @@ public class InteractionModule : Module
         {
             return false;
         }
+        if (PlayerManager.instance.isHit)
+        {
+            Release();
+            return false; // Ne peut pas faire le prisme si le joueur est knockback
+        }
 
         if (!PlayerController.instance.onGround)
         {

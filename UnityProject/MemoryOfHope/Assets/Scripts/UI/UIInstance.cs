@@ -44,6 +44,7 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private float distanceBetweenHeartContainers;
     [SerializeField] private GameObject heartContainerPrefab;
     [SerializeField] private List<UIHeart> heartContainers;
+    private Vector3 pos;
 
     [Header("Player Module")] [SerializeField]
     private RectTransform firstIconTransform;
@@ -114,7 +115,7 @@ public class UIInstance : MonoBehaviour
 
     #region Canvas Management
 
-    private void SetCanvasOnDisplay(InGameCanvasType[] canvasesToSet, bool activate)
+    public void SetCanvasOnDisplay(InGameCanvasType[] canvasesToSet, bool activate)
     {
         foreach (var canvasType in canvases)
         {
@@ -150,13 +151,20 @@ public class UIInstance : MonoBehaviour
 
         float heartsContainersNumberFloat = PlayerManager.instance.health / 4f;
         int heartsContainersNumber = (int) heartsContainersNumberFloat;
-        var pos = firstHeartContainerTransform.position;
+        pos = firstHeartContainerTransform.position;
         for (int i = 0; i < heartsContainersNumber; i++)
         {
             heartContainers.Add(Instantiate(heartContainerPrefab, pos, Quaternion.identity,
                 firstHeartContainerTransform).GetComponent<UIHeart>());
             pos += Vector3.right * distanceBetweenHeartContainers;
         }
+    }
+
+    public void GetHeart()
+    {
+        heartContainers.Add(Instantiate(heartContainerPrefab, pos, Quaternion.identity,
+            firstHeartContainerTransform).GetComponent<UIHeart>());
+        pos += Vector3.right * distanceBetweenHeartContainers;
     }
 
     public void DisplayHealth()
@@ -504,5 +512,5 @@ public enum InGameCanvasType
     DialoguesCanvas,
     TutorialCanvas,
     PauseMenuCanvas,
-    OptionsMenuCanvas
+    OptionsMenuCanvas, CinematicCanvas
 }

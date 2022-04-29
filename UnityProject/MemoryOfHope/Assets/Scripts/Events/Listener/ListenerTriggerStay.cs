@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class ListenerTriggerStay : MonoBehaviour
 {
+    public bool IsActive = true;
     [SerializeField]
     protected UnityEvent UpdateListeners;
     [SerializeField]
@@ -27,5 +28,7 @@ public class ListenerTriggerStay : MonoBehaviour
         if(_destroyWhenTrigger)
         Destroy(gameObject, _timeToDestroy);
     }
-    
+    public void Activate() => IsActive = true; 
+   
+    public void Desactivate() => IsActive = false;
 }

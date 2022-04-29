@@ -91,9 +91,10 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
         data = (MoveObjectData) interactive;
         
+        data.GetComponent<Outline>().OutlineColor = Color.yellow;
+        
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<MoveObjectData>();
-        data.GetComponent<Renderer>().material = data.selectedMaterial;
             
         // Selection feedbacks
         
@@ -112,7 +113,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
         if (data != null)
         {
             data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Renderer>().material = data.defaultMaterial;
+            data.GetComponent<Outline>().OutlineColor = Color.white;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
