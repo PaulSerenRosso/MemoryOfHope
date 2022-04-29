@@ -42,12 +42,18 @@ PlayableDirector:
   m_GameObject: {fileID: 5980355718528824818}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 28e1464f45a7b6b438376d5498db7479, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: 1699369734816484890, guid: 28e1464f45a7b6b438376d5498db7479, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3441611080108665911, guid: 28e1464f45a7b6b438376d5498db7479, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5273294955307689889, guid: 28e1464f45a7b6b438376d5498db7479, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &5980355718528824782
@@ -62,7 +68,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da70c6f3a477e54184c76320e262184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllCinematics: []
+  AllCinematics:
+  - {fileID: 11400000, guid: e98627e5c0d480442a968c2e2e9ed91c, type: 2}
+  - {fileID: 0}
+  _canvasOutCinematic: 00000000
+  _canvasInCinematic: 0600000002000000
+  _inCutScene: 0
   _director: {fileID: 5980355718528824816}
 --- !u!114 &5980355718528824783
 MonoBehaviour:
@@ -77,5 +88,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Events:
-    m_Signals: []
-    m_Events: []
+    m_Signals:
+    - {fileID: 11400000, guid: 8afbdaf939d14db4daaa6bdbb74df8d2, type: 2}
+    - {fileID: 11400000, guid: 5fd15489c4981904b836967bd75e7973, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 52afe0943ae65dd43829ec80f1961378, type: 2}
+          m_TargetAssemblyTypeName: DialogueGameEvent, Assembly-CSharp
+          m_MethodName: SetUpDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5980355718528824782}
+          m_TargetAssemblyTypeName: CinematicManager, Assembly-CSharp
+          m_MethodName: EndCinematic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

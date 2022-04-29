@@ -69,7 +69,6 @@ public class JumpModule : Module
         {
             if (PlayerController.instance.onGround && !isPerformed)
             {
-                PlayerController.instance.playerAnimator.SetBool("jumpAir", true);
                 yStartPosition = PlayerController.instance.playerRb.position.y;
                 yEndPosition = yStartPosition + HeightJump;
                 PlayerController.instance.stuckGround = false;
@@ -91,7 +90,6 @@ public class JumpModule : Module
             if (PlayerController.instance.playerRb.position.y >= yEndPosition)
             {
                 inExecute = false;
-                PlayerController.instance.playerAnimator.SetBool("jumpAir", false);
                 PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
                 PlayerController.instance.stuckGround = true;
                 PlayerController.instance.currentVelocity += speedEndJump * Vector3.up;

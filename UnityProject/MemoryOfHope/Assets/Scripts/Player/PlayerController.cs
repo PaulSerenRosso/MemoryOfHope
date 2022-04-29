@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 currentNormalGround;
     private Collider currentGround;
     private Collider currentWall;
-
+    
     private bool _useCheckGround;
 
 
@@ -401,4 +401,6 @@ public class PlayerController : MonoBehaviour
 
         return toProject;
     }
+    
+    
 }
