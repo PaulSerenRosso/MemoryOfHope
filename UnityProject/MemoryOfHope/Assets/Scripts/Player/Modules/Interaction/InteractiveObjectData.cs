@@ -13,7 +13,6 @@ public class InteractiveObjectData : MonoBehaviour
     
     public virtual void Start()
     {
-        GetComponent<Renderer>().material = defaultMaterial;
         rb = GetComponent<Rigidbody>();
     }
 }
