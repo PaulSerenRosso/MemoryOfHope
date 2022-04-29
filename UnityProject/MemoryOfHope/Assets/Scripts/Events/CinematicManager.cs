@@ -6,6 +6,8 @@ using UnityEngine.Timeline;
 public class CinematicManager : MonoBehaviour
 {
     [SerializeField]
+    private Animation _fadeInOut;
+    [SerializeField]
     private List<PlayableAsset> AllCinematics;
 
     [SerializeField]
@@ -36,24 +38,38 @@ public class CinematicManager : MonoBehaviour
 
     public void LaunchCinematic(int index)
     {
-        Debug.Log("launchCinematic");
-        MainCameraController.Instance.MainCamera.enabled = false; 
-        _director.playableAsset = AllCinematics[index];
-        UIInstance.instance.SetCanvasOnDisplay( _canvasOutCinematic,false);
-        UIInstance.instance.SetCanvasOnDisplay( _canvasInCinematic,true);
-        InCutScene = true;
-        _director.Play();
+        _fadeInOut.Play("BeginFade");
+
+        StartCoroutine(WaitForLoadCinematic(index));
+    }
+
+    IEnumerator WaitForLoadCinematic(int index)
+    {
+        yield return new WaitForSeconds(0.25f);
+          MainCameraController.Instance.MainCamera.enabled = false; 
+                _director.playableAsset = AllCinematics[index];
+                UIInstance.instance.SetCanvasOnDisplay( _canvasOutCinematic,false);
+                UIInstance.instance.SetCanvasOnDisplay( _canvasInCinematic,true);
+                InCutScene = true;
+                _director.Play();
     }
 
     public void EndCinematic()
     {
-       Debug.Log("test");
-        UIInstance.instance.SetCanvasOnDisplay( _canvasOutCinematic,true);
-        UIInstance.instance.SetCanvasOnDisplay( _canvasInCinematic,false);
-        MainCameraController.Instance.MainCamera.enabled = true;  
-        _director.Stop();
-        _director.playableAsset = null;
-        InCutScene = false;
+        _fadeInOut.Play("EndFade");
+        StartCoroutine(WaitForLoadGamePhase());
+    }
+
+    IEnumerator WaitForLoadGamePhase()
+    {
+        yield return new WaitForSeconds(1f);
+           
+                UIInstance.instance.SetCanvasOnDisplay( _canvasOutCinematic,true);
+                UIInstance.instance.SetCanvasOnDisplay( _canvasInCinematic,false);
+                MainCameraController.Instance.MainCamera.enabled = true;  
+                _director.Stop();
+                _director.playableAsset = null;
+                InCutScene = false;
     }
 
   
