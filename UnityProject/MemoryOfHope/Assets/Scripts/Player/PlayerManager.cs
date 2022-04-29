@@ -120,7 +120,8 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         yield return new WaitForFixedUpdate();
         if (enemy.isBlocked)
-        {
+        { 
+            enemy.isBlocked = false; 
             isBlocked = true;
             _shield.TakeDamage(1);
             KnockBack(enemy, _blockedDrag, _blockedKnockbackStrength);
@@ -128,19 +129,23 @@ public class PlayerManager : MonoBehaviour, Damageable
             isBlocked = false;
             PlayerController.instance.playerRb.drag = 0;
             PlayerController.instance.playerRb.velocity = Vector3.zero;
+           
             yield break;
         }
 
         isHit = true;
+        PlayerController.instance.playerAnimator.Play("Hit");
         KnockBack(enemy, _drag, knockbackStrength);
         int damage = enemy.damage;
         TakeDamage(damage);
         yield return new WaitForSeconds(hitDuration);
+
         PlayerController.instance.playerRb.drag = 0;
         PlayerController.instance.playerRb.velocity = Vector3.zero;
 
         isHit = false;
     }
+    
 
     void KnockBack(EnemyManager enemy, float drag, float strengh)
     {

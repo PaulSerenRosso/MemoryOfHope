@@ -48,6 +48,7 @@ public class PrismModule : Module
         
         if (PlayerManager.instance.isHit)
         {
+            Release();
             return false; // Ne peut pas faire le prisme si le joueur est knockback
         }
         
