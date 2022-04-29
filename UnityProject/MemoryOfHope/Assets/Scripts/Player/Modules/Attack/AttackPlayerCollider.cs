@@ -7,7 +7,8 @@ public class AttackPlayerCollider : MonoBehaviour
 { 
     public float currentDamage;
     public Collider collider;
-    
+    public GameObject renderer;
+
     private void OnTriggerEnter(Collider other)
     {
 
