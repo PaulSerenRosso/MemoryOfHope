@@ -92,7 +92,6 @@ public class InteractionModule : Module
             }
             else if(selectedObject != null)
             {
-                selectedObject = null;
                 foreach (var interaction in interactiveFunction)
                 {
                     interaction.Deselect();
@@ -182,7 +181,6 @@ public class InteractionModule : Module
         isPerformed = false;
         PlayerController.instance.playerAnimator.SetBool("InPrism", false);
         if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
-        selectedObject = null;
         line.positionCount = 0;
         foreach (var interaction in interactiveFunction)
         {

@@ -245,15 +245,14 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isHit && !isBlocked)
+        if (other.CompareTag("Enemy") && !isBlocked)
         {
             CheckEnemyTrigger(other);
         }
 
         CheckEventTriggerEnter(other);
     }
-
-
+    
     private void CheckShockWaveTrigger(Collider other, EnemyManager enemy)
     {
         var machine = other.GetComponentInParent<MC_StateMachine>();
@@ -263,7 +262,11 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         if (!(distance > sphere.radius - machine.attackAreaLength)) return;
         if (!(transform.position.y < machine.attackArea.transform.position.y + machine.attackAreaHeight)) return;
-        hitDirection = transform.position - enemy.transform.position;
+
+        var closestPoint =
+            Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
+        hitDirection = transform.position - closestPoint;
+
         StartCoroutine(Hit(enemy));
     }
 
@@ -274,12 +277,15 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (enemy.Machine.GetType() == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
         {
             CheckShockWaveTrigger(other, enemy);
+            return;
         }
-        else
-        {
-            hitDirection = transform.position - enemy.transform.position;
-            StartCoroutine(Hit(enemy));
-        }
+
+        var closestPoint =
+            Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
+        hitDirection = transform.position - closestPoint;
+
+        StartCoroutine(Hit(enemy));
+        
     }
 
     private void OnTriggerStay(Collider other)

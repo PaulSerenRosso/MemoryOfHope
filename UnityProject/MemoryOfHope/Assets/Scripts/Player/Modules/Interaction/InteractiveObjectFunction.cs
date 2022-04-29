@@ -71,6 +71,7 @@ public class InteractiveObjectFunction : Module
 
     public virtual void Deselect()
     {
+        interactionModule.selectedObject = null;
         PlayerController.instance.playerRb.isKinematic = false;
         isSelected = false;
         isPerformed = false;
