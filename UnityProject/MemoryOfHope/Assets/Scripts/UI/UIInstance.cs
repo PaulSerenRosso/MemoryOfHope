@@ -222,11 +222,11 @@ public class UIInstance : MonoBehaviour
 
     private void OpeningInformationMenu()
     {
-        if (informationWindow.activeSelf) return;
-        blackFilter.SetActive(true);
+        if (informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf) return;
         SetCanvasOnDisplay(informationMenuHiddenCanvas, false);
         informationWindow.SetActive(true);
         eventSystem.SetSelectedGameObject(informationMenuFirstSelected);
+        SettingPlayerState();
     }
 
     private void ClosingInformationMenu(InputAction.CallbackContext ctx)
@@ -235,7 +235,7 @@ public class UIInstance : MonoBehaviour
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
-        blackFilter.SetActive(false);
+        SettingPlayerState();
     }
 
     public void AddModuleGUI(Module module)
@@ -267,10 +267,8 @@ public class UIInstance : MonoBehaviour
 
     private IEnumerator SelectModuleGUI(UIModule UImodule)
     {
+        // Retirer  au joueur
         eventSystem.SetSelectedGameObject(null);
-
-        // Retirer contrôle au joueur
-
 
         // Faire disparaitre les autres zones de Module GUI
         foreach (var modGUI in modulesGUI)
@@ -318,11 +316,9 @@ public class UIInstance : MonoBehaviour
 
     private IEnumerator UnselectModuleGUI(UIModule UImodule)
     {
-        Debug.Log("closing");
         eventSystem.SetSelectedGameObject(null);
 
         // Faire disparaitre la zone d'informations
-
         moduleGUIInformationBox.SetActive(false);
 
         //yield return new WaitForSeconds(.25f);
@@ -351,7 +347,6 @@ public class UIInstance : MonoBehaviour
         UImodule.isOpened = false;
         
         // Redonner contrôle au joueur
-
         eventSystem.SetSelectedGameObject(UImodule.gameObject);
     }
 
@@ -390,17 +385,22 @@ public class UIInstance : MonoBehaviour
     public void OpeningPauseMenu()
     {
         if (pauseMenu.activeSelf) return;
-        blackFilter.SetActive(true);
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(pauseMenuFirstSelected);
+        SettingPlayerState();
+    }
+    
+    public void OnClosePauseMenu()
+    {
+        ClosingPauseMenu(new InputAction.CallbackContext());
     }
 
     public void ClosingPauseMenu(InputAction.CallbackContext ctx)
     {
         if (!pauseMenu.activeSelf) return;
-        blackFilter.SetActive(false);
         pauseMenu.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
+        SettingPlayerState();
     }
 
     public void GoingBackMainMenu()
@@ -441,6 +441,7 @@ public class UIInstance : MonoBehaviour
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(optionMenuFirstSelected);
+        SettingPlayerState();
     }
 
     public void OnCloseOptionMenu()
@@ -454,6 +455,7 @@ public class UIInstance : MonoBehaviour
         optionMenu.SetActive(false);
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(optionButton);
+        SettingPlayerState();
     }
     
     public void OnLanguageChange(int index)
@@ -498,10 +500,20 @@ public class UIInstance : MonoBehaviour
         }
     }
 
-    public void SettingTimeScale(bool froze)
+    public void SettingPlayerState()
     {
-        if (froze) Time.timeScale = 0;
-        else Time.timeScale = 1;
+        var active = !(informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf);
+        PlayerManager.instance.isActive = active;
+        blackFilter.SetActive(!active);
+        var pauseActive = pauseMenu.activeSelf || optionMenu.activeSelf;
+        if (pauseActive)
+        {
+            GameManager.instance.inputs.UI.OpenInformationMenu.Disable();
+        }
+        else
+        {            
+            GameManager.instance.inputs.UI.OpenInformationMenu.Enable();
+        }
     }
 }
 
