@@ -21,6 +21,10 @@ public class InteractionModule : Module
     public LineRenderer line;
     private Vector2 inputCam;
     private bool joystickIsPressed;
+
+    public Gradient interactionLineGradient;
+    public Gradient defaultGradient;
+    public Color interactionColor;
     
     public override void LinkModule()
     {

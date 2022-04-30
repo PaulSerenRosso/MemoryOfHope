@@ -54,7 +54,6 @@ public class MoveObjectFunction : InteractiveObjectFunction
         inputCam = _cameraForwardXZ * joystickDirection.y +
                    _cameraRightXZ * joystickDirection.x;
         moveVector = new Vector3(inputCam.x, 0, inputCam.y);
-        moveVector.Normalize();
         
         CheckBoundaries();
         data.rb.velocity = moveVector * data.moveSpeed * Time.fixedDeltaTime;
@@ -90,8 +89,10 @@ public class MoveObjectFunction : InteractiveObjectFunction
         var interactive = (InteractiveObjectData) component;
 
         data = (MoveObjectData) interactive;
-        
-        data.GetComponent<Outline>().OutlineColor = Color.yellow;
+        data.tutorial.SetTutorial();
+        interactionModule.line.colorGradient = interactionModule.interactionLineGradient;
+
+        data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<MoveObjectData>();
@@ -112,6 +113,9 @@ public class MoveObjectFunction : InteractiveObjectFunction
     {
         if (data != null)
         {
+            data.tutorial.RemoveTutorial();
+            interactionModule.line.colorGradient = interactionModule.defaultGradient;
+
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = Color.white;
             data.rb.isKinematic = true;

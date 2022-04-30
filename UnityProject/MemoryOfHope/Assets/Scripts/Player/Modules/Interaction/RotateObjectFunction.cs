@@ -9,8 +9,8 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
     public override void LinkModule()
     {
-        GameManager.instance.inputs.Player.InteractionMove.performed += InputPressed;
-        GameManager.instance.inputs.Player.InteractionMove.canceled += InputReleased;
+        GameManager.instance.inputs.Player.InteractionRotate.performed += InputPressed;
+        GameManager.instance.inputs.Player.InteractionRotate.canceled += InputReleased;
         isLinked = true;
     }
     
@@ -22,44 +22,32 @@ public class RotateObjectFunction : InteractiveObjectFunction
     public override void UnlinkModule()
     {
         if (!isLinked) return;
-        GameManager.instance.inputs.Player.InteractionMove.performed -= InputPressed;
-        GameManager.instance.inputs.Player.InteractionMove.canceled -= InputReleased;
+        GameManager.instance.inputs.Player.InteractionRotate.performed -= InputPressed;
+        GameManager.instance.inputs.Player.InteractionRotate.canceled -= InputReleased;
     }
     
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
         inputPressed = true;
-        joystickDirection = ctx.ReadValue<Vector2>();
+        Debug.Log("pressed");
     }
     
     public override void InputReleased(InputAction.CallbackContext ctx)
     {
         inputPressed = false;
         Release();
+        Debug.Log("unpressed");
+
     }
 
     public override void Execute()
     {
         base.Execute();
-        
-        Vector2 _cameraForwardXZ;
-        Vector2 _cameraRightXZ;
-        _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
-            MainCameraController.Instance.transform.forward.z).normalized;
-        _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
-            MainCameraController.Instance.transform.right.z).normalized;
-        inputCam = _cameraForwardXZ * joystickDirection.y +
-                   _cameraRightXZ * joystickDirection.x;
-        moveVector = new Vector3(inputCam.x, 0, inputCam.y);
-        moveVector.Normalize();
+        Debug.Log("clic : " + timer);
 
         if (timer <= 0)
         {
-            float factor;
-            if (moveVector.x > 0) factor = -1;
-            else factor = 1;
-        
-            data.transform.Rotate(0, factor * data.rotationDegree, 0);
+            data.transform.Rotate(0, data.rotationDegree, 0);
             
             timer = time;
         }
@@ -75,8 +63,10 @@ public class RotateObjectFunction : InteractiveObjectFunction
         var interactive = (InteractiveObjectData) component;
 
         data = (RotateObjectData) interactive;
-
-        data.GetComponent<Outline>().OutlineColor = Color.yellow;
+        data.tutorial.SetTutorial();
+        interactionModule.line.startColor = interactionModule.interactionColor;
+        interactionModule.line.endColor = interactionModule.interactionColor;
+        data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<RotateObjectData>();
             
@@ -89,6 +79,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
     {
         if (data != null)
         {
+            data.tutorial.RemoveTutorial();
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = Color.white;
             data.rb.isKinematic = true;
