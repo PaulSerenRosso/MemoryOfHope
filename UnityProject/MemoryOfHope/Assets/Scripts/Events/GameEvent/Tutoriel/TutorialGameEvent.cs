@@ -14,12 +14,14 @@ public class TutorialGameEvent : ScriptableObject
 
     public void SetTutorial()
     {
+        if (TutorialManager.instance.activeTutorialGameEvents.Contains(this)) return;
         TutorialManager.instance.activeTutorialGameEvents.Add(this);
         TutorialManager.instance.SetCurrentEvent();
     }
 
     public void RemoveTutorial()
     {
+        if (!TutorialManager.instance.activeTutorialGameEvents.Contains(this)) return;
         TutorialManager.instance.activeTutorialGameEvents.Remove(this);
         TutorialManager.instance.currentTutorialGameEvent = null;
         TutorialManager.instance.SetCurrentEvent();

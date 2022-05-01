@@ -21,6 +21,7 @@ public class InteractionModule : Module
     public LineRenderer line;
     private Vector2 inputCam;
     private bool joystickIsPressed;
+    public TutorialGameEvent selectionTutorial;
 
     public Gradient interactionLineGradient;
     public Gradient defaultGradient;
@@ -166,6 +167,7 @@ public class InteractionModule : Module
             if (Physics.Raycast(raycastOrigin.position, transform.forward, out var hit ,rayLength, interactiveObjectLayer))
             {
                 if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+                selectionTutorial.SetTutorial();
                 line.SetPosition(1,   hit.point);
                 currentTargetedObject = hit.transform.gameObject;
                 currentTargetedObject.GetComponent<Outline>().enabled = true;
@@ -173,6 +175,7 @@ public class InteractionModule : Module
             else
             {
                 if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+                selectionTutorial.RemoveTutorial();
                 currentTargetedObject = null;
             }
         }
