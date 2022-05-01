@@ -128,7 +128,6 @@ public class InteractionModule : Module
     public override void Execute()
     {
         if (selectedObject != null) return;
-        isPerformed = true;
             
         if (!isActivate)
         {
@@ -140,6 +139,7 @@ public class InteractionModule : Module
             else
             {
                 _timer = 0;
+                isPerformed = true;
                 isActivate = true;
             }
         }
