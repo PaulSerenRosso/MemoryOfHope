@@ -12,9 +12,6 @@ public class InteractiveObjectFunction : Module
 
     public override void LinkModule()
     {
-        GameManager.instance.inputs.Player.Move.performed += InputPressed;
-        GameManager.instance.inputs.Player.Move.canceled += InputReleased;
-        isLinked = true;
     }
     
     private void OnDisable()
@@ -24,27 +21,17 @@ public class InteractiveObjectFunction : Module
 
     public override void UnlinkModule()
     {
-        /*
-        if (!isLinked) return;
-        GameManager.instance.inputs.Player.Move.performed -= InputPressed;
-        GameManager.instance.inputs.Player.Move.canceled -= InputReleased;
-        */
+        
     }
     
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
-        /*
-        inputPressed = true;
-        joystickDirection = ctx.ReadValue<Vector2>();
-        */
+        
     }
     
     public override void InputReleased(InputAction.CallbackContext ctx)
     {
-        /*
-        inputPressed = false;
-        Release();
-        */
+        
     }
 
     public override bool Conditions()
