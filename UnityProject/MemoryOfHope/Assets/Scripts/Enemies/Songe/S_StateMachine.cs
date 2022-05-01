@@ -84,7 +84,7 @@ public class S_StateMachine : EnemyMachine
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
-            PlayerManager.instance.Hit(enemyManager);
+            StartCoroutine(PlayerManager.instance.Hit(enemyManager));
         }
         if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {

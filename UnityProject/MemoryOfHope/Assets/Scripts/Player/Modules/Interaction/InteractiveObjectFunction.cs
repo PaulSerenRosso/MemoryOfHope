@@ -12,9 +12,6 @@ public class InteractiveObjectFunction : Module
 
     public override void LinkModule()
     {
-        GameManager.instance.inputs.Player.Move.performed += InputPressed;
-        GameManager.instance.inputs.Player.Move.canceled += InputReleased;
-        isLinked = true;
     }
     
     private void OnDisable()
@@ -24,21 +21,17 @@ public class InteractiveObjectFunction : Module
 
     public override void UnlinkModule()
     {
-        if (!isLinked) return;
-        GameManager.instance.inputs.Player.Move.performed -= InputPressed;
-        GameManager.instance.inputs.Player.Move.canceled -= InputReleased;
+        
     }
     
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
-        inputPressed = true;
-        joystickDirection = ctx.ReadValue<Vector2>();
+        
     }
     
     public override void InputReleased(InputAction.CallbackContext ctx)
     {
-        inputPressed = false;
-        Release();
+        
     }
 
     public override bool Conditions()
@@ -63,7 +56,8 @@ public class InteractiveObjectFunction : Module
     }
 
     public virtual void Select()
-    {
+    {        
+        GameManager.instance.inputs.Player.InteractionSelect.Disable();
         isPerformed = true;
         isSelected = true;
         PlayerController.instance.playerRb.isKinematic = true;
@@ -71,10 +65,11 @@ public class InteractiveObjectFunction : Module
 
     public virtual void Deselect()
     {
+        interactionModule.selectedObject = null;
         PlayerController.instance.playerRb.isKinematic = false;
         isSelected = false;
         isPerformed = false;
-        
+        GameManager.instance.inputs.Player.InteractionSelect.Enable();
     }
     
     public override void Release()

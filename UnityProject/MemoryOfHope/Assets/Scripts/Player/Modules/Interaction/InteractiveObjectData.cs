@@ -10,7 +10,8 @@ public class InteractiveObjectData : MonoBehaviour
     public Material selectedMaterial;
     public Rigidbody rb;
     public ParticleSystem interactiveParticleSystem;
-    
+    public TutorialGameEvent tutorial;
+
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
