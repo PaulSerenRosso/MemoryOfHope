@@ -22,6 +22,7 @@ public class InteractionModule : Module
     private Vector2 inputCam;
     private bool joystickIsPressed;
 
+    public TutorialGameEvent selectionTutorial;
     public Gradient interactionLineGradient;
     public Gradient defaultGradient;
     public Color interactionColor;
@@ -167,12 +168,14 @@ public class InteractionModule : Module
             {
                 if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
                 line.SetPosition(1,   hit.point);
+                selectionTutorial.SetTutorial();
                 currentTargetedObject = hit.transform.gameObject;
                 currentTargetedObject.GetComponent<Outline>().enabled = true;
             }
             else
             {
                 if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+                selectionTutorial.RemoveTutorial();
                 currentTargetedObject = null;
             }
         }

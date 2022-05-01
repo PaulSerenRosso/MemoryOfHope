@@ -34,7 +34,6 @@ public class TutorialManager : MonoBehaviour
     
     public void SetCurrentEvent()
     {
-        Debug.Log(activeTutorialGameEvents.Count);
         if (activeTutorialGameEvents.Count == 0)
         {
             tutorialWindow.SetActive(false);

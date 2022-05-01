@@ -115,7 +115,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
         {
             data.tutorial.RemoveTutorial();
             interactionModule.line.colorGradient = interactionModule.defaultGradient;
-
+            
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = Color.white;
             data.rb.isKinematic = true;
