@@ -30,6 +30,7 @@ public class UIInstance : MonoBehaviour
     public InGameCanvasType[] informationMenuHiddenCanvas;
     public GameObject informationWindow;
     public UIModule[] modulesGUI;
+    private UIModule actualModuleGUI;
     public GameObject moduleGUIInformationBox;
     public TextMeshProUGUI moduleAbilityText;
     public TextMeshProUGUI moduleInputText;
@@ -232,6 +233,7 @@ public class UIInstance : MonoBehaviour
     private void ClosingInformationMenu(InputAction.CallbackContext ctx)
     {
         if (!informationWindow.activeSelf) return;
+        if (actualModuleGUI != null) StartCoroutine(UnselectModuleGUI(actualModuleGUI));
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
@@ -311,6 +313,7 @@ public class UIInstance : MonoBehaviour
         moduleGUIInformationBox.SetActive(true);
         yield return new WaitForSeconds(.25f);
         eventSystem.SetSelectedGameObject(UImodule.gameObject);
+        actualModuleGUI = UImodule;
         UImodule.isOpened = true;
     }
 
@@ -345,7 +348,8 @@ public class UIInstance : MonoBehaviour
             modGUI.gameObject.SetActive(true);
         }
         UImodule.isOpened = false;
-        
+        actualModuleGUI = null;
+
         // Redonner contrôle au joueur
         eventSystem.SetSelectedGameObject(UImodule.gameObject);
     }
