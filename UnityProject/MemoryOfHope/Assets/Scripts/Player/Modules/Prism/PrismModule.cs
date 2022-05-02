@@ -12,8 +12,8 @@ public class PrismModule : Module
     private bool isActivate;
     [SerializeField] private float rotationSpeed;
     private Vector2 inputCam;
-    private bool joystickPressed ;
-    
+    private bool joystickPressed;
+
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.Move.performed += JoystickPressed;
@@ -45,14 +45,14 @@ public class PrismModule : Module
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
-        
+
         if (PlayerManager.instance.isHit)
         {
             Release();
             return false; // Ne peut pas faire le prisme si le joueur est knockback
         }
-        
-        if (!PlayerController.instance.onGround || (_shield.isDead&& !isActivate)) return false;
+
+        if (!PlayerController.instance.onGround || (_shield.isDead && !isActivate)) return false;
         return true;
     }
 
@@ -78,9 +78,10 @@ public class PrismModule : Module
         if (_shield.isDead)
         {
             Release();
-              
+
             return;
         }
+
         isPerformed = true;
         if (!isActivate)
         {
@@ -97,8 +98,6 @@ public class PrismModule : Module
         }
         else
         {
-            
-          
             if (!joystickPressed)
                 return;
             Vector2 angleFoward = new Vector2(transform.forward.x,
@@ -107,12 +106,12 @@ public class PrismModule : Module
             Vector2 _cameraRightXZ;
             _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
                 MainCameraController.Instance.transform.forward.z).normalized;
-            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
+            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
                 MainCameraController.Instance.transform.right.z).normalized;
             inputCam = _cameraForwardXZ * _joystickDirection.y +
                        _cameraRightXZ * _joystickDirection.x;
             Vector2 rotationVector =
-                Vector3.RotateTowards(angleFoward, inputCam.normalized, rotationSpeed, 00f);
+                Vector3.RotateTowards(angleFoward, inputCam, rotationSpeed, 00f);
             PlayerController.instance.playerRb.rotation =
                 Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
         }

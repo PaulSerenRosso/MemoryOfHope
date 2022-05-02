@@ -128,6 +128,10 @@ public class InteractionModule : Module
     public override void Execute()
     {
         if (selectedObject != null) return;
+        if (!isPerformed)
+        {
+            
+        }
         isPerformed = true;
             
         if (!isActivate)
@@ -145,6 +149,8 @@ public class InteractionModule : Module
         }
         else
         {
+            if (!joystickIsPressed) return;
+            
             Vector2 angleFoward = new Vector2(transform.forward.x,
                 transform.forward.z);
             Vector2 _cameraForwardXZ;
@@ -156,7 +162,7 @@ public class InteractionModule : Module
             inputCam = _cameraForwardXZ * joystickDirection.y +
                        _cameraRightXZ * joystickDirection.x;
             Vector2 rotationVector =
-                Vector3.RotateTowards(angleFoward, inputCam.normalized, rotateSpeed, 00f);
+                Vector3.RotateTowards(angleFoward, inputCam, rotateSpeed, 00f);
             PlayerController.instance.playerRb.rotation =
                 Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
                 
