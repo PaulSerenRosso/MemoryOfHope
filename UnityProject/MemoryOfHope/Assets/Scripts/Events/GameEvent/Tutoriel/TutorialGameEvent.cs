@@ -14,6 +14,7 @@ public class TutorialGameEvent : ScriptableObject
 
     public void SetTutorial()
     {
+         Debug.Log("tesdfdftaaaaaaaaa");
         if (TutorialManager.instance.activeTutorialGameEvents.Contains(this)) return;
         TutorialManager.instance.activeTutorialGameEvents.Add(this);
         TutorialManager.instance.SetCurrentEvent();
@@ -21,6 +22,7 @@ public class TutorialGameEvent : ScriptableObject
 
     public void RemoveTutorial()
     {
+        Debug.Log("tedfdfst");
         if (!TutorialManager.instance.activeTutorialGameEvents.Contains(this)) return;
         TutorialManager.instance.activeTutorialGameEvents.Remove(this);
         TutorialManager.instance.currentTutorialGameEvent = null;
