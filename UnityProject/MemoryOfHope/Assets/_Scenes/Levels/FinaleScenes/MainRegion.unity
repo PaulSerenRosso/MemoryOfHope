@@ -2313,43 +2313,51 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e98627e5c0d480442a968c2e2e9ed91c, type: 2}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Signals.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Signals.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 3952ee5266c500c40b09333fef1fa7c6, type: 2}
+      objectReference: {fileID: 11400000, guid: 12ed6fb008480fb4e8c3d0ffe6b8f348, type: 2}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 371069130}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2103791058}
+      objectReference: {fileID: 11400000, guid: b3400af3e2e24ce49b8e90173e071a0c, type: 2}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EndCinematic
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: SetUpDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: DialogueGameEvent, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5980355718528824783, guid: 1ce981efdf683e94d961b65b996b2c0e, type: 3}
       propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5125,6 +5133,30 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 251119323}
+    - target: {fileID: 8236416770299501219, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 371069130}
+    - target: {fileID: 8236416770299501219, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchCinematic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236416770540057060, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 371069130}
+    - target: {fileID: 8236416770540057060, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchCinematic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236416770591946805, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 371069130}
+    - target: {fileID: 8236416770591946805, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchCinematic
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
 --- !u!43 &744101108
@@ -10916,6 +10948,14 @@ PrefabInstance:
     - target: {fileID: 551501204049607995, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
       propertyPath: BeginLaser.z
       value: 101.50084
+      objectReference: {fileID: 0}
+    - target: {fileID: 1473698277601545654, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 371069130}
+    - target: {fileID: 1473698277601545654, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchCinematic
       objectReference: {fileID: 0}
     - target: {fileID: 2445701437438906850, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
       propertyPath: m_Mesh
