@@ -173,10 +173,14 @@ public class UIInstance : MonoBehaviour
         int life = 0;
         foreach (var container in heartContainers)
         {
+            container.GetComponent<Image>().sprite = container.heartParts[0];
+            
+            /*
             foreach (var part in container.heartParts)
             {
                 part.color = Color.black;
             }
+            */
         }
 
         int heartContainer = 0;
@@ -184,7 +188,10 @@ public class UIInstance : MonoBehaviour
         while (life != PlayerManager.instance.health)
         {
             life++;
-            heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
+            heartContainers[heartContainer].GetComponent<Image>().sprite =
+                heartContainers[heartContainer].heartParts[heartPart + 1];
+            
+            //heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
             heartPart++;
 
             if (heartPart <= 3) continue;
