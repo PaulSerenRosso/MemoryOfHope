@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ModuleAcquisition : CheckPoint
 {
+    [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private Module[] moduleToLearn;
 
     public override void Activate()
@@ -12,6 +13,7 @@ public class ModuleAcquisition : CheckPoint
         {
             PlayerManager.instance.AddModule(module);
         }
+        particleSystem.Stop();
 
         base.Activate();
     }
