@@ -38,6 +38,7 @@ public class CinematicManager : MonoBehaviour
 
     public void LaunchCinematic(int index)
     {
+        
         _fadeInOut.Play("BeginFade");
 
         StartCoroutine(WaitForLoadCinematic(index));
