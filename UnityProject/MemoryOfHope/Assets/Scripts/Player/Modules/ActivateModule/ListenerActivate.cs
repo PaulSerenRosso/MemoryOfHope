@@ -14,8 +14,6 @@ public class ListenerActivate : ListenerTrigger
     public override void Raise()
     {
         if (isActivate) return;
-
-        Debug.Log("tesfdqsft");
         PlayerManager.instance.CurrentListenerActivate = this;
         base.Raise();
     }
@@ -25,7 +23,6 @@ public class ListenerActivate : ListenerTrigger
         if (isActivate) return;
       
         PlayerManager.instance.CurrentListenerActivate = null;
-        Debug.Log("tesfdqsftdfdfsfdfqsqs");
         base.EndRaise();
     }
 

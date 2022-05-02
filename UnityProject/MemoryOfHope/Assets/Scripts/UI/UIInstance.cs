@@ -30,6 +30,7 @@ public class UIInstance : MonoBehaviour
     public InGameCanvasType[] informationMenuHiddenCanvas;
     public GameObject informationWindow;
     public UIModule[] modulesGUI;
+    private UIModule actualModuleGUI;
     public GameObject moduleGUIInformationBox;
     public TextMeshProUGUI moduleAbilityText;
     public TextMeshProUGUI moduleInputText;
@@ -172,10 +173,14 @@ public class UIInstance : MonoBehaviour
         int life = 0;
         foreach (var container in heartContainers)
         {
+            container.GetComponent<Image>().sprite = container.heartParts[0];
+            
+            /*
             foreach (var part in container.heartParts)
             {
                 part.color = Color.black;
             }
+            */
         }
 
         int heartContainer = 0;
@@ -183,7 +188,10 @@ public class UIInstance : MonoBehaviour
         while (life != PlayerManager.instance.health)
         {
             life++;
-            heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
+            heartContainers[heartContainer].GetComponent<Image>().sprite =
+                heartContainers[heartContainer].heartParts[heartPart + 1];
+            
+            //heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
             heartPart++;
 
             if (heartPart <= 3) continue;
@@ -232,6 +240,7 @@ public class UIInstance : MonoBehaviour
     private void ClosingInformationMenu(InputAction.CallbackContext ctx)
     {
         if (!informationWindow.activeSelf) return;
+        if (actualModuleGUI != null) StartCoroutine(UnselectModuleGUI(actualModuleGUI));
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
@@ -311,6 +320,7 @@ public class UIInstance : MonoBehaviour
         moduleGUIInformationBox.SetActive(true);
         yield return new WaitForSeconds(.25f);
         eventSystem.SetSelectedGameObject(UImodule.gameObject);
+        actualModuleGUI = UImodule;
         UImodule.isOpened = true;
     }
 
@@ -345,7 +355,8 @@ public class UIInstance : MonoBehaviour
             modGUI.gameObject.SetActive(true);
         }
         UImodule.isOpened = false;
-        
+        actualModuleGUI = null;
+
         // Redonner contrôle au joueur
         eventSystem.SetSelectedGameObject(UImodule.gameObject);
     }
