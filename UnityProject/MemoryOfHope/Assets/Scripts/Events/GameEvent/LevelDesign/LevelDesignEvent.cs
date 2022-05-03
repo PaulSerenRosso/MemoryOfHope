@@ -12,4 +12,9 @@ public class LevelDesignEvent : ScriptableObject
     {
         
     }
+
+    public void CreateEnemies()
+    {
+        
+    }
 }
