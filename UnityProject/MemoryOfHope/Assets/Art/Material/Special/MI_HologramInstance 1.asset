@@ -1,17 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &2100000
-Material:
-  serializedVersion: 6
+--- !u!114 &11400000
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BendGrass
-  m_Shader: {fileID: 4800000, guid: b4ffde989c4925245bc7d3a2fa08ed0f, type: 3}
-  m_ShaderKeywords: 
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fbb352189210b408ccf9a29097145a, type: 3}
+  m_Name: MI_HologramInstance 1
+  m_EditorClassIdentifier: 
+  master: {fileID: 2100000, guid: 9619de17760b14644a4dde053698db69, type: 2}
+  instance: {fileID: 1604236454383439550}
+  overrides:
+  - name: Texture2D_7b8bca99f8e04435950b313a7cf13482
+    type: 4
+    isKeyword: 0
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 2800000, guid: a595fcb237632ae44afda1e49b09ba16, type: 3}
+    active: 1
+--- !u!21 &1604236454383439550
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MI_HologramInstance 1
+  m_Shader: {fileID: -6465566751694194690, guid: d416cc812c30c1a40a40f9352262dfd7, type: 3}
+  m_ShaderKeywords: _RECEIVE_SHADOW_OFF
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -19,6 +42,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_7b8bca99f8e04435950b313a7cf13482:
+        m_Texture: {fileID: 2800000, guid: a595fcb237632ae44afda1e49b09ba16, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,6 +103,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_0eec5107ec49434ba8517e1bbed7504b: 0
+    - Vector1_2df55512a78f4b1498572bf9ff7318cb: -0.5
+    - Vector1_a235e1fc4070492aa8afcee0a9dc4e97: 0.32
+    - Vector1_a7334e7790544a84bf96dff7b82403aa: 0.2
+    - Vector1_c6960a55b6b14fd8af91340d659efe85: 17.56
+    - Vector1_cd0b3af522114f2c8f9e9cf519067291: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -103,25 +136,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_9efd00263da04301a5e4fa086853c2db: {r: 0, g: 0.94117653, b: 1, a: 1}
+    - Color_e2d6f04223004486b3edfee02472ab4e: {r: 0.3037113, g: 0.7075472, b: 0.69123393, a: 0}
+    - Color_e4ad0c26eafd4ec6863731abcd4aa1af: {r: 0.9386792, g: 1, b: 0.9955771, a: 0}
+    - Vector2_fcfe1e82ce0e40e8acc0d6d8a0e3f9da: {r: 1, g: 25, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.53462315, g: 0.8396226, b: 0.24951048, a: 1}
-    - _Color2: {r: 0.1455022, g: 0.3207547, b: 0.107422575, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WaveSpeed: {r: 1, g: 1, b: 1, a: 1}
-    - _WaveX: {r: 1, g: 1, b: 1, a: 1}
-    - _WaveZ: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7188845400431514472
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
