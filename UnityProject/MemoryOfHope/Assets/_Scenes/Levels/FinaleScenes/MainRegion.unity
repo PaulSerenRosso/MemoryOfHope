@@ -517,6 +517,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8472678044288392459, guid: ec1669b23022a0643a32b4d47a31638c, type: 3}
   m_PrefabInstance: {fileID: 22831361}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &96976701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 96976702}
+  m_Layer: 0
+  m_Name: ForsakenPrototypePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &96976702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96976701}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 100.75, y: -5.5, z: 117.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1857036993}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106470893
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +583,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-129738
+  m_Name: pb_Mesh-818942
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1045,7 +1075,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151036
+  m_Name: pb_Mesh-841484
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1209,7 +1239,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-129724
+  m_Name: pb_Mesh-818928
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1701,7 +1731,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151120
+  m_Name: pb_Mesh-841568
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1865,7 +1895,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151168
+  m_Name: pb_Mesh-841616
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4464,6 +4494,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemiesManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 1842088636626341998, guid: d28f9a9b71b7d6044997eabaa3fb776c, type: 3}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 1842088636626341998, guid: d28f9a9b71b7d6044997eabaa3fb776c, type: 3}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 1842088636626341998, guid: d28f9a9b71b7d6044997eabaa3fb776c, type: 3}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[0].position
+      value: 
+      objectReference: {fileID: 732575721}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[1].position
+      value: 
+      objectReference: {fileID: 1625823311}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[2].position
+      value: 
+      objectReference: {fileID: 96976702}
+    - target: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+      propertyPath: enemiesSetter.Array.data[0].position.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
 --- !u!4 &653726115 stripped
@@ -4471,13 +4533,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2524579612120297312, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
   m_PrefabInstance: {fileID: 653726114}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &653726116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2524579612120297319, guid: c8a7d55d052944f468760f6f075f569c, type: 3}
+  m_PrefabInstance: {fileID: 653726114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d20b9dff7ad0e746a64bf6a8c260991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &660463901
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151144
+  m_Name: pb_Mesh-841592
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5142,6 +5215,36 @@ PrefabInstance:
       objectReference: {fileID: 371069130}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e48118d1f7e4da34381b122cf4b7422b, type: 3}
+--- !u!1 &732575720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732575721}
+  m_Layer: 0
+  m_Name: ForsakenPrototypePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732575721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732575720}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 96.75, y: -5.5, z: 118.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1857036993}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &744101108
 Mesh:
   m_ObjectHideFlags: 0
@@ -5476,7 +5579,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151274
+  m_Name: pb_Mesh-841722
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7217,7 +7320,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151060
+  m_Name: pb_Mesh-841508
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7381,7 +7484,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151306
+  m_Name: pb_Mesh-841754
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8120,7 +8223,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-129626
+  m_Name: pb_Mesh-818830
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9170,7 +9273,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151072
+  m_Name: pb_Mesh-841520
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9334,7 +9437,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151132
+  m_Name: pb_Mesh-841580
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9498,7 +9601,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151318
+  m_Name: pb_Mesh-841766
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10392,7 +10495,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151048
+  m_Name: pb_Mesh-841496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10625,6 +10728,36 @@ MonoBehaviour:
   message: 
   _destroyWhenActivate: 0
   SpawnPosition: {fileID: 1602456833}
+--- !u!1 &1625823310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1625823311}
+  m_Layer: 0
+  m_Name: ForsakenPrototypePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1625823311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625823310}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 98.375, y: -5.5, z: 123.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1857036993}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1659627623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11686,6 +11819,90 @@ PrefabInstance:
       propertyPath: moduleToLearn.Array.data[0]
       value: 
       objectReference: {fileID: 1171753463}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 653726116}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 653726116}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 653726116}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: CreatingEnemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: CreatingEnemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: CreatingEnemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: EnemiesManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: EnemiesManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: EnemiesManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666221512373313987, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
+      propertyPath: ActivateEvent.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6835658342467385191, guid: 4c61ff70ce9286c409fa026a2b7c660e, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -11946,7 +12163,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-151084
+  m_Name: pb_Mesh-841532
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12596,6 +12813,39 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1857036992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857036993}
+  m_Layer: 0
+  m_Name: CreatedEnemiesTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1857036993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857036992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 732575721}
+  - {fileID: 1625823311}
+  - {fileID: 96976702}
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1865416744
 Mesh:
   m_ObjectHideFlags: 0
@@ -13542,7 +13792,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-129710
+  m_Name: pb_Mesh-818914
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

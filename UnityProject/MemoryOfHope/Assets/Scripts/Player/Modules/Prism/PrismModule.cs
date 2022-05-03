@@ -83,38 +83,28 @@ public class PrismModule : Module
         }
 
         isPerformed = true;
-        if (!isActivate)
-        {
-            if (_timer == 0)
-                PlayerController.instance.playerAnimator.SetBool("InPrism", true);
-            if (_activationTime > _timer)
-                _timer += Time.deltaTime;
-            else
-            {
-                _timer = 0;
-                isActivate = true;
-                _shield.InputShield = true;
-            }
-        }
-        else
-        {
-            if (!joystickPressed)
-                return;
-            Vector2 angleFoward = new Vector2(transform.forward.x,
-                transform.forward.z);
-            Vector2 _cameraForwardXZ;
-            Vector2 _cameraRightXZ;
-            _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
-                MainCameraController.Instance.transform.forward.z).normalized;
-            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
-                MainCameraController.Instance.transform.right.z).normalized;
-            inputCam = _cameraForwardXZ * _joystickDirection.y +
-                       _cameraRightXZ * _joystickDirection.x;
-            Vector2 rotationVector =
-                Vector3.RotateTowards(angleFoward, inputCam, rotationSpeed, 00f);
-            PlayerController.instance.playerRb.rotation =
-                Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-        }
+
+        PlayerController.instance.playerAnimator.SetBool("InPrism", true);
+
+        isActivate = true;
+        _shield.InputShield = true;
+
+        if (!joystickPressed)
+            return;
+        Vector2 angleFoward = new Vector2(transform.forward.x,
+            transform.forward.z);
+        Vector2 _cameraForwardXZ;
+        Vector2 _cameraRightXZ;
+        _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+            MainCameraController.Instance.transform.forward.z).normalized;
+        _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
+            MainCameraController.Instance.transform.right.z).normalized;
+        inputCam = _cameraForwardXZ * _joystickDirection.y +
+                   _cameraRightXZ * _joystickDirection.x;
+        Vector2 rotationVector =
+            Vector3.RotateTowards(angleFoward, inputCam, rotationSpeed, 00f);
+        PlayerController.instance.transform.rotation =
+            Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
     }
 
     public override void Release()
