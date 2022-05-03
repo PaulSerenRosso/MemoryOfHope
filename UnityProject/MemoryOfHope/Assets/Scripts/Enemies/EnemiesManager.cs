@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
-    public List<EnemyManager> BaseEnemies;
+    #region instance
+
     public static EnemiesManager Instance;
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
         Instance = this;
     }
+
+    #endregion
+    
+    public List<EnemyManager> BaseEnemies;
+
+    public List<EnemySetter> enemiesSetter;
 
     public void RefreshBaseEnemies()
     {
@@ -33,4 +40,9 @@ public class EnemiesManager : MonoBehaviour
 //pool d'ennemis pour les waves; 
 // list de enemis transform 
 
+    public void CreatingEnemies(int index)
+    {
+        var setter = enemiesSetter[index];
+        Instantiate(setter.prefab, setter.position.position, Quaternion.identity);
+    }
 }
