@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class BossPhaseManager : MonoBehaviour
 {
@@ -20,16 +21,11 @@ public class BossPhaseManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private PhaseType currentPhaseType;
-    private InvulnerablePhase currentInvulnerablePhase;
-    private ProtectedPhase currentProtectedPhase;
-
-    public List<InvulnerablePhase> invulnerablePhases;
-    public List<ProtectedPhase> protectedPhases;
-    
-    public List<Transform> spawningPoints;
+    public Transform[] spawningPoints;
     [SerializeField] private HM_StateMachine bossStateMachine;
-
+    public List<BossPhaseSO> allPhases;
+    public BossPhaseSO currentPhase;
+    
     private void Start()
     {
         BeginsBattle(); // A terme : ça se lance pas ici
@@ -37,60 +33,22 @@ public class BossPhaseManager : MonoBehaviour
 
     public void BeginsBattle()
     {
-        currentInvulnerablePhase = invulnerablePhases[0];
-        currentPhaseType = PhaseType.Invulnerable;
-        SetCurrentPhase(currentPhaseType);
-            
         // Le boss est activé
         bossStateMachine.ActivateBehaviour();
+        if(allPhases.Count == 0) Debug.LogError("Pas de phase disponible");
+        currentPhase = allPhases[0];
     }
 
-    public void SetNextInvulnerablePhase(PhaseType type)
+    public void SetNextPhase() // Set Next Phase est appelé dans les fonctions du State Machine
     {
-        switch (type)
+        allPhases.Remove(currentPhase);
+        if(allPhases.Count == 0)
         {
-            case PhaseType.Invulnerable:
-                
-                if (invulnerablePhases.Count <= 1) return;
-                if (currentInvulnerablePhase == null) return;
-                if (!invulnerablePhases.Contains(currentInvulnerablePhase)) return;
-
-                currentProtectedPhase = null;
-
-                invulnerablePhases.Remove(invulnerablePhases[0]);
-                currentInvulnerablePhase = invulnerablePhases[0];
-                
-                break;
-            
-            case PhaseType.Protected:
-                
-                if (protectedPhases.Count <= 1) return;
-                if (currentProtectedPhase == null) return;
-                if (!protectedPhases.Contains(currentProtectedPhase)) return;
-
-                currentInvulnerablePhase = null;
-
-                protectedPhases.Remove(protectedPhases[0]);
-                currentProtectedPhase = protectedPhases[0];
-                break;
+            Debug.Log("Boss vaincu");
         }
-        
-        SetCurrentPhase(currentPhaseType);
-    }
-
-    public void SetCurrentPhase(PhaseType type)
-    {
-        switch (type)
+        else
         {
-            case PhaseType.Invulnerable:
-                
-                
-                break;
-            
-            case PhaseType.Protected:
-                
-                
-                break;
+            currentPhase = allPhases[0];
         }
     }
 }
