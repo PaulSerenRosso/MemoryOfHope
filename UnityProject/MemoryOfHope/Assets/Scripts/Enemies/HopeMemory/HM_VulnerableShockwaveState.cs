@@ -9,5 +9,6 @@ public class HM_VulnerableShockwaveState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
+        // A la fin de la shockwave, lance cooldown puis move
     }
 }

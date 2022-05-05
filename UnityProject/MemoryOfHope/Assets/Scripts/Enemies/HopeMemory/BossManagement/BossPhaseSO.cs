@@ -26,5 +26,5 @@ public class BossPhaseSO : ScriptableObject
 
 public enum PhaseType
 {
-    Invulnerable, Protected
+    Vulnerable, Protected
 }

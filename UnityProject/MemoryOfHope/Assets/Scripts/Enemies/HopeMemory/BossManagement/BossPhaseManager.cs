@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -35,13 +34,11 @@ public class BossPhaseManager : MonoBehaviour
     {
         // Le boss est activé
         bossStateMachine.ActivateBehaviour();
-        if(allPhases.Count == 0) Debug.LogError("Pas de phase disponible");
-        currentPhase = allPhases[0];
     }
 
     public void SetNextPhase() // Set Next Phase est appelé dans les fonctions du State Machine
     {
-        allPhases.Remove(currentPhase);
+        if(currentPhase != null) allPhases.Remove(currentPhase);
         if(allPhases.Count == 0)
         {
             Debug.Log("Boss vaincu");
@@ -49,6 +46,20 @@ public class BossPhaseManager : MonoBehaviour
         else
         {
             currentPhase = allPhases[0];
+            switch (currentPhase.phaseType)
+            {
+                case PhaseType.Vulnerable:
+                    var vulnerablePhase = (VulnerablePhaseSO) currentPhase;
+                    vulnerablePhase.SetPhase();
+                    break;
+                case PhaseType.Protected:
+                    var protectedPhase = (ProtectedPhaseSO) currentPhase;
+                    protectedPhase.SetPhase();
+                    break;
+                default:
+                    Debug.LogError("Type invalide");
+                    break;
+            }
         }
     }
 }
