@@ -26,6 +26,7 @@ public class InteractionModule : Module
     public Gradient interactionLineGradient;
     public Gradient defaultGradient;
     public Color interactionColor;
+    public Color defaultColor;
     
     public override void LinkModule()
     {
@@ -73,7 +74,6 @@ public class InteractionModule : Module
         joystickIsPressed = true;
 
         joystickDirection = ctx.ReadValue<Vector2>();
-        
     }
 
     private void Selecting(InputAction.CallbackContext ctx)
@@ -95,7 +95,7 @@ public class InteractionModule : Module
                     }
                 }
             }
-            else if(selectedObject != null)
+            else if (selectedObject != null)
             {
                 foreach (var interaction in interactiveFunction)
                 {
@@ -111,6 +111,7 @@ public class InteractionModule : Module
         {
             return false;
         }
+
         if (PlayerManager.instance.isHit)
         {
             Release();
@@ -121,79 +122,61 @@ public class InteractionModule : Module
         {
             return false;
         }
-        
+
         return true;
     }
 
     public override void Execute()
     {
         if (selectedObject != null) return;
-        if (!isPerformed)
-        {
-            
-        }
+
         isPerformed = true;
-            
-        if (!isActivate)
+        isActivate = true;
+
+        PlayerController.instance.playerAnimator.SetBool("InPrism", true);
+        
+        Vector2 angleFoward = new Vector2(transform.forward.x,
+            transform.forward.z);
+        Vector2 _cameraForwardXZ;
+        Vector2 _cameraRightXZ;
+        _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+            MainCameraController.Instance.transform.forward.z).normalized;
+        _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
+            MainCameraController.Instance.transform.right.z).normalized;
+        inputCam = _cameraForwardXZ * joystickDirection.y +
+                   _cameraRightXZ * joystickDirection.x;
+        Vector2 rotationVector =
+            Vector3.RotateTowards(angleFoward, inputCam, rotateSpeed, 00f);
+        PlayerController.instance.transform.rotation =
+            Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+
+        line.positionCount = 2;
+        line.SetPosition(0, raycastOrigin.transform.position);
+        line.SetPosition(1, transform.position + transform.forward * rayLength);
+
+        if (Physics.Raycast(raycastOrigin.position, transform.forward, out var hit, rayLength, interactiveObjectLayer))
         {
-            if (_timer == 0)
-                PlayerController.instance.playerAnimator.SetBool("InPrism", true);
-                
-            if (_activationTime > _timer)
-                _timer += Time.deltaTime;
-            else
-            {
-                _timer = 0;
-                isActivate = true;
-            }
+            if (currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+            selectionTutorial.SetTutorial();
+            line.SetPosition(1, hit.point);
+            currentTargetedObject = hit.transform.gameObject;
+            currentTargetedObject.GetComponent<Outline>().enabled = true;
         }
         else
         {
-            if (!joystickIsPressed) return;
-            
-            Vector2 angleFoward = new Vector2(transform.forward.x,
-                transform.forward.z);
-            Vector2 _cameraForwardXZ;
-            Vector2 _cameraRightXZ;
-            _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
-                MainCameraController.Instance.transform.forward.z).normalized;
-            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x, 
-                MainCameraController.Instance.transform.right.z).normalized;
-            inputCam = _cameraForwardXZ * joystickDirection.y +
-                       _cameraRightXZ * joystickDirection.x;
-            Vector2 rotationVector =
-                Vector3.RotateTowards(angleFoward, inputCam, rotateSpeed, 00f);
-            PlayerController.instance.playerRb.rotation =
-                Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-                
-            line.positionCount = 2;
-            line.SetPosition(0, raycastOrigin.transform.position);
-            line.SetPosition(1,   transform.position + transform.forward * rayLength);
-            
-            if (Physics.Raycast(raycastOrigin.position, transform.forward, out var hit ,rayLength, interactiveObjectLayer))
-            {
-                if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
-                selectionTutorial.SetTutorial();
-                line.SetPosition(1,   hit.point);
-                currentTargetedObject = hit.transform.gameObject;
-                currentTargetedObject.GetComponent<Outline>().enabled = true;
-            }
-            else
-            {
-                if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
-                selectionTutorial.RemoveTutorial();
-                currentTargetedObject = null;
-            }
+            if (currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+            selectionTutorial.RemoveTutorial();
+            currentTargetedObject = null;
         }
     }
-    
+
     public override void Release()
     {
         _timer = 0;
         isActivate = false;
         isPerformed = false;
         PlayerController.instance.playerAnimator.SetBool("InPrism", false);
-        if(currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+        if (currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
         line.positionCount = 0;
         foreach (var interaction in interactiveFunction)
         {

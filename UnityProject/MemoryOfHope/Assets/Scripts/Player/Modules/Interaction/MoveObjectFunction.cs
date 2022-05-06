@@ -117,7 +117,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
             interactionModule.line.colorGradient = interactionModule.defaultGradient;
 
             data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Outline>().OutlineColor = Color.white;
+            data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
