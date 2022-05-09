@@ -29,21 +29,17 @@ public class RotateObjectFunction : InteractiveObjectFunction
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
         inputPressed = true;
-        Debug.Log("pressed");
     }
     
     public override void InputReleased(InputAction.CallbackContext ctx)
     {
         inputPressed = false;
         Release();
-        Debug.Log("unpressed");
-
     }
 
     public override void Execute()
     {
         base.Execute();
-        Debug.Log("clic : " + timer);
 
         if (timer <= 0)
         {
@@ -81,7 +77,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
         {
             data.tutorial.RemoveTutorial();
             data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Outline>().OutlineColor = Color.white;
+            data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();

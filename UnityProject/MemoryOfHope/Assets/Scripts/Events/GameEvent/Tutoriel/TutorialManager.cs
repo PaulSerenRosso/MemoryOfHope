@@ -34,7 +34,6 @@ public class TutorialManager : MonoBehaviour
     
     public void SetCurrentEvent()
     {
-        Debug.Log(activeTutorialGameEvents.Count);
         if (activeTutorialGameEvents.Count == 0)
         {
             tutorialWindow.SetActive(false);
@@ -63,7 +62,6 @@ public class TutorialManager : MonoBehaviour
     {
         if (currentTutorialGameEvent == null) return;
 
-        Debug.Log("Activé");
         tutorialWindow.SetActive(true);
         tutorialImage.sprite = currentTutorialGameEvent.inputSprite;
 

@@ -2,30 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "BossPhase/Wave/Wave")]
 public class BossWaveSO : ScriptableObject
 {
     [SerializeField] private GameObject[] spawningEnemies;
-
+    [SerializeField] private int[] indexAvailablePos;
+    
     public void SpawningEnemies()
     {
-        var positions = new List<Vector3>();
-        foreach (var pos in BossPhaseManager.instance.spawningPoints)
+        var availablePos = new List<Vector3>();
+        foreach (var index in indexAvailablePos)
         {
-            positions.Add(pos.position);
+            availablePos.Add(BossPhaseManager.instance.spawningPoints[index].position);
         }
-
-        var selectedPositions = new List<Vector3>();
-        for (int i = 0; i < 3; i++)
+        
+        foreach (var enemy in spawningEnemies)
         {
-            var randomPos = positions[Random.Range(0, positions.Count + 1)];
-            selectedPositions.Add(randomPos);
-            positions.Remove(randomPos);
-        }
-
-        for (int i = 0; i < spawningEnemies.Length; i++)
-        {
-            if (spawningEnemies[i] == null) return;
-            Instantiate(spawningEnemies[i], selectedPositions[i], Quaternion.identity);
+            if (enemy == null) continue;
+            Vector3 pos = availablePos[Random.Range(0, availablePos.Count)];
+            availablePos.Remove(pos);
+            Instantiate(enemy, pos, Quaternion.identity);
         }
     }
 }

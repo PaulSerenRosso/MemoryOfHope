@@ -5,5 +5,8 @@ using UnityEngine.UI;
 
 public class UIHeart : MonoBehaviour
 {
-    public Image[] heartParts = new Image[4];
+    public Sprite[] heartParts = new Sprite[5];
+    
+    // 0 : vide
+    // 4 : plein
 }

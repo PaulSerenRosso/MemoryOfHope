@@ -7,9 +7,10 @@ public class ProtectedPhaseSO : BossPhaseSO
 {
     [SerializeField] private bool isTowersRotating;
     [SerializeField] private GameObject[] corruptedTowers;
-
+    
     public override void SetPhase()
     {
+        base.SetPhase();
         
         // Faire apparaître les tours
     }

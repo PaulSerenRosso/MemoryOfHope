@@ -65,6 +65,7 @@ public class InteractiveObjectFunction : Module
 
     public virtual void Deselect()
     {
+        interactionModule.currentTargetedObject = null;
         interactionModule.selectedObject = null;
         interactionModule.selectionTutorial.RemoveTutorial();
         PlayerController.instance.playerRb.isKinematic = false;
