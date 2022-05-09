@@ -1,3 +1,5 @@
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 [System.Serializable]
@@ -60,9 +62,9 @@ public class TC_DefaultState : EnemyState
         
         // Rotation
         float angle;
-        var firstSegment = Vector3.Distance(towerPos, enemyPos);
-        var secondSegment = corruptedMemoryTransform.localPosition.x - enemyMachine.transform.localPosition.x;
-        angle = Mathf.Atan2(firstSegment, secondSegment) * Mathf.Rad2Deg;
+        var firstSegment = corruptedMemoryTransform.position.z - enemyMachine.transform.position.z;
+        var secondSegment = corruptedMemoryTransform.position.x - enemyMachine.transform.position.x;
+        angle = -Mathf.Atan2(firstSegment, secondSegment) * Mathf.Rad2Deg;
 
         protectionWall.eulerAngles = new Vector3(0,  angle, 0);
     }
