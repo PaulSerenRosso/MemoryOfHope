@@ -1,54 +1,64 @@
 fileFormatVersion: 2
-guid: 5166754349e97654a9c15571e6527c03
+guid: b2eb1a9258054234aa8e4f404baa7cc7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 5899074083492628322
-    second: Armature|0_Static
+      74: -3704577593276965377
+    second: QuickRigCharacter_Reference|0_Nul
   - first:
-      74: -223282646962322126
-    second: Armature|Attack_Left
+      74: -5718487078288892238
+    second: QuickRigCharacter_Reference|Attack_Left
   - first:
-      74: 292493350962807091
-    second: Armature|Attack_Right
+      74: -514239467095517447
+    second: QuickRigCharacter_Reference|Attack_Right
   - first:
-      74: -6788532455012819382
-    second: Armature|Damage
+      74: -266732901613326372
+    second: QuickRigCharacter_Reference|Damage
   - first:
-      74: -982115091633673366
-    second: Armature|Death
+      74: 6754051216230133240
+    second: QuickRigCharacter_Reference|Death
   - first:
-      74: -2323760062922712086
-    second: A_PA_idle_Base
+      74: 654856605279553985
+    second: QuickRigCharacter_Reference|idle_left
   - first:
-      74: 3450630758922471195
-    second: A_PA_idle_transition
+      74: 3540579763784564657
+    second: A_MC_idle_Right
   - first:
-      74: -4134778462307541004
-    second: Armature|idle_wind
+      74: -8117810520573408773
+    second: QuickRigCharacter_Reference|Shader NodetreeAction
   - first:
-      74: -5751006064141795650
-    second: A_PA_Walk
+      74: -7382730243337095107
+    second: A_MC_Walk
   - first:
-      74: -5383360476209777130
-    second: Armature|Sphere001|Take 001|BaseLayer
+      74: 8495006984726412062
+    second: A_MC_Nul
   - first:
-      74: -8867389204534999924
-    second: A_PA_Attack_Left
+      74: -7353085210667983124
+    second: A_MC_Attack_Left
   - first:
-      74: 699602135481206416
-    second: A_PA_Attack_Right
+      74: -8498494189892413594
+    second: A_MC_Attack_Right
   - first:
-      74: -6700547012190413662
-    second: A_PA_Damage
+      74: 4682564245604795002
+    second: A_MC_Damage
   - first:
-      74: -6074845210226144447
-    second: A_PA_Death
+      74: -7901713739895969699
+    second: A_MC_Death
   - first:
-      74: -2254212352911101435
-    second: A_PA_idle_wind
-  externalObjects: {}
+      74: -2489468233645837514
+    second: A_MC_idle_left
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body
+    second: {fileID: 2100000, guid: 18b5dc5619ca8b34499329901b2dcbb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: head
+    second: {fileID: 2100000, guid: 18b5dc5619ca8b34499329901b2dcbb1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -77,11 +87,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_PA_Attack_Left
-      takeName: Armature|Attack_Left
+      name: A_MC_Attack_Left
+      takeName: QuickRigCharacter_Reference|Attack_Left
       internalID: 0
       firstFrame: 0
-      lastFrame: 21
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -106,11 +116,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_Attack_Right
-      takeName: Armature|Attack_Right
+      name: A_MC_Attack_Right
+      takeName: QuickRigCharacter_Reference|Attack_Right
       internalID: 0
       firstFrame: 0
-      lastFrame: 21
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -135,11 +145,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_Damage
-      takeName: Armature|Damage
+      name: A_MC_Damage
+      takeName: QuickRigCharacter_Reference|Damage
       internalID: 0
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -164,11 +174,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_Death
-      takeName: Armature|Death
+      name: A_MC_Death
+      takeName: QuickRigCharacter_Reference|Death
       internalID: 0
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -193,11 +203,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_idle_Base
-      takeName: Armature|idle_Base
+      name: A_MC_idle_left
+      takeName: QuickRigCharacter_Reference|idle_left
       internalID: 0
       firstFrame: 0
-      lastFrame: 49
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -222,8 +232,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_idle_transition
-      takeName: Armature|idle_transition
+      name: A_MC_idle_Right
+      takeName: QuickRigCharacter_Reference|idle_Right
       internalID: 0
       firstFrame: 0
       lastFrame: 29
@@ -251,47 +261,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_idle_wind
-      takeName: Armature|idle_wind
+      name: A_MC_Walk
+      takeName: QuickRigCharacter_Reference|Walk
       internalID: 0
       firstFrame: 0
-      lastFrame: 58
+      lastFrame: 48
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: A_PA_Walk
-      takeName: Armature|SK_Prototype_Walk
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 26
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -322,7 +303,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
