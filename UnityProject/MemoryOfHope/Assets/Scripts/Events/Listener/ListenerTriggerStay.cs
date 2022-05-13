@@ -5,30 +5,45 @@ using UnityEngine.Events;
 
 public class ListenerTriggerStay : MonoBehaviour
 {
-    public bool IsActive = true;
-    [SerializeField]
-    protected UnityEvent UpdateListeners;
-    [SerializeField]
-    protected UnityEvent StartListeners;
-    [SerializeField]
-    protected bool _destroyWhenTrigger;
-    [SerializeField]
-    protected float _timeToDestroy;
+    [SerializeField] protected UnityEvent UpdateListeners;
+    [SerializeField] protected UnityEvent StartListeners;
+
+    [SerializeField] protected float _timeToDestroy;
+    [SerializeField] private Collider _collider;
+    private bool _isActiveTrigger;
+
+    public bool IsActiveTrigger
+    {
+        get { return _isActiveTrigger; }
+        set
+        {
+            _isActiveTrigger = value;
+            _collider.enabled = value;
+        }
+    }
+
+    void Start()
+    {
+        _isActiveTrigger = _collider.enabled;
+    }
 
     public virtual void FirstRaise()
     {
         StartListeners?.Invoke();
     }
+
     public virtual void Raise()
     {
         UpdateListeners?.Invoke();
     }
+
     public virtual void EndRaise()
     {
-        if(_destroyWhenTrigger)
-        Destroy(gameObject, _timeToDestroy);
     }
-    public void Activate() => IsActive = true; 
-   
-    public void Desactivate() => IsActive = false;
+
+    public void ActivateTrigger() => IsActiveTrigger = true;
+
+    public void DesactivateTrigger() => IsActiveTrigger = false;
+
+    public void Destroy(float timer) => Destroy(gameObject, timer);
 }

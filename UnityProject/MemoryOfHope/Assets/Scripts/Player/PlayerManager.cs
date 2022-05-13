@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -14,8 +15,25 @@ public class PlayerManager : MonoBehaviour, Damageable
     public List<Module> obtainedModule;
     public int money;
     public bool hasGlitch;
-    public bool isActive = true;
-    public CheckPoint currentCheckPoint;
+    private bool _isActive = true;
+   bool isColliding;
+
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
+        set
+        {
+            _isActive = value;
+            if (!value)
+            {
+                PlayerController.instance.CancelAllModules();
+            }
+        }
+    }
+    public List<CheckPoint> CheckPointsReached;
     public ListenerActivate CurrentListenerActivate;
 
     #endregion
@@ -96,7 +114,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #endregion
-    
+
     #region Main Functions
 
     private void Start()
@@ -120,8 +138,8 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         yield return new WaitForFixedUpdate();
         if (enemy.isBlocked)
-        { 
-            enemy.isBlocked = false; 
+        {
+            enemy.isBlocked = false;
             isBlocked = true;
             _shield.TakeDamage(1);
             KnockBack(enemy, _blockedDrag, _blockedKnockbackStrength);
@@ -129,7 +147,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             isBlocked = false;
             PlayerController.instance.playerRb.drag = 0;
             PlayerController.instance.playerRb.velocity = Vector3.zero;
-           
+
             yield break;
         }
 
@@ -145,7 +163,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         isHit = false;
     }
-    
+
 
     void KnockBack(EnemyManager enemy, float drag, float strengh)
     {
@@ -174,10 +192,9 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         if (UIInstance.instance != null)
         {
-           //UIInstance.instance.DisplayLife(); 
-           UIInstance.instance.DisplayHealth();
+            //UIInstance.instance.DisplayLife(); 
+            UIInstance.instance.DisplayHealth();
         }
-            
     }
 
     public void Heal(int heal)
@@ -187,10 +204,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         {
             //UIInstance.instance.DisplayLife();
             UIInstance.instance.DisplayHealth();
-
         }
     }
-
     #endregion
 
     #region Death
@@ -205,7 +220,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     IEnumerator DeathTime()
     {
         isDead = true;
-        isActive = false;
+        IsActive = false;
         _deathEvent?.Invoke();
         yield return new WaitForSeconds(_timeDeath);
         StartCoroutine(Respawn());
@@ -213,13 +228,25 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     IEnumerator Respawn()
     {
-        transform.position = currentCheckPoint.SpawnPosition.position;
-        transform.rotation = currentCheckPoint.SpawnPosition.rotation;
+        int index = 0;
+        float maxSquareDistance = 0;
+        for (int i = 0; i < CheckPointsReached.Count; i++)
+        {
+            float currentSquareDistance =
+                Vector3.SqrMagnitude(CheckPointsReached[i].SpawnPosition.position - transform.position);
+            if (currentSquareDistance >= maxSquareDistance)
+            {
+                maxSquareDistance = currentSquareDistance;
+                index = i;
+            }
+        }
+        transform.position = CheckPointsReached[index].SpawnPosition.position;
+        transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
-        isActive = true;
+        IsActive = true;
         isDead = false;
     }
 
@@ -245,6 +272,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
+  
+     
         if (other.CompareTag("Enemy") && !isBlocked)
         {
             CheckEnemyTrigger(other);
@@ -252,7 +281,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         CheckEventTriggerEnter(other);
     }
-    
+
     private void CheckShockWaveTrigger(Collider other, EnemyManager enemy)
     {
         var machine = other.GetComponentInParent<MC_StateMachine>();
@@ -285,7 +314,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         hitDirection = transform.position - closestPoint;
 
         StartCoroutine(Hit(enemy));
-        
     }
 
     private void OnTriggerStay(Collider other)
@@ -306,9 +334,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTrigger"))
         {
+
             ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
-            if(listenerTrigger.IsActive)
-           listenerTrigger.Raise();
+            listenerTrigger.Raise();
         }
     }
 
@@ -316,9 +344,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTriggerStay"))
         {
-            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>(); 
-            if(listenerTriggerStay.IsActive)
-        listenerTriggerStay.Raise();
+            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>();
+          
+                listenerTriggerStay.Raise();
         }
     }
 
@@ -326,16 +354,16 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTriggerStay"))
         {
-            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>(); 
-            if(listenerTriggerStay.IsActive)
+            ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>();
+  
                 listenerTriggerStay.EndRaise();
         }
 
         if (other.CompareTag("EventTrigger"))
         {
-            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
-            if(listenerTrigger.IsActive)
-            listenerTrigger.EndRaise();
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>();
+    
+                listenerTrigger.EndRaise();
         }
     }
 
@@ -350,6 +378,13 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void OnCollisionExit(Collision other)
     {
+    }
+
+    IEnumerator EndColliding()
+    {
+        yield return new WaitForEndOfFrame();
+ 
+        isColliding = false;
     }
 
     #endregion
