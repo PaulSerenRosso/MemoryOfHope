@@ -50,15 +50,22 @@ MonoBehaviour:
   _endTriggerListeners:
     m_PersistentCalls:
       m_Calls: []
-  _destroyWhenTrigger: 0
-  _timeToDestroyWhenTrigger: 0
-  _destroyWhenEndTrigger: 0
-  _timeToDestroyWhenEndTrigger: 0
-  IsActive: 1
-  isActivate: 0
+  _collider: {fileID: 4076005267487546009}
   ActivateEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3648590327760506715}
+        m_TargetAssemblyTypeName: ListenerTrigger, Assembly-CSharp
+        m_MethodName: Destroy
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   message: 
   _destroyWhenActivate: 0
 --- !u!65 &4076005267487546009

@@ -12,6 +12,11 @@ public class LaserModule : Module
     
     //ui 
     [SerializeField] private ShieldManager _shield;
+    public override void Cancel()
+    {
+        Release();
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()){ Release(); return false;}

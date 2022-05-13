@@ -44,6 +44,17 @@ public class AttackModule : Module
         GameManager.instance.inputs.Player.Attack.canceled -= InputReleased;
     }
 
+    public override void Cancel()
+    {
+        for (int i = 0; i < attackList.Count; i++)
+        {
+            attackList[i].attackPlayerCollider.enabled = false;
+            attackList[i].attackPlayerCollider.renderer.SetActive(false);
+            attackList[i].attackPlayerCollider.currentDamage = 0;
+        }
+        EndAttack();
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
@@ -187,10 +198,9 @@ public class AttackModule : Module
         {
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
             attackList[currentIndexAttack].attackPlayerCollider.renderer.SetActive(false);
-                attackList[currentIndexAttack].attackPlayerCollider.currentDamage =
-                    attackList[currentIndexAttack].damage;
-            
-        canMove = false;
+            attackList[currentIndexAttack].attackPlayerCollider.currentDamage = 0;
+
+            canMove = false;
         PlayerController.instance.playerAnimator.SetInteger("currentAttack", currentIndexAttack + 1);
         currentStateCombo = StateCombo.WaitCombo;
         }
