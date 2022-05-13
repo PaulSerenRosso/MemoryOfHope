@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (PlayerManager.instance.isActive)
+        if (PlayerManager.instance.IsActive)
         {
             CheckModuleUpdate();
             CheckCurrentModuleUpdate();
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (PlayerManager.instance.isActive)
+        if (PlayerManager.instance.IsActive)
         {
             CheckModuleFixed();
             CheckCurrentModuleFixed();
@@ -400,6 +400,26 @@ public class PlayerController : MonoBehaviour
         }
 
         return toProject;
+    }
+
+    public void CancelAllModules()
+    {
+  
+        for (int i = 0; i < activeModulesFixed.Count; i++)
+        {
+
+            if (activeModulesFixed[i].isPerformed)
+            {
+                activeModulesFixed[i].Cancel();
+            }
+        }
+        for (int i = 0; i < activeModulesUpdate.Count; i++)
+        {
+            if (activeModulesUpdate[i].isPerformed)
+            {
+                activeModulesUpdate[i].Cancel();
+            }
+        }
     }
     
     

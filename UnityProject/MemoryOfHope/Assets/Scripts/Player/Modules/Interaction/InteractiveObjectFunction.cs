@@ -34,6 +34,11 @@ public class InteractiveObjectFunction : Module
         
     }
 
+    public override void Cancel()
+    {
+        
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
