@@ -13,6 +13,7 @@ public class PlayerAttackClass
    public float maxSpeedDashAttack;
    public AnimationCurve speedDashAttackCurve;
    public AttackPlayerCollider attackPlayerCollider;
+   public bool IsKnockbackEnemy;
      public float attackStrength;
 }
 
