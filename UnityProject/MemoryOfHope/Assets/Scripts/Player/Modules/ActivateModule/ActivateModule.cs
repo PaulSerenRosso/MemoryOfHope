@@ -6,11 +6,18 @@ using UnityEngine.InputSystem;
 
 public class ActivateModule : Module
 {
+    public override void Cancel()
+    {
+        Release();
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
         if (PlayerManager.instance.CurrentListenerActivate == null) return false;
-        if (PlayerManager.instance.CurrentListenerActivate.isActivate) return false;
+       
+        Debug.Log("bonsoir à tous");
+        isPerformed = true;
         return true;
     }
 
@@ -45,13 +52,17 @@ public class ActivateModule : Module
 
     public override void Execute()
     {
-        isPerformed = true;
+    if(!PlayerManager.instance.CurrentListenerActivate)
+        return;
+        Debug.Log(PlayerManager.instance.CurrentListenerActivate);
         PlayerManager.instance.CurrentListenerActivate.Activate();
+ 
+      PlayerManager.instance.CurrentListenerActivate = null;       
         isPerformed = false;
     }
 
     public override void Release()
     {
-        
+        isPerformed = false;
     }
 }

@@ -30,6 +30,7 @@ public abstract class Module : MonoBehaviour
     public List<Module> constrainingModules;
     public List<Module> neededModules;
     public bool inputPressed;
+    
 
     public abstract void LinkModule();
 
@@ -38,6 +39,9 @@ public abstract class Module : MonoBehaviour
     public abstract void InputPressed(InputAction.CallbackContext ctx);
 
     public abstract void InputReleased(InputAction.CallbackContext ctx);
+
+    public abstract void Cancel();
+ 
 
     public virtual bool Conditions()
     {

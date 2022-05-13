@@ -137,4 +137,14 @@ public class LaserMachine : MonoBehaviour
         _returnable = null;
         _returnableObject = null;
     }
+
+    public void Activate()
+    {
+        IsActive = true;
+    }
+
+    public void Desactivate()
+    {
+        IsActive = false;
+    }
 }

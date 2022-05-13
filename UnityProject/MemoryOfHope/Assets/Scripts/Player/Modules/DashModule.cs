@@ -109,6 +109,11 @@ public class DashModule : Module
         GameManager.instance.inputs.Player.Dash.performed -= InputPressed;
     }
 
+    public override void Cancel()
+    {
+        EndDash();
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;

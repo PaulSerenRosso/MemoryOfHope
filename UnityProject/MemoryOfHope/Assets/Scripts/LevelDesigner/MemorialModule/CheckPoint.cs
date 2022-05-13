@@ -8,9 +8,6 @@ public class CheckPoint : ListenerActivate
 
     public override void Raise()
     {
-        if (isActivate)
-            PlayerManager.instance.currentCheckPoint = this;
-
         base.Raise();
         Debug.Log("Checkpoint");
     }
@@ -18,8 +15,9 @@ public class CheckPoint : ListenerActivate
 
     public override void Activate()
     {
-        isActivate = true;
-        PlayerManager.instance.currentCheckPoint = this;
+        IsActiveTrigger = false; 
+        PlayerManager.instance.CheckPointsReached.Add(this);
+       
         base.Activate();
     }
 }

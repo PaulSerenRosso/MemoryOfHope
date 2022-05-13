@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1483218472129960346
+--- !u!1 &398696233570641214
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,56 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2296453158725665568}
-  - component: {fileID: 1483218472129960357}
-  - component: {fileID: 1483218472129960359}
-  m_Layer: 6
-  m_Name: AcquisitionZone
-  m_TagString: Ground
+  - component: {fileID: 5866348179230821328}
+  - component: {fileID: 3584506461073867006}
+  - component: {fileID: 1815401178717527997}
+  m_Layer: 11
+  m_Name: EventTimerTrigger
+  m_TagString: EventTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2296453158725665568
+--- !u!4 &5866348179230821328
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483218472129960346}
+  m_GameObject: {fileID: 398696233570641214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.1774826, y: 3.0678673, z: -15.147961}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1483218472129960357
+--- !u!114 &3584506461073867006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483218472129960346}
+  m_GameObject: {fileID: 398696233570641214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b743c58696363434e8e9e841dfc0f874, type: 3}
+  m_Script: {fileID: 11500000, guid: 20fd0f1b76ac97d409a8e634d245193e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Listeners:
     m_PersistentCalls:
-      m_Calls: []
-  _endTriggerListeners:
-    m_PersistentCalls:
-      m_Calls: []
-  _collider: {fileID: 1483218472129960359}
-  ActivateEvent:
-    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1483218472129960357}
+      - m_Target: {fileID: 3584506461073867006}
         m_TargetAssemblyTypeName: ListenerTrigger, Assembly-CSharp
-        m_MethodName: Destroy
-        m_Mode: 4
+        m_MethodName: DesactivateTrigger
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -66,22 +59,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  message: 
-  _destroyWhenActivate: 0
-  SpawnPosition: {fileID: 0}
-  particleSystem: {fileID: 0}
-  moduleToLearn:
-  - {fileID: 0}
---- !u!65 &1483218472129960359
+      - m_Target: {fileID: 3584506461073867006}
+        m_TargetAssemblyTypeName: ListenerTriggerTimer, Assembly-CSharp
+        m_MethodName: ActivateTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _endTriggerListeners:
+    m_PersistentCalls:
+      m_Calls: []
+  _collider: {fileID: 1815401178717527997}
+  _eventTimers: []
+--- !u!65 &1815401178717527997
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483218472129960346}
+  m_GameObject: {fileID: 398696233570641214}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

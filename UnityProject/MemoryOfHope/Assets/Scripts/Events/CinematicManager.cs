@@ -21,7 +21,7 @@ public class CinematicManager : MonoBehaviour
         set
         {
             _inCutScene = value;
-            PlayerManager.instance.isActive = !value;
+            PlayerManager.instance.IsActive = !value;
         }
     }
 

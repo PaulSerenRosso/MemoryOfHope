@@ -6,22 +6,21 @@ using UnityEngine.EventSystems;
 
 public class ListenerActivate : ListenerTrigger
 {
-    public bool isActivate;
+  
     [SerializeField] private UnityEvent ActivateEvent;
     [SerializeField] private string message;
     [SerializeField] private bool _destroyWhenActivate;
 
     public override void Raise()
     {
-        if (isActivate) return;
+        Debug.Log("raise");
         PlayerManager.instance.CurrentListenerActivate = this;
         base.Raise();
     }
 
     public override void EndRaise()
     {
-        if (isActivate) return;
-      
+        Debug.Log("endRaise");
         PlayerManager.instance.CurrentListenerActivate = null;
         base.EndRaise();
     }
@@ -29,8 +28,7 @@ public class ListenerActivate : ListenerTrigger
     public virtual void Activate()
     {
         ActivateEvent?.Invoke();
-        PlayerManager.instance.CurrentListenerActivate = null;
-        if (_destroyWhenActivate)
-            Destroy(gameObject, Time.deltaTime);
+        
+     
     }
 }
