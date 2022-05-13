@@ -334,6 +334,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTrigger"))
         {
+
             ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
             listenerTrigger.Raise();
         }
