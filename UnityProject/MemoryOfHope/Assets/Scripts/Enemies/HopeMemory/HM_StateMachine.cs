@@ -12,13 +12,20 @@ public class HM_StateMachine : EnemyMachine
     public HM_CooldownState cooldownState = new HM_CooldownState();
     public HM_VulnerableShockwaveState vulnerableShockwaveState = new HM_VulnerableShockwaveState();
 
+    public HM_PauseVulnerableMove pauseVulnerableMove = new HM_PauseVulnerableMove();
+    public HM_PauseVulnerableAttack pauseVulnerableAttack = new HM_PauseVulnerableAttack();
+
     [Header("Protection State")]
     public HM_ProtectionDefaultState protectionDefaultState = new HM_ProtectionDefaultState();
 
     public HM_ProtectionPositionState protectionPositionState = new HM_ProtectionPositionState();
     public HM_ProtectionProtectedState protectionProtectedState = new HM_ProtectionProtectedState();
 
+    public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
+
     #endregion
+
+    public int nextLifeThreshold;
 
     #region State Machine Main Functions
 
