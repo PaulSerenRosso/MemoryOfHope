@@ -200,6 +200,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void Heal(int heal)
     {
         health += heal;
+        if (health > maxHealth) health = maxHealth;
         if (UIInstance.instance != null)
         {
             //UIInstance.instance.DisplayLife();

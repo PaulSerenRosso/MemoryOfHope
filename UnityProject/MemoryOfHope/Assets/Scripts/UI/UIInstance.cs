@@ -174,28 +174,22 @@ public class UIInstance : MonoBehaviour
         foreach (var container in heartContainers)
         {
             container.GetComponent<Image>().sprite = container.heartParts[0];
-            
-            /*
-            foreach (var part in container.heartParts)
-            {
-                part.color = Color.black;
-            }
-            */
         }
 
         int heartContainer = 0;
         int heartPart = 0;
         while (life != PlayerManager.instance.health)
         {
-            life++;
-            heartContainers[heartContainer].GetComponent<Image>().sprite =
-                heartContainers[heartContainer].heartParts[heartPart + 1];
-            
-            //heartContainers[heartContainer].heartParts[heartPart].color = Color.red;
-            heartPart++;
+            for (int i = 1; i <= 4; i++)
+            {
+                life++;
+                var heart = heartContainers[heartContainer];
+                heart.GetComponent<Image>().sprite = heart.heartParts[i];
 
-            if (heartPart <= 3) continue;
-            heartPart = 0;
+                if (life == PlayerManager.instance.health) break;
+
+            }
+
             heartContainer++;
         }
     }
