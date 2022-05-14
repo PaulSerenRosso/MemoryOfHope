@@ -19,6 +19,8 @@ public class UIModule : MonoBehaviour
     
     public Image moduleImage;
 
+    public Image modulePosOnMap;
+
     public bool isUnlocked;
 
     public bool isOpened;

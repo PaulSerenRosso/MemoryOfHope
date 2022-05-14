@@ -39,7 +39,7 @@ public class UIInstance : MonoBehaviour
     private Vector3 selectedModulePos;
     [SerializeField] private AnimationCurve animationSpeed;
     [SerializeField] private float speedFactor;
-
+    
     [Header("Player Stats")]
     [SerializeField] private RectTransform firstHeartContainerTransform;
     [SerializeField] private float distanceBetweenHeartContainers;
@@ -280,6 +280,9 @@ public class UIInstance : MonoBehaviour
             modGUI.gameObject.SetActive(false);
         }
         
+        // Set la position sur la map
+        UImodule.modulePosOnMap.color = Color.red;
+        
         // Faire monter la zone sélectionnée en haut
         var rt = UImodule.GetComponent<RectTransform>();
         var bottomY = UImodule.initialPos.y + Mathf.Abs(UImodule.initialPos.y);
@@ -327,6 +330,9 @@ public class UIInstance : MonoBehaviour
 
         //yield return new WaitForSeconds(.25f);
 
+        // Set la position sur la map
+        UImodule.modulePosOnMap.color = Color.white;
+        
         // Faire redescendre la zone à sa place
         var rt = UImodule.GetComponent<RectTransform>();
         var bottomY = UImodule.initialPos.y + Mathf.Abs(UImodule.initialPos.y);
