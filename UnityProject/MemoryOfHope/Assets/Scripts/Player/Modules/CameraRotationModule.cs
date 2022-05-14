@@ -45,6 +45,11 @@ public class CameraRotationModule : Module
         Release();
     }
 
+    public override void Cancel()
+    {
+        isPerformed = false;
+    }
+
     public override void Execute()
     {
         isPerformed = true;

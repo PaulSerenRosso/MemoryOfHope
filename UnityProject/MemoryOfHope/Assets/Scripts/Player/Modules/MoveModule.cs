@@ -48,6 +48,11 @@ public class MoveModule : Module
         Release();
     }
 
+    public override void Cancel()
+    {
+        Release();
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions())

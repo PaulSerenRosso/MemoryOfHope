@@ -514,7 +514,7 @@ public class UIInstance : MonoBehaviour
     public void SettingPlayerState()
     {
         var active = !(informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf);
-        PlayerManager.instance.isActive = active;
+        PlayerManager.instance.IsActive = active;
         blackFilter.SetActive(!active);
         var pauseActive = pauseMenu.activeSelf || optionMenu.activeSelf;
         if (pauseActive)

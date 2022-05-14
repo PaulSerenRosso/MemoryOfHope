@@ -7,44 +7,47 @@ ModelImporter:
       74: 5899074083492628322
     second: Armature|0_Static
   - first:
-      74: -2522128243683063310
-    second: Armature|Attack_Left_Face_View
+      74: -223282646962322126
+    second: Armature|Attack_Left
   - first:
-      74: -7392327553933172666
-    second: Armature|Attack_Right_Face_View
+      74: 292493350962807091
+    second: Armature|Attack_Right
   - first:
       74: -6788532455012819382
     second: Armature|Damage
   - first:
-      74: -7521072362091166453
-    second: Armature|DEATH
+      74: -982115091633673366
+    second: Armature|Death
+  - first:
+      74: -2323760062922712086
+    second: A_PA_idle_Base
+  - first:
+      74: 3450630758922471195
+    second: A_PA_idle_transition
+  - first:
+      74: -4134778462307541004
+    second: Armature|idle_wind
   - first:
       74: -5751006064141795650
-    second: Armature|SK_Prototype_Walk
+    second: A_PA_Walk
   - first:
       74: -5383360476209777130
     second: Armature|Sphere001|Take 001|BaseLayer
   - first:
-      74: -7514479913650003527
-    second: A_PA_Static
+      74: -8867389204534999924
+    second: A_PA_Attack_Left
   - first:
-      74: 6850339319460311965
-    second: A_PA_Attack_Left_Face_View
-  - first:
-      74: 5836533465675463624
-    second: A_PA_Attack_Right_Face_View
+      74: 699602135481206416
+    second: A_PA_Attack_Right
   - first:
       74: -6700547012190413662
     second: A_PA_Damage
   - first:
-      74: 3550291293278347173
-    second: A_PA_DEATH
+      74: -6074845210226144447
+    second: A_PA_Death
   - first:
-      74: -159017880812668517
-    second: A_PA__Walk
-  - first:
-      74: 5717989399542141031
-    second: A_PA_BaseLayer
+      74: -2254212352911101435
+    second: A_PA_idle_wind
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -74,37 +77,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_PA_Static
-      takeName: Armature|0_Static
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: A_PA_Attack_Left_Face_View
-      takeName: Armature|Attack_Left_Face_View
+      name: A_PA_Attack_Left
+      takeName: Armature|Attack_Left
       internalID: 0
       firstFrame: 0
       lastFrame: 21
@@ -132,8 +106,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_Attack_Right_Face_View
-      takeName: Armature|Attack_Right_Face_View
+      name: A_PA_Attack_Right
+      takeName: Armature|Attack_Right
       internalID: 0
       firstFrame: 0
       lastFrame: 21
@@ -190,11 +164,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_DEATH
-      takeName: Armature|DEATH
+      name: A_PA_Death
+      takeName: Armature|Death
       internalID: 0
       firstFrame: 0
-      lastFrame: 9
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -219,11 +193,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA__Walk
-      takeName: Armature|SK_Prototype_Walk
+      name: A_PA_idle_Base
+      takeName: Armature|idle_Base
       internalID: 0
       firstFrame: 0
-      lastFrame: 27
+      lastFrame: 49
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -248,11 +222,69 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: A_PA_BaseLayer
-      takeName: Armature|Sphere001|Take 001|BaseLayer
+      name: A_PA_idle_transition
+      takeName: Armature|idle_transition
       internalID: 0
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: A_PA_idle_wind
+      takeName: Armature|idle_wind
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 58
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: A_PA_Walk
+      takeName: Armature|SK_Prototype_Walk
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

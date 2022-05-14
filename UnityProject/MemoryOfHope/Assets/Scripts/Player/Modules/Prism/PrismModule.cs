@@ -42,6 +42,11 @@ public class PrismModule : Module
         joystickPressed = false;
     }
 
+    public override void Cancel()
+    {
+     Release();   
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;

@@ -40,7 +40,16 @@ public class JumpModule : Module
         GameManager.instance.inputs.Player.Jump.performed -= InputPressed;
         GameManager.instance.inputs.Player.Jump.canceled -= InputReleased;
     }
-    
+
+    public override void Cancel()
+    {
+        inExecute = false;
+        PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
+        PlayerController.instance.stuckGround = true;
+        PlayerController.instance.currentVelocity += speedEndJump * Vector3.up;
+        isPerformed = false;
+    }
+
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
@@ -89,11 +98,7 @@ public class JumpModule : Module
         {
             if (PlayerController.instance.playerRb.position.y >= yEndPosition)
             {
-                inExecute = false;
-                PlayerController.instance.currentGravity = PlayerController.instance.defaultGravity;
-                PlayerController.instance.stuckGround = true;
-                PlayerController.instance.currentVelocity += speedEndJump * Vector3.up;
-                isPerformed = false;
+                Cancel();
             }
             else
             {
