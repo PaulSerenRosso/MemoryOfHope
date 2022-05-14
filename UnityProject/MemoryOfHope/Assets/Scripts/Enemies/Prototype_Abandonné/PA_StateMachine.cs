@@ -39,7 +39,10 @@ public class PA_StateMachine : EnemyMachine
     
     public override void OnHitByMelee()
     {
+  
+        
         base.OnHitByMelee();
+        if(_isCurrentAttackKnockback)
         SwitchState(hitState);
     }
 

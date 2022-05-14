@@ -47,6 +47,7 @@ public class MC_StateMachine : EnemyMachine
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
+        if(_isCurrentAttackKnockback)
         SwitchState(hitState);
     }
 
@@ -70,9 +71,9 @@ public class MC_StateMachine : EnemyMachine
     {
         if (other.CompareTag("PlayerFist") && !isHit && !isProtected) // Hit by the player
         {
+            
             hitDirection = transform.position - PlayerController.instance.transform.position;
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
-
             OnHitByMelee();
         }
 
