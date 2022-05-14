@@ -312,7 +312,9 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         var closestPoint =
             Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
-        hitDirection = transform.position - closestPoint;
+        //hitDirection = transform.position - closestPoint;
+
+        hitDirection = transform.position - enemy.transform.position;
 
         StartCoroutine(Hit(enemy));
     }
