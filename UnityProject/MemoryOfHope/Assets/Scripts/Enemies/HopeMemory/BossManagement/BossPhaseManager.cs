@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -21,13 +22,25 @@ public class BossPhaseManager : MonoBehaviour
     #endregion
 
     public Transform[] spawningPoints;
-    [SerializeField] private HM_StateMachine bossStateMachine;
+    public bool isSphereRotating;
+    [SerializeField] float rotatingSpeed;
+    public Transform rotatingSphere;
+    public Transform[] towersSpawningPoints;
+    public HM_StateMachine bossStateMachine;
     public List<BossPhaseSO> allPhases;
     public BossPhaseSO currentPhase;
     
     private void Start()
     {
         BeginsBattle(); // A terme : ça se lance pas ici
+    }
+
+    private void Update()
+    {
+        if (isSphereRotating)
+        {
+            rotatingSphere.eulerAngles += Vector3.up * rotatingSpeed * Time.deltaTime;
+        }
     }
 
     public void BeginsBattle()
@@ -45,6 +58,7 @@ public class BossPhaseManager : MonoBehaviour
         }
         else
         {
+            isSphereRotating = false;
             currentPhase = allPhases[0];
             switch (currentPhase.phaseType)
             {

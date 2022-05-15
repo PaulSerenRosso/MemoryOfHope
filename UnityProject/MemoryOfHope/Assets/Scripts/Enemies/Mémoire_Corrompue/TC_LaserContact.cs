@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class S_LaserContact : MonoBehaviour, IReturnable
+public class TC_LaserContact : MonoBehaviour, IReturnable
 {
-    [SerializeField] private S_StateMachine _stateMachine;
+    [SerializeField] private TC_StateMachine _stateMachine;
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -26,7 +26,7 @@ public class S_LaserContact : MonoBehaviour, IReturnable
     }
     public void Returnable(LaserMachine laser, RaycastHit hit)
     {
-       _stateMachine.OnHitByLaser();
+        _stateMachine.OnHitByLaser();
     }
 
     public void Cancel(LaserMachine laser)

@@ -6,16 +6,13 @@ public class S_StateMachine : EnemyMachine
     #region Variables
 
     public Vector3 initialPosition;
-
- 
+    
     float _damageLaserTimer;
     
-    
-    [Header("Parameters")]
-    [SerializeField]
+    [Header("Parameters")] [SerializeField]
     float _damageLaserTime;
-    [SerializeField]
-    int _laserDamageAmount;
+
+    [SerializeField] int _laserDamageAmount;
     [Range(1, 15)] public float detectionDistance;
     [Range(1, 15)] public float pursuitDistance;
 
@@ -24,7 +21,7 @@ public class S_StateMachine : EnemyMachine
     #region States
 
     public S_DefautState defaultState = new S_DefautState();
-    
+
     public S_PursuitState pursuitState = new S_PursuitState();
 
     public S_EndPursuitState endPursuitState = new S_EndPursuitState();
@@ -42,7 +39,7 @@ public class S_StateMachine : EnemyMachine
     public S_HidingState hidingState = new S_HidingState();
 
     public S_HitState hitState = new S_HitState();
-    
+
     #endregion
 
     #region Gizmos
@@ -51,7 +48,7 @@ public class S_StateMachine : EnemyMachine
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(initialPosition, detectionDistance);
-        
+
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(initialPosition, pursuitDistance);
     }
@@ -66,12 +63,11 @@ public class S_StateMachine : EnemyMachine
         currentState = defaultState;
         base.Start();
     }
-    
+
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
-        if(_isCurrentAttackKnockback)
-        SwitchState(hitState);
+        if (_isCurrentAttackKnockback) SwitchState(hitState);
     }
 
     #endregion
@@ -81,12 +77,13 @@ public class S_StateMachine : EnemyMachine
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        
+
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
             StartCoroutine(PlayerManager.instance.Hit(enemyManager));
         }
+
         if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             hitDirection = transform.position - PlayerController.instance.transform.position;
@@ -101,17 +98,17 @@ public class S_StateMachine : EnemyMachine
         else
         {
             enemyManager.TakeDamage(_laserDamageAmount);
-            _damageLaserTimer = 0; 
+            _damageLaserTimer = 0;
         }
     }
 
     public void CancelHitLaser()
     {
-        _damageLaserTimer = 0; 
+        _damageLaserTimer = 0;
     }
+
     public override void OnTriggerStay(Collider other)
     {
-        
     }
 
     public override void OnTriggerExit(Collider other)
@@ -124,19 +121,15 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnCollisionEnter(Collision other)
     {
-        
     }
 
     public override void OnCollisionStay(Collision other)
     {
-        
     }
 
     public override void OnCollisionExit(Collision other)
     {
-        
     }
-
 
     #endregion
 }

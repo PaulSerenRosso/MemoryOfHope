@@ -304,12 +304,18 @@ public class PlayerManager : MonoBehaviour, Damageable
             CheckShockWaveTrigger(other, enemy);
             return;
         }
+        
 
-        var closestPoint =
-            Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
-        //hitDirection = transform.position - closestPoint;
-
-        hitDirection = transform.position - enemy.transform.position;
+        if (enemy.Machine.GetType() == typeof(TC_StateMachine)) // Si c'est un mur
+        {
+            var closestPoint =
+                Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
+            hitDirection = transform.position - closestPoint;
+        }
+        else
+        {
+            hitDirection = transform.position - enemy.transform.position;
+        }
 
         StartCoroutine(Hit(enemy));
     }
@@ -366,6 +372,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void OnCollisionEnter(Collision other)
     {
+        
     }
 
     private void OnCollisionStay(Collision other)

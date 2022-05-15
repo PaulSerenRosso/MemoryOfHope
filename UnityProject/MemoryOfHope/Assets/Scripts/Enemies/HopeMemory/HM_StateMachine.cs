@@ -32,6 +32,8 @@ public class HM_StateMachine : EnemyMachine
     public int nextLifeThreshold;
     public Vector3 protectedPos;
 
+    public bool isProtected;
+    
     #region State Machine Main Functions
 
     public override void Start()
