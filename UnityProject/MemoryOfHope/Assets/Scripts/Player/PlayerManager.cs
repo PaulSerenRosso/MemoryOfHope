@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -242,6 +240,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
+        Debug.Log("Respawn");
+        UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
         IsActive = true;
@@ -304,7 +304,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             CheckShockWaveTrigger(other, enemy);
             return;
         }
-        
+
 
         if (enemy.Machine.GetType() == typeof(TC_StateMachine)) // Si c'est un mur
         {
@@ -372,7 +372,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void OnCollisionEnter(Collision other)
     {
-        
     }
 
     private void OnCollisionStay(Collision other)

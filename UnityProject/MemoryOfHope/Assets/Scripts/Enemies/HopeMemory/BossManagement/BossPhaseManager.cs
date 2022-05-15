@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -16,6 +15,7 @@ public class BossPhaseManager : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
+
         instance = this;
     }
 
@@ -29,7 +29,7 @@ public class BossPhaseManager : MonoBehaviour
     public HM_StateMachine bossStateMachine;
     public List<BossPhaseSO> allPhases;
     public BossPhaseSO currentPhase;
-    
+
     private void Start()
     {
         BeginsBattle(); // A terme : ça se lance pas ici
@@ -51,8 +51,8 @@ public class BossPhaseManager : MonoBehaviour
 
     public void SetNextPhase() // Set Next Phase est appelé dans les fonctions du State Machine
     {
-        if(currentPhase != null) allPhases.Remove(currentPhase);
-        if(allPhases.Count == 0)
+        if (currentPhase != null) allPhases.Remove(currentPhase);
+        if (allPhases.Count == 0)
         {
             Debug.Log("Boss vaincu");
         }

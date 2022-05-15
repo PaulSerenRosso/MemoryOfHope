@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorActivator : MonoBehaviour, IReturnable
 {
     [SerializeField] private DoorLaserMultiple currentDoor;
+
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -12,6 +11,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
     }
 
     public bool IsActive;
+
     public bool IsActiveReturnable
     {
         get => IsActive;
@@ -26,10 +26,11 @@ public class DoorActivator : MonoBehaviour, IReturnable
         get => _currentSource;
         set => _currentSource = value;
     }
+
     public void Returnable(LaserMachine laser, RaycastHit hit)
     {
-       
     }
+
     public void Cancel(LaserMachine laser)
     {
         if (currentDoor.IsActive)
@@ -38,14 +39,14 @@ public class DoorActivator : MonoBehaviour, IReturnable
             _currentSource = null;
         }
     }
+
     public void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
         if (currentDoor.IsActive)
         {
-            _triggerByLaser = true; 
-        _currentSource = laser ;
-        currentDoor.CheckActivator();
+            _triggerByLaser = true;
+            _currentSource = laser;
+            currentDoor.CheckActivator();
         }
-        
     }
 }
