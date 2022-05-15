@@ -13,6 +13,8 @@ public class HM_VulnerableMoveState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        Debug.Log("Moving !");
+
         enemyMachine.agent.isStopped = false;
         timer = 0;
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
@@ -21,19 +23,24 @@ public class HM_VulnerableMoveState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        timer += Time.deltaTime;
-        
+
+        enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
         // Si suffisemment proche et que timer d'attaque dépassé : lance pause attack
         
         if (ConditionState.CheckDistance(enemyMachine.transform.position,
             PlayerController.instance.transform.position, attackDistance))
         {
+            timer += Time.deltaTime;
             if (ConditionState.Timer(durationBeforeAttack, timer))
             {
                 HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
                 enemy.SwitchState(enemy.pauseVulnerableAttack);
-            
+                
             }
+        }
+        else
+        {
+            timer = 0f;
         }
 
         // Check si la vie du boss est inférieure au seuil, si oui lance pause puis protectedDefault

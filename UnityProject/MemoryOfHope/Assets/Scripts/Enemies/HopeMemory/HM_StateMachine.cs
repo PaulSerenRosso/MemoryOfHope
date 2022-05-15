@@ -15,6 +15,8 @@ public class HM_StateMachine : EnemyMachine
     public HM_PauseVulnerableMove pauseVulnerableMove = new HM_PauseVulnerableMove();
     public HM_PauseVulnerableAttack pauseVulnerableAttack = new HM_PauseVulnerableAttack();
 
+    public HM_VulnerableHitState vulnerableHitState = new HM_VulnerableHitState();
+
     [Header("Protection State")]
     public HM_ProtectionDefaultState protectionDefaultState = new HM_ProtectionDefaultState();
 
@@ -23,17 +25,46 @@ public class HM_StateMachine : EnemyMachine
 
     public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
 
+    public HM_ProtectionHitState protectionHitState = new HM_ProtectionHitState();
+    
     #endregion
 
     public int nextLifeThreshold;
+    public Vector3 protectedPos;
 
     #region State Machine Main Functions
+
+    public override void Start()
+    {
+        protectedPos = transform.position;
+    }
 
     public void ActivateBehaviour()
     {
         currentState = vulnerableDefaultState;
+        UIInstance.instance.SetBossDisplay(enemyManager);
         base.Start();
         // Active default state
+    }
+    
+    public override void OnHitByMelee()
+    {
+        base.OnHitByMelee();
+
+        switch (BossPhaseManager.instance.currentPhase.phaseType)
+        {
+            case PhaseType.Vulnerable:
+                if (_isCurrentAttackKnockback)
+                {
+                    SwitchState(vulnerableHitState);
+                }
+                break;
+            
+            case PhaseType.Protected:
+                SwitchState(protectionHitState);
+                break;
+        }
+
     }
 
     #endregion
@@ -44,7 +75,7 @@ public class HM_StateMachine : EnemyMachine
     {
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
-            hitDirection = transform.position - PlayerController.instance.transform.position;
+            //hitDirection = transform.position - PlayerController.instance.transform.position;
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
             OnHitByMelee();
         }
@@ -52,6 +83,18 @@ public class HM_StateMachine : EnemyMachine
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
+        }
+
+        if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Vulnerable) return;
+        
+        if (other.CompareTag("Shield"))
+        {
+            enemyManager.isBlocked = true;
+            StartCoroutine(PlayerManager.instance.Hit(enemyManager));
+        }
+        if (other.CompareTag("Player") || other.CompareTag("Shield"))
+        {
+            hitDirection = transform.position - PlayerController.instance.transform.position;
         }
     }
 

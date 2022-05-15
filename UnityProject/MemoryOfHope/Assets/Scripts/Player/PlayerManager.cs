@@ -16,14 +16,11 @@ public class PlayerManager : MonoBehaviour, Damageable
     public int money;
     public bool hasGlitch;
     private bool _isActive = true;
-   bool isColliding;
+    bool isColliding;
 
     public bool IsActive
     {
-        get
-        {
-            return _isActive;
-        }
+        get { return _isActive; }
         set
         {
             _isActive = value;
@@ -33,6 +30,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             }
         }
     }
+
     public List<CheckPoint> CheckPointsReached;
     public ListenerActivate CurrentListenerActivate;
 
@@ -181,10 +179,9 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
-        if (isDead)
-            return;
+        if (isDead) return;
         health -= damages;
-        //StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
+
         if (health <= 0)
         {
             Death();
@@ -192,7 +189,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         if (UIInstance.instance != null)
         {
-            //UIInstance.instance.DisplayLife(); 
             UIInstance.instance.DisplayHealth();
         }
     }
@@ -203,10 +199,10 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (health > maxHealth) health = maxHealth;
         if (UIInstance.instance != null)
         {
-            //UIInstance.instance.DisplayLife();
             UIInstance.instance.DisplayHealth();
         }
     }
+
     #endregion
 
     #region Death
@@ -241,6 +237,7 @@ public class PlayerManager : MonoBehaviour, Damageable
                 index = i;
             }
         }
+
         transform.position = CheckPointsReached[index].SpawnPosition.position;
         transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
@@ -273,8 +270,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-  
-     
         if (other.CompareTag("Enemy") && !isBlocked)
         {
             CheckEnemyTrigger(other);
@@ -337,8 +332,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTrigger"))
         {
-
-            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>();
             listenerTrigger.Raise();
         }
     }
@@ -348,8 +342,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (other.CompareTag("EventTriggerStay"))
         {
             ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>();
-          
-                listenerTriggerStay.Raise();
+
+            listenerTriggerStay.Raise();
         }
     }
 
@@ -358,15 +352,15 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (other.CompareTag("EventTriggerStay"))
         {
             ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>();
-  
-                listenerTriggerStay.EndRaise();
+
+            listenerTriggerStay.EndRaise();
         }
 
         if (other.CompareTag("EventTrigger"))
         {
             ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>();
-    
-                listenerTrigger.EndRaise();
+
+            listenerTrigger.EndRaise();
         }
     }
 
@@ -386,7 +380,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     IEnumerator EndColliding()
     {
         yield return new WaitForEndOfFrame();
- 
+
         isColliding = false;
     }
 

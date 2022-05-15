@@ -11,9 +11,11 @@ public class HM_ProtectionDefaultState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        Debug.Log("Passage en état de protection !");
+
         BossPhaseManager.instance.SetNextPhase();
         
-        // Change l'UI de la barre de vie
+        UIInstance.instance.SetBossLifeGauge(PhaseType.Protected);
 
     }
 

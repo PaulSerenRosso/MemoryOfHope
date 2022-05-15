@@ -8,11 +8,16 @@ public class HM_ProtectionPositionState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
-        enemyMachine.agent.isStopped = false;
+        enemyMachine.agent.isStopped = true;
         
         // Tp le boss à sa position initiale
 
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
+
+        initialPos = enemy.protectedPos;
+        
+        enemy.transform.position = initialPos;
+
         enemy.SwitchState(enemy.protectionProtectedState);
 
     }

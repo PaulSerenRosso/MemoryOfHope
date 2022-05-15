@@ -68,7 +68,11 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject optionMenuFirstSelected;
     [SerializeField] private TMP_Dropdown languageDropdown;
-
+    
+    [Header("Boss Canvas")]
+    public Slider bossLifeGauge;
+    public Image fillImage;
+    
     [Header("Navigation")]
     public EventSystem eventSystem;
     
@@ -500,6 +504,30 @@ public class UIInstance : MonoBehaviour
     {
         Debug.Log(sfx.value);
     } // Quand la valeur de l'audio (SFX) est changée
+
+    #endregion
+
+    #region Boss
+
+    public void SetBossDisplay(EnemyManager enemy)
+    {
+        bossLifeGauge.maxValue = enemy.maxHealth;
+        bossLifeGauge.value = bossLifeGauge.maxValue;
+        bossLifeGauge.gameObject.SetActive(true);
+    }
+
+    public void SetBossLifeGauge(PhaseType type)
+    {
+        switch (type)
+        {
+            case PhaseType.Vulnerable:
+                fillImage.color = Color.red;
+                break;
+            case PhaseType.Protected:
+                fillImage.color = Color.grey;
+                break;
+        }
+    }
 
     #endregion
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class PA_HitState : EnemyState // State quand le Prototype Abandonné est attaqué
+public class HM_VulnerableHitState : EnemyState
 {
     [Header("Parameters")]
     [Range(0, 1)] [SerializeField] private float durationHitStunned;
@@ -13,7 +13,6 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
     
     public override void StartState(EnemyMachine enemyMachine)
     {
-   
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
@@ -36,14 +35,14 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
         
         if (ConditionState.Timer(durationHitStunned, timer))
         {
-            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
+            HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
             enemyMachine.rb.isKinematic = true;
             enemyMachine.rb.velocity = Vector3.zero;
-            enemy.SwitchState(enemy.pursuitState);
+            enemy.SwitchState(enemy.pauseVulnerableMove);
             //enemyMachine.attackStrength = 0;
         }
     }
-
+    
 }
