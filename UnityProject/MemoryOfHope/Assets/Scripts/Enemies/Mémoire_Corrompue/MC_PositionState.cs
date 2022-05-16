@@ -15,11 +15,12 @@ public class MC_PositionState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         towersPositions.Clear();
-        
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         // On stock la position des tours corrompues associées à l'ennemi
         MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
         foreach (var tower in enemy.corruptedTowers)
         {
+            if(tower == null) continue;
             if(tower.isDeadEnemy) continue;
             towersPositions.Add(tower.transform.position);
         }

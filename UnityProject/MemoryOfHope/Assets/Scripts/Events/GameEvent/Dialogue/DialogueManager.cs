@@ -40,6 +40,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue()
     {
+     
         StartCoroutine(LaunchDialogue());
     }
 

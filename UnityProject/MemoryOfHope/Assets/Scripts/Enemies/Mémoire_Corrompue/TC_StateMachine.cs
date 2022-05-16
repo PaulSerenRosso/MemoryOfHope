@@ -40,12 +40,15 @@ public class TC_StateMachine : EnemyMachine
 
     public override void OnHitByLaser()
     {
+        if (!enemyManager.isDead)
+        {
         if (_damageLaserTimer < _damageLaserTime)
             _damageLaserTimer += Time.deltaTime;
         else
         {
             enemyManager.TakeDamage(_laserDamageAmount);
             _damageLaserTimer = 0;
+        }
         }
     }
 
