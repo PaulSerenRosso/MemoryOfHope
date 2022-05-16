@@ -28,6 +28,7 @@ public class S_PositionState : EnemyState
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         float distance = enemyMachine.agent.remainingDistance;
+        //enemyMachine.agent.CalculatePath(enemyMachine.transform.position, PlayerController.instance.transform.position);
 
         if (ConditionState.CheckDistance(initialPos, 
             PlayerController.instance.transform.position, pursuitDistance))
