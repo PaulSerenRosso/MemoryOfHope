@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 358743312057673580}
   - component: {fileID: 3637889848260676384}
   - component: {fileID: 2419787145521888647}
+  - component: {fileID: 7370133793493733059}
   m_Layer: 6
   m_Name: SM_Computer_Table_01
   m_TagString: Ground
@@ -190,7 +191,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4263060069874375565, guid: f9fe25f694bac4c4caf038053a4b3405, type: 3}
 --- !u!205 &2419787145521888647
@@ -220,6 +221,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1239851168030284635}
   m_Enabled: 1
+--- !u!208 &7370133793493733059
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130776828685778390}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3248888899269577849
 GameObject:
   m_ObjectHideFlags: 0
