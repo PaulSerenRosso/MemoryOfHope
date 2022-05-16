@@ -11,7 +11,7 @@ public class MC_StateMachine : EnemyMachine
     public bool isProtected;
 
     #region States
-    
+
     public MC_DefaultState defaultState = new MC_DefaultState();
 
     public MC_PositionState positionState = new MC_PositionState();
@@ -43,12 +43,11 @@ public class MC_StateMachine : EnemyMachine
         currentState = defaultState;
         base.Start();
     }
-    
+
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
-        if(_isCurrentAttackKnockback)
-        SwitchState(hitState);
+        if (_isCurrentAttackKnockback) SwitchState(hitState);
     }
 
     public bool IsProtected()
@@ -60,9 +59,10 @@ public class MC_StateMachine : EnemyMachine
                 return true;
             }
         }
+
         return false;
     }
-    
+
     #endregion
 
     #region Trigger & Collision
@@ -71,7 +71,6 @@ public class MC_StateMachine : EnemyMachine
     {
         if (other.CompareTag("PlayerFist") && !isHit && !isProtected) // Hit by the player
         {
-            
             hitDirection = transform.position - PlayerController.instance.transform.position;
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
             OnHitByMelee();
@@ -85,7 +84,6 @@ public class MC_StateMachine : EnemyMachine
 
     public override void OnTriggerStay(Collider other)
     {
-        
     }
 
     public override void OnTriggerExit(Collider other)
@@ -95,23 +93,18 @@ public class MC_StateMachine : EnemyMachine
             enemyManager.isBlocked = false;
         }
     }
-    
+
     public override void OnCollisionEnter(Collision other)
     {
-        
     }
 
     public override void OnCollisionStay(Collision other)
     {
-
-        
     }
 
     public override void OnCollisionExit(Collision other)
     {
-        
     }
 
     #endregion
-
 }

@@ -5,6 +5,9 @@ public class HM_ProtectionProtectedState : EnemyState
 {
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.agent.isStopped = true;
+        enemyMachine.attackArea.SetActive(true);
+        enemyMachine.enemyManager.canBeHitByMelee = false;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

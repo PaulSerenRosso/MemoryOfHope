@@ -1,56 +1,31 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 
 [System.Serializable]
 public class TC_DefaultState : EnemyState
 {
-    private Transform corruptedMemoryTransform;
-    [SerializeField] private LineRenderer link;
-    [SerializeField] private LayerMask player;
-    [SerializeField] private int linkDamage;
-    [SerializeField] private float damagingDelay;
-    [SerializeField] private Transform lookAtTransform;
+    private Transform memoryTransform;
+    [SerializeField] private Transform module;
 
     [SerializeField] private Transform protectionWall;
-    
-    private float time;
-    
+    [SerializeField] private float wallHeight;
+
     public override void StartState(EnemyMachine enemyMachine)
     {
-        corruptedMemoryTransform = enemyMachine.GetComponent<CorruptedTowerManager>().linkedCorruptedMemory;
-        link.positionCount = 2;
+        var enemy = (TC_StateMachine) enemyMachine;
+
+        memoryTransform = enemy.isHopeCorruptedTower
+            ? BossPhaseManager.instance.bossStateMachine.transform
+            : enemyMachine.GetComponent<CorruptedTowerManager>().linkedCorruptedMemory;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        var towerPos = enemyMachine.transform.position;
-        var pos0 = new Vector3(towerPos.x, 1, towerPos.z);
-        
-        var enemyPos = corruptedMemoryTransform.position;
-        var pos1 = new Vector3(enemyPos.x, 1, enemyPos.z);
-        
-        /*
-        link.SetPosition(0, pos0);
-        link.SetPosition(1, pos1);
+        module.LookAt(memoryTransform);
+        module.eulerAngles = new Vector3(-90, module.eulerAngles.y, 0);
 
-        var distance = Vector3.Distance(pos0, pos1);
-        lookAtTransform.LookAt(pos1);
-        if (!Physics.Raycast(pos0, lookAtTransform.forward, distance, player))
-        {
-            time = 0;
-            return;
-        }
-        if (time >= damagingDelay)
-        {
-            PlayerManager.instance.TakeDamage(linkDamage);
-            time = 0;
-        }
-        else
-        {
-            time += Time.deltaTime;
-        }
-        */
+        var towerPos = enemyMachine.transform.position;
+
+        var enemyPos = memoryTransform.position;
 
         // Position
         var localPos = (enemyPos + towerPos) * .5f;
@@ -58,14 +33,14 @@ public class TC_DefaultState : EnemyState
 
         float protectionWallSize = Vector3.Distance(towerPos, enemyPos);
         protectionWall.localScale =
-            new Vector3(protectionWallSize, protectionWall.localScale.y, protectionWall.localScale.z);
-        
+            new Vector3(protectionWallSize, wallHeight, protectionWall.localScale.z);
+
         // Rotation
         float angle;
-        var firstSegment = corruptedMemoryTransform.position.z - enemyMachine.transform.position.z;
-        var secondSegment = corruptedMemoryTransform.position.x - enemyMachine.transform.position.x;
+        var firstSegment = memoryTransform.position.z - enemyMachine.transform.position.z;
+        var secondSegment = memoryTransform.position.x - enemyMachine.transform.position.x;
         angle = -Mathf.Atan2(firstSegment, secondSegment) * Mathf.Rad2Deg;
 
-        protectionWall.eulerAngles = new Vector3(0,  angle, 0);
+        protectionWall.eulerAngles = new Vector3(0, angle, 0);
     }
 }

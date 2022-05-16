@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8390accbdcda9c24abc6dd71b29361b3, type: 3}
-  m_Name: ProtectedPhase
+  m_Script: {fileID: 11500000, guid: 899d15f1a2ac8c14b843cb47c9f4ea51, type: 3}
+  m_Name: PlayerInvulnerableCommand
   m_EditorClassIdentifier: 
-  allWaves: []
-  currentWave: {fileID: 0}
-  phaseType: 0
-  isTowersRotating: 0
-  corruptedTowers: []
+  CommandName: "Rendre invuln\xE9rable le joueur"
+  Command: playerinvulnerable
+  CommandStructure: playerinvulnerable "on/off"

@@ -26,17 +26,17 @@ public class EnemyMachine : MonoBehaviour
 
     public virtual void Start()
     {
-        currentState.StartState(this);
+        currentState?.StartState(this);
     }
     
     public virtual void Update()
     {
-        currentState.UpdateState(this);
+        currentState?.UpdateState(this);
     }
 
     public void FixedUpdate()
     {
-        currentState.FixedUpdateState(this);
+        currentState?.FixedUpdateState(this);
     }
 
     public void SwitchState(EnemyState state)

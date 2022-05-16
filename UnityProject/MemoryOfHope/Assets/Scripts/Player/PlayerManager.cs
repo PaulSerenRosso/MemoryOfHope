@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -16,14 +14,11 @@ public class PlayerManager : MonoBehaviour, Damageable
     public int money;
     public bool hasGlitch;
     private bool _isActive = true;
-   bool isColliding;
+    bool isColliding;
 
     public bool IsActive
     {
-        get
-        {
-            return _isActive;
-        }
+        get { return _isActive; }
         set
         {
             _isActive = value;
@@ -33,6 +28,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             }
         }
     }
+
     public List<CheckPoint> CheckPointsReached;
     public ListenerActivate CurrentListenerActivate;
 
@@ -84,6 +80,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public bool isHit = false;
     [SerializeField] private float _drag;
     [SerializeField] private float _blockedDrag;
+    public bool IsInvincible; 
     public bool isBlocked;
     [SerializeField] float blockedDuration;
 
@@ -136,6 +133,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public IEnumerator Hit(EnemyManager enemy)
     {
+        if (!IsInvincible)
+        {
         yield return new WaitForFixedUpdate();
         if (enemy.isBlocked)
         {
@@ -160,6 +159,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         PlayerController.instance.playerRb.drag = 0;
         PlayerController.instance.playerRb.velocity = Vector3.zero;
+        
+        }
 
         isHit = false;
     }
@@ -181,10 +182,9 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
-        if (isDead)
-            return;
+        if (isDead) return;
         health -= damages;
-        //StartCoroutine(Feedbacks.instance.VignetteFeedbacks(.5f, Color.red));
+
         if (health <= 0)
         {
             Death();
@@ -192,7 +192,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         if (UIInstance.instance != null)
         {
-            //UIInstance.instance.DisplayLife(); 
             UIInstance.instance.DisplayHealth();
         }
     }
@@ -200,12 +199,13 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void Heal(int heal)
     {
         health += heal;
+        if (health > maxHealth) health = maxHealth;
         if (UIInstance.instance != null)
         {
-            //UIInstance.instance.DisplayLife();
             UIInstance.instance.DisplayHealth();
         }
     }
+
     #endregion
 
     #region Death
@@ -240,10 +240,13 @@ public class PlayerManager : MonoBehaviour, Damageable
                 index = i;
             }
         }
+
         transform.position = CheckPointsReached[index].SpawnPosition.position;
         transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
+        Debug.Log("Respawn");
+        UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
         IsActive = true;
@@ -272,8 +275,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-  
-     
         if (other.CompareTag("Enemy") && !isBlocked)
         {
             CheckEnemyTrigger(other);
@@ -309,9 +310,17 @@ public class PlayerManager : MonoBehaviour, Damageable
             return;
         }
 
-        var closestPoint =
-            Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
-        hitDirection = transform.position - closestPoint;
+
+        if (enemy.Machine.GetType() == typeof(TC_StateMachine)) // Si c'est un mur
+        {
+            var closestPoint =
+                Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
+            hitDirection = transform.position - closestPoint;
+        }
+        else
+        {
+            hitDirection = transform.position - enemy.transform.position;
+        }
 
         StartCoroutine(Hit(enemy));
     }
@@ -334,8 +343,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (other.CompareTag("EventTrigger"))
         {
-
-            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>(); 
+            ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>();
             listenerTrigger.Raise();
         }
     }
@@ -345,8 +353,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (other.CompareTag("EventTriggerStay"))
         {
             ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>();
-          
-                listenerTriggerStay.Raise();
+
+            listenerTriggerStay.Raise();
         }
     }
 
@@ -355,15 +363,15 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (other.CompareTag("EventTriggerStay"))
         {
             ListenerTriggerStay listenerTriggerStay = other.gameObject.GetComponent<ListenerTriggerStay>();
-  
-                listenerTriggerStay.EndRaise();
+
+            listenerTriggerStay.EndRaise();
         }
 
         if (other.CompareTag("EventTrigger"))
         {
             ListenerTrigger listenerTrigger = other.gameObject.GetComponent<ListenerTrigger>();
-    
-                listenerTrigger.EndRaise();
+
+            listenerTrigger.EndRaise();
         }
     }
 
@@ -383,7 +391,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     IEnumerator EndColliding()
     {
         yield return new WaitForEndOfFrame();
- 
+
         isColliding = false;
     }
 

@@ -7,7 +7,7 @@ public class CorruptedTowerManager : EnemyManager
     public override void Death()
     {
         base.Death();
-        MC_StateMachine machine = linkedCorruptedMemory.GetComponent<MC_StateMachine>();
+        var machine = linkedCorruptedMemory.GetComponent<MC_StateMachine>();
         machine.isProtected = machine.IsProtected();
     }
 }

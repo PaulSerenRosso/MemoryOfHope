@@ -376,6 +376,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipCinematic"",
+                    ""type"": ""Button"",
+                    ""id"": ""0873b8e1-31a8-4d62-a48d-1b30c3c81f0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -409,6 +418,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OpenInformationMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0869f82b-454d-4acf-8ca4-ed1fbb781a4d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipCinematic"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -485,6 +505,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_UI_Return = m_UI.FindAction("Return", throwIfNotFound: true);
         m_UI_OpenInformationMenu = m_UI.FindAction("OpenInformationMenu", throwIfNotFound: true);
         m_UI_OpenPauseMenu = m_UI.FindAction("OpenPauseMenu", throwIfNotFound: true);
+        m_UI_SkipCinematic = m_UI.FindAction("SkipCinematic", throwIfNotFound: true);
         // MainMenuUI
         m_MainMenuUI = asset.FindActionMap("MainMenuUI", throwIfNotFound: true);
         m_MainMenuUI_MainMenuGoRight = m_MainMenuUI.FindAction("MainMenuGoRight", throwIfNotFound: true);
@@ -680,6 +701,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Return;
     private readonly InputAction m_UI_OpenInformationMenu;
     private readonly InputAction m_UI_OpenPauseMenu;
+    private readonly InputAction m_UI_SkipCinematic;
     public struct UIActions
     {
         private @InputMaster m_Wrapper;
@@ -687,6 +709,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @Return => m_Wrapper.m_UI_Return;
         public InputAction @OpenInformationMenu => m_Wrapper.m_UI_OpenInformationMenu;
         public InputAction @OpenPauseMenu => m_Wrapper.m_UI_OpenPauseMenu;
+        public InputAction @SkipCinematic => m_Wrapper.m_UI_SkipCinematic;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -705,6 +728,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @OpenPauseMenu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenPauseMenu;
                 @OpenPauseMenu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenPauseMenu;
                 @OpenPauseMenu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenPauseMenu;
+                @SkipCinematic.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipCinematic;
+                @SkipCinematic.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipCinematic;
+                @SkipCinematic.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipCinematic;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -718,6 +744,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @OpenPauseMenu.started += instance.OnOpenPauseMenu;
                 @OpenPauseMenu.performed += instance.OnOpenPauseMenu;
                 @OpenPauseMenu.canceled += instance.OnOpenPauseMenu;
+                @SkipCinematic.started += instance.OnSkipCinematic;
+                @SkipCinematic.performed += instance.OnSkipCinematic;
+                @SkipCinematic.canceled += instance.OnSkipCinematic;
             }
         }
     }
@@ -784,6 +813,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnReturn(InputAction.CallbackContext context);
         void OnOpenInformationMenu(InputAction.CallbackContext context);
         void OnOpenPauseMenu(InputAction.CallbackContext context);
+        void OnSkipCinematic(InputAction.CallbackContext context);
     }
     public interface IMainMenuUIActions
     {
