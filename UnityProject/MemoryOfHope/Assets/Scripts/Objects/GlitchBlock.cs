@@ -7,9 +7,6 @@ public class GlitchBlock : MonoBehaviour
 {
     private bool isGlitchAvailable;
     [SerializeField] private float duration;
-    public Material material;
-    [SerializeField] private Color availableGlitchColor;
-    [SerializeField] private Color usedGlitchColor;
     [SerializeField] private ParticleSystem feedback;
 
     private void Start()
@@ -32,15 +29,17 @@ public class GlitchBlock : MonoBehaviour
         isGlitchAvailable = false;
 
         PlayerController.instance.isGlitching = true;
-        material.color = usedGlitchColor;
+        PlayerController.instance.hopeCape.GetColor("Color_Hope");
+        PlayerController.instance.hopeCape.SetColor("Color_Hope", PlayerController.instance.glitchColor);
         
         yield return new WaitForSeconds(duration);
         
         PlayerController.instance.isGlitching = false;
+        PlayerController.instance.hopeCape.SetColor("Color_Hope", Color.black);
+
 
         yield return new WaitForSeconds(1);
 
-        material.color = availableGlitchColor;
         isGlitchAvailable = true;
     }
 }
