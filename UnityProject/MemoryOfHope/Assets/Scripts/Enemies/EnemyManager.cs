@@ -82,7 +82,6 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public virtual void Death()
     {
-        Debug.Log("bonsoir je meurs");
         for (int i = 0; i < 20; i++)
         {
             Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
@@ -94,8 +93,10 @@ public class EnemyManager : MonoBehaviour, Damageable
 
         if (WaveListener != null)
             WaveListener.Raise(this);
+        if(Animator != null)
         Animator.Play("Death");
-        Machine.agent.SetDestination(transform.position);
+        if(Machine.agent != null)
+        Machine.agent.isStopped = false;
         Machine.enabled = false;
         StartCoroutine(WaitForDeath());
 

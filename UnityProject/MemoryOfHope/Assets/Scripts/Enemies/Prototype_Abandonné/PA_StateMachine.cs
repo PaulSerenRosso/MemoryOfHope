@@ -4,18 +4,20 @@ public class PA_StateMachine : EnemyMachine
 {
     #region States
 
+    //idle de base detect false   //move detect true
     public PA_DefaultState defaultState = new PA_DefaultState();
 
+    //attack
     public PA_AttackState attackState = new PA_AttackState();
-
+    //move
     public PA_PursuitState pursuitState = new PA_PursuitState();
-
+// move
     public PA_EndPursuitState endPursuitState = new PA_EndPursuitState();
-
+//idle
     public PA_PauseAttackState pauseAttackState = new PA_PauseAttackState();
-
+//idle 
     public PA_PausePursuitState pausePursuitState = new PA_PausePursuitState();
-
+//death damage
     public PA_HitState hitState = new PA_HitState();
 
     #endregion
@@ -40,6 +42,7 @@ public class PA_StateMachine : EnemyMachine
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
+        enemyManager.Animator.Play("Damage");
         if (_isCurrentAttackKnockback) SwitchState(hitState);
     }
 
