@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Light_BeamInstance
+  m_Name: MI_Light_Beam
   m_Shader: {fileID: -6465566751694194690, guid: bd212f7262e6ecc4eb4fbd7a8ab27820, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_0e9d852c85a5496f8171c3937e32e51b:
-        m_Texture: {fileID: 2800000, guid: 74497a601cb0f6d45944c4b82e78eb3e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 76bdaa00b97f4de429be547d07b66d34, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -83,6 +83,7 @@ Material:
     - Vector1_2afaa6922bf3412cba1080211326d0bd: 0.2
     - Vector1_3a0d77c4721c4f4a9516d0861c6656f9: 0.02
     - Vector1_94bfc7b727ef4b5ca3edbfc1f5b78d67: 1
+    - Vector1_e81cc391a97e43acbc5360290c2a857f: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -110,7 +111,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_14ab3e5a5a054000a7eac31fb7bd524d: {r: 0, g: 0.9623866, b: 1, a: 0}
+    - Color_14ab3e5a5a054000a7eac31fb7bd524d: {r: 0, g: 0.96238655, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -130,4 +131,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 2100000, guid: 707e828492a8f174ba6219964d30e5c7, type: 2}
   instance: {fileID: -6803952611310616449}
-  overrides: []
+  overrides:
+  - name: Vector1_94bfc7b727ef4b5ca3edbfc1f5b78d67
+    type: 2
+    isKeyword: 0
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 1
+    textureValue: {fileID: 0}
+    active: 1
+  - name: Color_14ab3e5a5a054000a7eac31fb7bd524d
+    type: 0
+    isKeyword: 0
+    colorValue: {r: 0, g: 0.96238655, b: 1, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 1
+    textureValue: {fileID: 0}
+    active: 1
+  - name: Vector1_2afaa6922bf3412cba1080211326d0bd
+    type: 2
+    isKeyword: 0
+    colorValue: {r: 0, g: 0.96238655, b: 1, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0.2
+    textureValue: {fileID: 0}
+    active: 1
+  - name: Vector1_3a0d77c4721c4f4a9516d0861c6656f9
+    type: 2
+    isKeyword: 0
+    colorValue: {r: 0, g: 0.96238655, b: 1, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0.02
+    textureValue: {fileID: 0}
+    active: 1
+  - name: Texture2D_0e9d852c85a5496f8171c3937e32e51b
+    type: 4
+    isKeyword: 0
+    colorValue: {r: 0, g: 0.96238655, b: 1, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0.02
+    textureValue: {fileID: 2800000, guid: 76bdaa00b97f4de429be547d07b66d34, type: 3}
+    active: 1
