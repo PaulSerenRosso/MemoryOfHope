@@ -17,6 +17,7 @@ public class S_PursuitState : EnemyState
         initialPos = enemy.initialPosition;
         enemyMachine.agent.isStopped = false;
         enemyMachine.agent.speed = speed;
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)
