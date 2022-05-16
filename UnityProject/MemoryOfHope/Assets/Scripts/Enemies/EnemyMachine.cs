@@ -6,7 +6,8 @@ public class EnemyMachine : MonoBehaviour
     #region Main Variables
 
     public EnemyManager enemyManager;
-   
+
+  protected bool _isCurrentAttackKnockback;
     public EnemyState currentState;
     public Material material;
     
@@ -25,17 +26,17 @@ public class EnemyMachine : MonoBehaviour
 
     public virtual void Start()
     {
-        currentState.StartState(this);
+        currentState?.StartState(this);
     }
     
     public virtual void Update()
     {
-        currentState.UpdateState(this);
+        currentState?.UpdateState(this);
     }
 
     public void FixedUpdate()
     {
-        currentState.FixedUpdateState(this);
+        currentState?.FixedUpdateState(this);
     }
 
     public void SwitchState(EnemyState state)
@@ -52,15 +53,27 @@ public class EnemyMachine : MonoBehaviour
     {
         AttackModule attackModule = PlayerController.instance.attackModule;
         PlayerAttackClass attack = attackModule.attackList[attackModule.currentIndexAttack];
-        attackStrength = attack.attackStrength;
+        if (attack.IsKnockbackEnemy)
+        {
+            _isCurrentAttackKnockback = true; 
+            attackStrength = attack.attackStrength;
+       
+            hitDirection = transform.position - PlayerController.instance.transform.position;
+            hitDirection = -(PlayerController.instance.transform.position - transform.position);
+        }
+        else
+        {
+            _isCurrentAttackKnockback = false; 
+        }
 
         if (enemyManager.canBeHitByMelee)
         {
             enemyManager.TakeDamage(attack.damage);
         }
-        else
-        {
+        else 
+        { 
             enemyManager.HitNoDamage();
+       
         }
     }
 
@@ -82,8 +95,7 @@ public class EnemyMachine : MonoBehaviour
     {
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
-            hitDirection = transform.position - PlayerController.instance.transform.position;
-            hitDirection = -(PlayerController.instance.transform.position - transform.position);
+      
 
             OnHitByMelee();
         }

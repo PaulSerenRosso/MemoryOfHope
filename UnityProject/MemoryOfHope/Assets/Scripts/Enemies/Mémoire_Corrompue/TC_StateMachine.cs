@@ -2,12 +2,25 @@ using UnityEngine;
 
 public class TC_StateMachine : EnemyMachine
 {
+    #region Variables
+
+    float _damageLaserTimer;
+
+    [Header("Parameters")] [SerializeField]
+    float _damageLaserTime;
+
+    [SerializeField] int _laserDamageAmount;
+
+    public bool isHopeCorruptedTower;
+
+    #endregion
+    
     #region States
 
     public TC_DefaultState defaultState = new TC_DefaultState();
 
     #endregion
-    
+
     #region State Machine Main Functions
 
     public override void Start()
@@ -20,11 +33,27 @@ public class TC_StateMachine : EnemyMachine
     {
         base.OnHitByMelee();
     }
-    
+
     #endregion
 
     #region Trigger & Collision
 
+    public override void OnHitByLaser()
+    {
+        if (_damageLaserTimer < _damageLaserTime)
+            _damageLaserTimer += Time.deltaTime;
+        else
+        {
+            enemyManager.TakeDamage(_laserDamageAmount);
+            _damageLaserTimer = 0;
+        }
+    }
+
+    public void CancelHitLaser()
+    {
+        _damageLaserTimer = 0;
+    }
+    
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);

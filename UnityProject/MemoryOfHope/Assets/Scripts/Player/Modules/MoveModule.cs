@@ -6,7 +6,7 @@ public class MoveModule : Module
 {
     private Vector2 inputVector;
     public Vector3 moveVector;
-    [SerializeField] private float defaultSpeedMovment;
+   public float defaultSpeedMovment;
     [SerializeField] private float defaultSpeedRotationOppositeRun;
     [SerializeField] private float defaultSpeedRotation;
     [SerializeField] private float toleranceRotation;
@@ -45,6 +45,11 @@ public class MoveModule : Module
     public override void InputReleased(InputAction.CallbackContext ctx)
     {
         inputPressed = false;
+        Release();
+    }
+
+    public override void Cancel()
+    {
         Release();
     }
 

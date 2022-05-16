@@ -69,6 +69,20 @@ public class InteractionModule : Module
         Release();
     }
 
+    public override void Cancel()
+    {
+        _timer = 0;
+        isActivate = false;
+        isPerformed = false;
+        PlayerController.instance.playerAnimator.SetBool("InPrism", false);
+        if (currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+        line.positionCount = 0;
+        foreach (var interaction in interactiveFunction)
+        {
+            interaction.Deselect();
+        }
+    }
+
     private void Aim(InputAction.CallbackContext ctx)
     {
         joystickIsPressed = true;

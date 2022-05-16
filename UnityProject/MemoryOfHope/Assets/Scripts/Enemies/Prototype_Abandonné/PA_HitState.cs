@@ -1,5 +1,4 @@
 using System;
-using System.Security.AccessControl;
 using UnityEngine;
 
 [Serializable]
@@ -14,6 +13,7 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+   
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
@@ -42,6 +42,7 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
             enemyMachine.rb.isKinematic = true;
             enemyMachine.rb.velocity = Vector3.zero;
             enemy.SwitchState(enemy.pursuitState);
+            //enemyMachine.attackStrength = 0;
         }
     }
 

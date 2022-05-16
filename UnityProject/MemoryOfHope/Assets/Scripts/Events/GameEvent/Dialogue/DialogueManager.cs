@@ -45,9 +45,12 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator LaunchDialogue()
     {
+
         for (int i = 0; i < CurrentDialogue.Lines.Count; i++)
         {
             SetUpLine(i);
+      
+            if(CurrentLine.WaitTimeBeforeLine != 0)
             yield return new WaitForSeconds(CurrentLine.WaitTimeBeforeLine);
             UpdateLine();
             UpdateBackgroundSize();
@@ -92,7 +95,7 @@ public class DialogueManager : MonoBehaviour
             _textDialogueHolder.rectTransform.sizeDelta.y + _yOffsetBackground);
     }
 
-    void EndDialogue()
+   public void EndDialogue()
     {
         InGameDialogue = false;
         InCinematicDialogue = false;

@@ -15,19 +15,32 @@ public class BossPhaseManager : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
+
         instance = this;
     }
 
     #endregion
 
     public Transform[] spawningPoints;
-    [SerializeField] private HM_StateMachine bossStateMachine;
+    public bool isSphereRotating;
+    [SerializeField] float rotatingSpeed;
+    public Transform rotatingSphere;
+    public Transform[] towersSpawningPoints;
+    public HM_StateMachine bossStateMachine;
     public List<BossPhaseSO> allPhases;
     public BossPhaseSO currentPhase;
-    
+
     private void Start()
     {
         BeginsBattle(); // A terme : ça se lance pas ici
+    }
+
+    private void Update()
+    {
+        if (isSphereRotating)
+        {
+            rotatingSphere.eulerAngles += Vector3.up * rotatingSpeed * Time.deltaTime;
+        }
     }
 
     public void BeginsBattle()
@@ -38,13 +51,14 @@ public class BossPhaseManager : MonoBehaviour
 
     public void SetNextPhase() // Set Next Phase est appelé dans les fonctions du State Machine
     {
-        if(currentPhase != null) allPhases.Remove(currentPhase);
-        if(allPhases.Count == 0)
+        if (currentPhase != null) allPhases.Remove(currentPhase);
+        if (allPhases.Count == 0)
         {
             Debug.Log("Boss vaincu");
         }
         else
         {
+            isSphereRotating = false;
             currentPhase = allPhases[0];
             switch (currentPhase.phaseType)
             {

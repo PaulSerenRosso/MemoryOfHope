@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 public class CinematicManager : MonoBehaviour
 {
@@ -14,6 +17,48 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] private InGameCanvasType[] _canvasInCinematic;
 
     [SerializeField] private bool _inCutScene;
+    
+    [SerializeField] Slider _skipSlider;
+    [SerializeField] private float _skipSliderSpeed;
+
+    private bool _isPressSkipInput;
+
+    private void Start()
+    {
+        GameManager.instance.inputs.UI.SkipCinematic.performed += SkipCinematic;
+        GameManager.instance.inputs.UI.SkipCinematic.canceled += CancelCinematic;
+   
+    }
+
+    void SkipCinematic(InputAction.CallbackContext context)
+    {
+        _isPressSkipInput = true;
+
+    }
+
+    void CancelCinematic(InputAction.CallbackContext context)
+    {
+        _isPressSkipInput = false;
+        _skipSlider.value = 0; 
+    }
+
+    private void Update()
+    {
+        if (_inCutScene)
+        {
+           
+            if (_isPressSkipInput)
+            {
+                
+                
+                _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
+                if (_skipSlider.value >= _skipSlider.maxValue)
+                {
+                    EndCinematic();
+                }
+            }
+        }
+    }
 
     public bool InCutScene
     {
@@ -21,7 +66,7 @@ public class CinematicManager : MonoBehaviour
         set
         {
             _inCutScene = value;
-            PlayerManager.instance.isActive = !value;
+            PlayerManager.instance.IsActive = !value;
         }
     }
 
@@ -38,6 +83,7 @@ public class CinematicManager : MonoBehaviour
     {
         _fadeInOut.Play("BeginFade");
 
+        _skipSlider.value = 0;
         StartCoroutine(WaitForLoadCinematic(index));
     }
 
@@ -55,7 +101,10 @@ public class CinematicManager : MonoBehaviour
     public void EndCinematic()
     {
         _fadeInOut.Play("EndFade");
+        DialogueManager.Instance.EndDialogue();
+        DialogueManager.Instance.StopAllCoroutines();
         StartCoroutine(WaitForLoadGamePhase());
+        
     }
 
     IEnumerator WaitForLoadGamePhase()

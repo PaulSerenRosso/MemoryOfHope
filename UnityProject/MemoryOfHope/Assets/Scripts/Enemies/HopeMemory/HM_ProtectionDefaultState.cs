@@ -1,17 +1,32 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class HM_ProtectionDefaultState : EnemyState
 {
+    [Header("Parameters")]
+    [Range(0, 1)] [SerializeField] private float defaultDuration;
+    
+    private float timer;
+    
     public override void StartState(EnemyMachine enemyMachine)
     {
+        Debug.Log("Passage en état de protection !");
+
         BossPhaseManager.instance.SetNextPhase();
+        
+        UIInstance.instance.SetBossLifeGauge(PhaseType.Protected);
+
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        // Change l'UI de la barre de vie
-
-        // Lance pause puis position
+        timer += Time.deltaTime;
+        
+        if (ConditionState.Timer(defaultDuration, timer))
+        {
+            HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.pauseProtectionPosition);
+        }
     }
 }
