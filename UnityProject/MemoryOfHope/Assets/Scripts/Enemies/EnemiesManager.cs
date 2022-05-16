@@ -24,6 +24,7 @@ public class EnemiesManager : MonoBehaviour
         for (int i = 0; i < BaseEnemies.Count; i++)
         {
             BaseEnemies[i].gameObject.SetActive(true);
+            BaseEnemies[i].Machine.enabled = true;
             BaseEnemies[i].transform.position = BaseEnemies[i].SpawnPosition;
             BaseEnemies[i].transform.rotation = BaseEnemies[i].SpawnRotation;
             BaseEnemies[i].Machine.Start();

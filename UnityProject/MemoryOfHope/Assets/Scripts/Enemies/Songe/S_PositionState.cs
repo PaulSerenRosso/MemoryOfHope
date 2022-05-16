@@ -15,6 +15,7 @@ public class S_PositionState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         enemyMachine.agent.isStopped = false;
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         pursuitDistance = enemy.pursuitDistance;

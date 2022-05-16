@@ -16,7 +16,7 @@ public class S_PauseHitState : EnemyState // Quand le songe a touché l'ennemi
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
-
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         Vector3 knockback = enemyMachine.hitDirection;
         knockback.Normalize();
         knockback *= hitFactor;
