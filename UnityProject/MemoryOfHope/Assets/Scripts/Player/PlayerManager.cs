@@ -234,7 +234,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         {
             float currentSquareDistance =
                 Vector3.SqrMagnitude(CheckPointsReached[i].SpawnPosition.position - transform.position);
-            if (currentSquareDistance >= maxSquareDistance)
+            if (currentSquareDistance <= maxSquareDistance)
             {
                 maxSquareDistance = currentSquareDistance;
                 index = i;
