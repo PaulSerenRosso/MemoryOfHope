@@ -95,7 +95,7 @@ public class DialogueManager : MonoBehaviour
             _textDialogueHolder.rectTransform.sizeDelta.y + _yOffsetBackground);
     }
 
-    void EndDialogue()
+   public void EndDialogue()
     {
         InGameDialogue = false;
         InCinematicDialogue = false;

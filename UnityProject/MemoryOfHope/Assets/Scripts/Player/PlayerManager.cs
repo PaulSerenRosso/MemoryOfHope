@@ -84,6 +84,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public bool isHit = false;
     [SerializeField] private float _drag;
     [SerializeField] private float _blockedDrag;
+    public bool IsInvincible; 
     public bool isBlocked;
     [SerializeField] float blockedDuration;
 
@@ -136,6 +137,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public IEnumerator Hit(EnemyManager enemy)
     {
+        if (!IsInvincible)
+        {
         yield return new WaitForFixedUpdate();
         if (enemy.isBlocked)
         {
@@ -160,6 +163,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         PlayerController.instance.playerRb.drag = 0;
         PlayerController.instance.playerRb.velocity = Vector3.zero;
+        
+        }
 
         isHit = false;
     }

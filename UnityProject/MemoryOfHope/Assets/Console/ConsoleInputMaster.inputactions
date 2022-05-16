@@ -1,0 +1,54 @@
+{
+    "name": "ConsoleInputMaster",
+    "maps": [
+        {
+            "name": "Console",
+            "id": "0223a41a-e235-4229-999a-5ac933f1e21c",
+            "actions": [
+                {
+                    "name": "OpenClose",
+                    "type": "Button",
+                    "id": "3770a01c-1be7-41ef-9193-c8fbf34f9366",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ValidateCommand",
+                    "type": "Button",
+                    "id": "0f9dcc8b-9606-4438-885f-35d0ecf34d83",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0d8c5857-4df9-492b-bc66-7d4771072fa5",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenClose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f41df0e-16d1-4ed5-b0e4-d3777f745422",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ValidateCommand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
