@@ -25,6 +25,7 @@ public class S_ApparitionState : EnemyState
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemyMachine.enemyManager.Animator.SetBool("IsSpawn", false);
+
             for (int i = 0; i < _colliders.Length; i++)
             {
                 _colliders[i].enabled = true;
