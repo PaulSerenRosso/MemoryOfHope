@@ -19,6 +19,7 @@ public class S_EndPursuitState : EnemyState
         pursuitDistance = enemy.pursuitDistance;
         initialPos = enemy.initialPosition;
         enemyMachine.agent.isStopped = false;
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         enemyMachine.agent.speed = speed;
     }
 

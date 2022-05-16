@@ -5,12 +5,13 @@ using UnityEngine;
 public class S_PausePursuitState : EnemyState
 {
     [Header("Parameters")]
-    [Range(0, 1)] [SerializeField] private float durationBeforePursuit;
+    [Range(0, 5)] [SerializeField] private float durationBeforePursuit;
     
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }
