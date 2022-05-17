@@ -65,6 +65,7 @@ public class EnemyMachine : MonoBehaviour
         {
             _isCurrentAttackKnockback = false; 
         }
+        
 
         if (enemyManager.canBeHitByMelee)
         {
@@ -95,9 +96,11 @@ public class EnemyMachine : MonoBehaviour
     {
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
-      
-
-            OnHitByMelee();
+            if (!enemyManager.isDead)
+            {
+                  OnHitByMelee();
+            }
+          
         }
     }
 
@@ -105,7 +108,10 @@ public class EnemyMachine : MonoBehaviour
     {
         if (other.CompareTag("Laser") && !isHit) // Hit by laser
         {
-            OnHitByLaser();
+            if (!enemyManager.isDead)
+            {
+                OnHitByLaser();
+            }
         }
     }
 

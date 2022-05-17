@@ -15,30 +15,31 @@ public class S_StateMachine : EnemyMachine
     [SerializeField] int _laserDamageAmount;
     [Range(1, 15)] public float detectionDistance;
     [Range(1, 15)] public float pursuitDistance;
-
+    
     #endregion
 
     #region States
 
+    // pour la mort faire un truc globale dans enemyamangers
     public S_DefautState defaultState = new S_DefautState();
 
-    public S_PursuitState pursuitState = new S_PursuitState();
+    public S_PursuitState pursuitState = new S_PursuitState();//walk
 
-    public S_EndPursuitState endPursuitState = new S_EndPursuitState();
+    public S_EndPursuitState endPursuitState = new S_EndPursuitState(); //walk
 
-    public S_PositionState positionState = new S_PositionState();
+    public S_PositionState positionState = new S_PositionState(); //walk
 
-    public S_ApparitionState apparitionState = new S_ApparitionState();
+    public S_ApparitionState apparitionState = new S_ApparitionState(); //spawn
 
-    public S_PauseHitState pauseHitState = new S_PauseHitState();
+    public S_PauseHitState pauseHitState = new S_PauseHitState(); //idle
 
-    public S_PausePositionState pausePositionState = new S_PausePositionState();
+    public S_PausePositionState pausePositionState = new S_PausePositionState();//idle
 
-    public S_PausePursuitState pausePursuitState = new S_PausePursuitState();
+    public S_PausePursuitState pausePursuitState = new S_PausePursuitState();//idle
 
-    public S_HidingState hidingState = new S_HidingState();
+    public S_HidingState hidingState = new S_HidingState(); // despawn
 
-    public S_HitState hitState = new S_HitState();
+    public S_HitState hitState = new S_HitState();  //damage
 
     #endregion
 
@@ -60,13 +61,14 @@ public class S_StateMachine : EnemyMachine
     public override void Start()
     {
         initialPosition = transform.position;
-        currentState = defaultState;
+        currentState = hidingState;
         base.Start();
     }
 
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
+        enemyManager.Animator.Play("Damage");
         if (_isCurrentAttackKnockback) SwitchState(hitState);
     }
 
@@ -93,6 +95,7 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnHitByLaser()
     {
+        
         if (_damageLaserTimer < _damageLaserTime)
             _damageLaserTimer += Time.deltaTime;
         else
@@ -109,6 +112,7 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnTriggerStay(Collider other)
     {
+        
     }
 
     public override void OnTriggerExit(Collider other)
