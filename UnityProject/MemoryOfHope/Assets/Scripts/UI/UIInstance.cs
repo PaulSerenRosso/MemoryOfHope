@@ -51,6 +51,8 @@ public class UIInstance : MonoBehaviour
     [Header("Player Module")] [SerializeField]
     private RectTransform firstIconTransform;
 
+    public Slider LaserSlider;
+
     [SerializeField] private float distanceBetweenIcons;
     [SerializeField] private GameObject iconPrefab;
     private int displayedModule;
