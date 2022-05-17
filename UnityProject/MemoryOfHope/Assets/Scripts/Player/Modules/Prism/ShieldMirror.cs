@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldMirror : BaseMirror
@@ -12,10 +9,19 @@ public class ShieldMirror : BaseMirror
 
     [SerializeField] private ShieldManager _shield;
 
+    [SerializeField] private Color laserColor;
+
+    public bool prismObtained = false;
 
     public override void Returnable(LaserMachine laser, RaycastHit hit)
     {
         _shield.LaserCharge += Time.deltaTime * _shield.LaserChargeRegeneration;
+
+        if (prismObtained)
+        {
+            PlayerController.instance.hopeCape.GetColor("Color_Hope");
+            PlayerController.instance.hopeCape.SetColor("Color_Hope", laserColor);
+        }
 
         _triggerByLaser = true;
         if (_shield.InputShield && !_shield.inputLaser)
@@ -49,6 +55,12 @@ public class ShieldMirror : BaseMirror
         _triggerByLaser = false;
         _currentSource = null;
         LaserLineReceiver = null;
+
+        if (prismObtained)
+        {
+            PlayerController.instance.hopeCape.GetColor("Color_Hope");
+            PlayerController.instance.hopeCape.SetColor("Color_Hope", Color.black);
+        }
     }
 
     public override void StartReturnable(LaserMachine laser, RaycastHit hit)

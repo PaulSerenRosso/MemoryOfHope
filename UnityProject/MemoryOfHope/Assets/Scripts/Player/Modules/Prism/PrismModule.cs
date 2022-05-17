@@ -25,6 +25,7 @@ public class PrismModule : Module
         GameManager.instance.inputs.Player.Prism.performed += InputPressed;
         isLinked = true;
         isTutorial = true;
+        _shield.Mirror.prismObtained = true;
     }
 
     private void OnDisable()

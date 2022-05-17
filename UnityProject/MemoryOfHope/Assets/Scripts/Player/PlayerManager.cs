@@ -180,6 +180,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
+        GameManager.instance.RumbleConstant(.3f, .7f, .4f);
+        
         if (isDead) return;
         health -= damages;
 
@@ -210,6 +212,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void Death()
     {
+        GameManager.instance.RumbleConstant(.6f, .9f, .7f);
+
         health = 0;
         UIInstance.instance.DisplayHealth();
         StartCoroutine(DeathTime());
