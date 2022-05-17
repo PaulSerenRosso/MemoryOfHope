@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -69,14 +70,17 @@ public class ConsoleManager : MonoBehaviour
                 _inputField.text = "";
                 PlayerManager.instance.IsActive = false;
                 _consoleCanvas.SetActive(true);
-                _currentTimeScale = Time.timeScale;
+                _currentTimeScale = Time.timeScale; 
+                 _inputField.ActivateInputField();
                 Time.timeScale = 0;
                 _isOpen = true;
+              
             }
             else
             {
                 PlayerManager.instance.IsActive = true;
                 _consoleCanvas.SetActive(false);
+              
                 _isOpen = false;
                 Time.timeScale = _currentTimeScale;
             }
@@ -97,6 +101,7 @@ public class ConsoleManager : MonoBehaviour
                return;
             }
         }
+        
         _currentCommand = null;
         _inputField.textComponent.color = Color.white;
     }
@@ -113,7 +118,9 @@ public class ConsoleManager : MonoBehaviour
             {
                 _currentCommand.Execute();  _currentCommand = null;
                 _inputField.text = String.Empty;
-            }
+            
+            }    
+            _inputField.ActivateInputField();
         }
     }
         
