@@ -9,6 +9,8 @@ public class ModuleAcquisition : CheckPoint
 
     public override void Activate()
     {
+        GameManager.instance.RumbleConstant(.1f, .3f, 1);
+        
         foreach (var module in moduleToLearn)
         {
             PlayerManager.instance.AddModule(module);

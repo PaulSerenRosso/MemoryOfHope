@@ -27,6 +27,9 @@ public class InteractionModule : Module
     public Gradient defaultGradient;
     public Color interactionColor;
     public Color defaultColor;
+
+    private bool isTutorial;
+    [SerializeField] private TutorialGameEvent interactionTutorial;
     
     public override void LinkModule()
     {
@@ -36,6 +39,7 @@ public class InteractionModule : Module
         GameManager.instance.inputs.Player.Move.canceled += AimCancel;
         GameManager.instance.inputs.Player.InteractionSelect.started += Selecting;
         isLinked = true;
+        isTutorial = true;
     }
 
     private void OnDisable()
@@ -142,6 +146,12 @@ public class InteractionModule : Module
 
     public override void Execute()
     {
+        if (isTutorial)
+        {
+            isTutorial = false;
+            interactionTutorial.RemoveTutorial();
+        }
+        
         if (selectedObject != null) return;
 
         isPerformed = true;
@@ -175,6 +185,8 @@ public class InteractionModule : Module
             line.SetPosition(1, hit.point);
             currentTargetedObject = hit.transform.gameObject;
             currentTargetedObject.GetComponent<Outline>().enabled = true;
+            GameManager.instance.RumbleConstant(.1f, .1f, .1f);
+
         }
         else
         {
