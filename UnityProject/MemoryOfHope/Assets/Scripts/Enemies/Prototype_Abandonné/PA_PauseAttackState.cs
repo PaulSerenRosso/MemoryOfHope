@@ -14,6 +14,7 @@ public class PA_PauseAttackState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }

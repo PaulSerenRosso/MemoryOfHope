@@ -5,12 +5,13 @@ using UnityEngine;
 public class S_PausePositionState : EnemyState
 {
     [Header("Parameters")]
-    [Range(0, 1)] [SerializeField] private float durationBeforePosition;
+    [Range(0, 5)] [SerializeField] private float durationBeforePosition;
     
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }

@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("PlayerComponent")] public Rigidbody playerRb;
     public Animator playerAnimator;
-
+    public Material hopeCape;
+    public Color glitchColor;
 
     public bool isGlitching;
     public AttackModule attackModule;

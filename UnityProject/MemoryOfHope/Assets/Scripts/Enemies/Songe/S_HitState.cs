@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class S_HitState : EnemyState // State quand le Songe est attaqué
+public class 
+    S_HitState : EnemyState // State quand le Songe est attaqué
 {
     [Header("Parameters")]
     [Range(0, 1)] [SerializeField] private float durationHitStunned;
@@ -25,6 +26,7 @@ public class S_HitState : EnemyState // State quand le Songe est attaqué
         Debug.DrawRay(enemyMachine.transform.position, knockback, Color.green, 1f);
         enemyMachine.rb.AddForce(knockback);
         enemyMachine.rb.drag = drag;
+        enemyMachine.enemyManager.Animator.Play("Damage");
         
         timer = 0;
     }
