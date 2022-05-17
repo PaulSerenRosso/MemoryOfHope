@@ -9,7 +9,7 @@ public class ShieldManager : MonoBehaviour, Damageable
     [SerializeField]
     private Collider _collider;
 
-    [SerializeField] private float _maxLaserCharge;
+    public float MaxLaserCharge;
    private float _laserCharge;
     public float  LaserCharge
     {
@@ -19,7 +19,8 @@ public class ShieldManager : MonoBehaviour, Damageable
         }
         set
         {
-            _laserCharge = Mathf.Min(value, _maxLaserCharge);
+            _laserCharge = Mathf.Min(value, MaxLaserCharge);
+            UIInstance.instance.LaserSlider.value = value;
 
         }
     }
