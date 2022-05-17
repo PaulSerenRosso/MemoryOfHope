@@ -281,22 +281,18 @@ public class PlayerManager : MonoBehaviour, Damageable
         CheckEventTriggerEnter(other);
     }
 
-    private void CheckShockWaveTrigger(Collider other)
+    private void CheckShockWaveTrigger(Collider other, EnemyManager enemy)
     {
-        Debug.Log("shock wave hit");
-        var machine = other.GetComponentInParent<MC_StateMachine>();
+        MC_StateMachine machine = other.GetComponentInParent<MC_StateMachine>();
         var sphere = (SphereCollider) other;
 
-        var distance = Vector3.Magnitude(other.transform.position - transform.position);
+        float distance = Vector3.Magnitude(other.transform.position - transform.position);
 
-        Debug.Log($"distance origin du collider et position PJ : {distance}");
-        Debug.Log($"Zone d'impact XZ : {sphere.radius - machine.attackAreaLength} (la distance doit être inférieure pour éviter)");
-        Debug.Log($"Zone d'impact Y : {sphere.transform.position.y + machine.attackAreaHeight} (la hauteur du PJ doit être supérieure pour éviter)");
+        if (!(distance > sphere.radius - machine.attackAreaLength)) return;
+        if (!(transform.position.y < machine.attackArea.transform.position.y + machine.attackAreaHeight)) return;
 
-        if (distance <= sphere.radius - machine.attackAreaLength) return;
-        if (transform.position.y > sphere.transform.position.y + machine.attackAreaHeight) return;
-        
-        hitDirection = transform.position - machine.transform.position;
+        hitDirection = transform.position - enemy.transform.position;
+        StartCoroutine(Hit(enemy));
     }
 
     private void CheckEnemyTrigger(Collider other)
@@ -306,7 +302,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         
         if (type == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
         {
-            CheckShockWaveTrigger(other);
+            CheckShockWaveTrigger(other, enemy);
+            return;
         }
         else if (type == typeof(TC_StateMachine)) // Si c'est un mur
         {

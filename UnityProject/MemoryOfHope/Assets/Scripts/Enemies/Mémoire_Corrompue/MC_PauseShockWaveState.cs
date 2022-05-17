@@ -8,13 +8,27 @@ public class MC_PauseShockWaveState : EnemyState
     [SerializeField] private float rotateSpeed;
     
     [Header("Fixed variables")]
-    [SerializeField] private LayerMask playerLayers;
     private float timer;
     [SerializeField] private Transform lookAtTransform;
+    
+    private bool _rightAnimationAttack = false;
+
     
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
+
+        if (_rightAnimationAttack)
+        {
+            _rightAnimationAttack = false;
+            enemyMachine.enemyManager.Animator.Play("AttackRight");
+        }
+        else
+        {
+            enemyMachine.enemyManager.Animator.Play("AttackLeft");
+            _rightAnimationAttack = true;
+        }
+        
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }
