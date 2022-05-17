@@ -47,7 +47,7 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject heartContainerPrefab;
     [SerializeField] private List<UIHeart> heartContainers;
     private Vector3 pos;
-
+    
     [Header("Player Module")] [SerializeField]
     private RectTransform firstIconTransform;
 
