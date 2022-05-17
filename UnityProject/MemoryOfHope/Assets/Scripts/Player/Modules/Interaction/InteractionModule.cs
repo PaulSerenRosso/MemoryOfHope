@@ -106,6 +106,7 @@ public class InteractionModule : Module
                     if (interaction.type == interactive.type)
                     {
                         interaction.Select();
+                        
                     }
                 }
             }

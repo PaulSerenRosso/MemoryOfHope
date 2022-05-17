@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class PlayerAttackClass
@@ -15,6 +16,7 @@ public class PlayerAttackClass
    public AttackPlayerCollider attackPlayerCollider;
    public bool IsKnockbackEnemy;
      public float attackStrength;
+     public UnityEvent FeedBackEvent;
 }
 
 
