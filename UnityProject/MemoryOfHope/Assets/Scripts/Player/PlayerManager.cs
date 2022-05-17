@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public bool isHit = false;
     [SerializeField] private float _drag;
     [SerializeField] private float _blockedDrag;
-    public bool IsInvincible; 
+    public bool IsInvincible;
     public bool isBlocked;
     [SerializeField] float blockedDuration;
 
@@ -135,36 +135,34 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         if (!IsInvincible)
         {
-        yield return new WaitForFixedUpdate();
-        if (enemy.isBlocked)
-        {
-            enemy.isBlocked = false;
-            isBlocked = true;
-            _shield.TakeDamage(1);
-            KnockBack(enemy, _blockedDrag, _blockedKnockbackStrength);
-            yield return new WaitForSeconds(blockedDuration);
-            isBlocked = false;
+            yield return new WaitForFixedUpdate();
+            if (enemy.isBlocked)
+            {
+                enemy.isBlocked = false;
+                isBlocked = true;
+                _shield.TakeDamage(1);
+                KnockBack(enemy, _blockedDrag, _blockedKnockbackStrength);
+                yield return new WaitForSeconds(blockedDuration);
+                isBlocked = false;
+                PlayerController.instance.playerRb.drag = 0;
+                PlayerController.instance.playerRb.velocity = Vector3.zero;
+
+                yield break;
+            }
+
+            isHit = true;
+            PlayerController.instance.playerAnimator.Play("Hit");
+            KnockBack(enemy, _drag, knockbackStrength);
+            int damage = enemy.damage;
+            TakeDamage(damage);
+            yield return new WaitForSeconds(hitDuration);
+
             PlayerController.instance.playerRb.drag = 0;
             PlayerController.instance.playerRb.velocity = Vector3.zero;
-
-            yield break;
-        }
-
-        isHit = true;
-        PlayerController.instance.playerAnimator.Play("Hit");
-        KnockBack(enemy, _drag, knockbackStrength);
-        int damage = enemy.damage;
-        TakeDamage(damage);
-        yield return new WaitForSeconds(hitDuration);
-
-        PlayerController.instance.playerRb.drag = 0;
-        PlayerController.instance.playerRb.velocity = Vector3.zero;
-        
         }
 
         isHit = false;
     }
-
 
     void KnockBack(EnemyManager enemy, float drag, float strengh)
     {
@@ -283,45 +281,50 @@ public class PlayerManager : MonoBehaviour, Damageable
         CheckEventTriggerEnter(other);
     }
 
-    private void CheckShockWaveTrigger(Collider other, EnemyManager enemy)
+    private void CheckShockWaveTrigger(Collider other)
     {
+        Debug.Log("shock wave hit");
         var machine = other.GetComponentInParent<MC_StateMachine>();
         var sphere = (SphereCollider) other;
 
         var distance = Vector3.Magnitude(other.transform.position - transform.position);
 
-        if (!(distance > sphere.radius - machine.attackAreaLength)) return;
-        if (!(transform.position.y < machine.attackArea.transform.position.y + machine.attackAreaHeight)) return;
+        Debug.Log($"distance origin du collider et position PJ : {distance}");
+        Debug.Log($"Zone d'impact XZ : {sphere.radius - machine.attackAreaLength} (la distance doit être inférieure pour éviter)");
+        Debug.Log($"Zone d'impact Y : {sphere.transform.position.y + machine.attackAreaHeight} (la hauteur du PJ doit être supérieure pour éviter)");
 
-        var closestPoint =
-            Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
-        hitDirection = transform.position - closestPoint;
-
-        StartCoroutine(Hit(enemy));
+        if (distance <= sphere.radius - machine.attackAreaLength) return;
+        if (transform.position.y > sphere.transform.position.y + machine.attackAreaHeight) return;
+        
+        hitDirection = transform.position - machine.transform.position;
     }
 
     private void CheckEnemyTrigger(Collider other)
     {
         var enemy = other.GetComponentInParent<EnemyManager>();
-
-        if (enemy.Machine.GetType() == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
+        var type = enemy.Machine.GetType();
+        
+        if (type == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
         {
-            CheckShockWaveTrigger(other, enemy);
-            return;
+            CheckShockWaveTrigger(other);
         }
-
-
-        if (enemy.Machine.GetType() == typeof(TC_StateMachine)) // Si c'est un mur
+        else if (type == typeof(TC_StateMachine)) // Si c'est un mur
         {
             var closestPoint =
                 Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
             hitDirection = transform.position - closestPoint;
         }
+        else if (type == typeof(S_StateMachine)) // Si c'est un songe
+        {
+            hitDirection = transform.position - enemy.transform.position;
+            enemy.Machine.hitDirection = enemy.transform.position - transform.position;
+            enemy.Machine.SwitchState(((S_StateMachine) enemy.Machine).pauseHitState);
+        }
         else
         {
             hitDirection = transform.position - enemy.transform.position;
         }
-
+        
         StartCoroutine(Hit(enemy));
     }
 
