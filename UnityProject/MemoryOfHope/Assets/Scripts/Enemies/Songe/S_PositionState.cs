@@ -12,7 +12,6 @@ public class S_PositionState : EnemyState
     private float pursuitDistance;
     private Vector3 initialPos;
     
-
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
@@ -27,16 +26,24 @@ public class S_PositionState : EnemyState
     
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        float distance = enemyMachine.agent.remainingDistance;
-        //enemyMachine.agent.CalculatePath(enemyMachine.transform.position, PlayerController.instance.transform.position);
+        var playerPos = PlayerController.instance.transform.position;
 
+        float distance = enemyMachine.agent.remainingDistance;
+        
         if (ConditionState.CheckDistance(initialPos, 
-            PlayerController.instance.transform.position, pursuitDistance))
+            playerPos, pursuitDistance))
         {
-            S_StateMachine enemy = (S_StateMachine) enemyMachine;
-            enemy.SwitchState(enemy.pursuitState);
+            // Check s'il y a un moyen d'atteindre le joueur
+            NavMeshPath path = new NavMeshPath();
+            enemyMachine.agent.CalculatePath(playerPos, path);
+            
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                S_StateMachine enemy = (S_StateMachine) enemyMachine;
+                enemy.SwitchState(enemy.pursuitState);
+            }
         }
-        else if(!float.IsPositiveInfinity(distance) && enemyMachine.agent.pathStatus == NavMeshPathStatus.PathComplete && distance <= .01f)
+        if(!float.IsPositiveInfinity(distance) && enemyMachine.agent.pathStatus == NavMeshPathStatus.PathComplete && distance <= .01f)
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.hidingState);

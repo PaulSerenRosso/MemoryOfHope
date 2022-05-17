@@ -25,10 +25,10 @@ public class EnemyManager : MonoBehaviour, Damageable
         get => isDeadEnemy;
         set => isDeadEnemy = value;
     }
-    [SerializeField]
-    private float _timeDeath;
 
-    private float _timerDeath;
+    [SerializeField] private float _timeDeath;
+
+    [SerializeField] private float _timerDeath;
     public Animator Animator;
     public int healthEnemy;
     public int maxHealthEnemy;
@@ -64,7 +64,6 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
-        
         health -= damages;
         if (health <= 0)
         {
@@ -86,27 +85,25 @@ public class EnemyManager : MonoBehaviour, Damageable
         {
             Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
                 Random.Range(2.0f, 3.0f));
-            
         }
 
-        isDead= true;
+        isDead = true;
 
         if (WaveListener != null)
             WaveListener.Raise(this);
-        if(Animator != null)
-        Animator.Play("Death");
-        if(Machine.agent != null)
-        Machine.agent.isStopped = false;
+        if (Animator != null)
+            Animator.Play("Death");
+        if (Machine.agent != null && Machine.agent.enabled)
+            Machine.agent.isStopped = false;
         Machine.enabled = false;
         StartCoroutine(WaitForDeath());
-
-
     }
 
     IEnumerator WaitForDeath()
     {
         yield return new WaitForSeconds(_timeDeath);
-          gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
+
     #endregion
 }

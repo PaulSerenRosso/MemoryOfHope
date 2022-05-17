@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,30 +23,25 @@ public class S_PursuitState : EnemyState
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)
-    {
-        enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
+    {        
+        var playerPos = PlayerController.instance.transform.position;
+
+        enemyMachine.agent.SetDestination(playerPos); // Cherche la pos la plus proche
 
         if (!ConditionState.CheckDistance(initialPos, 
-            PlayerController.instance.transform.position, pursuitDistance))
+            playerPos, pursuitDistance))
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.endPursuitState);
         }
-        Debug.Log(enemyMachine.agent.pathStatus.ToString());
-        if (enemyMachine.agent.pathStatus != NavMeshPathStatus.PathComplete)
+
+        var enemyPosXZ = new Vector3(enemyMachine.agent.destination.x, 0, enemyMachine.agent.destination.z);
+        var playerPosXZ = new Vector3(playerPos.x, 0, playerPos.z);
+
+        if (enemyPosXZ != playerPosXZ)
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pausePositionState);
-        }
-    }
-    
-    
-    public override void OnCollisionStayState(EnemyMachine enemyMachine, Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            S_StateMachine enemy = (S_StateMachine) enemyMachine;
-            enemy.SwitchState(enemy.pauseHitState);
         }
     }
 }

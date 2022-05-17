@@ -22,6 +22,7 @@ public class S_PauseHitState : EnemyState // Quand le songe a touché l'ennemi
         knockback *= hitFactor;
         knockback /= enemyMachine.enemyWeigth;
 
+        enemyMachine.rb.isKinematic = false;
         enemyMachine.rb.AddForce(knockback);
         enemyMachine.rb.drag = drag;
         timer = 0;
@@ -33,6 +34,7 @@ public class S_PauseHitState : EnemyState // Quand le songe a touché l'ennemi
         
         if (ConditionState.Timer(durationBeforePursuit, timer))
         {
+            enemyMachine.rb.isKinematic = true;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
