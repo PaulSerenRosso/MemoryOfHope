@@ -6,6 +6,7 @@ public class CheckPoint : ListenerActivate
 {
     public Transform SpawnPosition;
 
+
     public override void Raise()
     {
         base.Raise();

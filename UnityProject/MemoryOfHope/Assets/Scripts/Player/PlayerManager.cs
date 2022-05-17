@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -82,6 +80,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public bool isHit = false;
     [SerializeField] private float _drag;
     [SerializeField] private float _blockedDrag;
+    public bool IsInvincible; 
     public bool isBlocked;
     [SerializeField] float blockedDuration;
 
@@ -134,6 +133,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public IEnumerator Hit(EnemyManager enemy)
     {
+        if (!IsInvincible)
+        {
         yield return new WaitForFixedUpdate();
         if (enemy.isBlocked)
         {
@@ -158,6 +159,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
         PlayerController.instance.playerRb.drag = 0;
         PlayerController.instance.playerRb.velocity = Vector3.zero;
+        
+        }
 
         isHit = false;
     }
@@ -231,7 +234,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         {
             float currentSquareDistance =
                 Vector3.SqrMagnitude(CheckPointsReached[i].SpawnPosition.position - transform.position);
-            if (currentSquareDistance >= maxSquareDistance)
+            if (currentSquareDistance <= maxSquareDistance)
             {
                 maxSquareDistance = currentSquareDistance;
                 index = i;
@@ -242,6 +245,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
+        Debug.Log("Respawn");
+        UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
         IsActive = true;
@@ -305,11 +310,17 @@ public class PlayerManager : MonoBehaviour, Damageable
             return;
         }
 
-        var closestPoint =
-            Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
-        //hitDirection = transform.position - closestPoint;
 
-        hitDirection = transform.position - enemy.transform.position;
+        if (enemy.Machine.GetType() == typeof(TC_StateMachine)) // Si c'est un mur
+        {
+            var closestPoint =
+                Physics.ClosestPoint(transform.position, other, other.transform.position, other.transform.rotation);
+            hitDirection = transform.position - closestPoint;
+        }
+        else
+        {
+            hitDirection = transform.position - enemy.transform.position;
+        }
 
         StartCoroutine(Hit(enemy));
     }

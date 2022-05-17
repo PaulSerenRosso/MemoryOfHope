@@ -8,6 +8,9 @@ public class PA_DefaultState : EnemyState
 
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.Play("Idle");
+        enemyMachine.enemyManager.Animator.SetBool("IsDetect" , false);
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
     }
 
@@ -16,6 +19,7 @@ public class PA_DefaultState : EnemyState
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, detectionDistance))
         {
+            enemyMachine.enemyManager.Animator.SetBool("IsDetect" , true);
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pausePursuitState);
         }

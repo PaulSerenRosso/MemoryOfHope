@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class S_LaserContact : MonoBehaviour, IReturnable
@@ -28,6 +26,7 @@ public class S_LaserContact : MonoBehaviour, IReturnable
     }
     public void Returnable(LaserMachine laser, RaycastHit hit)
     {
+        if(!_stateMachine.enemyManager.isDead)
        _stateMachine.OnHitByLaser();
     }
 

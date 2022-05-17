@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 [Serializable]
 public class S_PursuitState : EnemyState
@@ -17,6 +18,7 @@ public class S_PursuitState : EnemyState
         initialPos = enemy.initialPosition;
         enemyMachine.agent.isStopped = false;
         enemyMachine.agent.speed = speed;
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -28,6 +30,12 @@ public class S_PursuitState : EnemyState
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.endPursuitState);
+        }
+        Debug.Log(enemyMachine.agent.pathStatus.ToString());
+        if (enemyMachine.agent.pathStatus != NavMeshPathStatus.PathComplete)
+        {
+            S_StateMachine enemy = (S_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.pausePositionState);
         }
     }
     

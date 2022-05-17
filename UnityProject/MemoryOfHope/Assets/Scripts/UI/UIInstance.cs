@@ -8,40 +8,41 @@ using UnityEngine.InputSystem;
 
 public class UIInstance : MonoBehaviour
 {
-    #region  Instance
+    #region Instance
 
     public static UIInstance instance;
-    
-        private void Awake()
-        {
-            if (instance != null && instance != this) Destroy(gameObject);
-            instance = this;
-        }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this) Destroy(gameObject);
+        instance = this;
+    }
 
     #endregion
 
     #region Variables
 
-    [Header("Canvas")] 
-    public UICanvasType[] canvases;
+    [Header("Canvas")] public UICanvasType[] canvases;
     [SerializeField] private GameObject blackFilter;
 
-    [Header("Information Menu")]
-    public InGameCanvasType[] informationMenuHiddenCanvas;
+    [Header("Information Menu")] public InGameCanvasType[] informationMenuHiddenCanvas;
     public GameObject informationWindow;
     public UIModule[] modulesGUI;
     private UIModule actualModuleGUI;
-    public GameObject moduleGUIInformationBox;
     public TextMeshProUGUI moduleAbilityText;
     public TextMeshProUGUI moduleInputText;
     public TextMeshProUGUI moduleLoreText;
+    public TextMeshProUGUI moduleNameText;
     public GameObject informationMenuFirstSelected;
-    private Vector3 selectedModulePos;
-    [SerializeField] private AnimationCurve animationSpeed;
-    [SerializeField] private float speedFactor;
-    
-    [Header("Player Stats")]
-    [SerializeField] private RectTransform firstHeartContainerTransform;
+    [SerializeField] private Sprite cursor;
+    [SerializeField] private Sprite emptyCursor;
+
+    [SerializeField] private TextMeshProUGUI hp_m14Text;
+    public int respawnCount = 1;
+
+    [Header("Player Stats")] [SerializeField]
+    private RectTransform firstHeartContainerTransform;
+
     [SerializeField] private float distanceBetweenHeartContainers;
     [SerializeField] private GameObject heartContainerPrefab;
     [SerializeField] private List<UIHeart> heartContainers;
@@ -49,40 +50,37 @@ public class UIInstance : MonoBehaviour
 
     [Header("Player Module")] [SerializeField]
     private RectTransform firstIconTransform;
+
     [SerializeField] private float distanceBetweenIcons;
     [SerializeField] private GameObject iconPrefab;
     private int displayedModule;
 
-    [Header("Notification")] 
-    [SerializeField] private GameObject notificationBox;
+    [Header("Notification")] [SerializeField]
+    private GameObject notificationBox;
+
     [SerializeField] private TextMeshProUGUI notificationText;
 
-    [Header("Pause Menu")]
-    public InGameCanvasType[] pauseMenuHiddenCanvas;
+    [Header("Pause Menu")] public InGameCanvasType[] pauseMenuHiddenCanvas;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject pauseMenuFirstSelected;
     [SerializeField] private GameObject optionButton;
 
-    [Header("Options Menu")]
-    public InGameCanvasType[] optionMenuHiddenCanvas;
+    [Header("Options Menu")] public InGameCanvasType[] optionMenuHiddenCanvas;
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject optionMenuFirstSelected;
     [SerializeField] private TMP_Dropdown languageDropdown;
-    
-    [Header("Boss Canvas")]
-    public Slider bossLifeGauge;
+
+    [Header("Boss Canvas")] public Slider bossLifeGauge;
     public Image fillImage;
-    
-    [Header("Navigation")]
-    public EventSystem eventSystem;
-    
+
+    [Header("Navigation")] public EventSystem eventSystem;
+
     public List<UIDisplayText> allTextsOnScreen;
 
     #endregion
-    
+
     private void Start()
     {
-        InformationMenuInitialization();
         InitializationStats();
         InitializationOption();
         SetTextLanguageOnDisplay();
@@ -105,7 +103,7 @@ public class UIInstance : MonoBehaviour
         GameManager.instance.inputs.UI.Return.performed -= ClosingOptionMenu;
         GameManager.instance.inputs.UI.Return.performed -= ClosingPauseMenu;
     }
-    
+
     private void OnEnable()
     {
         LinkInput();
@@ -135,7 +133,7 @@ public class UIInstance : MonoBehaviour
     } // Active ou désactive les canvas que l'on renseigne en paramètres
 
     #endregion
-    
+
     #region HUD
 
     public void InitializationStats()
@@ -191,7 +189,6 @@ public class UIInstance : MonoBehaviour
                 heart.GetComponent<Image>().sprite = heart.heartParts[i];
 
                 if (life == PlayerManager.instance.health) break;
-
             }
 
             heartContainer++;
@@ -212,13 +209,8 @@ public class UIInstance : MonoBehaviour
     }
 
     #endregion
-    
-    #region Information Menu
 
-    private void InformationMenuInitialization()
-    {
-        selectedModulePos = modulesGUI[0].GetComponent<RectTransform>().anchoredPosition;
-    }
+    #region Information Menu
 
     private void InformationMenuInputPressed(InputAction.CallbackContext ctx)
     {
@@ -228,8 +220,11 @@ public class UIInstance : MonoBehaviour
 
     private void OpeningInformationMenu()
     {
+        if (!PlayerManager.instance.IsActive) return;
         if (informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf) return;
         SetCanvasOnDisplay(informationMenuHiddenCanvas, false);
+
+        hp_m14Text.text = $"HP-M14 - V{respawnCount}.0";
         informationWindow.SetActive(true);
         eventSystem.SetSelectedGameObject(informationMenuFirstSelected);
         SettingPlayerState();
@@ -238,7 +233,7 @@ public class UIInstance : MonoBehaviour
     private void ClosingInformationMenu(InputAction.CallbackContext ctx)
     {
         if (!informationWindow.activeSelf) return;
-        if (actualModuleGUI != null) StartCoroutine(UnselectModuleGUI(actualModuleGUI));
+        //if (actualModuleGUI != null) StartCoroutine(UnselectModuleGUI(actualModuleGUI));
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
@@ -259,110 +254,51 @@ public class UIInstance : MonoBehaviour
         }
     }
 
-    public void OnModuleGUIClick(UIModule UImodule)
+    public void OnModuleGUIHover(UIModule UImodule)
     {
-        if (!UImodule.isUnlocked)
-        {
-            Debug.Log("You haven't unlocked this module yet");
-            // Feedbacks
-            
-            return;
-        }
-
-        StartCoroutine(UImodule.isOpened ? UnselectModuleGUI(UImodule) : SelectModuleGUI(UImodule));
-    }
-
-    private IEnumerator SelectModuleGUI(UIModule UImodule)
-    {
-        // Retirer  au joueur
-        eventSystem.SetSelectedGameObject(null);
-
-        // Faire disparaitre les autres zones de Module GUI
         foreach (var modGUI in modulesGUI)
         {
-            if (modGUI == UImodule) continue;
-            modGUI.gameObject.SetActive(false);
+            if (!modGUI.isUnlocked) continue;
+            moduleAbilityText.text = null;
+            moduleInputText.text = null;
+            moduleLoreText.text = null;
+            moduleNameText.text = "???";
+            modGUI.modulePosOnMap.sprite = emptyCursor;
         }
-        
-        // Set la position sur la map
-        UImodule.modulePosOnMap.color = Color.red;
-        
-        // Faire monter la zone sélectionnée en haut
-        var rt = UImodule.GetComponent<RectTransform>();
-        var bottomY = UImodule.initialPos.y + Mathf.Abs(UImodule.initialPos.y);
-        var topY = selectedModulePos.y + Mathf.Abs(UImodule.initialPos.y);
-        while (bottomY < topY)
+
+        if (UImodule.isUnlocked)
         {
-            float i = bottomY / topY;
-            Vector2 bonus = Vector2.up * animationSpeed.Evaluate(i) * speedFactor;
-            rt.anchoredPosition += bonus;
-            bottomY += bonus.y;
-            yield return new WaitForSeconds(0.0025f);
-        }
-        rt.anchoredPosition = selectedModulePos;
+            UImodule.modulePosOnMap.sprite = cursor;
 
-        // Set les valeurs du selectedModuleGUI
-        switch (SettingsManager.instance.gameLanguage)
+            switch (SettingsManager.instance.gameLanguage)
+            {
+                case Language.French:
+                    moduleAbilityText.text = UImodule.associatedModule.frenchAbilityText;
+                    moduleInputText.text = UImodule.associatedModule.frenchInputText;
+                    moduleLoreText.text = UImodule.associatedModule.frenchLoreText;
+                    moduleNameText.text = UImodule.associatedModule.frenchModuleName;
+                    break;
+
+                case Language.English:
+                    moduleAbilityText.text = UImodule.associatedModule.englishAbilityText;
+                    moduleInputText.text = UImodule.associatedModule.englishInputText;
+                    moduleLoreText.text = UImodule.associatedModule.englishLoreText;
+                    moduleNameText.text = UImodule.associatedModule.englishModuleName;
+                    break;
+            }
+        }
+        else
         {
-            case Language.French:
-                moduleAbilityText.text = UImodule.associatedModule.frenchAbilityText;
-                moduleInputText.text = UImodule.associatedModule.frenchInputText;
-                moduleLoreText.text = UImodule.associatedModule.frenchLoreText;
-                break;
-
-            case Language.English:
-                moduleAbilityText.text = UImodule.associatedModule.englishAbilityText;
-                moduleInputText.text = UImodule.associatedModule.englishInputText;
-                moduleLoreText.text = UImodule.associatedModule.englishLoreText;
-                break;
+            switch (SettingsManager.instance.gameLanguage)
+            {
+                case Language.French:
+                    moduleAbilityText.text = "Vous n'avez pas encore débloqué ce module...";
+                    break;
+                case Language.English:
+                    moduleAbilityText.text = "You haven't unlocked this module yet...";
+                    break;
+            }
         }
-
-        // Animation d'apparition de la zone d'informations
-        moduleGUIInformationBox.SetActive(true);
-        yield return new WaitForSeconds(.25f);
-        eventSystem.SetSelectedGameObject(UImodule.gameObject);
-        actualModuleGUI = UImodule;
-        UImodule.isOpened = true;
-    }
-
-    private IEnumerator UnselectModuleGUI(UIModule UImodule)
-    {
-        eventSystem.SetSelectedGameObject(null);
-
-        // Faire disparaitre la zone d'informations
-        moduleGUIInformationBox.SetActive(false);
-
-        //yield return new WaitForSeconds(.25f);
-
-        // Set la position sur la map
-        UImodule.modulePosOnMap.color = Color.white;
-        
-        // Faire redescendre la zone à sa place
-        var rt = UImodule.GetComponent<RectTransform>();
-        var bottomY = UImodule.initialPos.y + Mathf.Abs(UImodule.initialPos.y);
-        var topY = selectedModulePos.y + Mathf.Abs(UImodule.initialPos.y);
-        while (bottomY < topY)
-        {
-            float i = bottomY / topY;
-            Vector2 bonus = Vector2.up * animationSpeed.Evaluate(i) * speedFactor;
-            rt.anchoredPosition -= bonus;
-            bottomY += bonus.y;
-            yield return new WaitForSeconds(0.0025f);
-        }
-        rt.anchoredPosition = UImodule.initialPos;
-
-        // Faire réapparaître les autres zones de module GUI
-        yield return new WaitForSeconds(.25f);
-        foreach (var modGUI in modulesGUI)
-        {
-            if (modGUI == UImodule) continue;
-            modGUI.gameObject.SetActive(true);
-        }
-        UImodule.isOpened = false;
-        actualModuleGUI = null;
-
-        // Redonner contrôle au joueur
-        eventSystem.SetSelectedGameObject(UImodule.gameObject);
     }
 
     #endregion
@@ -396,15 +332,16 @@ public class UIInstance : MonoBehaviour
         }
         else OpeningPauseMenu();
     }
-    
+
     public void OpeningPauseMenu()
     {
+        if (!PlayerManager.instance.IsActive) return;
         if (pauseMenu.activeSelf) return;
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(pauseMenuFirstSelected);
         SettingPlayerState();
     }
-    
+
     public void OnClosePauseMenu()
     {
         ClosingPauseMenu(new InputAction.CallbackContext());
@@ -430,26 +367,25 @@ public class UIInstance : MonoBehaviour
     public void InitializationOption()
     {
         if (SettingsManager.instance == null) return;
-        
+
         switch (SettingsManager.instance.gameLanguage)
         {
             case Language.French:
                 languageDropdown.value = 0;
                 break;
-            
+
             case Language.English:
                 languageDropdown.value = 1;
                 break;
-            
+
             default:
                 Debug.LogError("Invalide language");
                 break;
         }
-        
-        // Audio initialization values
 
+        // Audio initialization values
     }
-    
+
     public void OpeningOptionMenu()
     {
         if (optionMenu.activeSelf) return;
@@ -472,29 +408,29 @@ public class UIInstance : MonoBehaviour
         eventSystem.SetSelectedGameObject(optionButton);
         SettingPlayerState();
     }
-    
+
     public void OnLanguageChange(int index)
     {
         if (SettingsManager.instance == null) return;
-        
+
         switch (index)
         {
             case 0:
                 SettingsManager.instance.SetLanguage(Language.French);
                 break;
-            
+
             case 1:
                 SettingsManager.instance.SetLanguage(Language.English);
                 break;
-  
+
             default:
                 Debug.LogError("Index invalide");
                 break;
         }
-        
+
         SetTextLanguageOnDisplay();
     }
-    
+
     public void OnMusicChange(Slider music)
     {
         Debug.Log(music.value);
@@ -550,7 +486,7 @@ public class UIInstance : MonoBehaviour
             GameManager.instance.inputs.UI.OpenInformationMenu.Disable();
         }
         else
-        {            
+        {
             GameManager.instance.inputs.UI.OpenInformationMenu.Enable();
         }
     }
@@ -563,5 +499,6 @@ public enum InGameCanvasType
     DialoguesCanvas,
     TutorialCanvas,
     PauseMenuCanvas,
-    OptionsMenuCanvas, CinematicCanvas
+    OptionsMenuCanvas,
+    CinematicCanvas
 }

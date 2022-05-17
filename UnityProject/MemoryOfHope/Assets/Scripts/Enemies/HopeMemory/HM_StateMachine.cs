@@ -26,11 +26,13 @@ public class HM_StateMachine : EnemyMachine
     public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
 
     public HM_ProtectionHitState protectionHitState = new HM_ProtectionHitState();
-    
+
     #endregion
 
     public int nextLifeThreshold;
     public Vector3 protectedPos;
+
+    public bool isProtected;
 
     #region State Machine Main Functions
 
@@ -46,7 +48,7 @@ public class HM_StateMachine : EnemyMachine
         base.Start();
         // Active default state
     }
-    
+
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
@@ -58,13 +60,13 @@ public class HM_StateMachine : EnemyMachine
                 {
                     SwitchState(vulnerableHitState);
                 }
+
                 break;
-            
+
             case PhaseType.Protected:
                 SwitchState(protectionHitState);
                 break;
         }
-
     }
 
     #endregion
@@ -86,12 +88,13 @@ public class HM_StateMachine : EnemyMachine
         }
 
         if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Vulnerable) return;
-        
+
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
             StartCoroutine(PlayerManager.instance.Hit(enemyManager));
         }
+
         if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             hitDirection = transform.position - PlayerController.instance.transform.position;

@@ -6,13 +6,14 @@ using UnityEngine;
 public class PA_AttackState : EnemyState
 {
     [Header("Parameters")]
-    [Range(0, 2)] [SerializeField] private int durationAttack;
+    [Range(0, 2)] [SerializeField] private float durationAttack;
     
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
+        enemyMachine.enemyManager.Animator.Play("Attack");
         enemyMachine.attackArea.SetActive(true);
         timer = 0;
     }
