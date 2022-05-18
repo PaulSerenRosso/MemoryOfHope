@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 // Passe le joueur en mode de sélection et permet de stocker l'objet ciblé
@@ -13,6 +14,10 @@ public class InteractionModule : Module
     private float _timer;
     private bool isActivate;
 
+    [SerializeField] private AudioClip _selectAudioClip;
+    [SerializeField] private AudioClip _canSelectAudioClip;
+    
+ [SerializeField] UnityEvent _interactionPerformedEvent;
     [Range(2, 10)] public float rayLength;
     [SerializeField] private LayerMask interactiveObjectLayer;
 
@@ -109,6 +114,7 @@ public class InteractionModule : Module
 
                     if (interaction.type == interactive.type)
                     {
+                        interactive.AudioSource.PlayOneShot(_selectAudioClip);
                         interaction.Select();
                         
                     }
@@ -147,6 +153,8 @@ public class InteractionModule : Module
 
     public override void Execute()
     {
+        if(!isPerformed)
+            _interactionPerformedEvent?.Invoke();
         if (isTutorial)
         {
             isTutorial = false;
@@ -181,11 +189,20 @@ public class InteractionModule : Module
 
         if (Physics.Raycast(raycastOrigin.position, transform.forward, out var hit, rayLength, interactiveObjectLayer))
         {
-            if (currentTargetedObject != null) currentTargetedObject.GetComponent<Outline>().enabled = false;
+            if (currentTargetedObject != null)
+            { currentTargetedObject.GetComponent<Outline>().enabled = false;}
+            else
+            {
+                AudioSource audioSource = hit.transform.GetComponent<InteractiveObjectData>().AudioSource;
+                audioSource.PlayOneShot(_canSelectAudioClip);
+            }
             selectionTutorial.SetTutorial();
             line.SetPosition(1, hit.point);
+            
             currentTargetedObject = hit.transform.gameObject;
+            
             currentTargetedObject.GetComponent<Outline>().enabled = true;
+            
             GameManager.instance.RumbleConstant(.1f, .1f, .1f);
 
         }

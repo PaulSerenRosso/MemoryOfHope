@@ -99,7 +99,9 @@ public class EnemyMachine : MonoBehaviour
             Debug.Log("hits by fists");
             if (!enemyManager.isDead)
             {
-                  OnHitByMelee();
+                if(enemyManager.isDead)
+                    Debug.Log("tatatatata");
+                OnHitByMelee();
             }
           
         }

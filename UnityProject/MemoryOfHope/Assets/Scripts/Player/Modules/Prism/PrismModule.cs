@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PrismModule : Module
@@ -17,6 +18,7 @@ public class PrismModule : Module
     private bool isTutorial;
     [SerializeField] private TutorialGameEvent prismTutorial;
 
+    [SerializeField] private UnityEvent _prismPerformedEvent;
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.Move.performed += JoystickPressed;
@@ -98,8 +100,13 @@ public class PrismModule : Module
             return;
         }
 
+        if (!isPerformed)
+        {
+            _prismPerformedEvent?.Invoke();
+        }
         isPerformed = true;
 
+        
         PlayerController.instance.playerAnimator.SetBool("InPrism", true);
 
         isActivate = true;

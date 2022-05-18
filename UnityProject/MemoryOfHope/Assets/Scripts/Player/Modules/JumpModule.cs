@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class JumpModule : Module
@@ -10,6 +11,8 @@ public class JumpModule : Module
 
     float currentSpeed = 0;
 
+    [SerializeField]
+    private UnityEvent _jumpPerformedEvent;
     [SerializeField] private MoveModule moveModule;
     [SerializeField] private float HeightJump;
     private AnimationCurve curveJumpSpeed;
@@ -125,10 +128,12 @@ public class JumpModule : Module
     {
         if (isTutorial)
         {
+            _jumpPerformedEvent?.Invoke();
             isTutorial = false;
             jumpTutorial.RemoveTutorial();
         }
 
+        
         inExecute = true;
     }
 

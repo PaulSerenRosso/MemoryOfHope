@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class LaserSource : LaserMachine
@@ -11,6 +12,9 @@ public class LaserSource : LaserMachine
     private bool _doActivation;
     private bool _doDesactivation;
 
+    [SerializeField]
+    private AudioSource _audioSource; 
+    
     public Vector3 DirectionSource;
 
     private void Start()
@@ -37,6 +41,24 @@ public class LaserSource : LaserMachine
         else _triggerByLaser = false;
     }
 
+    void Update()
+    {
+        if(_audioSource == null) return;
+        if (IsActive)
+        {
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.Play();
+            }
+        }
+        else 
+        {
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+        }
+    }
     public override void FixedUpdate()
     {
         if (IsActive)
