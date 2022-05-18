@@ -66,10 +66,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 3.34
-  m_Height: 0.82
+  m_Radius: 1.5
+  m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0, y: 1.04, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!195 &8187002710246371107
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   pausePositionState:
     durationBeforePosition: 2
   pausePursuitState:
-    durationBeforePursuit: 2
+    durationBeforePursuit: 0.5
   hidingState:
     durationBeforeHiding: 0.5
     _colliders:
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeDeath: 2.1
+  _timerDeath: 0
   Animator: {fileID: 4574660470204127452}
   healthEnemy: 1
   maxHealthEnemy: 1
@@ -266,10 +267,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 3.76
-  m_Height: 2
+  m_Radius: 1.5
+  m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0, y: 1.12, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &8187002711624987919
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +283,7 @@ GameObject:
   - component: {fileID: 8187002711624987921}
   - component: {fileID: 8187002711624987923}
   - component: {fileID: 8187002711624987920}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: AttackCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -298,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 8187002711624987919}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 6, y: 3, z: 6}
+  m_LocalScale: {x: 3.1, y: 3.1, z: 3.1}
   m_Children: []
   m_Father: {fileID: 8187002710246371110}
   m_RootOrder: 1

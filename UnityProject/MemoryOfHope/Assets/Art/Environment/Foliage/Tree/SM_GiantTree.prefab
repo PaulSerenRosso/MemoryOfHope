@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2623844205376884377}
   - component: {fileID: 102624841382940342}
-  - component: {fileID: 1227287556060948847}
+  - component: {fileID: 8205915501001580612}
   m_Layer: 6
   m_Name: SM_GiantTree
   m_TagString: Ground
@@ -139,8 +139,8 @@ LODGroup:
     - renderer: {fileID: 4432095228882077789}
     - renderer: {fileID: 3224743197967873666}
   m_Enabled: 1
---- !u!64 &1227287556060948847
-MeshCollider:
+--- !u!136 &8205915501001580612
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -149,10 +149,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8292939764242441134, guid: 74e1f8b0fde254f4b81ac7dc76a49f5d, type: 3}
+  m_Radius: 2.2
+  m_Height: 20
+  m_Direction: 1
+  m_Center: {x: 0.14, y: 5, z: 0.89}
 --- !u!1 &3421655522996006701
 GameObject:
   m_ObjectHideFlags: 0

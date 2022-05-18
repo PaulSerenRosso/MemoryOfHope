@@ -1,14 +1,27 @@
+using System.Collections;
 using UnityEngine;
 
 public class HeartItem : MonoBehaviour
 {
+    private bool isObtained;
+    
     public void GetItem()
     {
-        gameObject.SetActive(false);
+        if (isObtained) return;
+        isObtained = true;
         PlayerManager.instance.maxHealth += 4;
         int lostHp = PlayerManager.instance.maxHealth - PlayerManager.instance.health;
         UIInstance.instance.GetHeart();
         UIInstance.instance.DisplayHealth();
         PlayerManager.instance.Heal(lostHp);
+        var anim = GetComponent<Animation>();
+        anim.Play("GetLifeItem");
+        StartCoroutine(GetObject());
+    }
+
+    IEnumerator GetObject()
+    {
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
     }
 }

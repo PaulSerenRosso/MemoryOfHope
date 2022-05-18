@@ -9,6 +9,9 @@ public class MC_PositionState : EnemyState
     [Header("Parameters")]
     [Range(1, 15)] [SerializeField] private float minDistance;
     [Range(10, 25)] [SerializeField] private float maxDistanceFromTower;
+    
+    [SerializeField] private float cooldownDuration;
+    private float timer;
 
     public List<Vector3> towersPositions = new List<Vector3>();
 
@@ -27,38 +30,62 @@ public class MC_PositionState : EnemyState
 
         enemyMachine.agent.stoppingDistance = minDistance - 1;
         enemyMachine.agent.isStopped = false;
+
+        timer = 0f;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
+        Debug.Log(enemyMachine.agent.velocity);
+        if (enemyMachine.agent.velocity == Vector3.zero)
+        {
+            enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
+        }
+        else
+        {
+            enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
+        }
+        
+        if (timer <= cooldownDuration) timer += Time.deltaTime;
+        
         if (towersPositions.Count == 0) // Pas de tour
         {
             enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
-            
-            if (ConditionState.CheckDistance(enemyMachine.transform.position, 
-                PlayerController.instance.transform.position, minDistance)) // Si le joueur est trop proche : attaque
+
+            if (ConditionState.Timer(cooldownDuration, timer))
             {
-                MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-                enemy.SwitchState(enemy.pauseShockWaveState);
-            }
-            else if (!ConditionState.CheckDistance(enemyMachine.transform.position,
-                PlayerController.instance.transform.position, maxDistanceFromTower)) // Si la MC est trop loin du joueur
-            {
-                MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-                enemy.SwitchState(enemy.defaultState);
+                if (ConditionState.CheckDistance(enemyMachine.transform.position, 
+                    PlayerController.instance.transform.position, minDistance)) // Si le joueur est trop proche : attaque
+                {
+                    timer = 0f;
+                    MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
+                    enemy.SwitchState(enemy.pauseShockWaveState);
+                }
+                else if (!ConditionState.CheckDistance(enemyMachine.transform.position,
+                    PlayerController.instance.transform.position, maxDistanceFromTower)) // Si la MC est trop loin du joueur
+                {
+                    timer = 0f;
+                    MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
+                    enemy.SwitchState(enemy.defaultState);
+                }
             }
         }
         else
         {
             foreach (var pos in towersPositions)
             {
-                if (ConditionState.CheckDistance(enemyMachine.transform.position, 
-                    PlayerController.instance.transform.position, minDistance)) // Si le joueur est trop proche : attaque
+                if (ConditionState.Timer(cooldownDuration, timer))
                 {
-                    MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-                    enemy.SwitchState(enemy.pauseShockWaveState);
+                    if (ConditionState.CheckDistance(enemyMachine.transform.position, 
+                        PlayerController.instance.transform.position, minDistance)) // Si le joueur est trop proche : attaque
+                    {
+                        timer = 0;
+                        MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
+                        enemy.SwitchState(enemy.pauseShockWaveState);
+                        return;
+                    }
                 }
-                else if (!ConditionState.CheckDistance(pos,
+                if (!ConditionState.CheckDistance(pos,
                     PlayerController.instance.transform.position, maxDistanceFromTower)) // Si la MC est trop loin d'une tour
                 {
                     MC_StateMachine enemy = (MC_StateMachine) enemyMachine;

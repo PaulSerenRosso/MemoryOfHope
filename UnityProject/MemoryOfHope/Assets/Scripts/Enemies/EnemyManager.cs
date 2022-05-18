@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -25,10 +26,8 @@ public class EnemyManager : MonoBehaviour, Damageable
         get => isDeadEnemy;
         set => isDeadEnemy = value;
     }
-    [SerializeField]
-    private float _timeDeath;
 
-    private float _timerDeath;
+    [SerializeField] private float _timeDeath;
     public Animator Animator;
     public int healthEnemy;
     public int maxHealthEnemy;
@@ -44,7 +43,6 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
-    [SerializeField] private GameObject deathFeedback;
     public EnemyMachine Machine;
     public ListenerWaveEnemy WaveListener;
 
@@ -64,7 +62,6 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
-        
         health -= damages;
         if (health <= 0)
         {
@@ -82,31 +79,33 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public virtual void Death()
     {
-        for (int i = 0; i < 20; i++)
-        {
-            Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
-                Random.Range(2.0f, 3.0f));
-            
-        }
-
-        isDead= true;
+        isDead = true;
 
         if (WaveListener != null)
             WaveListener.Raise(this);
-        if(Animator != null)
-        Animator.Play("Death");
-        if(Machine.agent != null)
-        Machine.agent.isStopped = false;
+        if (Animator != null)
+        {
+            Animator.Play("Death");
+        }
+        if (Machine.agent != null && Machine.agent.enabled)
+        {
+            Machine.agent.isStopped = true;
+        }
         Machine.enabled = false;
         StartCoroutine(WaitForDeath());
+    }
 
-
+    private void Update()
+    {
+        if (!isDead) return;
+        Debug.Log(Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"));
     }
 
     IEnumerator WaitForDeath()
-    {
+    { 
         yield return new WaitForSeconds(_timeDeath);
-          gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
+
     #endregion
 }

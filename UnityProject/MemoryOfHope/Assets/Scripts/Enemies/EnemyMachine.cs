@@ -7,10 +7,9 @@ public class EnemyMachine : MonoBehaviour
 
     public EnemyManager enemyManager;
 
-  protected bool _isCurrentAttackKnockback;
+    protected bool _isCurrentAttackKnockback;
     public EnemyState currentState;
-    public Material material;
-    
+
     public float PlayerKnockBackFactor;
     public NavMeshAgent agent;
     public Rigidbody rb;
@@ -28,7 +27,7 @@ public class EnemyMachine : MonoBehaviour
     {
         currentState?.StartState(this);
     }
-    
+
     public virtual void Update()
     {
         currentState?.UpdateState(this);
@@ -48,33 +47,32 @@ public class EnemyMachine : MonoBehaviour
             currentState.StartState(this);
         }
     }
-    
+
     public virtual void OnHitByMelee()
     {
         AttackModule attackModule = PlayerController.instance.attackModule;
         PlayerAttackClass attack = attackModule.attackList[attackModule.currentIndexAttack];
         if (attack.IsKnockbackEnemy)
         {
-            _isCurrentAttackKnockback = true; 
+            _isCurrentAttackKnockback = true;
             attackStrength = attack.attackStrength;
-       
+
             hitDirection = transform.position - PlayerController.instance.transform.position;
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
         }
         else
         {
-            _isCurrentAttackKnockback = false; 
+            _isCurrentAttackKnockback = false;
         }
-        
+
 
         if (enemyManager.canBeHitByMelee)
         {
             enemyManager.TakeDamage(attack.damage);
         }
-        else 
-        { 
+        else
+        {
             enemyManager.HitNoDamage();
-       
         }
     }
 
@@ -85,22 +83,17 @@ public class EnemyMachine : MonoBehaviour
 
     #endregion
 
-    public void OnDisable()
-    {
-        material.color = Color.white;
-    }
-    
     #region Trigger & Collision
-    
+
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
+            Debug.Log("hits by fists");
             if (!enemyManager.isDead)
             {
-                  OnHitByMelee();
+                OnHitByMelee();
             }
-          
         }
     }
 
@@ -117,23 +110,19 @@ public class EnemyMachine : MonoBehaviour
 
     public virtual void OnTriggerExit(Collider other)
     {
-        
     }
 
     public virtual void OnCollisionEnter(Collision other)
     {
-        
     }
-    
+
     public virtual void OnCollisionStay(Collision other)
     {
-        
     }
-    
+
     public virtual void OnCollisionExit(Collision other)
     {
-        
     }
-    
+
     #endregion
 }

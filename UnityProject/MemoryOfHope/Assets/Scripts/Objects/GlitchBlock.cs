@@ -27,6 +27,7 @@ public class GlitchBlock : MonoBehaviour
     {
         feedback.Play();
         isGlitchAvailable = false;
+        GameManager.instance.RumbleConstant(.2f, .6f, .5f);
 
         PlayerController.instance.isGlitching = true;
         PlayerController.instance.hopeCape.GetColor("Color_Hope");
