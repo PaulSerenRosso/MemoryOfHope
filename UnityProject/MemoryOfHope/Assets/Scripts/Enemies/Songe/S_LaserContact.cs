@@ -3,6 +3,7 @@ using UnityEngine;
 public class S_LaserContact : MonoBehaviour, IReturnable
 {
     [SerializeField] private S_StateMachine _stateMachine;
+
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -10,6 +11,7 @@ public class S_LaserContact : MonoBehaviour, IReturnable
     }
 
     public bool IsActive;
+
     public bool IsActiveReturnable
     {
         get => IsActive;
@@ -24,10 +26,11 @@ public class S_LaserContact : MonoBehaviour, IReturnable
         get => _currentSource;
         set => _currentSource = value;
     }
+
     public void Returnable(LaserMachine laser, RaycastHit hit)
     {
-        if(!_stateMachine.enemyManager.isDead)
-       _stateMachine.OnHitByLaser();
+        if (!_stateMachine.enemyManager.isDead)
+            _stateMachine.OnHitByLaser();
     }
 
     public void Cancel(LaserMachine laser)

@@ -381,7 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: 6546855627693250739}
   _collider: {fileID: 6725060030925692718}
-  _maxLaserCharge: 100
+  MaxLaserCharge: 100
   LaserChargeRegeneration: 1
   LaserChargeCost: 5
   Laser: {fileID: 1735945226244798610}
@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 4272034707977539781}
   - component: {fileID: 8509076338704852473}
   - component: {fileID: 1959456016}
+  - component: {fileID: 5792279151003202651}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1603,6 +1604,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &5792279151003202651
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226099581146458017}
+  m_Enabled: 1
 --- !u!1 &7284903415733054223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,15 +2016,15 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 39.5
+      value: 6.86
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: -3.413
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 19.55
+      value: 8.61
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: RayLayer.m_Bits

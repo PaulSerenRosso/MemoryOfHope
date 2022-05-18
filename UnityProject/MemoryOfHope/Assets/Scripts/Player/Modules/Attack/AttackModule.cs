@@ -13,7 +13,10 @@ public class AttackModule : Module
     bool inCombo;
     private bool canMove;
     private StateCombo currentStateCombo;
-   
+
+    private bool isTutorial;
+    [SerializeField] private TutorialGameEvent attackTutorial;
+
     enum StateCombo
     {
         Begin,
@@ -30,8 +33,9 @@ public class AttackModule : Module
         GameManager.instance.inputs.Player.Attack.started += InputPressed;
         GameManager.instance.inputs.Player.Attack.canceled += InputReleased;
         isLinked = true;
+        isTutorial = true;
     }
-    
+
     private void OnDisable()
     {
         UnlinkModule();
@@ -52,18 +56,19 @@ public class AttackModule : Module
             attackList[i].attackPlayerCollider.renderer.SetActive(false);
             attackList[i].attackPlayerCollider.currentDamage = 0;
         }
+
         EndAttack();
     }
 
     public override bool Conditions()
     {
         if (!base.Conditions()) return false;
-        
+
         if (PlayerManager.instance.isHit)
         {
             return false; // Ne peut pas attaquer si le joueur est knockback
         }
-        
+
         if (!PlayerController.instance.onGround) return false;
         return true;
     }
@@ -81,6 +86,12 @@ public class AttackModule : Module
 
     public override void Execute()
     {
+        if (isTutorial)
+        {
+            isTutorial = false;
+            attackTutorial.RemoveTutorial();
+        }
+
         if (inCombo) return;
         inCombo = true;
     }
@@ -92,14 +103,6 @@ public class AttackModule : Module
     public void CantCancel()
     {
         currentStateCombo = StateCombo.WaitDamage;
-        /*
-        if (attackTimer >= attackList[currentIndexAttack].cantCancelTime)
-        {
-            currentStateCombo = StateCombo.WaitDamage;
-            return;
-        }
-        */
-        
     }
 
     void Update()
@@ -161,48 +164,26 @@ public class AttackModule : Module
 
     void WaitToDamage()
     {
-        /*
-        List<Module> allModule = new List<Module>();
-        allModule.AddRange(PlayerController.instance.activeModulesFixed);
-        allModule.AddRange(PlayerController.instance.activeModulesUpdate);
-
-       
-        for (int i = 0; i < allModule.Count; i++)
-        {
-            if (allModule[i].inputPressed)
-            {
-                if (allModule[i] != this)
-                {
-                    PlayerController.instance.playerAnimator.Play("Idle");
-                    currentStateCombo = StateCombo.End;
-                    return;
-                }
-            }
-        }
-        */
-
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
             attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = true;
             attackList[currentIndexAttack].attackPlayerCollider.renderer.SetActive(true);
-            attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage; 
+            attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage;
             currentStateCombo = StateCombo.InDamage;
         }
-
-       
     }
 
     void InDamage()
     {
         if (attackTimer >= attackList[currentIndexAttack].endTimeActivateAttack)
         {
-            attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false ;
+            attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false;
             attackList[currentIndexAttack].attackPlayerCollider.renderer.SetActive(false);
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = 0;
 
             canMove = false;
-        PlayerController.instance.playerAnimator.SetInteger("currentAttack", currentIndexAttack + 1);
-        currentStateCombo = StateCombo.WaitCombo;
+            PlayerController.instance.playerAnimator.SetInteger("currentAttack", currentIndexAttack + 1);
+            currentStateCombo = StateCombo.WaitCombo;
         }
     }
 

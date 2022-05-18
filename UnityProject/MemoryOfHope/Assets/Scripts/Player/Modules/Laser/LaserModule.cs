@@ -38,6 +38,10 @@ public class LaserModule : Module
         GameManager.instance.inputs.Player.Laser.canceled += InputReleased;
         GameManager.instance.inputs.Player.Laser.performed += InputPressed;
         isLinked = true;
+        UIInstance.instance.LaserSlider.gameObject.SetActive(true);
+        UIInstance.instance.LaserSlider.value = _shield.LaserCharge;
+        UIInstance.instance.LaserSlider.maxValue = _shield.MaxLaserCharge;
+
     }
     
     private void OnDisable()
@@ -50,6 +54,7 @@ public class LaserModule : Module
         if (!isLinked) return;
         GameManager.instance.inputs.Player.Laser.canceled -= InputReleased;
         GameManager.instance.inputs.Player.Laser.performed -= InputPressed;
+        UIInstance.instance.LaserSlider.gameObject.SetActive(false);
     }
 
     public override void InputPressed(InputAction.CallbackContext ctx)

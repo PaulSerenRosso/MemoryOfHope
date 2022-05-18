@@ -14,6 +14,9 @@ public class PrismModule : Module
     private Vector2 inputCam;
     private bool joystickPressed;
 
+    private bool isTutorial;
+    [SerializeField] private TutorialGameEvent prismTutorial;
+
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.Move.performed += JoystickPressed;
@@ -21,6 +24,8 @@ public class PrismModule : Module
         GameManager.instance.inputs.Player.Prism.canceled += InputReleased;
         GameManager.instance.inputs.Player.Prism.performed += InputPressed;
         isLinked = true;
+        isTutorial = true;
+        _shield.Mirror.prismObtained = true;
     }
 
     private void OnDisable()
@@ -44,7 +49,7 @@ public class PrismModule : Module
 
     public override void Cancel()
     {
-     Release();   
+        Release();   
     }
 
     public override bool Conditions()
@@ -80,6 +85,12 @@ public class PrismModule : Module
 
     public override void Execute()
     {
+        if (isTutorial && _shield.Mirror.LaserLineReceiver != null)
+        {
+            isTutorial = false;
+            prismTutorial.RemoveTutorial();
+        }
+        
         if (_shield.isDead)
         {
             Release();

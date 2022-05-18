@@ -13,14 +13,12 @@ public class ListenerActivate : ListenerTrigger
 
     public override void Raise()
     {
-        Debug.Log("raise");
         PlayerManager.instance.CurrentListenerActivate = this;
         base.Raise();
     }
 
     public override void EndRaise()
     {
-        Debug.Log("endRaise");
         PlayerManager.instance.CurrentListenerActivate = null;
         base.EndRaise();
     }
