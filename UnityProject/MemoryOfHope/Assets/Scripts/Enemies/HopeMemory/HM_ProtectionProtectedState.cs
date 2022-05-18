@@ -1,17 +1,26 @@
 using System;
+using UnityEditor;
 
 [Serializable]
 public class HM_ProtectionProtectedState : EnemyState
 {
+    private HM_StateMachine machine;
+    
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
         enemyMachine.enemyManager.canBeHitByMelee = false;
+        machine = (HM_StateMachine) enemyMachine;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        // Check si les tours sont détruites, si oui passe en pause transition avec vulnerable default
+        foreach (var tower in machine.associatedTowers)
+        {
+            if (!tower.isDead) return;
+        }
+        
+        machine.SwitchState(machine.vulnerableDefaultState);
     }
 }

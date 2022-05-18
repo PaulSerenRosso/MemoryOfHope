@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2045950059}
-  m_IndirectSpecularColor: {r: 0.31242573, g: 0.12563735, b: 0.4290579, a: 1}
+  m_IndirectSpecularColor: {r: 0.8471094, g: 0.40226123, b: 0.80394596, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -786,11 +786,11 @@ PrefabInstance:
     - target: {fileID: 3980917203610173515, guid: 6499dfdabeb6a684d9bc278d324d4952, type: 3}
       propertyPath: CharacterAudioSources.Array.data[0].AudioSource
       value: 
-      objectReference: {fileID: 1690641184}
+      objectReference: {fileID: 0}
     - target: {fileID: 3980917203610173515, guid: 6499dfdabeb6a684d9bc278d324d4952, type: 3}
       propertyPath: CharacterAudioSources.Array.data[1].AudioSource
       value: 
-      objectReference: {fileID: 1690641184}
+      objectReference: {fileID: 0}
     - target: {fileID: 5032506917874111454, guid: 6499dfdabeb6a684d9bc278d324d4952, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1116,7 +1116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 569089592}
   - component: {fileID: 569089593}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: TowerSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1625,6 +1625,9 @@ MonoBehaviour:
   allPhases:
   - {fileID: 11400000, guid: 2e15745c934a61643a6adef9214ae207, type: 2}
   - {fileID: 11400000, guid: 664d5014417b3674fb4cc4c23cdb992b, type: 2}
+  - {fileID: 11400000, guid: 909447c74c3e483468b463d5eb9e3534, type: 2}
+  - {fileID: 11400000, guid: 14b522bffcb47d84b853eb1864225e73, type: 2}
+  - {fileID: 11400000, guid: b450c86681f3fc14dbf627ebbb9e3005, type: 2}
   currentPhase: {fileID: 0}
 --- !u!4 &887689663
 Transform:
@@ -2224,6 +2227,10 @@ PrefabInstance:
     - target: {fileID: 1735945226244798610, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
       propertyPath: BeginLaser.z
       value: 19.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201645785281637263, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
+      propertyPath: LaserChargeRegeneration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7226099581146458017, guid: 9f5c44c7074dffa4fa2dd24816ead3c5, type: 3}
       propertyPath: m_Name
@@ -3025,11 +3032,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5763017173735706876, guid: 1528e210124fe3040aef26de68e197b8, type: 3}
   m_PrefabInstance: {fileID: 1690641181}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1690641184 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1690641184, guid: 1528e210124fe3040aef26de68e197b8, type: 3}
-  m_PrefabInstance: {fileID: 1690641181}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1690641185 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7049170229128927258, guid: 1528e210124fe3040aef26de68e197b8, type: 3}
@@ -3689,6 +3691,14 @@ PrefabInstance:
     - target: {fileID: 5579927895126949813, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: m_Name
       value: HopeMemory
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579927895126949819, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: healthEnemy
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579927895126949819, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: maxHealthEnemy
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5579927895126949821, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: m_RootOrder

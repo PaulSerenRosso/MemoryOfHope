@@ -12,7 +12,9 @@ public class ProtectedPhaseSO : BossPhaseSO
 
         foreach (var tr in BossPhaseManager.instance.towersSpawningPoints)
         {
-            Instantiate(corruptedTowers, tr.position, Quaternion.identity, tr);
+            BossPhaseManager.instance.bossStateMachine.associatedTowers.Clear();
+            var tower = Instantiate(corruptedTowers, tr.position, Quaternion.identity, tr).GetComponent<EnemyManager>();
+            BossPhaseManager.instance.bossStateMachine.associatedTowers.Add(tower);
         }
 
         BossPhaseManager.instance.isSphereRotating = isTowersRotating;
