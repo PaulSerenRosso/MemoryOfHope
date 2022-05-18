@@ -23,7 +23,7 @@ public class ListenerWaveEnemy : MonoBehaviour
         for (int i = 0; i < checkEnemyCount.Count; i++)
         {
 
-            if (_allEnemies.Count == checkEnemyCount[i].Index)
+            if (_allEnemies.Count == checkEnemyCount[i].Index+1)
             {
           
                 checkEnemyCount[i]?.Event.Invoke();   
