@@ -10,7 +10,7 @@ public class HM_VulnerableShockwaveState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         Debug.Log("Shock wave attack !");
         enemyMachine.agent.isStopped = true;
         timer = 0;

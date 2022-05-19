@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour, Damageable
 {
+  
     #region Variables
 
     public int health
@@ -37,6 +39,10 @@ public class EnemyManager : MonoBehaviour, Damageable
     public bool canBeHitByLaser;
     public bool canBeKnockback;
     public Vector3 SpawnPosition;
+    [SerializeField]
+    private UnityEvent _deathEvent;
+  [SerializeField]
+    private UnityEvent _damageEvent;
     public Quaternion SpawnRotation;
     public bool IsBaseEnemy = true;
 
@@ -62,8 +68,9 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
-        if(isDead)
-            Debug.Log("tatatatatadfsdfqsdfqsdfqs");
+        
+
+        _damageEvent?.Invoke();
         health -= damages;
         if (health <= 0)
         {
@@ -82,7 +89,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     public virtual void Death()
     {
         isDead = true;
-
+_deathEvent?.Invoke();
         if (WaveListener != null)
             WaveListener.Raise(this);
         if (Animator != null)
@@ -95,6 +102,7 @@ public class EnemyManager : MonoBehaviour, Damageable
         {
             Machine.agent.isStopped = true;
         }
+        
         Machine.enabled = false;
         StartCoroutine(WaitForDeath());
     }

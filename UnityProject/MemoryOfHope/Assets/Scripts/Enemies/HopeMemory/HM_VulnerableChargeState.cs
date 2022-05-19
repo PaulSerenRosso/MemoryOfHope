@@ -14,7 +14,7 @@ public class HM_VulnerableChargeState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         Debug.Log("Charge attack !");
-
+        base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = false;
         baseSpeed = enemyMachine.agent.speed;
         enemyMachine.agent.speed = chargeSpeed;

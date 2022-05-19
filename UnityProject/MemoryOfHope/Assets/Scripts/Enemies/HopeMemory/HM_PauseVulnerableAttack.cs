@@ -9,7 +9,7 @@ public class HM_PauseVulnerableAttack : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         Debug.Log("HM is about to attack !");
 
         enemyMachine.agent.isStopped = true;

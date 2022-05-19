@@ -13,7 +13,7 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
     
     public override void StartState(EnemyMachine enemyMachine)
     {
-  
+        base.StartState(enemyMachine);
         Debug.Log("bonsoir");
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;

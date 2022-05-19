@@ -7,7 +7,7 @@ public class PA_DefaultState : EnemyState
     [Range(1, 15)] [SerializeField] public float detectionDistance;
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.Play("Idle");
         enemyMachine.enemyManager.Animator.SetBool("IsDetect" , false);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);

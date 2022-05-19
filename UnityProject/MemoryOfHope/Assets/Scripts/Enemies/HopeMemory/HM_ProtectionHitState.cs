@@ -6,7 +6,7 @@ public class HM_ProtectionHitState : EnemyState
 {
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         // Feedback de boucliers
     }
 

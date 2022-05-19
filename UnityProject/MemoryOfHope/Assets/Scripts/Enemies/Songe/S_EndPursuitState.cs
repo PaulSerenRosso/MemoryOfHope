@@ -15,7 +15,7 @@ public class S_EndPursuitState : EnemyState
     private float timer;
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         pursuitDistance = enemy.pursuitDistance;
         initialPos = enemy.initialPosition;
