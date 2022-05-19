@@ -12,8 +12,6 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     [Header("Base")] public ShieldManager _shield;
     public List<Module> obtainedModule;
-    public int money;
-    public bool hasGlitch;
     public UnityEvent TriggerGlitchWall;
     public UnityEvent HasGlitchEvent;
     public AudioSource MainAudioSource;
@@ -127,6 +125,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void Start()
     {
+        IsActive = true;
+        
         for (int i = 0; i < obtainedModule.Count; i++)
         {
             Module module = obtainedModule[i];

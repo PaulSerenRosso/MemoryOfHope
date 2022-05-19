@@ -30,7 +30,7 @@ public class HM_StateMachine : EnemyMachine
 
     #endregion
 
-    public List<EnemyManager> associatedTowers;
+    public List<EnemyManager> associatedTowers = new List<EnemyManager>();
     
     public int nextLifeThreshold;
     public Vector3 protectedPos;
@@ -49,7 +49,6 @@ public class HM_StateMachine : EnemyMachine
         currentState = vulnerableDefaultState;
         UIInstance.instance.SetBossDisplay(enemyManager);
         base.Start();
-        // Active default state
     }
 
     public override void OnHitByMelee()
@@ -67,6 +66,7 @@ public class HM_StateMachine : EnemyMachine
                 break;
 
             case PhaseType.Protected:
+                if (isProtected) return;
                 SwitchState(protectionHitState);
                 break;
         }
@@ -90,22 +90,16 @@ public class HM_StateMachine : EnemyMachine
             enemyManager.isBlocked = true;
         }
         
+        
         if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected)
         {
-            if (!isProtected) return;
-            
-            if (other.CompareTag("Shield"))
-            {
-                enemyManager.isBlocked = true;
-                StartCoroutine(PlayerManager.instance.Hit(enemyManager));
-            }
-
             if (other.CompareTag("Player") || other.CompareTag("Shield"))
             {
                 hitDirection = transform.position - PlayerController.instance.transform.position;
+                StartCoroutine(PlayerManager.instance.Hit(enemyManager));
             }
         }
-
+        
         
     }
 

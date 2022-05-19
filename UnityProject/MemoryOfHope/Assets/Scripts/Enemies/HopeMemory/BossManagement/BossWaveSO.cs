@@ -8,7 +8,7 @@ public class BossWaveSO : ScriptableObject
     [SerializeField] private GameObject[] spawningEnemies;
     [SerializeField] private int[] indexAvailablePos;
 
-    [SerializeField] private List<EnemyManager> enemiesInWave;
+    [SerializeField] private List<EnemyManager> enemiesInWave = new List<EnemyManager>();
     
     public void SpawningEnemies()
     {
@@ -34,6 +34,7 @@ public class BossWaveSO : ScriptableObject
         foreach (var enemy in enemiesInWave)
         {
             if (!enemy.isDead) return false;
+            
         }
 
         return true;

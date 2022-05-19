@@ -27,7 +27,7 @@ public class BossPhaseManager : MonoBehaviour
     public Transform[] puzzleBoxesSpawningPoints;
     public Transform[] puzzlesBoxes;
     public HM_StateMachine bossStateMachine;
-    public List<BossPhaseSO> allPhases;
+    public List<BossPhaseSO> allPhases = new List<BossPhaseSO>();
     public BossPhaseSO currentPhase;
     private void Start()
     {

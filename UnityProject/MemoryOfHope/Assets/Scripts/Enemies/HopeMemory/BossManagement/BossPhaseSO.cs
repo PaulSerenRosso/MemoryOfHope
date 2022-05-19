@@ -6,7 +6,7 @@ public class BossPhaseSO : ScriptableObject
 {
     [SerializeField] private BossWaveSO[] allWavesSO;
     
-    private List<BossWaveSO> allWaves;
+    private List<BossWaveSO> allWaves = new List<BossWaveSO>();
 
     public BossWaveSO currentWave;
     public PhaseType phaseType;
