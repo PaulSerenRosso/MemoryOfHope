@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemiesManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class EnemiesManager : MonoBehaviour
         for (int i = 0; i < BaseEnemies.Count; i++)
         {
             BaseEnemies[i].gameObject.SetActive(true);
+            if(BaseEnemies[i].GetComponent<NavMeshAgent>()) BaseEnemies[i].GetComponent<NavMeshAgent>().enabled = true;
             BaseEnemies[i].Machine.enabled = true;
             BaseEnemies[i].transform.position = BaseEnemies[i].SpawnPosition;
             BaseEnemies[i].transform.rotation = BaseEnemies[i].SpawnRotation;

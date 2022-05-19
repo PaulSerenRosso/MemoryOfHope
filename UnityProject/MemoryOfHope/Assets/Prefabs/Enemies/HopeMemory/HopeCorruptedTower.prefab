@@ -146,8 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f80e2908ec5fa4cb1be0551d9664f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthEnemy: 10
-  maxHealthEnemy: 10
+  _timeDeath: 0
+  Animator: {fileID: 0}
+  healthEnemy: 1
+  maxHealthEnemy: 1
   isDeadEnemy: 0
   isBlocked: 0
   canBeHitByMelee: 0
@@ -157,8 +159,6 @@ MonoBehaviour:
   SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
   IsBaseEnemy: 0
   damage: 1
-  anim: {fileID: 0}
-  deathFeedback: {fileID: 9008804931157601855, guid: fe7d0850474b7cd45b6bda1995388540, type: 3}
   Machine: {fileID: 1970830584279501767}
   WaveListener: {fileID: 0}
 --- !u!114 &1970830584279501767
@@ -173,8 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f74a2b6fce4e649a2afa58fc9807bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 0}
-  material: {fileID: 0}
+  enemyManager: {fileID: 7437408164213089871}
   PlayerKnockBackFactor: 2
   agent: {fileID: 0}
   rb: {fileID: 962247880275140486}
@@ -183,13 +182,13 @@ MonoBehaviour:
   attackArea: {fileID: 0}
   hitDirection: {x: 0, y: 0, z: 0}
   isHit: 0
-  _damageLaserTime: 0.2
+  _damageLaserTime: 0.1
   _laserDamageAmount: 1
   isHopeCorruptedTower: 1
   defaultState:
     module: {fileID: 1177937694691360470}
     protectionWall: {fileID: 5702159270918907218}
-    wallHeight: 6
+    wallHeight: 1.5
 --- !u!114 &6385194377824274850
 MonoBehaviour:
   m_ObjectHideFlags: 0

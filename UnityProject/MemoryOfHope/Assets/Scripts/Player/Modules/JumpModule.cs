@@ -9,26 +9,28 @@ public class JumpModule : Module
     private float yEndPosition;
 
     float currentSpeed = 0;
-    
+
     [SerializeField] private MoveModule moveModule;
     [SerializeField] private float HeightJump;
     private AnimationCurve curveJumpSpeed;
     bool inExecute;
     private bool isRelease = true;
-    [SerializeField]
-    private float MaxSpeedJump;
+    [SerializeField] private float MaxSpeedJump;
     [SerializeField] private float speedEndJump;
 
-    [SerializeField]
-    private AnimationCurve CurveJump;
+    [SerializeField] private AnimationCurve CurveJump;
+
+    private bool isTutorial;
+    [SerializeField] private TutorialGameEvent jumpTutorial;
 
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.Jump.performed += InputPressed;
         GameManager.instance.inputs.Player.Jump.canceled += InputReleased;
         isLinked = true;
+        isTutorial = true;
     }
-    
+
     private void OnDisable()
     {
         UnlinkModule();
@@ -58,7 +60,7 @@ public class JumpModule : Module
         {
             return false; // Ne peut pas sauter si le joueur est knockback
         }
-        
+
         if ((PlayerController.instance.onGround && isRelease) || !PlayerController.instance.onGround && isPerformed)
             return true;
 
@@ -85,8 +87,9 @@ public class JumpModule : Module
                 isRelease = false;
                 PlayerController.instance.currentGravity = 0;
                 if (moveModule.inputPressed)
-                { 
-                    PlayerController.instance.currentVelocity += PlayerController.instance.PlayerProjectOnPlane(moveModule.moveVector);
+                {
+                    PlayerController.instance.currentVelocity +=
+                        PlayerController.instance.PlayerProjectOnPlane(moveModule.moveVector);
                 }
             }
         }
@@ -102,11 +105,12 @@ public class JumpModule : Module
             }
             else
             {
-                currentSpeed = CurveJump.Evaluate((PlayerController.instance.playerRb.position.y-yStartPosition) / HeightJump) * MaxSpeedJump;
+                currentSpeed =
+                    CurveJump.Evaluate((PlayerController.instance.playerRb.position.y - yStartPosition) / HeightJump) *
+                    MaxSpeedJump;
                 PlayerController.instance.currentVelocityWithUndo += currentSpeed * Vector3.up;
                 PlayerController.instance.currentGravity = 0;
             }
-       
         }
     }
 
@@ -119,6 +123,12 @@ public class JumpModule : Module
 
     public override void Execute()
     {
+        if (isTutorial)
+        {
+            isTutorial = false;
+            jumpTutorial.RemoveTutorial();
+        }
+
         inExecute = true;
     }
 

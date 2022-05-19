@@ -17,40 +17,37 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] private InGameCanvasType[] _canvasInCinematic;
 
     [SerializeField] private bool _inCutScene;
-    
+
     [SerializeField] Slider _skipSlider;
     [SerializeField] private float _skipSliderSpeed;
 
     private bool _isPressSkipInput;
 
+    [SerializeField] private GameObject[] modules;
+
     private void Start()
     {
         GameManager.instance.inputs.UI.SkipCinematic.performed += SkipCinematic;
         GameManager.instance.inputs.UI.SkipCinematic.canceled += CancelCinematic;
-   
     }
 
     void SkipCinematic(InputAction.CallbackContext context)
     {
         _isPressSkipInput = true;
-
     }
 
     void CancelCinematic(InputAction.CallbackContext context)
     {
         _isPressSkipInput = false;
-        _skipSlider.value = 0; 
+        _skipSlider.value = 0;
     }
 
     private void Update()
     {
         if (_inCutScene)
         {
-           
             if (_isPressSkipInput)
             {
-                
-                
                 _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
                 if (_skipSlider.value >= _skipSlider.maxValue)
                 {
@@ -104,7 +101,6 @@ public class CinematicManager : MonoBehaviour
         DialogueManager.Instance.EndDialogue();
         DialogueManager.Instance.StopAllCoroutines();
         StartCoroutine(WaitForLoadGamePhase());
-        
     }
 
     IEnumerator WaitForLoadGamePhase()
@@ -117,5 +113,11 @@ public class CinematicManager : MonoBehaviour
         _director.Stop();
         _director.playableAsset = null;
         InCutScene = false;
+    }
+
+    public void ActivateModuleFeedback(int index)
+    {
+        var module = modules[index];
+        // Pour chaque module, active le fx d'activation
     }
 }

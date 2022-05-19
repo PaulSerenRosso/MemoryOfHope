@@ -92,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3140074238959305929}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3140074239672621017}
@@ -147,12 +147,12 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 6
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0.8
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3140074238959305934
@@ -188,6 +188,7 @@ MonoBehaviour:
   positionState:
     minDistance: 9
     maxDistanceFromTower: 0
+    cooldownDuration: 4
     towersPositions: []
   shockWaveState:
     durationAttack: 1
@@ -198,11 +199,8 @@ MonoBehaviour:
   pausePositionState:
     durationBeforePosition: 0.5
   pauseShockWaveState:
-    durationBeforeShockWave: 5
+    durationBeforeShockWave: 0.6
     rotateSpeed: 3
-    playerLayers:
-      serializedVersion: 2
-      m_Bits: 136
     lookAtTransform: {fileID: 6664800561438287062}
 --- !u!114 &3140074238959305777
 MonoBehaviour:
@@ -274,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3140074239672621016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3140074238959305778}
@@ -447,11 +445,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2eb1a9258054234aa8e4f404baa7cc7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.86
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2eb1a9258054234aa8e4f404baa7cc7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.044
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b2eb1a9258054234aa8e4f404baa7cc7, type: 3}
       propertyPath: m_LocalRotation.w

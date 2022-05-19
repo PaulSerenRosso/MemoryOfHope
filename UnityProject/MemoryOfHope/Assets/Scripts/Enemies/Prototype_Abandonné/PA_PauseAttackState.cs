@@ -21,27 +21,18 @@ public class PA_PauseAttackState : EnemyState
     
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        RaycastHit hit;
-        Debug.DrawRay(enemyMachine.transform.position, enemyMachine.transform.forward * 10, Color.green);
-        if (Physics.Raycast(enemyMachine.transform.position, enemyMachine.transform.forward, 
-            out hit, 10, playerLayers))
+        timer += Time.deltaTime;
+        
+        lookAtTransform.LookAt(PlayerController.instance.transform);
+        var tr = enemyMachine.transform;
+        tr.rotation = Quaternion.Slerp(tr.rotation, 
+            lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
+        tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
+        
+        if (ConditionState.Timer(durationBeforeAttack, timer))
         {
-            timer += Time.deltaTime;
-
-            if (ConditionState.Timer(durationBeforeAttack, timer))
-            {
-                PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
-                enemy.SwitchState(enemy.attackState);
-            }
-        }
-        else
-        {
-            lookAtTransform.LookAt(PlayerController.instance.transform);
-
-            var tr = enemyMachine.transform;
-            tr.rotation = Quaternion.Slerp(tr.rotation, 
-                lookAtTransform.rotation, Time.deltaTime * rotateSpeed);
-            tr.eulerAngles = new Vector3(0, tr.eulerAngles.y, tr.eulerAngles.z);
+            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
+            enemy.SwitchState(enemy.attackState);
         }
     }
 }

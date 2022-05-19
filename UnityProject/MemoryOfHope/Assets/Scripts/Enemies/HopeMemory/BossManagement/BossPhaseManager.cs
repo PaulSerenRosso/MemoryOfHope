@@ -22,10 +22,10 @@ public class BossPhaseManager : MonoBehaviour
     #endregion
 
     public Transform[] spawningPoints;
-    public bool isSphereRotating;
-    [SerializeField] float rotatingSpeed;
     public Transform rotatingSphere;
     public Transform[] towersSpawningPoints;
+    public Transform[] puzzleBoxesSpawningPoints;
+    public Transform[] puzzlesBoxes;
     public HM_StateMachine bossStateMachine;
     public List<BossPhaseSO> allPhases;
     public BossPhaseSO currentPhase;
@@ -37,10 +37,10 @@ public class BossPhaseManager : MonoBehaviour
 
     private void Update()
     {
-        if (isSphereRotating)
-        {
-            rotatingSphere.eulerAngles += Vector3.up * rotatingSpeed * Time.deltaTime;
-        }
+        if(currentPhase == null) return;
+        //rotatingSphere.GetComponent<Rigidbody>().rot
+        
+        rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
     }
 
     public void BeginsBattle()
@@ -58,7 +58,6 @@ public class BossPhaseManager : MonoBehaviour
         }
         else
         {
-            isSphereRotating = false;
             currentPhase = allPhases[0];
             switch (currentPhase.phaseType)
             {
@@ -76,4 +75,45 @@ public class BossPhaseManager : MonoBehaviour
             }
         }
     }
+
+    public void DisablePuzzle()
+    {
+        foreach (var box in puzzlesBoxes)
+        {
+            box.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetPuzzle(BossPuzzleType difficulty)
+    {
+        switch (difficulty)
+        {
+            case BossPuzzleType.Easy:
+                // On les fait directement apparaître
+                foreach (var puzzleBox in puzzlesBoxes)
+                {
+                    puzzleBox.gameObject.SetActive(true);
+                }
+                break;
+            
+            case BossPuzzleType.Hard:
+                // On les place de manière aléatoire et on les fait apparaître
+                List<Transform> transformRandom = new List<Transform>();
+                foreach (var spawnPoint in puzzleBoxesSpawningPoints) transformRandom.Add(spawnPoint);
+
+                foreach (var box in puzzlesBoxes)
+                {
+                    var randomPos = transformRandom[Random.Range(0, transformRandom.Count)];
+                    box.position = randomPos.position;
+                    transformRandom.Remove(randomPos);
+                    box.gameObject.SetActive(true);
+                }
+                break;
+        }
+    }
+}
+
+public enum BossPuzzleType
+{
+    Easy, Hard
 }

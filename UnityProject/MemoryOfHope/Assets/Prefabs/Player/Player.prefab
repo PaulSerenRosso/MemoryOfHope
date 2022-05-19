@@ -381,9 +381,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: 6546855627693250739}
   _collider: {fileID: 6725060030925692718}
-  _maxLaserCharge: 100
-  LaserChargeRegeneration: 1
-  LaserChargeCost: 5
+  MaxLaserCharge: 100
+  LaserChargeRegeneration: 15
+  LaserChargeCost: 10
   Laser: {fileID: 1735945226244798610}
   Mirror: {fileID: 696764172249142509}
   inputLaser: 0
@@ -607,6 +607,8 @@ MonoBehaviour:
   _offsetDistanceBeginPosition: 1.05
   Yoffset: 1
   _shield: {fileID: 2201645785281637263}
+  laserColor: {r: 0, g: 0, b: 0, a: 0}
+  prismObtained: 0
 --- !u!136 &5026034841179207460
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -728,6 +730,7 @@ GameObject:
   - component: {fileID: 4272034707977539781}
   - component: {fileID: 8509076338704852473}
   - component: {fileID: 1959456016}
+  - component: {fileID: 5792279151003202651}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -770,10 +773,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 636fefa72cb322b47855cd589983f61b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.42
-  m_Height: 1.9385258
+  m_Radius: 0.3
+  m_Height: 1.5666144
   m_Direction: 1
-  m_Center: {x: 0, y: 0.97, z: 0}
+  m_Center: {x: 0, y: 0.87, z: 0}
 --- !u!54 &7226099581146458016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -976,6 +979,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  jumpTutorial: {fileID: 0}
 --- !u!114 &7226099581146458022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1132,7 @@ MonoBehaviour:
     IsKnockbackEnemy: 1
     attackStrength: 1300
   currentIndexAttack: 0
+  attackTutorial: {fileID: 0}
 --- !u!114 &7649947021829257087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,6 +1172,7 @@ MonoBehaviour:
   _shield: {fileID: 2201645785281637263}
   _activationTime: 0.5
   rotationSpeed: 0.3
+  prismTutorial: {fileID: 0}
 --- !u!114 &423913510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,6 +1284,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   interactionColor: {r: 0, g: 0.18409586, b: 1, a: 1}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  interactionTutorial: {fileID: 0}
 --- !u!114 &423913511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,6 +1478,7 @@ MonoBehaviour:
   speedDash: 20
   speedRotation: 0.5
   cooldownDash: 0.5
+  dashTutorial: {fileID: 0}
 --- !u!114 &8509076338704852473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1603,6 +1611,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &5792279151003202651
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226099581146458017}
+  m_Enabled: 1
 --- !u!1 &7284903415733054223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,15 +2023,15 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 39.5
+      value: 6.86
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: -3.413
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 19.55
+      value: 8.61
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: RayLayer.m_Bits
