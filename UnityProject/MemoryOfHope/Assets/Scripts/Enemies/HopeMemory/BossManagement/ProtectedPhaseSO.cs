@@ -19,5 +19,8 @@ public class ProtectedPhaseSO : BossPhaseSO
         }
         
         BossPhaseManager.instance.SetPuzzle(difficulty);
+
+        PlayerManager.instance._shield._laserCharge = 0;
+        UIInstance.instance.LaserSlider.value = 0;
     }
 }

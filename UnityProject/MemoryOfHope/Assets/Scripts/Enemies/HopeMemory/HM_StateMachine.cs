@@ -90,7 +90,10 @@ public class HM_StateMachine : EnemyMachine
             enemyManager.isBlocked = true;
         }
 
+        // Pas de hit quand on est en protection
+        // Hit = damage quand on est en isProtected
         if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Vulnerable) return;
+        if (!isProtected) return;
 
         if (other.CompareTag("Shield"))
         {

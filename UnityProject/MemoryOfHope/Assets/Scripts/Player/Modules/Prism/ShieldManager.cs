@@ -7,7 +7,7 @@ public class ShieldManager : MonoBehaviour, Damageable
     [SerializeField] private Collider _collider;
 
     public float MaxLaserCharge;
-    private float _laserCharge;
+    public float _laserCharge;
 
     public float LaserCharge
     {

@@ -17,6 +17,8 @@ public class HM_VulnerableDefaultState : EnemyState
 
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
 
+        enemy.isProtected = false;
+        
         enemy.nextLifeThreshold = enemy.enemyManager.health -
                                   ((VulnerablePhaseSO) BossPhaseManager.instance.currentPhase).damageToInflict;
         Debug.Log($"next threshold : {enemy.nextLifeThreshold}");

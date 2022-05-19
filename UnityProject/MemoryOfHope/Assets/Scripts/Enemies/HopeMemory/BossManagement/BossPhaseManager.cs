@@ -41,6 +41,12 @@ public class BossPhaseManager : MonoBehaviour
         //rotatingSphere.GetComponent<Rigidbody>().rot
         
         rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
+
+        if (currentPhase.currentWave == null) return;
+        if (currentPhase.currentWave.IsWaveCleared())
+        {
+            currentPhase.SetNextWave();
+        }
     }
 
     public void BeginsBattle()

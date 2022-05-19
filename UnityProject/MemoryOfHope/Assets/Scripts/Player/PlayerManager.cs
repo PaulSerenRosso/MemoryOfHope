@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     #region Base
 
-    [Header("Base")] [SerializeField] private ShieldManager _shield;
+    [Header("Base")] public ShieldManager _shield;
     public List<Module> obtainedModule;
     public int money;
     public bool hasGlitch;
