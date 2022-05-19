@@ -89,22 +89,24 @@ public class HM_StateMachine : EnemyMachine
         {
             enemyManager.isBlocked = true;
         }
-
-        // Pas de hit quand on est en protection
-        // Hit = damage quand on est en isProtected
-        if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Vulnerable) return;
-        if (!isProtected) return;
-
-        if (other.CompareTag("Shield"))
+        
+        if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected)
         {
-            enemyManager.isBlocked = true;
-            StartCoroutine(PlayerManager.instance.Hit(enemyManager));
+            if (!isProtected) return;
+            
+            if (other.CompareTag("Shield"))
+            {
+                enemyManager.isBlocked = true;
+                StartCoroutine(PlayerManager.instance.Hit(enemyManager));
+            }
+
+            if (other.CompareTag("Player") || other.CompareTag("Shield"))
+            {
+                hitDirection = transform.position - PlayerController.instance.transform.position;
+            }
         }
 
-        if (other.CompareTag("Player") || other.CompareTag("Shield"))
-        {
-            hitDirection = transform.position - PlayerController.instance.transform.position;
-        }
+        
     }
 
     public override void OnTriggerStay(Collider other)

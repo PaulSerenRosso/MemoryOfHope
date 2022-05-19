@@ -29,7 +29,6 @@ public class BossPhaseManager : MonoBehaviour
     public HM_StateMachine bossStateMachine;
     public List<BossPhaseSO> allPhases;
     public BossPhaseSO currentPhase;
-
     private void Start()
     {
         BeginsBattle(); // A terme : ça se lance pas ici
@@ -38,7 +37,6 @@ public class BossPhaseManager : MonoBehaviour
     private void Update()
     {
         if(currentPhase == null) return;
-        //rotatingSphere.GetComponent<Rigidbody>().rot
         
         rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
 

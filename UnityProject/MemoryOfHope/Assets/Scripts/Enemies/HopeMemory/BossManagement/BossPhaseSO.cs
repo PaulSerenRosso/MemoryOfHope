@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class BossPhaseSO : ScriptableObject
 {
-    [SerializeField] private List<BossWaveSO> allWaves;
+    [SerializeField] private BossWaveSO[] allWavesSO;
+    
+    private List<BossWaveSO> allWaves;
+
     public BossWaveSO currentWave;
     public PhaseType phaseType;
     public float rotatingSphereSpeed;
 
     public virtual void SetPhase()
     {
+        allWaves.Clear();
+        foreach (var wave in allWavesSO)
+        {
+            allWaves.Add(wave);
+        }
+        
         currentWave = allWaves[0];
         currentWave.SpawningEnemies();
     }
