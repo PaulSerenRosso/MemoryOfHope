@@ -7,6 +7,7 @@ public class SetPlayerToPlatform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.gameObject.transform.parent = transform;
+            Camera.main.transform.parent = transform;
         }
     }
     
@@ -15,6 +16,7 @@ public class SetPlayerToPlatform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.gameObject.transform.parent = null;
+            Camera.main.transform.parent = null;
         }
     }
 }

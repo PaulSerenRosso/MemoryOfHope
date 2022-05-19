@@ -10,9 +10,10 @@ public class ProtectedPhaseSO : BossPhaseSO
     {
         base.SetPhase();
 
+        BossPhaseManager.instance.bossStateMachine.associatedTowers.Clear();
+
         foreach (var tr in BossPhaseManager.instance.towersSpawningPoints)
         {
-            BossPhaseManager.instance.bossStateMachine.associatedTowers.Clear();
             var tower = Instantiate(corruptedTowers, tr.position, Quaternion.identity, tr).GetComponent<EnemyManager>();
             BossPhaseManager.instance.bossStateMachine.associatedTowers.Add(tower);
         }
