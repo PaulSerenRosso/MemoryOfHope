@@ -91,8 +91,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     [Header("Other")] [SerializeField] private float timeNotificationMaxHeart;
 
     #endregion
-
-
+    
     #region Instance
 
     public static PlayerManager instance;
@@ -286,7 +285,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isBlocked)
+        if (other.CompareTag("Enemy") && !isBlocked && !isHit)
         {
             CheckEnemyTrigger(other);
         }

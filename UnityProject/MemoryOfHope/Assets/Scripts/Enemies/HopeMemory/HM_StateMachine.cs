@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class HM_StateMachine : EnemyMachine
 {
@@ -29,6 +30,8 @@ public class HM_StateMachine : EnemyMachine
 
     #endregion
 
+    public List<EnemyManager> associatedTowers;
+    
     public int nextLifeThreshold;
     public Vector3 protectedPos;
 

@@ -14,7 +14,7 @@ public class TC_StateMachine : EnemyMachine
     public bool isHopeCorruptedTower;
 
     #endregion
-    
+
     #region States
 
     public TC_DefaultState defaultState = new TC_DefaultState();
@@ -28,7 +28,7 @@ public class TC_StateMachine : EnemyMachine
         currentState = defaultState;
         base.Start();
     }
-    
+
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
@@ -42,13 +42,13 @@ public class TC_StateMachine : EnemyMachine
     {
         if (!enemyManager.isDead)
         {
-        if (_damageLaserTimer < _damageLaserTime)
-            _damageLaserTimer += Time.deltaTime;
-        else
-        {
-            enemyManager.TakeDamage(_laserDamageAmount);
-            _damageLaserTimer = 0;
-        }
+            if (_damageLaserTimer < _damageLaserTime)
+                _damageLaserTimer += Time.deltaTime;
+            else
+            {
+                enemyManager.TakeDamage(_laserDamageAmount);
+                _damageLaserTimer = 0;
+            }
         }
     }
 
@@ -56,11 +56,11 @@ public class TC_StateMachine : EnemyMachine
     {
         _damageLaserTimer = 0;
     }
-    
+
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        
+
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
@@ -69,7 +69,6 @@ public class TC_StateMachine : EnemyMachine
 
     public override void OnTriggerStay(Collider other)
     {
-        
     }
 
     public override void OnTriggerExit(Collider other)
@@ -79,23 +78,18 @@ public class TC_StateMachine : EnemyMachine
             enemyManager.isBlocked = false;
         }
     }
-    
+
     public override void OnCollisionEnter(Collision other)
     {
-        
     }
 
     public override void OnCollisionStay(Collision other)
     {
-
-        
     }
 
     public override void OnCollisionExit(Collision other)
     {
-        
     }
 
     #endregion
-
 }

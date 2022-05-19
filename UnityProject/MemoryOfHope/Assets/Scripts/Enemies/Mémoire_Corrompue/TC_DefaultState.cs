@@ -27,14 +27,15 @@ public class TC_DefaultState : EnemyState
 
         var enemyPos = memoryTransform.position;
 
-        // Position
-        var localPos = (enemyPos + towerPos) * .5f;
-        protectionWall.position = localPos;
-
+        // Scale
         float protectionWallSize = Vector3.Distance(towerPos, enemyPos);
         protectionWall.localScale =
             new Vector3(protectionWallSize, wallHeight, protectionWall.localScale.z);
-
+        
+        // Position
+        var localPos = (enemyPos + towerPos) * .5f;
+        protectionWall.position = new Vector3(localPos.x, .5f * (protectionWall.localScale.y - 1), localPos.z);
+        
         // Rotation
         float angle;
         var firstSegment = memoryTransform.position.z - enemyMachine.transform.position.z;

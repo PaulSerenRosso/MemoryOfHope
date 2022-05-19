@@ -12,22 +12,11 @@ public class MC_StateMachine : EnemyMachine
 
     #region States
 
-    // idle
     public MC_DefaultState defaultState = new MC_DefaultState();
-
-    
     public MC_PositionState positionState = new MC_PositionState();
-
-    //attack
     public MC_ShockWaveState shockWaveState = new MC_ShockWaveState();
-
-    //hit
     public MC_HitState hitState = new MC_HitState();
-
-    //idle
     public MC_PausePositionState pausePositionState = new MC_PausePositionState();
-
-    //idle
     public MC_PauseShockWaveState pauseShockWaveState = new MC_PauseShockWaveState();
 
     #endregion

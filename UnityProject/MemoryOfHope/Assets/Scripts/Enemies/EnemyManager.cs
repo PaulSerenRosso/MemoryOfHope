@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -27,8 +28,6 @@ public class EnemyManager : MonoBehaviour, Damageable
     }
 
     [SerializeField] private float _timeDeath;
-
-    [SerializeField] private float _timerDeath;
     public Animator Animator;
     public int healthEnemy;
     public int maxHealthEnemy;
@@ -44,7 +43,6 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
-    [SerializeField] private GameObject deathFeedback;
     public EnemyMachine Machine;
     public ListenerWaveEnemy WaveListener;
 
@@ -81,26 +79,30 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public virtual void Death()
     {
-        for (int i = 0; i < 20; i++)
-        {
-            Destroy(Instantiate(deathFeedback, transform.position, quaternion.identity),
-                Random.Range(2.0f, 3.0f));
-        }
-
         isDead = true;
 
         if (WaveListener != null)
             WaveListener.Raise(this);
         if (Animator != null)
+        {
             Animator.Play("Death");
+        }
         if (Machine.agent != null && Machine.agent.enabled)
-            Machine.agent.isStopped = false;
+        {
+            Machine.agent.isStopped = true;
+        }
         Machine.enabled = false;
         StartCoroutine(WaitForDeath());
     }
 
-    IEnumerator WaitForDeath()
+    private void Update()
     {
+        if (!isDead) return;
+        Debug.Log(Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"));
+    }
+
+    IEnumerator WaitForDeath()
+    { 
         yield return new WaitForSeconds(_timeDeath);
         gameObject.SetActive(false);
     }

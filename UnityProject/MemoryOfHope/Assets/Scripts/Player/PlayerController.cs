@@ -101,6 +101,8 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         GameManager.instance.inputs.Player.Disable();
+        hopeCape.GetColor("Color_Hope");
+        hopeCape.SetColor("Color_Hope", Color.black);
     }
 
     #endregion
@@ -388,7 +390,6 @@ public class PlayerController : MonoBehaviour
  */
 
     #endregion
-
 
     public Vector3 PlayerProjectOnPlane(Vector3 toProject)
     {
