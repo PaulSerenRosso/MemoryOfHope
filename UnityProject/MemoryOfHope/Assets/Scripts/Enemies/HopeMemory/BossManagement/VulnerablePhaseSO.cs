@@ -10,5 +10,7 @@ public class VulnerablePhaseSO : BossPhaseSO
     public override void SetPhase()
     {
         base.SetPhase();
+        
+        BossPhaseManager.instance.DisablePuzzle();
     }
 }

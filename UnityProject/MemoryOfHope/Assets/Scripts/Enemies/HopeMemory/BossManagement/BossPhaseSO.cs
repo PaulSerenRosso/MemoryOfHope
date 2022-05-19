@@ -7,6 +7,7 @@ public class BossPhaseSO : ScriptableObject
     [SerializeField] private List<BossWaveSO> allWaves;
     [SerializeField] private BossWaveSO currentWave;
     public PhaseType phaseType;
+    public float rotatingSphereSpeed;
 
     public virtual void SetPhase()
     {
