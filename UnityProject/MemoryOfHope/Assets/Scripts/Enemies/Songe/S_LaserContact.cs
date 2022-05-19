@@ -3,7 +3,7 @@ using UnityEngine;
 public class S_LaserContact : MonoBehaviour, IReturnable
 {
     [SerializeField] private S_StateMachine _stateMachine;
-
+    
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -20,6 +20,11 @@ public class S_LaserContact : MonoBehaviour, IReturnable
 
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
+
+    public void StartReturnableFeedBack()
+    {
+        
+    }
 
     public LaserMachine CurrentSource
     {

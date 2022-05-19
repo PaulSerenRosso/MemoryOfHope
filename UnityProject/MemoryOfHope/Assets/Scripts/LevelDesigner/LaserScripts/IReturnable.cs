@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public interface IReturnable 
 {
   public bool IsReturnLaser { get; set; }
   
   public bool IsActiveReturnable { get; set; }
+
+  void StartReturnableFeedBack();
   
+ 
   public LaserMachine CurrentSource { get; set; }
   void Returnable(LaserMachine laser, RaycastHit hit);
 

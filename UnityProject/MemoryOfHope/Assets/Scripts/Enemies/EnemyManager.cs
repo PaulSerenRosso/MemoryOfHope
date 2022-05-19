@@ -62,6 +62,8 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public void TakeDamage(int damages)
     {
+        if(isDead)
+            Debug.Log("tatatatatadfsdfqsdfqsdfqs");
         health -= damages;
         if (health <= 0)
         {
@@ -85,7 +87,9 @@ public class EnemyManager : MonoBehaviour, Damageable
             WaveListener.Raise(this);
         if (Animator != null)
         {
-            Animator.Play("Death");
+
+            StartCoroutine(WaitForLaunchAnimationDeath());
+
         }
         if (Machine.agent != null && Machine.agent.enabled)
         {
@@ -94,11 +98,12 @@ public class EnemyManager : MonoBehaviour, Damageable
         Machine.enabled = false;
         StartCoroutine(WaitForDeath());
     }
+    
 
-    private void Update()
+    IEnumerator WaitForLaunchAnimationDeath()
     {
-        if (!isDead) return;
-        Debug.Log(Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"));
+        yield return new WaitForEndOfFrame();
+        Animator.Play("Death");
     }
 
     IEnumerator WaitForDeath()

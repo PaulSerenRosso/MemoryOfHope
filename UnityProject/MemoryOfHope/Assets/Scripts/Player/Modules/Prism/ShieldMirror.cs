@@ -1,12 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShieldMirror : BaseMirror
 {
     [Header("ShieldMirror Variables")] [SerializeField]
     private float _offsetDistanceBeginPosition;
-
+    [SerializeField] private AudioSource _reloadLaserAudioSource;
     [SerializeField] private float Yoffset;
-
     [SerializeField] private ShieldManager _shield;
 
     [SerializeField] private Color laserColor;
@@ -15,6 +15,14 @@ public class ShieldMirror : BaseMirror
 
     public override void Returnable(LaserMachine laser, RaycastHit hit)
     {
+    
+            if (!_reloadLaserAudioSource.isPlaying)
+            {
+                _reloadLaserAudioSource.Play();
+                    
+            }
+                
+        
         _shield.LaserCharge += Time.deltaTime * _shield.LaserChargeRegeneration;
 
         if (prismObtained)
@@ -55,7 +63,7 @@ public class ShieldMirror : BaseMirror
         _triggerByLaser = false;
         _currentSource = null;
         LaserLineReceiver = null;
-
+        _reloadLaserAudioSource.Stop();
         if (prismObtained)
         {
             PlayerController.instance.hopeCape.GetColor("Color_Hope");
@@ -67,5 +75,7 @@ public class ShieldMirror : BaseMirror
     {
         _triggerByLaser = true;
         _currentSource = laser;
+     
+        
     }
 }

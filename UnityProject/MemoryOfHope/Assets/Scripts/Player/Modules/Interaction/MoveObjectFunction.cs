@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class MoveObjectFunction : InteractiveObjectFunction
@@ -9,7 +10,9 @@ public class MoveObjectFunction : InteractiveObjectFunction
     float rightBound;
     float downBound;
     float upBound;
-    
+  
+  [SerializeField] UnityEvent _feedbackMoveObject;
+
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.Move.performed += InputPressed;
@@ -44,7 +47,12 @@ public class MoveObjectFunction : InteractiveObjectFunction
     public override void Execute()
     {
         base.Execute();
-
+        
+        if (!data.AudioSource.isPlaying)
+        {
+            data.AudioSource.Play();
+        }
+ 
         Vector2 _cameraForwardXZ;
         Vector2 _cameraRightXZ;
         _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
@@ -56,6 +64,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
         moveVector = new Vector3(inputCam.x, 0, inputCam.y);
         
         CheckBoundaries();
+        
         data.rb.velocity = moveVector * data.moveSpeed * Time.fixedDeltaTime;
     }
 
@@ -116,6 +125,9 @@ public class MoveObjectFunction : InteractiveObjectFunction
             data.tutorial.RemoveTutorial();
             interactionModule.line.colorGradient = interactionModule.defaultGradient;
 
+          
+                data.AudioSource.Stop();
+            
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
             data.rb.isKinematic = true;

@@ -11,6 +11,9 @@ public class MoveModule : Module
     [SerializeField] private float defaultSpeedRotation;
     [SerializeField] private float toleranceRotation;
     [SerializeField] private float factorAngleOppositeRun;
+ 
+
+    private AudioClip _runSound; 
     private bool canMove;
     [SerializeField] private float airSpeedMovment;
     private Vector2 inputCam;
@@ -50,6 +53,7 @@ public class MoveModule : Module
 
     public override void Cancel()
     {
+        if(isPerformed)
         Release();
     }
 
@@ -106,29 +110,41 @@ public class MoveModule : Module
             }
             else
             {
+                if(PlayerManager.instance.MainAudioSource.isPlaying)
+                    PlayerManager.instance.MainAudioSource.Stop();
                 Rotate(angleForward);
             }
         }
         else
         {
+            if(PlayerManager.instance.MainAudioSource.isPlaying)
+                PlayerManager.instance.MainAudioSource.Stop();
             MoveAir();
         }
     }
 
     public override void Release()
     {
+        if(PlayerManager.instance.MainAudioSource.isPlaying)
+            PlayerManager.instance.MainAudioSource.Stop();
         isPerformed = false;
         PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
     }
 
     void MoveGround(Vector3 angleForward)
     {
+        if (!PlayerManager.instance.MainAudioSource.isPlaying)
+        {
+            PlayerManager.instance.MainAudioSource.clip = _runSound;
+            PlayerManager.instance.MainAudioSource.Play();
+        }
         moveVector *= defaultSpeedMovment;
         PlayerController.instance.currentVelocityWithUndo += moveVector;
         Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputCam, defaultSpeedRotation * 2, 00f);
         PlayerController.instance.playerRb.rotation =
             Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
         PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", inputCam.magnitude);
+        
     }
 
     void MoveAir()

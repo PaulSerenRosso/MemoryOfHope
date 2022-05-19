@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class DashModule : Module
@@ -15,7 +16,8 @@ public class DashModule : Module
     private Vector2 inputCam;
     private float Yposition;
     [SerializeField] float cooldownDash;
-    
+    [SerializeField]
+    private UnityEvent _dashPerformedEvent;
     float cooldownDashTimer;
     private bool dashReady;
 
@@ -141,7 +143,8 @@ public class DashModule : Module
             isTutorial = false;
             dashTutorial.RemoveTutorial();
         }
-        
+        if(!isPerformed)
+        _dashPerformedEvent?.Invoke();
         isPerformed = true;
         oldHealth = PlayerManager.instance.health;
         PlayerController.instance.useGravity = false;
