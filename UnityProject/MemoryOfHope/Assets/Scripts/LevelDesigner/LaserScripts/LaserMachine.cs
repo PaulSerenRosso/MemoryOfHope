@@ -79,6 +79,7 @@ public class LaserMachine : MonoBehaviour
             {
                 if (!_returnable.IsReturnLaser && !checkIfStartReturnable)
                 {
+                    _returnable.StartReturnableFeedBack();
                     _returnable.StartReturnable(this, _hit);
                     checkIfStartReturnable = true;
                 }
@@ -114,6 +115,7 @@ public class LaserMachine : MonoBehaviour
            
             if (!_currentReturnable.IsReturnLaser && _currentReturnable.IsActiveReturnable)
             {
+                _returnable.StartReturnableFeedBack();
                 _returnable.StartReturnable(this, _hit);
                 checkIfStartReturnable = true;
             }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractiveObjectData : MonoBehaviour
 {
     public InteractionType type;
-    
+public AudioSource AudioSource;
     public Material defaultMaterial;
     public Material selectedMaterial;
     public Rigidbody rb;

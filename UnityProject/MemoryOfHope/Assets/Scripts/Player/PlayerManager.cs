@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -13,6 +14,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     public List<Module> obtainedModule;
     public int money;
     public bool hasGlitch;
+    public UnityEvent TriggerGlitchWall;
+    public UnityEvent HasGlitchEvent;
+    public AudioSource MainAudioSource;
     private bool _isActive = true;
     bool isColliding;
 
@@ -38,7 +42,10 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     [Header("Health")] [SerializeField] public int defaultMaxHealthPlayer;
     public int healthPlayer;
+    [SerializeField] public UnityEvent _takeDamageEvent;
     public int maxHealthPlayer;
+    [SerializeField]
+    private UnityEvent _getHeartItemEvent; 
 
     public int maxHealth
     {
@@ -95,6 +102,11 @@ public class PlayerManager : MonoBehaviour, Damageable
     #region Instance
 
     public static PlayerManager instance;
+
+    public PlayerManager(AudioSource mainAudioSource)
+    {
+        MainAudioSource = mainAudioSource;
+    }
 
     private void Awake()
     {
@@ -180,7 +192,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void TakeDamage(int damages)
     {
         GameManager.instance.RumbleConstant(.3f, .7f, .4f);
-        
+        _takeDamageEvent?.Invoke();
         if (isDead) return;
         health -= damages;
 
@@ -333,6 +345,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         CheckEventTriggerStay(other);
         if (other.CompareTag("MaxLifeItem"))
         {
+           _getHeartItemEvent?.Invoke();
             other.GetComponent<HeartItem>().GetItem();
         }
     }

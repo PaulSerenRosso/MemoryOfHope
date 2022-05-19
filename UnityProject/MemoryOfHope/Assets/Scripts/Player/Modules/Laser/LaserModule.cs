@@ -11,6 +11,7 @@ public class LaserModule : Module
     // ui comment je gère
     
     //ui 
+    [SerializeField] private AudioClip _costLaserSound;
     [SerializeField] private ShieldManager _shield;
     public override void Cancel()
     {
@@ -85,6 +86,11 @@ public class LaserModule : Module
 
     public override void Release()
     {
+        if (!PlayerManager.instance.MainAudioSource.isPlaying)
+        {
+            PlayerManager.instance.MainAudioSource.clip = _costLaserSound;
+            PlayerManager.instance.MainAudioSource.Play();
+        }
      
         _shield.inputLaser = false;
         _shield.Laser.IsActive = false; 

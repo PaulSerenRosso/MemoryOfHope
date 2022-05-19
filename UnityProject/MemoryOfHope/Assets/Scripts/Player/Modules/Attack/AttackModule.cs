@@ -102,6 +102,7 @@ public class AttackModule : Module
 
     public void CantCancel()
     {
+        attackList[currentIndexAttack].FeedBackEvent?.Invoke();
         currentStateCombo = StateCombo.WaitDamage;
     }
 
@@ -159,6 +160,8 @@ public class AttackModule : Module
         isPerformed = true;
         PlayerController.instance.playerAnimator.SetBool("inFight", true);
 
+     
+      
         currentStateCombo = StateCombo.CantCancel;
     }
 

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MultiReturnableLaser : MonoBehaviour,IReturnable
 {
     [SerializeField]
     private List<LaserSource> _allExits;
     public LineRenderer LaserLineReceiver;
+    public UnityEvent StartReturnableEvent; 
     
     public  void Cancel(LaserMachine laser)
     {
@@ -41,6 +43,12 @@ public class MultiReturnableLaser : MonoBehaviour,IReturnable
          
         } 
     }
+
+    public void StartReturnableFeedBack()
+    {
+   StartReturnableEvent?.Invoke();
+    }
+
     public LaserMachine CurrentSource { get=>_currentSource; set => _currentSource = value; }
 
     public  void Returnable(LaserMachine laser, RaycastHit hit)

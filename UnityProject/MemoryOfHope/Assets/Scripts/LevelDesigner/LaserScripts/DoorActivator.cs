@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DoorActivator : MonoBehaviour, IReturnable
 {
     [SerializeField] private DoorLaserMultiple currentDoor;
 
+  public UnityEvent ActiveEvent;
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -20,6 +22,11 @@ public class DoorActivator : MonoBehaviour, IReturnable
 
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
+
+    public void StartReturnableFeedBack()
+    {
+        ActiveEvent?.Invoke();
+    }
 
     public LaserMachine CurrentSource
     {

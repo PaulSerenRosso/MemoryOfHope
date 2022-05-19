@@ -1,13 +1,19 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class ShieldManager : MonoBehaviour, Damageable
 {
     [SerializeField] private MeshRenderer _mesh;
     [SerializeField] private Collider _collider;
+ 
 
     public float MaxLaserCharge;
     public float _laserCharge;
+
+    [SerializeField] private AudioSource _reloadShieldAudioSource;
+    [SerializeField] private UnityEvent _shieldDamageEvent;
+
 
     public float LaserCharge
     {
@@ -74,6 +80,7 @@ public class ShieldManager : MonoBehaviour, Damageable
     public void TakeDamage(int amount)
     {
         health -= amount;
+        _shieldDamageEvent?.Invoke();
         if (health <= 0)
         {
             isDead = true;
@@ -102,12 +109,15 @@ public class ShieldManager : MonoBehaviour, Damageable
         {
             if (timeDeath > timerDeath)
             {
+                if (!_reloadShieldAudioSource.isPlaying)
+                   _reloadShieldAudioSource.Play();
                 timerDeath += Time.deltaTime;
             }
             else
             {
                 _isDead = false;
                 timerDeath = 0;
+                _reloadShieldAudioSource.Stop();
                 if (_inputShield)
                 {
                     _mesh.enabled = true;
