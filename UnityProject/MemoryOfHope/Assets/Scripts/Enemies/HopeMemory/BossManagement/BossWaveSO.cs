@@ -7,6 +7,7 @@ public class BossWaveSO : ScriptableObject
 {
     [SerializeField] private GameObject[] spawningEnemies;
     [SerializeField] private int[] indexAvailablePos;
+    [SerializeField] private float durationBetweenSpawns;
 
     [SerializeField] private List<EnemyManager> enemiesInWave = new List<EnemyManager>();
     

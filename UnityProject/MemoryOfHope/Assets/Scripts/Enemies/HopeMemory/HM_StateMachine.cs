@@ -25,9 +25,7 @@ public class HM_StateMachine : EnemyMachine
     public HM_ProtectionProtectedState protectionProtectedState = new HM_ProtectionProtectedState();
 
     public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
-
-    public HM_ProtectionHitState protectionHitState = new HM_ProtectionHitState();
-
+    
     #endregion
 
     public List<EnemyManager> associatedTowers = new List<EnemyManager>();
@@ -37,10 +35,13 @@ public class HM_StateMachine : EnemyMachine
 
     public bool isProtected;
 
+    public bool isActive;
+
     #region State Machine Main Functions
 
     public override void Start()
     {
+        isActive = false;
         protectedPos = transform.position;
     }
 
@@ -49,26 +50,18 @@ public class HM_StateMachine : EnemyMachine
         currentState = vulnerableDefaultState;
         UIInstance.instance.SetBossDisplay(enemyManager);
         base.Start();
+        isActive = true;
     }
 
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
 
-        switch (BossPhaseManager.instance.currentPhase.phaseType)
+        if (BossPhaseManager.instance.currentPhase.phaseType != PhaseType.Vulnerable) return;
+        
+        if (_isCurrentAttackKnockback)
         {
-            case PhaseType.Vulnerable:
-                if (_isCurrentAttackKnockback)
-                {
-                    SwitchState(vulnerableHitState);
-                }
-
-                break;
-
-            case PhaseType.Protected:
-                if (isProtected) return;
-                SwitchState(protectionHitState);
-                break;
+            SwitchState(vulnerableHitState);
         }
     }
 
@@ -78,6 +71,10 @@ public class HM_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
+        if (!isActive) return;
+        
+        currentState.OnTriggerEnterState(this, other);
+        
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
             //hitDirection = transform.position - PlayerController.instance.transform.position;
@@ -89,8 +86,7 @@ public class HM_StateMachine : EnemyMachine
         {
             enemyManager.isBlocked = true;
         }
-        
-        
+
         if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected)
         {
             if (other.CompareTag("Player") || other.CompareTag("Shield"))
@@ -99,8 +95,6 @@ public class HM_StateMachine : EnemyMachine
                 StartCoroutine(PlayerManager.instance.Hit(enemyManager));
             }
         }
-        
-        
     }
 
     public override void OnTriggerStay(Collider other)
@@ -109,6 +103,8 @@ public class HM_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
+        if (!isActive) return;
+
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = false;
