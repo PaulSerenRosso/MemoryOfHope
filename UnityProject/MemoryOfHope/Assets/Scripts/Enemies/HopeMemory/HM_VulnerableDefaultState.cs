@@ -17,6 +17,7 @@ public class HM_VulnerableDefaultState : EnemyState
 
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
 
+        enemy.chargeArea.SetActive(false);
         enemy.isProtected = false;
         
         enemy.nextLifeThreshold = enemy.enemyManager.health -

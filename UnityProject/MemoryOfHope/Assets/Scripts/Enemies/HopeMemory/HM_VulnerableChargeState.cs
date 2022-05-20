@@ -21,7 +21,8 @@ public class HM_VulnerableChargeState : EnemyState
         baseSpeed = enemyMachine.agent.speed;
         baseStoppingDistance = enemyMachine.agent.stoppingDistance;
         enemyMachine.agent.speed = chargeSpeed;
-        enemyMachine.attackArea.SetActive(true);
+        HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
+        enemy.chargeArea.SetActive(true);
         timer = 0;
     }
 
@@ -38,7 +39,7 @@ public class HM_VulnerableChargeState : EnemyState
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
             enemy.agent.speed = baseSpeed;
             enemy.agent.stoppingDistance = baseStoppingDistance;
-            enemyMachine.attackArea.SetActive(false);
+            enemy.chargeArea.SetActive(false);
             enemy.SwitchState(enemy.cooldownState);
             
         }
