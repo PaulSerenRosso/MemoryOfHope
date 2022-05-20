@@ -11,7 +11,7 @@ public class PA_AttackState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         enemyMachine.enemyManager.Animator.Play("Attack");
         enemyMachine.attackArea.SetActive(true);

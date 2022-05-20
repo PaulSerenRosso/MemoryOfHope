@@ -7,9 +7,9 @@ public class HM_ProtectionProtectedState : EnemyState
     private HM_StateMachine machine;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
-        enemyMachine.agent.enabled = true;
+    { base.StartState(enemyMachine);
         enemyMachine.rb.isKinematic = false;
+        enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.enemyManager.canBeHitByMelee = false;
         machine = (HM_StateMachine) enemyMachine;

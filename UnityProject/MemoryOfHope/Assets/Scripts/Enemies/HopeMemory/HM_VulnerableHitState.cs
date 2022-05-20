@@ -17,7 +17,7 @@ public class HM_VulnerableHitState : EnemyState
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
         enemyMachine.rb.isKinematic = false;
-        
+        base.StartState(enemyMachine);
         Vector3 knockback = new Vector3(enemyMachine.hitDirection.x, 0, enemyMachine.hitDirection.z);
         knockback.Normalize();
         knockback *= enemyMachine.attackStrength;

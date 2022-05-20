@@ -14,7 +14,7 @@ public class MC_HitState : EnemyState // State quand le Songe est attaqué
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.attackArea.SetActive(false);
-
+        base.StartState(enemyMachine);
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;

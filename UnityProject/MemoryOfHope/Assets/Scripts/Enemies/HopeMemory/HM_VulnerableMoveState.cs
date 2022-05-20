@@ -14,7 +14,7 @@ public class HM_VulnerableMoveState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         Debug.Log("Moving !");
-
+        base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = false;
         timer = 0;
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;

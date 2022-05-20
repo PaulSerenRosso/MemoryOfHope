@@ -10,7 +10,7 @@ public class MC_ShockWaveState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
         enemyMachine.attackArea.GetComponent<Animation>().Play("ShockwaveCorruptedMemory");

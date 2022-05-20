@@ -10,7 +10,7 @@ public class TC_DefaultState : EnemyState
     [SerializeField] private float wallHeight;
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         var enemy = (TC_StateMachine) enemyMachine;
 
         memoryTransform = enemy.isHopeCorruptedTower
