@@ -9,7 +9,8 @@ public class HM_ProtectionPositionState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.isStopped = true;
-        
+        enemyMachine.agent.enabled = false;
+        enemyMachine.rb.isKinematic = true;
         // Tp le boss à sa position initiale
 
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
