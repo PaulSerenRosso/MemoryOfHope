@@ -19,6 +19,11 @@ public class TC_LaserContact : MonoBehaviour, IReturnable
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
 
+    public void StartReturnableFeedBack()
+    {
+        
+    }
+
     public LaserMachine CurrentSource
     {
         get => _currentSource;

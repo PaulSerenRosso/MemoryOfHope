@@ -57,8 +57,13 @@ public class RotateObjectFunction : InteractiveObjectFunction
         
         Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
         var interactive = (InteractiveObjectData) component;
-
+        
         data = (RotateObjectData) interactive;
+        if (!data.AudioSource.isPlaying)
+        {
+            data.AudioSource.Play();
+        }
+        
         data.tutorial.SetTutorial();
         interactionModule.line.startColor = interactionModule.interactionColor;
         interactionModule.line.endColor = interactionModule.interactionColor;
@@ -75,6 +80,8 @@ public class RotateObjectFunction : InteractiveObjectFunction
     {
         if (data != null)
         {
+                data.AudioSource.Stop();
+            
             data.tutorial.RemoveTutorial();
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;

@@ -8,6 +8,8 @@ public class HM_ProtectionProtectedState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.agent.enabled = true;
+        enemyMachine.rb.isKinematic = false;
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
         enemyMachine.enemyManager.canBeHitByMelee = false;

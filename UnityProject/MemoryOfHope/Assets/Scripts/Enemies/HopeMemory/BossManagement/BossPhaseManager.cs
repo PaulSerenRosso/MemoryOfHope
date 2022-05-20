@@ -27,20 +27,20 @@ public class BossPhaseManager : MonoBehaviour
     public Transform[] puzzleBoxesSpawningPoints;
     public Transform[] puzzlesBoxes;
     public HM_StateMachine bossStateMachine;
-    public List<BossPhaseSO> allPhases;
+    public List<BossPhaseSO> allPhases = new List<BossPhaseSO>();
     public BossPhaseSO currentPhase;
-
-    private void Start()
-    {
-        BeginsBattle(); // A terme : ça se lance pas ici
-    }
 
     private void Update()
     {
         if(currentPhase == null) return;
-        //rotatingSphere.GetComponent<Rigidbody>().rot
         
         rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
+
+        if (currentPhase.currentWave == null) return;
+        if (currentPhase.currentWave.IsWaveCleared())
+        {
+            currentPhase.SetNextWave();
+        }
     }
 
     public void BeginsBattle()
@@ -104,7 +104,9 @@ public class BossPhaseManager : MonoBehaviour
                 foreach (var box in puzzlesBoxes)
                 {
                     var randomPos = transformRandom[Random.Range(0, transformRandom.Count)];
+                    var posY = box.position.y;
                     box.position = randomPos.position;
+                    box.position = new Vector3(box.position.x, posY, box.position.z);
                     transformRandom.Remove(randomPos);
                     box.gameObject.SetActive(true);
                 }

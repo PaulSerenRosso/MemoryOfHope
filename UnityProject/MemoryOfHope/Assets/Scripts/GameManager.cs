@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public void RumbleConstant(float low, float high, float duration)
     {
         if (isRumbling) return;
-        Debug.Log("rumble 0");
+//        Debug.Log("rumble 0");
 
         isRumbling = true;
         activeRumblePattern = RumblePattern.Constant;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void RumblePulse(float low, float high, float burstTime, float duration)
     {
         if (isRumbling) return;
-        Debug.Log("rumble 1");
+     //   Debug.Log("rumble 1");
 
         isRumbling = true;
         activeRumblePattern = RumblePattern.Pulse;
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     public void RumbleLinear(float lowStart, float lowEnd, float highStart, float highEnd, float duration)
     {
         if (isRumbling) return;
-        Debug.Log("rumble 2");
+     //   Debug.Log("rumble 2");
 
         isRumbling = true;
     }

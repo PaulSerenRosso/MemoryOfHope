@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -9,10 +10,11 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     #region Base
 
-    [Header("Base")] [SerializeField] private ShieldManager _shield;
+    [Header("Base")] public ShieldManager _shield;
     public List<Module> obtainedModule;
-    public int money;
-    public bool hasGlitch;
+    public UnityEvent TriggerGlitchWall;
+    public UnityEvent HasGlitchEvent;
+    public AudioSource MainAudioSource;
     private bool _isActive = true;
     bool isColliding;
 
@@ -38,7 +40,10 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     [Header("Health")] [SerializeField] public int defaultMaxHealthPlayer;
     public int healthPlayer;
+    [SerializeField] public UnityEvent _takeDamageEvent;
     public int maxHealthPlayer;
+    [SerializeField]
+    private UnityEvent _getHeartItemEvent; 
 
     public int maxHealth
     {
@@ -96,6 +101,11 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public static PlayerManager instance;
 
+    public PlayerManager(AudioSource mainAudioSource)
+    {
+        MainAudioSource = mainAudioSource;
+    }
+
     private void Awake()
     {
         /*if (instance is { })
@@ -115,6 +125,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void Start()
     {
+        IsActive = true;
+        
         for (int i = 0; i < obtainedModule.Count; i++)
         {
             Module module = obtainedModule[i];
@@ -180,7 +192,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void TakeDamage(int damages)
     {
         GameManager.instance.RumbleConstant(.3f, .7f, .4f);
-        
+        _takeDamageEvent?.Invoke();
         if (isDead) return;
         health -= damages;
 
@@ -193,6 +205,15 @@ public class PlayerManager : MonoBehaviour, Damageable
         {
             UIInstance.instance.DisplayHealth();
         }
+    }
+
+    public void MoveToLocation(Transform locationTransform)
+    {
+        Time.timeScale = 0;
+        transform.position = locationTransform.position;
+        transform.rotation = locationTransform.rotation;
+        Time.timeScale = 1;
+        Debug.Log(locationTransform.position);
     }
 
     public void Heal(int heal)
@@ -333,6 +354,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         CheckEventTriggerStay(other);
         if (other.CompareTag("MaxLifeItem"))
         {
+           _getHeartItemEvent?.Invoke();
             other.GetComponent<HeartItem>().GetItem();
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class TC_DefaultState : EnemyState
 {
     private Transform memoryTransform;
-    [SerializeField] private Transform module;
+    //[SerializeField] private Transform module;
 
     [SerializeField] private Transform protectionWall;
     [SerializeField] private float wallHeight;
@@ -20,8 +20,8 @@ public class TC_DefaultState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        module.LookAt(memoryTransform);
-        module.eulerAngles = new Vector3(-90, module.eulerAngles.y, 0);
+        //module.LookAt(memoryTransform);
+        //module.eulerAngles = new Vector3(-90, module.eulerAngles.y, 0);
 
         var towerPos = enemyMachine.transform.position;
 

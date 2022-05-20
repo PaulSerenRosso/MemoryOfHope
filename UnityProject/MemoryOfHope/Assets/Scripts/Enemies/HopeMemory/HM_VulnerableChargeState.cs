@@ -10,14 +10,18 @@ public class HM_VulnerableChargeState : EnemyState
     
     private float timer;
     private float baseSpeed;
+    private float baseStoppingDistance;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
         Debug.Log("Charge attack !");
 
         enemyMachine.agent.isStopped = false;
+        enemyMachine.agent.stoppingDistance = 0;
         baseSpeed = enemyMachine.agent.speed;
+        baseStoppingDistance = enemyMachine.agent.stoppingDistance;
         enemyMachine.agent.speed = chargeSpeed;
+        enemyMachine.attackArea.SetActive(true);
         timer = 0;
     }
 
@@ -33,14 +37,19 @@ public class HM_VulnerableChargeState : EnemyState
         {
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
             enemy.agent.speed = baseSpeed;
+            enemy.agent.stoppingDistance = baseStoppingDistance;
+            enemyMachine.attackArea.SetActive(false);
             enemy.SwitchState(enemy.cooldownState);
             
         }
     }
 
-    public override void OnCollisionEnterState(EnemyMachine enemyMachine, Collision other)
+    public override void OnTriggerEnterState(EnemyMachine enemyMachine, Collider other)
     {
-        base.OnCollisionEnterState(enemyMachine, other);
-        // Si touche le PJ ?
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("hits PJ with charge");
+            timer = chargeDuration;
+        }
     }
 }
