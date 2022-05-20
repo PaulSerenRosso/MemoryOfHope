@@ -18,6 +18,8 @@ public class UIMainMenuManager : MonoBehaviour
     [SerializeField] private GameObject optionsButton;
     [SerializeField] private TMP_Dropdown languageDropdown;
 
+  
+
     private Dictionary<MainMenuSection, GameObject> allSections = new Dictionary<MainMenuSection, GameObject>();
     
     public List<UIDisplayText> allTextsOnScreen;
