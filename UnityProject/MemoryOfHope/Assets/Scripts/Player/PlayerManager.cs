@@ -207,6 +207,15 @@ public class PlayerManager : MonoBehaviour, Damageable
         }
     }
 
+    public void MoveToLocation(Transform locationTransform)
+    {
+        Time.timeScale = 0;
+        transform.position = locationTransform.position;
+        transform.rotation = locationTransform.rotation;
+        Time.timeScale = 1;
+        Debug.Log(locationTransform.position);
+    }
+
     public void Heal(int heal)
     {
         health += heal;
