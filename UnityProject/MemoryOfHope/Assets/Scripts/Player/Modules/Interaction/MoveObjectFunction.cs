@@ -117,7 +117,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
         
         isPerformed = true;
     }
-
+    
     public override void Deselect()
     {
         if (data != null)
