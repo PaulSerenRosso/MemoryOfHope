@@ -6408,12 +6408,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 887689663}
     m_Modifications:
     - target: {fileID: 5579927894006133702, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: m_Name
+      value: ShockwaveArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579927894006133702, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5579927894172019646, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: m_Name
-      value: AttackArea
+      value: ChargeArea
       objectReference: {fileID: 0}
     - target: {fileID: 5579927894172019646, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: m_IsActive
@@ -6436,6 +6440,22 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: attackArea
+      value: 
+      objectReference: {fileID: 5579927893753771562}
+    - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: chargeArea
+      value: 
+      objectReference: {fileID: 5579927893753771561}
+    - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: attackAreaHeight
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: attackAreaLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: vulnerableChargeState.chargeSpeed
       value: 13
       objectReference: {fileID: 0}
@@ -6445,6 +6465,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
       propertyPath: protectionDefaultState.defaultDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579927895126949820, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+      propertyPath: vulnerableShockwaveState.shockWaveDuration
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5579927895126949821, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
@@ -6496,5 +6520,15 @@ PrefabInstance:
 --- !u!4 &5579927893753771560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5579927895126949821, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+  m_PrefabInstance: {fileID: 5579927893753771559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5579927893753771561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5579927894172019646, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
+  m_PrefabInstance: {fileID: 5579927893753771559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5579927893753771562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5579927894006133702, guid: 2cfa8b366cf8b454391cc53cf821b05e, type: 3}
   m_PrefabInstance: {fileID: 5579927893753771559}
   m_PrefabAsset: {fileID: 0}

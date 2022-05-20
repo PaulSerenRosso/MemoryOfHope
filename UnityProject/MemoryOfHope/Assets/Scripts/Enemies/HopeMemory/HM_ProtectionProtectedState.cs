@@ -11,9 +11,9 @@ public class HM_ProtectionProtectedState : EnemyState
         enemyMachine.agent.enabled = true;
         enemyMachine.rb.isKinematic = false;
         enemyMachine.agent.isStopped = true;
-        enemyMachine.attackArea.SetActive(true);
         enemyMachine.enemyManager.canBeHitByMelee = false;
         machine = (HM_StateMachine) enemyMachine;
+        machine.chargeArea.SetActive(true);
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

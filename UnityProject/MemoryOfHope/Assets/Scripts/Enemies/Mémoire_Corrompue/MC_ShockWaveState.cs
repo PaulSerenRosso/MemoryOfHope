@@ -6,7 +6,6 @@ public class MC_ShockWaveState : EnemyState
 {
     [Header("Parameters")]
     [Range(0, 2)] [SerializeField] private int durationAttack;
-    [Range(0, 3)] [SerializeField] private float shockwaveSpeed;
 
     private float timer;
     
