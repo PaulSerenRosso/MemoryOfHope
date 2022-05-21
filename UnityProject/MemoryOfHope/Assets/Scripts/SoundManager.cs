@@ -11,8 +11,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
     [SerializeField] private AudioSource _UIAudioSource;
     private Dictionary<string, AudioClip> _UISounds;
-  
-    [SerializeField] private List<SoundSlider> _soundSlidersList = new List<SoundSlider>();
+    
     public Dictionary<string, Slider> SoundSliders= new Dictionary<string, Slider>();
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _ambianceSource;
@@ -31,11 +30,6 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < Utilities._UISoundList.Count; i++)
         {
             _UISounds.Add(Utilities._UISoundList[i].Name, Utilities._UISoundList[i].AudioClip);
-        }
-
-        for (int i = 0; i < _soundSlidersList.Count; i++)
-        {
-            SoundSliders.Add(_soundSlidersList[i].Name,  _soundSlidersList[i].Slider);
         }
         _maxVolumeAmbiance = _ambianceSource.volume;
         _maxVolumeMusic = _musicSource.volume;
