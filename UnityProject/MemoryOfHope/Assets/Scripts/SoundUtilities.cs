@@ -29,6 +29,18 @@ public class SoundUtilities : ScriptableObject
     public  void SetAudioMixer(string groupName)
     {
         AudioMixer.SetFloat(groupName, Mathf.Log10(SoundManager.instance.SoundSliders[groupName].value)*20);
+        PlayerPrefs.SetFloat(groupName,SoundManager.instance.SoundSliders[groupName].value );
+    }
+
+    public void SetAudioSliders()
+    {
+        
+        foreach (var soundSlider in SoundManager.instance.SoundSliders)
+        {
+            soundSlider.Value.value = PlayerPrefs.GetFloat(soundSlider.Key); 
+        }
+
+     
     }
 
     [Serializable]
