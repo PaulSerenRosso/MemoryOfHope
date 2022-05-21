@@ -3,26 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     [SerializeField] private AudioSource _UIAudioSource;
+    private Dictionary<string, AudioClip> _UISounds;
+  
+    [SerializeField] private List<SoundSlider> _soundSlidersList = new List<SoundSlider>();
+    public Dictionary<string, Slider> SoundSliders= new Dictionary<string, Slider>();
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _ambianceSource;
+
     [SerializeField]
-   private List<AudioClipWithName> _UISoundList;
-     private Dictionary<string, AudioClip> _UISounds;
-      public AudioMixer AudioMixer;
-      [SerializeField] private List<SoundSlider> _soundSliders;
-      [SerializeField] private AudioSource _musicSource ;
-      [SerializeField] private AudioSource _ambianceSource ;
-      [SerializeField] private List<TransitionSound> _transitionSounds;
-     void Start()
+    private SoundUtilities Utilities;
+    private float _maxVolumeMusic;
+    private float _maxVolumeAmbiance;
+    private float _currentMaxValue;
+    private AudioSource _currentSource;
+    private TransitionSoundClass _currentTransition;
+    private bool _inTransition;
+
+    void Start()
     {
-        for (int i = 0; i < _UISoundList.Count; i++)
+        for (int i = 0; i < Utilities._UISoundList.Count; i++)
         {
-            _UISounds.Add(_UISoundList[i].Name,_UISoundList[i].AudioClip );
+            _UISounds.Add(Utilities._UISoundList[i].Name, Utilities._UISoundList[i].AudioClip);
         }
+
+        for (int i = 0; i < _soundSlidersList.Count; i++)
+        {
+            SoundSliders.Add(_soundSlidersList[i].Name,  _soundSlidersList[i].Slider);
+        }
+        _maxVolumeAmbiance = _ambianceSource.volume;
+        _maxVolumeMusic = _musicSource.volume;
+        
     }
+
     private void Awake()
     {
         if (instance is { })
@@ -32,34 +51,66 @@ public class SoundManager : MonoBehaviour
         }
 
         instance = this;
-        
+
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SetUISound(string name)
+    private void Update()
     {
-       _UIAudioSource.PlayOneShot(_UISounds[name]); 
+        if (_inTransition)
+        {
+            TransitionSound(_currentSource, _currentMaxValue, _currentTransition);
+        }
     }
 
-    public void SwitchMusic(int index)
+   public void SetUISound(string name)
     {
-        
-    }
- 
-
-    public void SwitchAmbiance(int index)
-    {
-        
+        _UIAudioSource.PlayOneShot(_UISounds[name]);
     }
 
-    public void SetAudioMixer(string groupName, float value)
+    public void StartSwitchMusic(TransitionSoundClass transitionSoundClass)
     {
-        AudioMixer.SetFloat(groupName, value);
+        _currentSource = _musicSource;
+        _currentMaxValue = _maxVolumeMusic;
+        _currentTransition = transitionSoundClass;
+        _inTransition = true;
     }
 
-    public class AudioClipWithName
+
+   public void StartSwitchAmbiance(TransitionSoundClass transitionSoundClass)
     {
-        public AudioClip AudioClip;
-        public string Name; 
+        _currentSource = _ambianceSource;
+        _currentMaxValue = _maxVolumeAmbiance;
+        _currentTransition = transitionSoundClass;
+        _inTransition = true;
     }
+
+    void TransitionSound(AudioSource source, float maxValue, TransitionSoundClass transition)
+    {
+        if (source.volume > 0 && source.clip != transition.FinalAudio)
+            source.volume -= transition.SpeedToMinVolume * Time.deltaTime;
+        else
+        {
+            if (source.clip != transition.FinalAudio)
+            {
+                source.clip = transition.FinalAudio;
+                source.Play();
+            }
+            else
+            {
+                if (source.volume < maxValue)
+                {
+                    source.volume += transition.SpeedToMaxVolume * Time.deltaTime;
+                }
+                else
+                {
+                    _inTransition = false;
+                }
+            }
+        }
+    }
+
+
+
+
 }
