@@ -9,8 +9,8 @@ public class LevelDesignEvent : ScriptableObject
         door.SetActive(false);
     }
 
-    public void ActivateLaser()
+    public void Teleporting(Transform teleportingArea)
     {
-        
+        PlayerController.instance.transform.position = teleportingArea.position;
     }
 }
