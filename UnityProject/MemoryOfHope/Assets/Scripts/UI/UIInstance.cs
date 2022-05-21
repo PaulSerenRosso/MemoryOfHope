@@ -24,7 +24,7 @@ public class UIInstance : MonoBehaviour
     #region Variables
 
     [Header("Canvas")] public UICanvasType[] canvases;
-    [SerializeField] private GameObject blackFilter;
+    public Animation blackFilter;
 
     [Header("Information Menu")] public InGameCanvasType[] informationMenuHiddenCanvas;
     public GameObject informationWindow;
@@ -211,6 +211,7 @@ public class UIInstance : MonoBehaviour
 
         displayedModule++;
     }
+    
 
     #endregion
 
@@ -449,11 +450,11 @@ public class UIInstance : MonoBehaviour
 
     #region Boss
 
-    public void SetBossDisplay(EnemyManager enemy)
+    public void SetBossDisplay(EnemyManager enemy, bool active)
     {
         bossLifeGauge.maxValue = enemy.maxHealth;
         bossLifeGauge.value = bossLifeGauge.maxValue;
-        bossLifeGauge.gameObject.SetActive(true);
+        bossLifeGauge.gameObject.SetActive(active);
     }
 
     public void SetBossLifeGauge(PhaseType type)
@@ -483,7 +484,6 @@ public class UIInstance : MonoBehaviour
     {
         var active = !(informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf);
         PlayerManager.instance.IsActive = active;
-        blackFilter.SetActive(!active);
         var pauseActive = pauseMenu.activeSelf || optionMenu.activeSelf;
         if (pauseActive)
         {

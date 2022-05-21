@@ -193,6 +193,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         GameManager.instance.RumbleConstant(.3f, .7f, .4f);
         _takeDamageEvent?.Invoke();
+        StartCoroutine(Feedbacks.instance.ChromaticAberrationFeedback());
         if (isDead) return;
         health -= damages;
 
@@ -245,6 +246,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         IsActive = false;
         _deathEvent?.Invoke();
         yield return new WaitForSeconds(_timeDeath);
+        UIInstance.instance.blackFilter.Play("FadeIn");
+        yield return new WaitForSeconds(1);
         StartCoroutine(Respawn());
     }
 
@@ -271,6 +274,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
+        UIInstance.instance.blackFilter.Play("FadeOut");
+        yield return new WaitForSeconds(1);
         IsActive = true;
         isDead = false;
     }

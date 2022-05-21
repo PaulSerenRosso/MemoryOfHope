@@ -53,9 +53,31 @@ public class HM_StateMachine : EnemyMachine
     public void ActivateBehaviour()
     {
         currentState = vulnerableDefaultState;
-        UIInstance.instance.SetBossDisplay(enemyManager);
+        UIInstance.instance.SetBossDisplay(enemyManager, true);
+        agent.enabled = true;
         base.Start();
         isActive = true;
+    }
+
+    public void DeactivateBehaviour()
+    {
+        currentState = null;
+        attackArea.SetActive(false);
+        chargeArea.SetActive(false);
+        agent.enabled = false;
+        transform.position = protectedPos;
+        enemyManager.Heal(enemyManager.maxHealth);
+        UIInstance.instance.SetBossDisplay(enemyManager, false);
+        for (int i = associatedTowers.Count - 1; i >= 0; i--)
+        {
+            var tower = associatedTowers[i];
+            if (!tower.gameObject.activeSelf) continue;
+            tower.TakeDamage(tower.maxHealth);
+            tower.gameObject.SetActive(false);
+            associatedTowers.Remove(tower);
+        }
+        
+        isActive = false;
     }
 
     public override void OnHitByMelee()

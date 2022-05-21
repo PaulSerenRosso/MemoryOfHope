@@ -13,6 +13,9 @@ public class HM_VulnerableHitState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
+        enemy.chargeArea.SetActive(false);
+        enemyMachine.attackArea.SetActive(false);
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
