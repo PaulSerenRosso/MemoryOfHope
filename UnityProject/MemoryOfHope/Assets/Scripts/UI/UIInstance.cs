@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -71,6 +72,7 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject optionMenuFirstSelected;
     [SerializeField] private TMP_Dropdown languageDropdown;
+
 
     [Header("Boss Canvas")] public Slider bossLifeGauge;
     public Image fillImage;
@@ -435,7 +437,7 @@ public class UIInstance : MonoBehaviour
 
     public void OnMusicChange(Slider music)
     {
-        Debug.Log(music.value);
+       
     } // Quand la valeur de l'audio (musique) est changée
 
     public void OnSfxChange(Slider sfx)
