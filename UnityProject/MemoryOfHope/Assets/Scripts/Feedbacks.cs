@@ -18,7 +18,7 @@ public class Feedbacks : MonoBehaviour
 
     public Volume volume;
     public bool canChromatic;
-
+    [SerializeField] private float teleportationDuration;
     public ChromaticAberration chromaticAberration;
 
     private void Start()
@@ -73,5 +73,23 @@ public class Feedbacks : MonoBehaviour
         }
 
         Camera.main.transform.localPosition = original;
+    }
+
+    public void TeleportationFeedback(Vector3 position)
+    {
+        StartCoroutine(Teleporting(position));
+    }
+
+    public IEnumerator Teleporting(Vector3 position)
+    {
+        PlayerManager.instance.IsActive = false;
+        UIInstance.instance.blackFilter.Play("FadeIn");
+        yield return new WaitForSeconds(1);
+        PlayerController.instance.transform.position = position;
+        yield return new WaitForSeconds(teleportationDuration);
+        UIInstance.instance.blackFilter.Play("FadeOut");
+        yield return new WaitForSeconds(1);
+        PlayerManager.instance.IsActive = true;
+
     }
 }
