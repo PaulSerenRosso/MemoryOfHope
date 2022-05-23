@@ -383,12 +383,13 @@ MonoBehaviour:
   _mesh: {fileID: 6546855627693250739}
   _collider: {fileID: 6725060030925692718}
   MaxLaserCharge: 100
+  _laserCharge: 0
   _reloadShieldAudioSource: {fileID: 6006267814195861478}
   _shieldDamageEvent:
     m_PersistentCalls:
       m_Calls: []
-  LaserChargeCost: 10
   LaserChargeRegeneration: 15
+  LaserChargeCost: 10
   Laser: {fileID: 1735945226244798610}
   Mirror: {fileID: 696764172249142509}
   inputLaser: 0
@@ -663,7 +664,7 @@ GameObject:
   - component: {fileID: 696764172249142509}
   - component: {fileID: 5026034841179207460}
   - component: {fileID: 866879702564848415}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: PlayerMirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +714,7 @@ MonoBehaviour:
   _reloadLaserAudioSource: {fileID: 866879702564848415}
   Yoffset: 1
   _shield: {fileID: 2201645785281637263}
-  laserColor: {r: 0, g: 0, b: 0, a: 0}
+  laserColor: {r: 1, g: 0, b: 0, a: 0}
   prismObtained: 0
 --- !u!136 &5026034841179207460
 CapsuleCollider:
@@ -1013,9 +1014,10 @@ MonoBehaviour:
   - {fileID: 7226099581146458020}
   - {fileID: 8587865940063536777}
   - {fileID: 8256235213664230015}
-  money: 0
-  hasGlitch: 0
-  _takeDamageEvent:
+  TriggerGlitchWall:
+    m_PersistentCalls:
+      m_Calls: []
+  HasGlitchEvent:
     m_PersistentCalls:
       m_Calls: []
   MainAudioSource: {fileID: 1433364424683010403}
@@ -1024,7 +1026,13 @@ MonoBehaviour:
   CurrentListenerActivate: {fileID: 0}
   defaultMaxHealthPlayer: 12
   healthPlayer: 12
+  _takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealthPlayer: 12
+  _getHeartItemEvent:
+    m_PersistentCalls:
+      m_Calls: []
   isDeadPlayer: 0
   _timeDeath: 2
   _timeRespawn: 2
@@ -1391,6 +1399,10 @@ MonoBehaviour:
   _shield: {fileID: 2201645785281637263}
   _activationTime: 0.5
   rotationSpeed: 0.3
+  prismTutorial: {fileID: 0}
+  _prismPerformedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &423913510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1544,7 +1556,7 @@ MonoBehaviour:
   joystickDirection: {x: 0, y: 0, z: 0}
   moveVector: {x: 0, y: 0, z: 0}
   inputCam: {x: 0, y: 0}
-  range: 15
+  range: 10
   _feedbackMoveObject:
     m_PersistentCalls:
       m_Calls: []
@@ -1704,6 +1716,10 @@ MonoBehaviour:
   speedDash: 20
   speedRotation: 0.5
   cooldownDash: 0.5
+  _dashPerformedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dashTutorial: {fileID: 0}
 --- !u!114 &8509076338704852473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2179,10 +2195,6 @@ PrefabInstance:
     - target: {fileID: 2268152091713842151, guid: b9cd41d2314ad04418788cc62f6da304, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2268152091713842151, guid: b9cd41d2314ad04418788cc62f6da304, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 5076618733137551201, guid: b9cd41d2314ad04418788cc62f6da304, type: 3}
       propertyPath: m_RootOrder

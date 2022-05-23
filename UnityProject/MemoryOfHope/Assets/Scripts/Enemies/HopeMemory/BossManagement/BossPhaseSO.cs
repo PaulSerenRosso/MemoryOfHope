@@ -15,6 +15,7 @@ public class BossPhaseSO : ScriptableObject
     public virtual void SetPhase()
     {
         allWaves.Clear();
+        currentWave = null;
         foreach (var wave in allWavesSO)
         {
             allWaves.Add(wave);

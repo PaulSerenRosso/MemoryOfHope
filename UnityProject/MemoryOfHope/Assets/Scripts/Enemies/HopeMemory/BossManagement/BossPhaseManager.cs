@@ -24,6 +24,7 @@ public class BossPhaseManager : MonoBehaviour
     public bool hasBattleBegun;
     public Transform[] spawningPoints;
     public Transform rotatingSphere;
+    public Transform[] towersInitPos;
     public Transform[] towersSpawningPoints;
     public Transform[] puzzleBoxesSpawningPoints;
     public Transform[] puzzlesBoxes;
@@ -117,28 +118,40 @@ public class BossPhaseManager : MonoBehaviour
 
     public void SetPuzzle(BossPuzzleType difficulty)
     {
+        
         switch (difficulty)
         {
             case BossPuzzleType.Easy:
                 // On les fait directement apparaître
-                foreach (var puzzleBox in puzzlesBoxes)
+                for (int i = 0; i < puzzlesBoxes.Length; i++)
                 {
-                    puzzleBox.gameObject.SetActive(true);
+                    var box = puzzlesBoxes[i];
+                    var posY = box.position.y;
+                    var trs = box.GetComponentsInChildren<Transform>();
+                    foreach (var tr in trs) tr.localPosition = Vector3.zero;
+                    box.position = towersInitPos[i].position;
+                    box.position = new Vector3(box.position.x, posY, box.position.z);
+                    
+                    box.gameObject.SetActive(true);
                 }
                 break;
             
             case BossPuzzleType.Hard:
                 // On les place de manière aléatoire et on les fait apparaître
                 List<Transform> transformRandom = new List<Transform>();
+                transformRandom.Clear();
                 foreach (var spawnPoint in puzzleBoxesSpawningPoints) transformRandom.Add(spawnPoint);
 
                 foreach (var box in puzzlesBoxes)
                 {
-                    var randomPos = transformRandom[Random.Range(0, transformRandom.Count)];
                     var posY = box.position.y;
+                    var trs = box.GetComponentsInChildren<Transform>();
+                    foreach (var tr in trs) tr.localPosition = Vector3.zero;
+                    var randomPos = transformRandom[Random.Range(0, transformRandom.Count)];
                     box.position = randomPos.position;
                     box.position = new Vector3(box.position.x, posY, box.position.z);
                     transformRandom.Remove(randomPos);
+                    
                     box.gameObject.SetActive(true);
                 }
                 break;
