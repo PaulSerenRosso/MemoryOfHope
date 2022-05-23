@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class BossPhaseManager : MonoBehaviour
 {
@@ -34,14 +36,22 @@ public class BossPhaseManager : MonoBehaviour
     public BossPhaseSO currentPhase;
     public List<EnemyManager> allEnemiesInBossRoom = new List<EnemyManager>();
     [SerializeField] private ListenerTrigger bossActivator;
-    
+
+    public void RotateSphere()
+    {
+        rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed;
+    }
+
+    private void FixedUpdate()
+    {
+        BossPhaseManager.instance.RotateSphere();
+    }
+
     private void Update()
     {
         if (!hasBattleBegun) return;
         if(currentPhase == null) return;
         
-        rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
-
         if (currentPhase.currentWave == null) return;
         if (currentPhase.currentWave.IsWaveCleared())
         {
