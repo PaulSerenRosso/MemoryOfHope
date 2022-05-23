@@ -7,14 +7,16 @@ public class HM_VulnerableShockwaveState : EnemyState
     [Header("Parameters")] [SerializeField]
     private float shockWaveDuration;
 
-    private float timer;
-    
-    public override void StartState(EnemyMachine enemyMachine)
+    [SerializeField] private ParticleSystem shockwave;
 
+    private float timer;
+
+    public override void StartState(EnemyMachine enemyMachine)
     {
- base.StartState(enemyMachine);
+        base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
+        shockwave.Play();
         enemyMachine.attackArea.GetComponent<Animation>().Play("ShockwaveCorruptedMemory");
         timer = 0;
     }
@@ -23,7 +25,7 @@ public class HM_VulnerableShockwaveState : EnemyState
     {
         // A la fin de la shockwave, lance cooldown puis move
         timer += Time.deltaTime;
-        
+
         if (ConditionState.Timer(shockWaveDuration, timer))
         {
             enemyMachine.attackArea.SetActive(false);
