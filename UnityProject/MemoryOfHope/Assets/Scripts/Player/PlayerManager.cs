@@ -34,6 +34,9 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public List<CheckPoint> CheckPointsReached;
     public ListenerActivate CurrentListenerActivate;
+    
+    public ParticleSystem speedEffect;
+
 
     #endregion
 
