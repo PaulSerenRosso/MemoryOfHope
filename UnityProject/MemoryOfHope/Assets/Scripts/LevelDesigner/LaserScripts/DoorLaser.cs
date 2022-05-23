@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class DoorLaser : MonoBehaviour, IReturnable
 {
-    [SerializeField]
-    private MeshRenderer _meshRenderer;
-    [SerializeField]
-    private Collider _collider;
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Collider _collider;
+
+    [SerializeField] private ParticleSystem breakDoorParticleSystem;
 
     [SerializeField] private UnityEvent _activeEvent;
+
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -19,6 +17,7 @@ public class DoorLaser : MonoBehaviour, IReturnable
     }
 
     public bool IsActive;
+
     public bool IsActiveReturnable
     {
         get => IsActive;
@@ -27,8 +26,7 @@ public class DoorLaser : MonoBehaviour, IReturnable
 
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
-    [SerializeField]
-    private AudioSource _audioSource;
+    [SerializeField] private AudioSource _audioSource;
 
     public void StartReturnableFeedBack()
     {
@@ -43,29 +41,22 @@ public class DoorLaser : MonoBehaviour, IReturnable
 
     public void Returnable(LaserMachine laser, RaycastHit hit)
     {
-     
     }
 
     public void Cancel(LaserMachine laser)
     {
-        /*
-        if (IsActive)
-        {
-        _meshRenderer.enabled = true;
-        _collider.enabled = true;
-        }
-        _triggerByLaser = false;
-        _currentSource = null;*/
     }
 
     public void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
         if (IsActive)
         {
-        _meshRenderer.enabled = false;
-        _collider.enabled = false;
-        _audioSource.enabled = false; 
+            _meshRenderer.enabled = false;
+            _collider.enabled = false;
+            _audioSource.enabled = false;
+            breakDoorParticleSystem.Play();
         }
+
         _triggerByLaser = true;
         _currentSource = laser;
     }
