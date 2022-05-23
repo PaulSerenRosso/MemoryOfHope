@@ -6,7 +6,7 @@ using UnityEngine;
 public class MainCameraController : MonoBehaviour
 {
     public static MainCameraController Instance;
-    [SerializeField] Transform viewFinder;
+public Transform viewFinder;
     public float Distance;
     [SerializeField] Vector3 offSet;
 
@@ -16,6 +16,7 @@ public class MainCameraController : MonoBehaviour
     public bool OffsetIsSet = true;
     public CameraZoomGameEvent CurrentZoom;
 
+    public bool IsFixedUpdate;
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
@@ -24,11 +25,14 @@ public class MainCameraController : MonoBehaviour
 
     void LateUpdate()
     {
+   
         if (CurrentZoom != null)
             Zoom();
        
         transform.position = viewFinder.position + offSet - transform.forward * Distance;
     }
+
+
 
     void Zoom()
     {
