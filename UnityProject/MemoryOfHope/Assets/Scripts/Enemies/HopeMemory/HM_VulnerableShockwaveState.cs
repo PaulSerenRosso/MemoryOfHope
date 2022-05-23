@@ -10,9 +10,12 @@ public class HM_VulnerableShockwaveState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
+
     {
-        Debug.Log("Shock wave attack !");
+ base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
+        enemyMachine.attackArea.SetActive(true);
+        enemyMachine.attackArea.GetComponent<Animation>().Play("ShockwaveCorruptedMemory");
         timer = 0;
     }
 
@@ -23,9 +26,10 @@ public class HM_VulnerableShockwaveState : EnemyState
         
         if (ConditionState.Timer(shockWaveDuration, timer))
         {
+            enemyMachine.attackArea.SetActive(false);
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
+            enemyMachine.enemyManager.isBlocked = false;
             enemy.SwitchState(enemy.cooldownState);
-            
         }
     }
 }

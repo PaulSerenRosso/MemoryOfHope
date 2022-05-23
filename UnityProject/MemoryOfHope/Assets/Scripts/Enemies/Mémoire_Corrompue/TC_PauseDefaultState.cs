@@ -11,6 +11,7 @@ public class TC_PauseDefaultState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         timer = 0f;
+        base.StartState(enemyMachine);
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

@@ -10,7 +10,7 @@ public class TC_DefaultState : EnemyState
     [SerializeField] private float wallHeight;
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         var enemy = (TC_StateMachine) enemyMachine;
 
         memoryTransform = enemy.isHopeCorruptedTower
@@ -34,8 +34,10 @@ public class TC_DefaultState : EnemyState
         
         // Position
         var localPos = (enemyPos + towerPos) * .5f;
-        protectionWall.position = new Vector3(localPos.x, .5f * (protectionWall.localScale.y - 1), localPos.z);
-        
+        //protectionWall.position = new Vector3(localPos.x, .5f * (protectionWall.localScale.y - 1), localPos.z);
+        protectionWall.position = new Vector3(localPos.x, localPos.y, localPos.z);
+        protectionWall.localPosition = new Vector3(protectionWall.localPosition.x, .5f * (protectionWall.localScale.y - 1), protectionWall.localPosition.z);
+
         // Rotation
         float angle;
         var firstSegment = memoryTransform.position.z - enemyMachine.transform.position.z;

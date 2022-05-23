@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5579927894006133699}
   - component: {fileID: 5579927894006133700}
   m_Layer: 0
-  m_Name: AttackCollider
+  m_Name: ShockwaveArea
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,12 +125,12 @@ GameObject:
   - component: {fileID: 5579927894172019644}
   - component: {fileID: 5579927894172019645}
   m_Layer: 15
-  m_Name: AttackCollider
+  m_Name: ChargeArea
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5579927894172019642
 Transform:
   m_ObjectHideFlags: 0
@@ -569,19 +569,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f80e2908ec5fa4cb1be0551d9664f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthEnemy: 20
-  maxHealthEnemy: 20
+  _timeDeath: 0
+  Animator: {fileID: 0}
+  healthEnemy: 30
+  maxHealthEnemy: 30
   isDeadEnemy: 0
   isBlocked: 0
   canBeHitByMelee: 1
   canBeHitByLaser: 1
-  canBeKnockback: 1
+  canBeKnockback: 0
   SpawnPosition: {x: 0, y: 0, z: 0}
   SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
   IsBaseEnemy: 1
   damage: 1
-  anim: {fileID: 5579927895126949812}
-  deathFeedback: {fileID: 0}
   Machine: {fileID: 5579927895126949820}
   WaveListener: {fileID: 0}
 --- !u!114 &5579927895126949820
@@ -597,13 +597,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 5579927895126949819}
-  material: {fileID: 2100000, guid: 1e98487a523367740ae134439d03e9c5, type: 2}
   PlayerKnockBackFactor: 2
   agent: {fileID: 5579927895126949810}
   rb: {fileID: 5579927895126949809}
   enemyWeigth: 1
   attackStrength: 0
-  attackArea: {fileID: 5579927894172019646}
+  attackArea: {fileID: 5579927894006133702}
   hitDirection: {x: 0, y: 0, z: 0}
   isHit: 0
   vulnerableDefaultState:
@@ -612,12 +611,12 @@ MonoBehaviour:
     attackDistance: 10
     durationBeforeAttack: 1
   vulnerableChargeState:
-    chargeDuration: 5
-    chargeSpeed: 8
+    chargeDuration: 8
+    chargeSpeed: 13
   cooldownState:
     cooldownDuration: 1
   vulnerableShockwaveState:
-    shockWaveDuration: 3
+    shockWaveDuration: 1
   pauseVulnerableMove:
     durationBeforePursuit: 1
   pauseVulnerableAttack:
@@ -626,12 +625,17 @@ MonoBehaviour:
     durationHitStunned: 1
     drag: 5
   protectionDefaultState:
-    defaultDuration: 0
+    defaultDuration: 1
   pauseProtectionPosition:
     durationBeforePosition: 0
+  associatedTowers: []
   nextLifeThreshold: 0
   protectedPos: {x: 0, y: 0, z: 0}
   isProtected: 0
+  isActive: 0
+  chargeArea: {fileID: 5579927894172019646}
+  attackAreaLength: 0.5
+  attackAreaHeight: 0.2
 --- !u!1 &5579927895184048685
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class S_ApparitionState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsSpawn", true);
         enemyMachine.agent.isStopped = true;
         timer = 0;

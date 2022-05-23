@@ -6,12 +6,11 @@ public class MC_ShockWaveState : EnemyState
 {
     [Header("Parameters")]
     [Range(0, 2)] [SerializeField] private int durationAttack;
-    [Range(0, 3)] [SerializeField] private float shockwaveSpeed;
 
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
         enemyMachine.attackArea.GetComponent<Animation>().Play("ShockwaveCorruptedMemory");

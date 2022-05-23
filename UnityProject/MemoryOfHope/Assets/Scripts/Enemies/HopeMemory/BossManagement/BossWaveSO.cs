@@ -26,7 +26,9 @@ public class BossWaveSO : ScriptableObject
             Vector3 pos = availablePos[Random.Range(0, availablePos.Count)];
             availablePos.Remove(pos);
             var manager = Instantiate(enemy, pos, Quaternion.identity).GetComponent<EnemyManager>();
+            manager.IsBaseEnemy = false;
             enemiesInWave.Add(manager);
+            BossPhaseManager.instance.allEnemiesInBossRoom.Add(manager);
         }
     }
 

@@ -156,6 +156,12 @@ MonoBehaviour:
   canBeHitByLaser: 1
   canBeKnockback: 0
   SpawnPosition: {x: 0, y: 0, z: 0}
+  _deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
   IsBaseEnemy: 0
   damage: 1
@@ -182,14 +188,28 @@ MonoBehaviour:
   attackArea: {fileID: 0}
   hitDirection: {x: 0, y: 0, z: 0}
   isHit: 0
+  _laserContactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _meleDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _meleNoDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _damageLaserTime: 0.1
   _laserDamageAmount: 1
   isHopeCorruptedTower: 1
   defaultState:
-    module: {fileID: 0}
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     protectionWall: {fileID: 5702159270918907218}
-    wallHeight: 1.5
+    wallHeight: 1.25
   pauseDefaultState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     pauseApparition: 2
 --- !u!114 &6385194377824274850
 MonoBehaviour:

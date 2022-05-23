@@ -21,17 +21,22 @@ public class BossPhaseManager : MonoBehaviour
 
     #endregion
 
+    public bool hasBattleBegun;
     public Transform[] spawningPoints;
     public Transform rotatingSphere;
     public Transform[] towersSpawningPoints;
     public Transform[] puzzleBoxesSpawningPoints;
     public Transform[] puzzlesBoxes;
     public HM_StateMachine bossStateMachine;
-    public List<BossPhaseSO> allPhases = new List<BossPhaseSO>();
+    public BossPhaseSO[] allPhasesSO;
+    private List<BossPhaseSO> allPhases = new List<BossPhaseSO>();
     public BossPhaseSO currentPhase;
-
+    public List<EnemyManager> allEnemiesInBossRoom = new List<EnemyManager>();
+    [SerializeField] private ListenerTrigger bossActivator;
+    
     private void Update()
     {
+        if (!hasBattleBegun) return;
         if(currentPhase == null) return;
         
         rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
@@ -46,7 +51,25 @@ public class BossPhaseManager : MonoBehaviour
     public void BeginsBattle()
     {
         // Le boss est activé
+        allPhases.Clear();
+        foreach (var phase in allPhasesSO)
+        {
+            allPhases.Add(phase);
+        }
         bossStateMachine.ActivateBehaviour();
+        hasBattleBegun = true;
+    }
+
+    public void BattleRefresh()
+    {
+        if (!hasBattleBegun) return;
+
+        currentPhase = null;
+        hasBattleBegun = false;
+        bossActivator.ActivateTrigger();
+        bossStateMachine.DeactivateBehaviour();
+        allEnemiesInBossRoom.Clear();
+        DisablePuzzle();
     }
 
     public void SetNextPhase() // Set Next Phase est appelé dans les fonctions du State Machine
@@ -55,6 +78,14 @@ public class BossPhaseManager : MonoBehaviour
         if (allPhases.Count == 0)
         {
             Debug.Log("Boss vaincu");
+            UIInstance.instance.SetBossDisplay(bossStateMachine.enemyManager, false);
+
+            foreach (var enemy in allEnemiesInBossRoom)
+            {
+                if (!enemy.gameObject.activeSelf) continue;
+                enemy.TakeDamage(enemy.maxHealth);
+                enemy.gameObject.SetActive(false);
+            }
         }
         else
         {

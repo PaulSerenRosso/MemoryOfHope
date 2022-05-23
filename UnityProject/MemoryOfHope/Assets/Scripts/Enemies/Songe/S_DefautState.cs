@@ -8,7 +8,7 @@ public class S_DefautState : EnemyState
     private Vector3 initialPos;
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         detectionDistance = enemy.detectionDistance;

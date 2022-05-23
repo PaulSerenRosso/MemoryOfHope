@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Unity.Mathematics;
 
@@ -9,8 +10,8 @@ public class LevelDesignEvent : ScriptableObject
         door.SetActive(false);
     }
 
-    public void ActivateLaser()
+    public void Teleporting(Transform teleportingArea)
     {
-        
+        Feedbacks.instance.TeleportationFeedback(teleportingArea.position);
     }
 }

@@ -15,6 +15,7 @@ public class ProtectedPhaseSO : BossPhaseSO
         foreach (var tr in BossPhaseManager.instance.towersSpawningPoints)
         {
             var tower = Instantiate(corruptedTowers, tr.position, Quaternion.identity, tr).GetComponent<EnemyManager>();
+            tower.IsBaseEnemy = false;
             BossPhaseManager.instance.bossStateMachine.associatedTowers.Add(tower);
         }
         
