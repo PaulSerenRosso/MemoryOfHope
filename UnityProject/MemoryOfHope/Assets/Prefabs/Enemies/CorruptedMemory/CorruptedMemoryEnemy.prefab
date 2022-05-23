@@ -100,6 +100,7 @@ Transform:
   - {fileID: 3140074238932660433}
   - {fileID: 6664800561438287062}
   - {fileID: 7311173021999245598}
+  - {fileID: 6867295231399928620}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -168,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 3140074238959305777}
-  material: {fileID: 2100000, guid: 1e98487a523367740ae134439d03e9c5, type: 2}
   PlayerKnockBackFactor: 1
   agent: {fileID: 3140074238959305776}
   rb: {fileID: 3140074238959305779}
@@ -177,6 +177,15 @@ MonoBehaviour:
   attackArea: {fileID: 3140074239672621016}
   hitDirection: {x: 0, y: 0, z: 0}
   isHit: 0
+  _laserContactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _meleDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _meleNoDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   attackAreaLength: 0.5
   attackAreaHeight: 0.2
   initialPos: {x: 0, y: 0, z: 0}
@@ -184,21 +193,39 @@ MonoBehaviour:
   - {fileID: 0}
   isProtected: 1
   defaultState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     detectionDistance: 14
   positionState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     minDistance: 9
     maxDistanceFromTower: 0
     cooldownDuration: 4
     towersPositions: []
   shockWaveState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     durationAttack: 1
-    shockwaveSpeed: 3
+    shockwave: {fileID: 1562668449651924393}
   hitState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     durationHitStunned: 1
     drag: 5
   pausePositionState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     durationBeforePosition: 0.5
   pauseShockWaveState:
+    _startState:
+      m_PersistentCalls:
+        m_Calls: []
     durationBeforeShockWave: 0.6
     rotateSpeed: 3
     lookAtTransform: {fileID: 6664800561438287062}
@@ -224,10 +251,15 @@ MonoBehaviour:
   canBeHitByLaser: 0
   canBeKnockback: 1
   SpawnPosition: {x: 0, y: 0, z: 0}
+  _deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
   IsBaseEnemy: 1
   damage: 1
-  deathFeedback: {fileID: 5238717765216865771, guid: e9596e1dcd5b87d469cce396490a3414, type: 3}
   Machine: {fileID: 3140074238959305934}
   WaveListener: {fileID: 0}
 --- !u!114 &3140074238959305782
@@ -253,8 +285,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3140074239672621017}
-  - component: {fileID: 3140074239672621020}
-  - component: {fileID: 3140074239672621023}
   - component: {fileID: 3140074239672621021}
   - component: {fileID: 3140074239672621022}
   m_Layer: 0
@@ -278,55 +308,6 @@ Transform:
   m_Father: {fileID: 3140074238959305778}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3140074239672621020
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3140074239672621016}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3140074239672621023
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3140074239672621016}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: dde80c959e036914db3cd3145a2fa9a4, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!111 &3140074239672621021
 Animation:
   m_ObjectHideFlags: 0
@@ -850,3 +831,86 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &8376374606786799929
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3140074238959305778}
+    m_Modifications:
+    - target: {fileID: 627319022071994660, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_Name
+      value: ShockWave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654113198352964413, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030518140443800720, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030518140443800720, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030518140443800720, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+--- !u!4 &6867295231399928620 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3130939572036471317, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+  m_PrefabInstance: {fileID: 8376374606786799929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1562668449651924393 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7030518140443800720, guid: cd0b8f794b504154d828ff9689dec8f8, type: 3}
+  m_PrefabInstance: {fileID: 8376374606786799929}
+  m_PrefabAsset: {fileID: 0}
