@@ -70,6 +70,8 @@ public class MC_StateMachine : EnemyMachine
             hitDirection = transform.position - PlayerController.instance.transform.position;
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
             OnHitByMelee();
+            if(enemyManager.isDead)
+            Debug.Log("tatatatata");
         }
 
         if (other.CompareTag("Shield"))

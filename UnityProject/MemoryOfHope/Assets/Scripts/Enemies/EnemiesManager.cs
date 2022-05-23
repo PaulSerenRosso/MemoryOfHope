@@ -29,8 +29,17 @@ public class EnemiesManager : MonoBehaviour
             BaseEnemies[i].Machine.enabled = true;
             BaseEnemies[i].transform.position = BaseEnemies[i].SpawnPosition;
             BaseEnemies[i].transform.rotation = BaseEnemies[i].SpawnRotation;
+            BaseEnemies[i].Heal(BaseEnemies[i].maxHealth);
             BaseEnemies[i].Machine.Start();
         }
+        
+        foreach (var enemy in BossPhaseManager.instance.allEnemiesInBossRoom)
+        {
+            if (!enemy.gameObject.activeSelf) continue;
+            enemy.TakeDamage(enemy.maxHealth);
+            enemy.gameObject.SetActive(false);
+        }
+        BossPhaseManager.instance.BattleRefresh();
     }
     
     // change la mort des enenmis

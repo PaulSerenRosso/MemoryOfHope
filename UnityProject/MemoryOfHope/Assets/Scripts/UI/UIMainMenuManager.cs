@@ -3,14 +3,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIMainMenuManager : MonoBehaviour
 {
-    private MainMenuSection actualSection; 
+    private MainMenuSection actualSection;
     [SerializeField] private GameObject mainSection;
     [SerializeField] private GameObject mainSectionButton;
-    
+
+    [SerializeField] private SoundUtilities _soundUtilities;
     [SerializeField] private GameObject creditsSection;
     [SerializeField] private GameObject creditsButton;
 
@@ -18,8 +20,12 @@ public class UIMainMenuManager : MonoBehaviour
     [SerializeField] private GameObject optionsButton;
     [SerializeField] private TMP_Dropdown languageDropdown;
 
+    [SerializeField] private UnityEvent _openOptionMenu;
+    [SerializeField] private UnityEvent _openMainMenu;
+    [SerializeField] private UnityEvent _openCreditMenu;
+
     private Dictionary<MainMenuSection, GameObject> allSections = new Dictionary<MainMenuSection, GameObject>();
-    
+
     public List<UIDisplayText> allTextsOnScreen;
 
     [SerializeField] private EventSystem eventSystem;
@@ -38,19 +44,19 @@ public class UIMainMenuManager : MonoBehaviour
         allSections.Add(MainMenuSection.OptionsSection, optionsSection);
         actualSection = MainMenuSection.MainSection;
     }
-    
+
     private void LinkInputs()
     {
         GameManager.instance.inputs.MainMenuUI.MainMenuGoRight.performed += GoingRight;
         GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed += GoingLeft;
     }
-    
+
     private void UnlinkInputs()
     {
         GameManager.instance.inputs.MainMenuUI.MainMenuGoRight.performed -= GoingRight;
         GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed -= GoingLeft;
     }
-    
+
     private void OnEnable()
     {
         GameManager.instance.inputs.MainMenuUI.Enable();
@@ -68,16 +74,27 @@ public class UIMainMenuManager : MonoBehaviour
         switch (actualSection)
         {
             case MainMenuSection.MainSection:
+            {
                 SetSection(MainMenuSection.OptionsSection);
+                _openOptionMenu?.Invoke();
                 break;
-            
+            }
+
+
             case MainMenuSection.CreditsSection:
+            {
                 SetSection(MainMenuSection.MainSection);
+                _openMainMenu?.Invoke();
                 break;
-            
+            }
+
+
             case MainMenuSection.OptionsSection:
+            {
                 SetSection(MainMenuSection.CreditsSection);
+                _openCreditMenu?.Invoke();
                 break;
+            }
         }
     }
 
@@ -86,16 +103,27 @@ public class UIMainMenuManager : MonoBehaviour
         switch (actualSection)
         {
             case MainMenuSection.MainSection:
+            {
                 SetSection(MainMenuSection.CreditsSection);
+                _openCreditMenu?.Invoke();
                 break;
-            
+            }
+
+
             case MainMenuSection.CreditsSection:
+            {
                 SetSection(MainMenuSection.OptionsSection);
+                _openOptionMenu?.Invoke();
                 break;
-            
+            }
+
+
             case MainMenuSection.OptionsSection:
+            {
                 SetSection(MainMenuSection.MainSection);
+                _openMainMenu?.Invoke();
                 break;
+            }
         }
     }
 
@@ -109,9 +137,10 @@ public class UIMainMenuManager : MonoBehaviour
                 actualSection = sect.Key;
                 continue;
             }
+
             sect.Value.SetActive(false);
         }
-        
+
         eventSystem.SetSelectedGameObject(SetCursor());
     }
 
@@ -121,19 +150,19 @@ public class UIMainMenuManager : MonoBehaviour
         {
             case MainMenuSection.MainSection:
                 return mainSectionButton;
-            
+
             case MainMenuSection.CreditsSection:
                 return creditsButton;
-            
+
             case MainMenuSection.OptionsSection:
                 return optionsButton;
-            
+
             default:
                 Debug.LogError("Can't set any object");
                 return null;
         }
     }
-    
+
     public void SetTextLanguageOnDisplay()
     {
         foreach (var text in allTextsOnScreen)
@@ -174,56 +203,47 @@ public class UIMainMenuManager : MonoBehaviour
             case Language.French:
                 languageDropdown.value = 0;
                 break;
-            
+
             case Language.English:
                 languageDropdown.value = 1;
                 break;
-            
+
             default:
                 Debug.LogError("Invalide language");
                 break;
         }
-        
+
         // Audio initialization values
     }
-    
+
     public void OnLanguageChange(int index)
     {
         if (SettingsManager.instance == null) return;
-        
+
         switch (index)
         {
             case 0:
                 SettingsManager.instance.SetLanguage(Language.French);
                 break;
-            
+
             case 1:
                 SettingsManager.instance.SetLanguage(Language.English);
                 break;
-  
+
             default:
                 Debug.LogError("Index invalide");
                 break;
         }
-        
+
         SetTextLanguageOnDisplay();
     } // Quand la langue est changée
 
-    public void OnMusicChange(Slider music)
-    {
-        Debug.Log(music.value);
-    } // Quand la valeur de l'audio (musique) est changée
-
-    public void OnSfxChange(Slider sfx)
-    {
-        Debug.Log(sfx.value);
-    } // Quand la valeur de l'audio (SFX) est changée
-
     #endregion
-    
 }
 
 public enum MainMenuSection
 {
-    MainSection, CreditsSection, OptionsSection
+    MainSection,
+    CreditsSection,
+    OptionsSection
 }

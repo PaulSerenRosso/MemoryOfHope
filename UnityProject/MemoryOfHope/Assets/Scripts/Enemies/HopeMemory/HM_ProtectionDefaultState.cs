@@ -12,7 +12,7 @@ public class HM_ProtectionDefaultState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         Debug.Log("Passage en état de protection !");
-
+        base.StartState(enemyMachine);
         BossPhaseManager.instance.SetNextPhase();
         
         UIInstance.instance.SetBossLifeGauge(PhaseType.Protected);

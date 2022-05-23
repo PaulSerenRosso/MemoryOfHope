@@ -13,7 +13,7 @@ public class S_PositionState : EnemyState
     private Vector3 initialPos;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         enemyMachine.agent.isStopped = false;
         S_StateMachine enemy = (S_StateMachine) enemyMachine;

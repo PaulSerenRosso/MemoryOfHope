@@ -16,7 +16,7 @@ public class MC_PositionState : EnemyState
     public List<Vector3> towersPositions = new List<Vector3>();
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         towersPositions.Clear();
         enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         // On stock la position des tours corrompues associées à l'ennemi

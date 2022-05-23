@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseMirror: LaserMachine, IReturnable
-{
-    
+{   public UnityEvent StartReturnableEvent; 
+
     void Start()
     {
         LaserLine.enabled = false;
@@ -30,6 +31,11 @@ public class BaseMirror: LaserMachine, IReturnable
     }
 
     public LaserMachine _currentSource;
+    public void StartReturnableFeedBack()
+    {
+        StartReturnableEvent?.Invoke();
+    }
+
     public LaserMachine CurrentSource { get=>_currentSource; set => _currentSource = value; }
 
     public virtual void Returnable(LaserMachine laser, RaycastHit hit)
@@ -53,6 +59,7 @@ public class BaseMirror: LaserMachine, IReturnable
 
     public virtual void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
+        
         LaserLine.enabled = true;
         _triggerByLaser = true; 
         _currentSource = laser ;

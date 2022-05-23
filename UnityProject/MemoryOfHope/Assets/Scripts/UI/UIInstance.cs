@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -23,7 +24,7 @@ public class UIInstance : MonoBehaviour
     #region Variables
 
     [Header("Canvas")] public UICanvasType[] canvases;
-    [SerializeField] private GameObject blackFilter;
+    public Animation blackFilter;
 
     [Header("Information Menu")] public InGameCanvasType[] informationMenuHiddenCanvas;
     public GameObject informationWindow;
@@ -71,6 +72,7 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject optionMenuFirstSelected;
     [SerializeField] private TMP_Dropdown languageDropdown;
+
 
     [Header("Boss Canvas")] public Slider bossLifeGauge;
     public Image fillImage;
@@ -209,6 +211,7 @@ public class UIInstance : MonoBehaviour
 
         displayedModule++;
     }
+    
 
     #endregion
 
@@ -435,7 +438,7 @@ public class UIInstance : MonoBehaviour
 
     public void OnMusicChange(Slider music)
     {
-        Debug.Log(music.value);
+       
     } // Quand la valeur de l'audio (musique) est changée
 
     public void OnSfxChange(Slider sfx)
@@ -447,11 +450,11 @@ public class UIInstance : MonoBehaviour
 
     #region Boss
 
-    public void SetBossDisplay(EnemyManager enemy)
+    public void SetBossDisplay(EnemyManager enemy, bool active)
     {
         bossLifeGauge.maxValue = enemy.maxHealth;
         bossLifeGauge.value = bossLifeGauge.maxValue;
-        bossLifeGauge.gameObject.SetActive(true);
+        bossLifeGauge.gameObject.SetActive(active);
     }
 
     public void SetBossLifeGauge(PhaseType type)
@@ -481,7 +484,6 @@ public class UIInstance : MonoBehaviour
     {
         var active = !(informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf);
         PlayerManager.instance.IsActive = active;
-        blackFilter.SetActive(!active);
         var pauseActive = pauseMenu.activeSelf || optionMenu.activeSelf;
         if (pauseActive)
         {

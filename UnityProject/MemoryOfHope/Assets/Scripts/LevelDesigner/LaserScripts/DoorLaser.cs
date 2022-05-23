@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class DoorLaser : MonoBehaviour, IReturnable
 {
@@ -8,7 +10,8 @@ public class DoorLaser : MonoBehaviour, IReturnable
     private MeshRenderer _meshRenderer;
     [SerializeField]
     private Collider _collider;
-    
+
+    [SerializeField] private UnityEvent _activeEvent;
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -24,6 +27,13 @@ public class DoorLaser : MonoBehaviour, IReturnable
 
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
+    [SerializeField]
+    private AudioSource _audioSource;
+
+    public void StartReturnableFeedBack()
+    {
+        _activeEvent?.Invoke();
+    }
 
     public LaserMachine CurrentSource
     {
@@ -54,6 +64,7 @@ public class DoorLaser : MonoBehaviour, IReturnable
         {
         _meshRenderer.enabled = false;
         _collider.enabled = false;
+        _audioSource.enabled = false; 
         }
         _triggerByLaser = true;
         _currentSource = laser;

@@ -21,32 +21,55 @@ public class BossPhaseManager : MonoBehaviour
 
     #endregion
 
+    public bool hasBattleBegun;
     public Transform[] spawningPoints;
     public Transform rotatingSphere;
     public Transform[] towersSpawningPoints;
     public Transform[] puzzleBoxesSpawningPoints;
     public Transform[] puzzlesBoxes;
     public HM_StateMachine bossStateMachine;
-    public List<BossPhaseSO> allPhases;
+    public BossPhaseSO[] allPhasesSO;
+    private List<BossPhaseSO> allPhases = new List<BossPhaseSO>();
     public BossPhaseSO currentPhase;
-
-    private void Start()
-    {
-        BeginsBattle(); // A terme : ça se lance pas ici
-    }
-
+    public List<EnemyManager> allEnemiesInBossRoom = new List<EnemyManager>();
+    [SerializeField] private ListenerTrigger bossActivator;
+    
     private void Update()
     {
+        if (!hasBattleBegun) return;
         if(currentPhase == null) return;
-        //rotatingSphere.GetComponent<Rigidbody>().rot
         
         rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed * Time.deltaTime;
+
+        if (currentPhase.currentWave == null) return;
+        if (currentPhase.currentWave.IsWaveCleared())
+        {
+            currentPhase.SetNextWave();
+        }
     }
 
     public void BeginsBattle()
     {
         // Le boss est activé
+        allPhases.Clear();
+        foreach (var phase in allPhasesSO)
+        {
+            allPhases.Add(phase);
+        }
         bossStateMachine.ActivateBehaviour();
+        hasBattleBegun = true;
+    }
+
+    public void BattleRefresh()
+    {
+        if (!hasBattleBegun) return;
+
+        currentPhase = null;
+        hasBattleBegun = false;
+        bossActivator.ActivateTrigger();
+        bossStateMachine.DeactivateBehaviour();
+        allEnemiesInBossRoom.Clear();
+        DisablePuzzle();
     }
 
     public void SetNextPhase() // Set Next Phase est appelé dans les fonctions du State Machine
@@ -55,6 +78,14 @@ public class BossPhaseManager : MonoBehaviour
         if (allPhases.Count == 0)
         {
             Debug.Log("Boss vaincu");
+            UIInstance.instance.SetBossDisplay(bossStateMachine.enemyManager, false);
+
+            foreach (var enemy in allEnemiesInBossRoom)
+            {
+                if (!enemy.gameObject.activeSelf) continue;
+                enemy.TakeDamage(enemy.maxHealth);
+                enemy.gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -104,7 +135,9 @@ public class BossPhaseManager : MonoBehaviour
                 foreach (var box in puzzlesBoxes)
                 {
                     var randomPos = transformRandom[Random.Range(0, transformRandom.Count)];
+                    var posY = box.position.y;
                     box.position = randomPos.position;
+                    box.position = new Vector3(box.position.x, posY, box.position.z);
                     transformRandom.Remove(randomPos);
                     box.gameObject.SetActive(true);
                 }

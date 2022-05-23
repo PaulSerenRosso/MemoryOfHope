@@ -25,50 +25,70 @@ public class HM_StateMachine : EnemyMachine
     public HM_ProtectionProtectedState protectionProtectedState = new HM_ProtectionProtectedState();
 
     public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
-
-    public HM_ProtectionHitState protectionHitState = new HM_ProtectionHitState();
-
+    
     #endregion
 
-    public List<EnemyManager> associatedTowers;
+    public List<EnemyManager> associatedTowers = new List<EnemyManager>();
     
     public int nextLifeThreshold;
     public Vector3 protectedPos;
 
     public bool isProtected;
 
+    public bool isActive;
+
+    public GameObject chargeArea;
+    
+    public float attackAreaLength;
+    public float attackAreaHeight;
+
     #region State Machine Main Functions
 
     public override void Start()
     {
+        isActive = false;
         protectedPos = transform.position;
     }
 
     public void ActivateBehaviour()
     {
         currentState = vulnerableDefaultState;
-        UIInstance.instance.SetBossDisplay(enemyManager);
+        UIInstance.instance.SetBossDisplay(enemyManager, true);
+        agent.enabled = true;
         base.Start();
-        // Active default state
+        isActive = true;
+    }
+
+    public void DeactivateBehaviour()
+    {
+        currentState = null;
+        attackArea.SetActive(false);
+        chargeArea.SetActive(false);
+        agent.enabled = false;
+        transform.position = protectedPos;
+        enemyManager.Heal(enemyManager.maxHealth);
+        UIInstance.instance.SetBossDisplay(enemyManager, false);
+        for (int i = associatedTowers.Count - 1; i >= 0; i--)
+        {
+            var tower = associatedTowers[i];
+            if (!tower.gameObject.activeSelf) continue;
+            tower.TakeDamage(tower.maxHealth);
+            tower.gameObject.SetActive(false);
+            associatedTowers.Remove(tower);
+        }
+        
+        isActive = false;
     }
 
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
 
-        switch (BossPhaseManager.instance.currentPhase.phaseType)
+        if (BossPhaseManager.instance.currentPhase.phaseType != PhaseType.Vulnerable) return;
+        
+        if (_isCurrentAttackKnockback)
         {
-            case PhaseType.Vulnerable:
-                if (_isCurrentAttackKnockback)
-                {
-                    SwitchState(vulnerableHitState);
-                }
-
-                break;
-
-            case PhaseType.Protected:
-                SwitchState(protectionHitState);
-                break;
+            SwitchState(vulnerableHitState);
         }
     }
 
@@ -78,6 +98,10 @@ public class HM_StateMachine : EnemyMachine
 
     public override void OnTriggerEnter(Collider other)
     {
+        if (!isActive) return;
+        
+        currentState.OnTriggerEnterState(this, other);
+        
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
             //hitDirection = transform.position - PlayerController.instance.transform.position;
@@ -90,17 +114,13 @@ public class HM_StateMachine : EnemyMachine
             enemyManager.isBlocked = true;
         }
 
-        if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Vulnerable) return;
-
-        if (other.CompareTag("Shield"))
+        if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected)
         {
-            enemyManager.isBlocked = true;
-            StartCoroutine(PlayerManager.instance.Hit(enemyManager));
-        }
-
-        if (other.CompareTag("Player") || other.CompareTag("Shield"))
-        {
-            hitDirection = transform.position - PlayerController.instance.transform.position;
+            if (other.CompareTag("Player") || other.CompareTag("Shield"))
+            {
+                hitDirection = transform.position - PlayerController.instance.transform.position;
+                StartCoroutine(PlayerManager.instance.Hit(enemyManager));
+            }
         }
     }
 
@@ -110,6 +130,8 @@ public class HM_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
+        if (!isActive) return;
+
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = false;

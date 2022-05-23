@@ -13,7 +13,7 @@ public class
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;

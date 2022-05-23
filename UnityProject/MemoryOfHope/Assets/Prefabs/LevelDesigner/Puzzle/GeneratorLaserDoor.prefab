@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8056114189520622360}
   - component: {fileID: 6661046106119138641}
   - component: {fileID: 5546694745361190767}
+  - component: {fileID: 2565984266544625075}
   m_Layer: 6
   m_Name: GeneratorLaserDoor
   m_TagString: Ground
@@ -142,11 +143,111 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allActivators:
-  - {fileID: 6293243962081712747}
-  - {fileID: 3145813573174044951}
+  - {fileID: 0}
+  - {fileID: 0}
   _meshRenderer: {fileID: 8056114189520622360}
+  _audioSource: {fileID: 2565984266544625075}
   _collider: {fileID: 6661046106119138641}
+  _activateEvent:
+    m_PersistentCalls:
+      m_Calls: []
   IsActive: 1
+--- !u!82 &2565984266544625075
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8172654805430812310}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3244985986304839087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,17 +334,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2922850209512863315, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
   m_PrefabInstance: {fileID: 3244985986304839087}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6293243962081712747 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8817653919264184260, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
-  m_PrefabInstance: {fileID: 3244985986304839087}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69a931c55df41b4c97ca0085232208a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5906107258642022099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -330,14 +420,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2922850209512863315, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
   m_PrefabInstance: {fileID: 5906107258642022099}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3145813573174044951 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8817653919264184260, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
-  m_PrefabInstance: {fileID: 5906107258642022099}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69a931c55df41b4c97ca0085232208a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

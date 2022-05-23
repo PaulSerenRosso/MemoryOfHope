@@ -10,7 +10,7 @@ public class S_PausePositionState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
         timer = 0;

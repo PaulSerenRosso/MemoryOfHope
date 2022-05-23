@@ -13,7 +13,7 @@ public class S_PursuitState : EnemyState
     private Vector3 initialPos;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         pursuitDistance = enemy.pursuitDistance;
         initialPos = enemy.initialPosition;

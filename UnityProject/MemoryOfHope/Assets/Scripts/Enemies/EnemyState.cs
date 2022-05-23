@@ -1,13 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public abstract class EnemyState
 {
-
+    [SerializeField]
+    private UnityEvent _startState;
     public virtual void StartState(EnemyMachine enemyMachine)
     {
-        
+        _startState?.Invoke();
     }
     
     public virtual void UpdateState(EnemyMachine enemyMachine)

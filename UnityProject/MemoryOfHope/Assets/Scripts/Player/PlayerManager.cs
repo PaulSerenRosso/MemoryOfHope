@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -9,10 +11,11 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     #region Base
 
-    [Header("Base")] [SerializeField] private ShieldManager _shield;
+    [Header("Base")] public ShieldManager _shield;
     public List<Module> obtainedModule;
-    public int money;
-    public bool hasGlitch;
+    public UnityEvent TriggerGlitchWall;
+    public UnityEvent HasGlitchEvent;
+    public AudioSource MainAudioSource;
     private bool _isActive = true;
     bool isColliding;
 
@@ -38,7 +41,9 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     [Header("Health")] [SerializeField] public int defaultMaxHealthPlayer;
     public int healthPlayer;
+    [SerializeField] public UnityEvent _takeDamageEvent;
     public int maxHealthPlayer;
+    [SerializeField] private UnityEvent _getHeartItemEvent;
 
     public int maxHealth
     {
@@ -91,10 +96,15 @@ public class PlayerManager : MonoBehaviour, Damageable
     [Header("Other")] [SerializeField] private float timeNotificationMaxHeart;
 
     #endregion
-    
+
     #region Instance
 
     public static PlayerManager instance;
+
+    public PlayerManager(AudioSource mainAudioSource)
+    {
+        MainAudioSource = mainAudioSource;
+    }
 
     private void Awake()
     {
@@ -115,6 +125,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     private void Start()
     {
+        IsActive = true;
+
         for (int i = 0; i < obtainedModule.Count; i++)
         {
             Module module = obtainedModule[i];
@@ -180,7 +192,8 @@ public class PlayerManager : MonoBehaviour, Damageable
     public void TakeDamage(int damages)
     {
         GameManager.instance.RumbleConstant(.3f, .7f, .4f);
-        
+        _takeDamageEvent?.Invoke();
+        StartCoroutine(Feedbacks.instance.ChromaticAberrationFeedback());
         if (isDead) return;
         health -= damages;
 
@@ -233,6 +246,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         IsActive = false;
         _deathEvent?.Invoke();
         yield return new WaitForSeconds(_timeDeath);
+        UIInstance.instance.blackFilter.Play("FadeIn");
+        yield return new WaitForSeconds(1);
         StartCoroutine(Respawn());
     }
 
@@ -259,6 +274,8 @@ public class PlayerManager : MonoBehaviour, Damageable
         UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
+        UIInstance.instance.blackFilter.Play("FadeOut");
+        yield return new WaitForSeconds(1);
         IsActive = true;
         isDead = false;
     }
@@ -307,15 +324,45 @@ public class PlayerManager : MonoBehaviour, Damageable
         StartCoroutine(Hit(enemy));
     }
 
+    private void CheckShockwaveTrigger(Collider other, float length, float height, EnemyManager enemy)
+    {
+        var sphere = (SphereCollider) other;
+        
+        var distance = Vector3.Magnitude(other.transform.position - transform.position);
+        
+        if (!(distance > sphere.radius - length)) return;
+        if (!(transform.position.y < height)) return;
+
+        hitDirection = transform.position - enemy.transform.position;
+        StartCoroutine(Hit(enemy));
+    }
+
     private void CheckEnemyTrigger(Collider other)
     {
         var enemy = other.GetComponentInParent<EnemyManager>();
         var type = enemy.Machine.GetType();
-        
+
         if (type == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
         {
-            CheckShockWaveTrigger(other, enemy);
+            var machine = other.GetComponentInParent<MC_StateMachine>();
+            CheckShockwaveTrigger(other, machine.attackAreaLength,machine.attackArea.transform.position.y + machine.attackAreaHeight, machine.enemyManager);
+            
+            //CheckShockWaveTrigger(other, enemy);
             return;
+        }
+
+        if (type == typeof(HM_StateMachine)) // Si c'est la Mémoire de Hope
+        {
+            if (enemy.Machine.attackArea.activeSelf) // Si le collider de l'attaque est activé = c'est une shockwave
+            {
+                var machine = other.GetComponentInParent<HM_StateMachine>();
+                CheckShockwaveTrigger(other, machine.attackAreaLength,machine.attackArea.transform.position.y + machine.attackAreaHeight, machine.enemyManager);
+                
+                return;
+            }
+            // C'est la charge
+
+            hitDirection = transform.position - enemy.transform.position;
         }
         else if (type == typeof(TC_StateMachine)) // Si c'est un mur
         {
@@ -333,7 +380,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         {
             hitDirection = transform.position - enemy.transform.position;
         }
-        
+
         StartCoroutine(Hit(enemy));
     }
 
@@ -342,6 +389,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         CheckEventTriggerStay(other);
         if (other.CompareTag("MaxLifeItem"))
         {
+            _getHeartItemEvent?.Invoke();
             other.GetComponent<HeartItem>().GetItem();
         }
     }

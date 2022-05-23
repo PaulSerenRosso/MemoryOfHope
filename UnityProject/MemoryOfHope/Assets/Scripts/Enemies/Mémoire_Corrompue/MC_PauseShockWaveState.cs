@@ -17,7 +17,7 @@ public class MC_PauseShockWaveState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
-
+        base.StartState(enemyMachine);
         if (_rightAnimationAttack)
         {
             _rightAnimationAttack = false;

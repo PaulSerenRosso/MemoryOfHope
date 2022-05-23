@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameEvent", menuName = "Event/GameEvent/Camera/CameraZoomGameEvent", order = 1)]

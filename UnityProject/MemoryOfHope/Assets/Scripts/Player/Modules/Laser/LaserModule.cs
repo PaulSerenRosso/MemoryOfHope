@@ -9,9 +9,11 @@ public class LaserModule : Module
     //est ce que je peux utiliser mon laser en meme temps que de recevoir un laser
     // il se passe quoi quand j'ai plus de laser
     // ui comment je gère
-    
+
     //ui 
+    [SerializeField] private AudioClip _costLaserSound;
     [SerializeField] private ShieldManager _shield;
+
     public override void Cancel()
     {
         Release();
@@ -19,20 +21,34 @@ public class LaserModule : Module
 
     public override bool Conditions()
     {
-        if (!base.Conditions()){ Release(); return false;}
+        if (!base.Conditions())
+        {
+            Release();
+            return false;
+        }
 
         if (PlayerManager.instance.isHit)
         {
-            Release(); return false; 
+            Release();
+            return false;
         }
 
-        if (_shield.LaserCharge < _shield.LaserChargeCost*Time.deltaTime) {Release(); return false;}
+        if (_shield.LaserCharge < _shield.LaserChargeCost * Time.deltaTime)
+        {
+            Release();
+            return false;
+        }
+
         if (!PlayerController.instance.onGround)
-        {Release(); return false;} 
-        
-        
+        {
+            Release();
+            return false;
+        }
+
+
         return true;
     }
+
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.Laser.canceled += InputReleased;
@@ -41,9 +57,8 @@ public class LaserModule : Module
         UIInstance.instance.LaserSlider.gameObject.SetActive(true);
         UIInstance.instance.LaserSlider.value = _shield.LaserCharge;
         UIInstance.instance.LaserSlider.maxValue = _shield.MaxLaserCharge;
-
     }
-    
+
     private void OnDisable()
     {
         UnlinkModule();
@@ -69,32 +84,26 @@ public class LaserModule : Module
 
     public override void Execute()
     {
-        
         isPerformed = true;
         if (_shield.InputShield)
         {
-        
             _shield.inputLaser = true;
             _shield.Laser.enabled = true;
-                    _shield.Laser.IsActive = true;
-                    _shield.LaserCharge -= _shield.LaserChargeCost * Time.deltaTime;
+            _shield.Laser.IsActive = true;
+            _shield.LaserCharge -= _shield.LaserChargeCost * Time.deltaTime;
         }
-        
-        
     }
 
     public override void Release()
     {
-     
+        if (!PlayerManager.instance.MainAudioSource.isPlaying)
+        {
+            PlayerManager.instance.MainAudioSource.clip = _costLaserSound;
+            PlayerManager.instance.MainAudioSource.Play();
+        }
+
         _shield.inputLaser = false;
-        _shield.Laser.IsActive = false; 
+        _shield.Laser.IsActive = false;
         isPerformed = false;
-  
-
     }
-
-
-
-    
 }
-

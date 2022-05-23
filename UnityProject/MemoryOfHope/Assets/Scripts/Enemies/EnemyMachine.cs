@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyMachine : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class EnemyMachine : MonoBehaviour
     public GameObject attackArea;
     public Vector3 hitDirection;
     public bool isHit = false;
+    [SerializeField] private UnityEvent _laserContactEvent;
+    [SerializeField] private UnityEvent _meleDamageEvent;
+    [SerializeField] private UnityEvent _meleNoDamageEvent;
 
     #endregion
 
@@ -68,16 +72,18 @@ public class EnemyMachine : MonoBehaviour
 
         if (enemyManager.canBeHitByMelee)
         {
+            _meleDamageEvent?.Invoke();
             enemyManager.TakeDamage(attack.damage);
         }
         else
-        {
+        { _meleNoDamageEvent?.Invoke();
             enemyManager.HitNoDamage();
         }
     }
 
     public virtual void OnHitByLaser()
     {
+       
         // Inflige damage aux songes
     }
 

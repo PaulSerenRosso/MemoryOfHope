@@ -8,7 +8,7 @@ public class MC_DefaultState : EnemyState
 
 
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
     }

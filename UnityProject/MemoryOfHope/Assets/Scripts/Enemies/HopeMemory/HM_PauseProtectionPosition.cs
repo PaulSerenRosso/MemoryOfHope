@@ -10,6 +10,7 @@ public class HM_PauseProtectionPosition : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }

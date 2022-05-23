@@ -11,7 +11,7 @@ public class S_HidingState : EnemyState
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
-    {
+    { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.Play("Despawn");
         enemyMachine.agent.isStopped = true;
         timer = 0;
