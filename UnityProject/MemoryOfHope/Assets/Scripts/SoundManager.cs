@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     [SerializeField] private AudioSource _UIAudioSource;
-    private Dictionary<string, AudioClip> _UISounds;
+    private Dictionary<string, AudioClip> _UISounds = new Dictionary<string, AudioClip>();
     
     public Dictionary<string, Slider> SoundSliders= new Dictionary<string, Slider>();
     [SerializeField] private AudioSource _musicSource;

@@ -85,6 +85,8 @@ public class UIInstance : MonoBehaviour
 
     public List<UIDisplayText> allTextsOnScreen;
 
+    [SerializeField] private SoundUtilities _utilities;
+    
     private bool _inTimerEvent;
     private float _timerEventValue;
 
@@ -234,8 +236,9 @@ public class UIInstance : MonoBehaviour
     {
         if (!PlayerManager.instance.IsActive) return;
         if (informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf) return;
+        
+        _utilities.PlayUISound("UI-02");
         SetCanvasOnDisplay(informationMenuHiddenCanvas, false);
-
         hp_m14Text.text = $"HP-M14 - V{respawnCount}.0";
         informationWindow.SetActive(true);
         eventSystem.SetSelectedGameObject(informationMenuFirstSelected);
@@ -247,6 +250,7 @@ public class UIInstance : MonoBehaviour
         if (!informationWindow.activeSelf) return;
         //if (actualModuleGUI != null) StartCoroutine(UnselectModuleGUI(actualModuleGUI));
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
+        _utilities.PlayUISound("UI-04");
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         SettingPlayerState();
@@ -349,6 +353,7 @@ public class UIInstance : MonoBehaviour
     {
         if (!PlayerManager.instance.IsActive) return;
         if (pauseMenu.activeSelf) return;
+        _utilities.PlayUISound("UI-02");
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(pauseMenuFirstSelected);
         SettingPlayerState();
@@ -362,6 +367,7 @@ public class UIInstance : MonoBehaviour
     public void ClosingPauseMenu(InputAction.CallbackContext ctx)
     {
         if (!pauseMenu.activeSelf) return;
+        _utilities.PlayUISound("UI-04");
         pauseMenu.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         SettingPlayerState();
@@ -415,6 +421,7 @@ public class UIInstance : MonoBehaviour
     public void ClosingOptionMenu(InputAction.CallbackContext ctx)
     {
         if (!optionMenu.activeSelf) return;
+        _utilities.PlayUISound("UI-04");
         optionMenu.SetActive(false);
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(optionButton);
