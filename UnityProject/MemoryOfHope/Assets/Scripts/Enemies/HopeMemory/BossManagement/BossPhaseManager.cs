@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -51,8 +50,8 @@ public class BossPhaseManager : MonoBehaviour
     private void Update()
     {
         if (!hasBattleBegun) return;
-        if(currentPhase == null) return;
-        
+        if (currentPhase == null) return;
+
         if (currentPhase.currentWave == null) return;
         if (currentPhase.currentWave.IsWaveCleared())
         {
@@ -62,12 +61,12 @@ public class BossPhaseManager : MonoBehaviour
 
     public void BeginsBattle()
     {
-        // Le boss est activé
         allPhases.Clear();
         foreach (var phase in allPhasesSO)
         {
             allPhases.Add(phase);
         }
+
         bossStateMachine.ActivateBehaviour();
         hasBattleBegun = true;
     }
@@ -129,7 +128,6 @@ public class BossPhaseManager : MonoBehaviour
 
     public void SetPuzzle(BossPuzzleType difficulty)
     {
-        
         switch (difficulty)
         {
             case BossPuzzleType.Easy:
@@ -142,11 +140,12 @@ public class BossPhaseManager : MonoBehaviour
                     foreach (var tr in trs) tr.localPosition = Vector3.zero;
                     box.position = towersInitPos[i].position;
                     box.position = new Vector3(box.position.x, posY, box.position.z);
-                    
+
                     box.gameObject.SetActive(true);
                 }
+
                 break;
-            
+
             case BossPuzzleType.Hard:
                 // On les place de manière aléatoire et on les fait apparaître
                 List<Transform> transformRandom = new List<Transform>();
@@ -162,9 +161,10 @@ public class BossPhaseManager : MonoBehaviour
                     box.position = randomPos.position;
                     box.position = new Vector3(box.position.x, posY, box.position.z);
                     transformRandom.Remove(randomPos);
-                    
+
                     box.gameObject.SetActive(true);
                 }
+
                 break;
         }
     }
@@ -172,5 +172,6 @@ public class BossPhaseManager : MonoBehaviour
 
 public enum BossPuzzleType
 {
-    Easy, Hard
+    Easy,
+    Hard
 }

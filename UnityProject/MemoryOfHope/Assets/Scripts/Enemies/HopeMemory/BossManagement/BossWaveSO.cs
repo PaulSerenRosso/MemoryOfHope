@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class BossWaveSO : ScriptableObject
     [SerializeField] private float durationBetweenSpawns;
 
     [SerializeField] private List<EnemyManager> enemiesInWave = new List<EnemyManager>();
-    
+
     public void SpawningEnemies()
     {
         enemiesInWave.Clear();
@@ -19,7 +18,7 @@ public class BossWaveSO : ScriptableObject
         {
             availablePos.Add(BossPhaseManager.instance.spawningPoints[index].position);
         }
-        
+
         foreach (var enemy in spawningEnemies)
         {
             if (enemy == null) continue;
@@ -37,7 +36,6 @@ public class BossWaveSO : ScriptableObject
         foreach (var enemy in enemiesInWave)
         {
             if (!enemy.isDead) return false;
-            
         }
 
         return true;
