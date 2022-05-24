@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<int> currentModuleUpdate;
     [SerializeField] private List<int> currentModuleFixed;
 
+    [SerializeField] private List<Module> _movmentModule;
     #endregion
 
     #region PlayerComponent
@@ -65,7 +68,16 @@ public class PlayerController : MonoBehaviour
     public Vector3 currentNormalGround;
     private Collider currentGround;
     private Collider currentWall;
-    
+
+    bool _inMoveGround;
+    private Vector3 _previousPositionMoveGround;
+    public Vector3 _currentPositionMoveGround;
+    private Vector3 _velocityMoveGround;
+    private bool _previousPositionSet;
+    private Vector3 _playerlocalPositionMoveGround;
+  
+Transform _moveGround;
+
     private bool _useCheckGround;
 
 
@@ -148,6 +160,7 @@ public class PlayerController : MonoBehaviour
         CalculateUndoVelocity();
         CalculateCurrentVelocity();
         CalculateUndoVelocity();
+        CalculateMovmentGround();
         CalculateVelocityWithUndo();
         CalculateGravity();
         CheckNormals();
@@ -155,20 +168,24 @@ public class PlayerController : MonoBehaviour
 
     void CalculateUndoVelocity()
     {
-        if (undoVelocity != Vector3.zero)
-        {
-            physicsFactor = oldVelocity - playerRb.velocity;
-            if (physicsFactor.magnitude <= undoVelocity.magnitude)
-            {
-                undoVelocity += physicsFactor;
-                finalVelocity += undoVelocity;
-            }
+     
+                    physicsFactor = oldVelocity - playerRb.velocity;
+            
+            
+                    if (physicsFactor.magnitude <= undoVelocity.magnitude)
+                    {
+                        undoVelocity += physicsFactor;
+                        finalVelocity += undoVelocity;
+                    }
+            
+                    undoVelocity = Vector3.zero;
+        
 
-            undoVelocity = Vector3.zero;
-        }
     }
 
     void CalculateCurrentVelocity()
+
+
     {
         if (currentVelocity != Vector3.zero)
         {
@@ -195,26 +212,73 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void CalculateMovmentGround()
+    {
+        if (!_inMoveGround) return;
+
+        if (_previousPositionSet)
+        {
+            _velocityMoveGround =  _moveGround.transform.TransformPoint( _playerlocalPositionMoveGround ) -
+                                   _currentPositionMoveGround;;
+            _currentPositionMoveGround = playerRb.position;
+            _playerlocalPositionMoveGround = _moveGround.InverseTransformPoint(_currentPositionMoveGround);
+            _velocityMoveGround /= Time.deltaTime;
+            currentVelocityWithUndo += _velocityMoveGround;
+        
+        }
+
+        else
+        {
+            _currentPositionMoveGround = playerRb.position;
+            _previousPositionSet = true;
+            _velocityMoveGround = Vector3.zero;
+            _playerlocalPositionMoveGround = _moveGround.InverseTransformPoint(_currentPositionMoveGround);
+        }
+    }
+
+    public void SetMoveGround(Transform moveGround)
+    {
+        _moveGround = moveGround;
+        _inMoveGround = true;
+        _previousPositionSet = false;
+       
+    }
+
+    public void ResetMoveGround()
+    {
+        _inMoveGround = false;
+    }
+
+
     void CheckNormals()
     {
         playerRb.velocity += finalVelocity;
+ 
         oldVelocity = playerRb.velocity;
+
 
         if (onGround && stuckGround)
         {
+            
             projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
             alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
             projectionRB *= alignedSpeed;
-            playerRb.velocity = projectionRB;
+          
+            
+                playerRb.velocity = projectionRB;
+            
         }
         else if (!onGround && currentWall != null)
         {
             if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
             {
+                
                 projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
                 alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
                 projectionRB *= alignedSpeed;
+
                 playerRb.velocity = projectionRB;
+                
             }
         }
     }
@@ -406,15 +470,14 @@ public class PlayerController : MonoBehaviour
 
     public void CancelAllModules()
     {
-  
         for (int i = 0; i < activeModulesFixed.Count; i++)
         {
-
             if (activeModulesFixed[i].isPerformed)
             {
                 activeModulesFixed[i].Cancel();
             }
         }
+
         for (int i = 0; i < activeModulesUpdate.Count; i++)
         {
             if (activeModulesUpdate[i].isPerformed)
@@ -423,6 +486,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
-    
 }
