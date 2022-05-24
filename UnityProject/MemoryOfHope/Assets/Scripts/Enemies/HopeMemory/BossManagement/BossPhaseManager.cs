@@ -39,12 +39,13 @@ public class BossPhaseManager : MonoBehaviour
 
     public void RotateSphere()
     {
+        if (currentPhase == null) return;
         rotatingSphere.eulerAngles += Vector3.up * currentPhase.rotatingSphereSpeed;
     }
 
     private void FixedUpdate()
     {
-        BossPhaseManager.instance.RotateSphere();
+        RotateSphere();
     }
 
     private void Update()
