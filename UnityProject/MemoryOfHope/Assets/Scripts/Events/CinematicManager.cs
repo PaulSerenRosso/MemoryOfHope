@@ -18,6 +18,7 @@ public class CinematicManager : MonoBehaviour
 
     [SerializeField] private bool _inCutScene;
 
+    
     [SerializeField] Slider _skipSlider;
     [SerializeField] private float _skipSliderSpeed;
 
@@ -84,7 +85,7 @@ public class CinematicManager : MonoBehaviour
         
         UIInstance.instance.SetCanvasOnDisplay(_canvasOutCinematic, false);
         UIInstance.instance.SetCanvasOnDisplay(_canvasInCinematic, true);
-        
+        _skipSlider.transform.parent.gameObject.SetActive(true);
         StartCoroutine(WaitForLoadCinematic(index));
     }
 
@@ -104,7 +105,7 @@ public class CinematicManager : MonoBehaviour
         DialogueManager.Instance.EndDialogue();
         DialogueManager.Instance.StopAllCoroutines();
         PlayerManager.instance.speedEffect.gameObject.SetActive(true);
-
+        _skipSlider.transform.parent.gameObject.SetActive(false);
         StartCoroutine(WaitForLoadGamePhase());
     }
 

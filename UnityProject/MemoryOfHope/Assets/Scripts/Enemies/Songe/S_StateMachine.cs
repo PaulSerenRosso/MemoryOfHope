@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,8 @@ public class S_StateMachine : EnemyMachine
     #region Variables
 
     public Vector3 initialPosition;
-    
+    [SerializeField]
+    private GameObject[] _renderers;
     float _damageLaserTimer;
     
     [Header("Parameters")] [SerializeField]
@@ -40,7 +42,7 @@ public class S_StateMachine : EnemyMachine
     public S_HidingState hidingState = new S_HidingState(); // despawn
 
     public S_HitState hitState = new S_HitState();  //damage
-
+    [SerializeField]float _startHidenTime;
     #endregion
 
     #region Gizmos
@@ -60,9 +62,24 @@ public class S_StateMachine : EnemyMachine
 
     public override void Start()
     {
+    for (var i = 0; i < _renderers.Length; i++)
+    {
+        _renderers[i].SetActive(false);
+    }
         initialPosition = transform.position;
         currentState = hidingState;
         base.Start();
+        StartCoroutine(WaitForEndHiddenState());
+
+    }
+
+    IEnumerator WaitForEndHiddenState()
+    {
+        yield return new WaitForSeconds(_startHidenTime);
+        for (var i = 0; i < _renderers.Length; i++)
+        {
+            _renderers[i].SetActive(true);
+        }
     }
 
     public override void OnHitByMelee()
@@ -80,13 +97,15 @@ public class S_StateMachine : EnemyMachine
     {
         base.OnTriggerEnter(other);
 
+        /*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
             StartCoroutine(PlayerManager.instance.Hit(enemyManager));
         }
+        */
 
-        if (other.CompareTag("Player") || other.CompareTag("Shield"))
+        if (other.CompareTag("Player") /*|| other.CompareTag("Shield")*/)
         {
             Debug.Log("Songe hits the player");
             hitDirection = transform.position - PlayerController.instance.transform.position;
@@ -118,10 +137,12 @@ public class S_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
+        /*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = false;
         }
+        */
     }
 
     public override void OnCollisionEnter(Collision other)

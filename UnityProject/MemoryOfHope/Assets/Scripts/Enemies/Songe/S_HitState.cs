@@ -37,7 +37,7 @@ public class
         
         if (ConditionState.Timer(durationHitStunned, timer))
         {
-            enemyMachine.enemyManager.isBlocked = false; 
+          //  enemyMachine.enemyManager.isBlocked = false; 
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;
