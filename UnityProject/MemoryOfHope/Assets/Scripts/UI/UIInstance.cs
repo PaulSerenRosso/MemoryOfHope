@@ -85,6 +85,9 @@ public class UIInstance : MonoBehaviour
 
     public List<UIDisplayText> allTextsOnScreen;
 
+    private bool _inTimerEvent;
+    private float _timerEventValue;
+
     #endregion
 
     private void Start()
@@ -498,27 +501,55 @@ public class UIInstance : MonoBehaviour
             GameManager.instance.inputs.UI.OpenInformationMenu.Enable();
         }
     }
+
+    void Update()
+    {
+        if (_inTimerEvent)
+        {
+            if (_timerEventValue > 0)
+            {
+                       _timerEventValue -= Time.deltaTime;
+                            _timerEvent.text = Mathf.RoundToInt(_timerEventValue).ToString();
+            }
+            else
+            {
+                DeactivateTimerUI();
+                
+            }
+     
+        }
+    }
 public void ActivateTimerUI(ListenerTriggerTimer listenerTriggerTimer)
 {
 _timerEventUI.SetActive(true);
-_timerEvent.text = listenerTriggerTimer._eventTimers[listenerTriggerTimer._eventTimers.Length - 1].Time.ToString();
+_inTimerEvent = true;
+_timerEventValue = listenerTriggerTimer._eventTimers[listenerTriggerTimer._eventTimers.Length - 1].Time;
+_timerEvent.text = _timerEventValue.ToString();
 }
 
 public void DeactivateTimerUI()
 {
+    _inTimerEvent = false; 
     _timerEventUI.SetActive(false);
+    
 }
 
 public void ActivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
     _batteriesCountUI.SetActive(true);
-    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount.ToString();
+    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
 }
+
+public void DeactivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
+{
+    _batteriesCountUI.SetActive(false);
+}
+
 
 
 public void UpdateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
-    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount.ToString();
+    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
 }
 }
 

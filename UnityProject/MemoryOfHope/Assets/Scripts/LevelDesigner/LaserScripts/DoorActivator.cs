@@ -44,6 +44,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
+          
             currentDoor.ActivedActivatorsCount--;
             DeactiveEvent?.Invoke();
             _triggerByLaser = false;

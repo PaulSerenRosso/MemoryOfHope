@@ -22,8 +22,9 @@ public class DoorLaserMultiple : MonoBehaviour
         }
         set
         {
-            updateActivatorCount?.Invoke();
             _activedActivatorCount = value;
+            updateActivatorCount?.Invoke();
+            
         }
     }
     [SerializeField] private AudioSource _audioSource;
