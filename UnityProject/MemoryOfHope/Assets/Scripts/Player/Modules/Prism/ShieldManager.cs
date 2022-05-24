@@ -6,7 +6,9 @@ public class ShieldManager : MonoBehaviour, Damageable
 {
     [SerializeField] private MeshRenderer _mesh;
     [SerializeField] private Collider _collider;
- 
+
+    public bool isTutorial;
+    [SerializeField] private TutorialGameEvent reloadTuto;
 
     public float MaxLaserCharge;
     public float _laserCharge;
@@ -20,6 +22,11 @@ public class ShieldManager : MonoBehaviour, Damageable
         get { return _laserCharge; }
         set
         {
+            if (isTutorial && value > _laserCharge)
+            {
+                reloadTuto.RemoveTutorial();
+                isTutorial = false;
+            }
             _laserCharge = Mathf.Min(value, MaxLaserCharge);
             UIInstance.instance.LaserSlider.value = value;
         }
@@ -105,6 +112,7 @@ public class ShieldManager : MonoBehaviour, Damageable
 
     private void Update()
     {
+        
         if (isDead)
         {
             if (timeDeath > timerDeath)
@@ -123,9 +131,12 @@ public class ShieldManager : MonoBehaviour, Damageable
                     _mesh.enabled = true;
                     _collider.enabled = true;
                 }
-
+                
+                
                 Heal(maxHealth);
             }
         }
+
+        
     }
 }
