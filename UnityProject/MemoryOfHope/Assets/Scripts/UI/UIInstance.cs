@@ -73,6 +73,10 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject optionMenuFirstSelected;
     [SerializeField] private TMP_Dropdown languageDropdown;
 
+    [Header("Event UI")] [SerializeField] TextMeshProUGUI _batteriesCount;
+    [SerializeField] private GameObject _batteriesCountUI;
+    [SerializeField] private GameObject _timerEventUI;
+    [SerializeField] private TextMeshProUGUI _timerEvent;
 
     [Header("Boss Canvas")] public Slider bossLifeGauge;
     public Image fillImage;
@@ -494,7 +498,30 @@ public class UIInstance : MonoBehaviour
             GameManager.instance.inputs.UI.OpenInformationMenu.Enable();
         }
     }
+public void ActivateTimerUI(ListenerTriggerTimer listenerTriggerTimer)
+{
+_timerEventUI.SetActive(true);
+_timerEvent.text = listenerTriggerTimer._eventTimers[listenerTriggerTimer._eventTimers.Length - 1].Time.ToString();
 }
+
+public void DeactivateTimerUI()
+{
+    _timerEventUI.SetActive(false);
+}
+
+public void ActivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
+{
+    _batteriesCountUI.SetActive(true);
+    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount.ToString();
+}
+
+
+public void UpdateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
+{
+    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount.ToString();
+}
+}
+
 
 public enum InGameCanvasType
 {

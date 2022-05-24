@@ -5,7 +5,9 @@ public class DoorActivator : MonoBehaviour, IReturnable
 {
     [SerializeField] private DoorLaserMultiple currentDoor;
 
+    
   public UnityEvent ActiveEvent;
+  public UnityEvent DeactiveEvent;
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -42,6 +44,8 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
+            currentDoor.ActivedActivatorsCount--;
+            DeactiveEvent?.Invoke();
             _triggerByLaser = false;
             _currentSource = null;
         }
@@ -51,6 +55,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
+            currentDoor.ActivedActivatorsCount++;
             _triggerByLaser = true;
             _currentSource = laser;
             currentDoor.CheckActivator();

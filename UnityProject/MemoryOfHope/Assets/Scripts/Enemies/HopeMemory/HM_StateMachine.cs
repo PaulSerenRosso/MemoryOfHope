@@ -109,14 +109,16 @@ public class HM_StateMachine : EnemyMachine
             OnHitByMelee();
         }
 
+        /*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
         }
+        */
 
         if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected)
         {
-            if (other.CompareTag("Player") || other.CompareTag("Shield"))
+            if (other.CompareTag("Player") /*|| other.CompareTag("Shield")*/)
             {
                 hitDirection = transform.position - PlayerController.instance.transform.position;
                 StartCoroutine(PlayerManager.instance.Hit(enemyManager));
@@ -132,10 +134,12 @@ public class HM_StateMachine : EnemyMachine
     {
         if (!isActive) return;
 
+        /*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = false;
         }
+        */
     }
 
     public override void OnCollisionEnter(Collision other)

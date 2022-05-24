@@ -73,11 +73,12 @@ public class MC_StateMachine : EnemyMachine
             if(enemyManager.isDead)
             Debug.Log("tatatatata");
         }
-
+/*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
         }
+        */
     }
 
     public override void OnTriggerStay(Collider other)
@@ -86,10 +87,12 @@ public class MC_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
+        /*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = false;
         }
+        */
     }
 
     public override void OnCollisionEnter(Collision other)
