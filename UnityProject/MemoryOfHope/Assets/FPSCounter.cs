@@ -5,7 +5,6 @@ public class FPSCounter : MonoBehaviour
 {
     private TextMeshProUGUI text;
     private float deltaTime;
-    
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
