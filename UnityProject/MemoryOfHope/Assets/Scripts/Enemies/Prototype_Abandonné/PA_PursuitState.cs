@@ -10,7 +10,7 @@ public class PA_PursuitState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
-        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
+        
         enemyMachine.agent.isStopped = false;
         enemyMachine.attackArea.SetActive(false);
     }
