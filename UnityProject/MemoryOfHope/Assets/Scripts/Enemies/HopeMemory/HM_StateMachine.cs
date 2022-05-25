@@ -3,27 +3,43 @@ using System.Collections.Generic;
 
 public class HM_StateMachine : EnemyMachine
 {
+
+    private List<EnemyState> damageAnimationState = new List<EnemyState>();
     #region States
 
     [Header("Vulnerable State")]
+    // IDLE
     public HM_VulnerableDefaultState vulnerableDefaultState = new HM_VulnerableDefaultState();
 
+    // WALK
     public HM_VulnerableMoveState vulnerableMoveState = new HM_VulnerableMoveState();
+    
+    // CHARGE RUN
     public HM_VulnerableChargeState vulnerableChargeState = new HM_VulnerableChargeState();
+    //idle
     public HM_CooldownState cooldownState = new HM_CooldownState();
+    
+    
     public HM_VulnerableShockwaveState vulnerableShockwaveState = new HM_VulnerableShockwaveState();
 
+    //idle
     public HM_PauseVulnerableMove pauseVulnerableMove = new HM_PauseVulnerableMove();
+    // debut de charge, shockwave
     public HM_PauseVulnerableAttack pauseVulnerableAttack = new HM_PauseVulnerableAttack();
 
+    //hit 
     public HM_VulnerableHitState vulnerableHitState = new HM_VulnerableHitState();
 
     [Header("Protection State")]
+    //idle
     public HM_ProtectionDefaultState protectionDefaultState = new HM_ProtectionDefaultState();
 
+    //fin tp
     public HM_ProtectionPositionState protectionPositionState = new HM_ProtectionPositionState();
+  // idle taunt
     public HM_ProtectionProtectedState protectionProtectedState = new HM_ProtectionProtectedState();
 
+    //debut tp
     public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
     
     #endregion
@@ -44,6 +60,13 @@ public class HM_StateMachine : EnemyMachine
 
     #region State Machine Main Functions
 
+    void Awake()
+    {
+        damageAnimationState.Add(vulnerableMoveState);
+        damageAnimationState.Add(pauseVulnerableMove);
+        damageAnimationState.Add(vulnerableDefaultState);
+        damageAnimationState.Add(vulnerableHitState);
+    }
     public override void Start()
     {
         isActive = false;
@@ -84,12 +107,30 @@ public class HM_StateMachine : EnemyMachine
     {
         base.OnHitByMelee();
 
+        if (BossPhaseManager.instance.currentPhase == null) return;
         if (BossPhaseManager.instance.currentPhase.phaseType != PhaseType.Vulnerable) return;
-        
-        if (_isCurrentAttackKnockback)
+        if (CheckDamageAnimationStateEqualCurrentState())
         {
-            SwitchState(vulnerableHitState);
+                enemyManager.Animator.Play("Damage");
+                    if (_isCurrentAttackKnockback)
+                    {
+                        SwitchState(vulnerableHitState);
+                    }
         }
+    
+    }
+
+    bool CheckDamageAnimationStateEqualCurrentState()
+    {
+        for (int i = 0; i < damageAnimationState.Count; i++)
+        {
+            if (damageAnimationState[i] == currentState)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #endregion

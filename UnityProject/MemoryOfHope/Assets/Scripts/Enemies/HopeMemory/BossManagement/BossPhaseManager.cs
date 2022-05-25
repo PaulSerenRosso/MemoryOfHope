@@ -89,6 +89,14 @@ public class BossPhaseManager : MonoBehaviour
         if (currentPhase != null) allPhases.Remove(currentPhase);
         if (allPhases.Count == 0) return;
         currentPhase = allPhases[0];
+        
+        foreach (var enemy in allEnemiesInBossRoom)
+        {
+            if (!enemy.gameObject.activeSelf) continue;
+            enemy.TakeDamage(enemy.maxHealth);
+            //enemy.gameObject.SetActive(false);
+        }
+
         switch (currentPhase.phaseType)
         {
             case PhaseType.Vulnerable:
@@ -162,7 +170,7 @@ public class BossPhaseManager : MonoBehaviour
         UIInstance.instance.SetBossDisplay(bossStateMachine.enemyManager, false);
 
         currentPhase = null;
-        
+
         foreach (var enemy in allEnemiesInBossRoom)
         {
             if (!enemy.gameObject.activeSelf) continue;

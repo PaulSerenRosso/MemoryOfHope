@@ -11,6 +11,7 @@ public class HM_VulnerableDefaultState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsMove",  false);
         BossPhaseManager.instance.SetNextPhase();
         enemyMachine.enemyManager.canBeHitByMelee = true;
         enemyMachine.attackArea.SetActive(false);

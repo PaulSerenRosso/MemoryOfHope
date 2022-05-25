@@ -10,6 +10,9 @@ public class HM_PauseProtectionPosition : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsProtected", true);
+        enemyMachine.enemyManager.Animator.Play("BeginTp");
+        enemyMachine.enemyManager.Animator.SetBool("EndTp", false);
         base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         timer = 0;
@@ -21,6 +24,7 @@ public class HM_PauseProtectionPosition : EnemyState
         
         if (ConditionState.Timer(durationBeforePosition, timer))
         {
+            enemyMachine.enemyManager.Animator.SetBool("EndTp", true);
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.protectionPositionState);
         }
