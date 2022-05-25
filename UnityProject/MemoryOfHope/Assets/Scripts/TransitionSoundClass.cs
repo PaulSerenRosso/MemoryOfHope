@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class TransitionSoundClass
 {
+    [SerializeField] private string _name;
     public AudioClip FinalAudio;
     public float SpeedToMinVolume;
     public float SpeedToMaxVolume;
