@@ -8,7 +8,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
     
   public UnityEvent ActiveEvent;
   public UnityEvent DeactiveEvent;
-    public virtual bool IsReturnLaser
+  public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
         set { _triggerByLaser = value; }
@@ -24,6 +24,8 @@ public class DoorActivator : MonoBehaviour, IReturnable
 
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
+
+    [SerializeField] private ParticleSystem particles;
 
     public void StartReturnableFeedBack()
     {
@@ -44,7 +46,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
-          
+            particles.Stop();
             currentDoor.ActivedActivatorsCount--;
             DeactiveEvent?.Invoke();
             _triggerByLaser = false;
@@ -56,6 +58,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
+            particles.Play();
             currentDoor.ActivedActivatorsCount++;
             _triggerByLaser = true;
             _currentSource = laser;
