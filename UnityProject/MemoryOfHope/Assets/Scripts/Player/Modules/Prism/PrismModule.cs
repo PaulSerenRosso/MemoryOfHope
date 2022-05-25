@@ -64,7 +64,7 @@ public class PrismModule : Module
             return false; // Ne peut pas faire le prisme si le joueur est knockback
         }
 
-        if (!PlayerController.instance.onGround || (_shield.isDead && !isActivate)) return false;
+        if (!PlayerController.instance.onGround/* || (_shield.isDead && !isActivate)*/) return false;
         return true;
     }
 
@@ -92,13 +92,14 @@ public class PrismModule : Module
             isTutorial = false;
             prismTutorial.RemoveTutorial();
         }
-        
+        /*
         if (_shield.isDead)
         {
             Release();
 
             return;
         }
+        */
 
         if (!isPerformed)
         {

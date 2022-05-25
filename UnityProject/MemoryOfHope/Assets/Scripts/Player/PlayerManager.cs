@@ -83,14 +83,14 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     [Header("TakeDamage")] public Vector3 hitDirection;
     [SerializeField] private float knockbackStrength;
-    [SerializeField] private float _blockedKnockbackStrength;
+  //  [SerializeField] private float _blockedKnockbackStrength;
     [SerializeField] private float hitDuration;
     public bool isHit = false;
     [SerializeField] private float _drag;
-    [SerializeField] private float _blockedDrag;
+   // [SerializeField] private float _blockedDrag;
     public bool IsInvincible;
-    public bool isBlocked;
-    [SerializeField] float blockedDuration;
+   // public bool isBlocked;
+   // [SerializeField] float blockedDuration;
 
     #endregion
 
@@ -150,6 +150,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (!IsInvincible)
         {
             yield return new WaitForFixedUpdate();
+            /*
             if (enemy.isBlocked)
             {
                 enemy.isBlocked = false;
@@ -163,6 +164,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
                 yield break;
             }
+            */
 
             isHit = true;
             PlayerController.instance.playerAnimator.Play("Hit");
@@ -305,7 +307,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isBlocked && !isHit)
+        if (other.CompareTag("Enemy") /*&& !isBlocked */&& !isHit)
         {
             CheckEnemyTrigger(other);
         }

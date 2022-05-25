@@ -11,6 +11,8 @@ public class LaserModule : Module
     // ui comment je gère
 
     //ui 
+    private bool isTutorial;
+    [SerializeField] private TutorialGameEvent laserTutorial;
     [SerializeField] private AudioClip _costLaserSound;
     [SerializeField] private ShieldManager _shield;
 
@@ -54,6 +56,7 @@ public class LaserModule : Module
         GameManager.instance.inputs.Player.Laser.canceled += InputReleased;
         GameManager.instance.inputs.Player.Laser.performed += InputPressed;
         isLinked = true;
+        isTutorial = true;
         UIInstance.instance.LaserSlider.gameObject.SetActive(true);
         UIInstance.instance.LaserSlider.value = _shield.LaserCharge;
         UIInstance.instance.LaserSlider.maxValue = _shield.MaxLaserCharge;
@@ -87,6 +90,12 @@ public class LaserModule : Module
         isPerformed = true;
         if (_shield.InputShield)
         {
+            if (isTutorial)
+            {
+                laserTutorial.RemoveTutorial();
+                isTutorial = false;
+                _shield.isTutorial = true;
+            }
             _shield.inputLaser = true;
             _shield.Laser.enabled = true;
             _shield.Laser.IsActive = true;

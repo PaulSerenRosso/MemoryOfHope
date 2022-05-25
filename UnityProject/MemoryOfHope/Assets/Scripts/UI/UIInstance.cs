@@ -73,6 +73,10 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject optionMenuFirstSelected;
     [SerializeField] private TMP_Dropdown languageDropdown;
 
+    [Header("Event UI")] [SerializeField] TextMeshProUGUI _batteriesCount;
+    [SerializeField] private GameObject _batteriesCountUI;
+    [SerializeField] private GameObject _timerEventUI;
+    [SerializeField] private TextMeshProUGUI _timerEvent;
 
     [Header("Boss Canvas")] public Slider bossLifeGauge;
     public Image fillImage;
@@ -80,6 +84,11 @@ public class UIInstance : MonoBehaviour
     [Header("Navigation")] public EventSystem eventSystem;
 
     public List<UIDisplayText> allTextsOnScreen;
+
+    [SerializeField] private SoundUtilities _utilities;
+    
+    private bool _inTimerEvent;
+    private float _timerEventValue;
 
     #endregion
 
@@ -227,8 +236,9 @@ public class UIInstance : MonoBehaviour
     {
         if (!PlayerManager.instance.IsActive) return;
         if (informationWindow.activeSelf || pauseMenu.activeSelf || optionMenu.activeSelf) return;
+        
+        _utilities.PlayUISound("UI-02");
         SetCanvasOnDisplay(informationMenuHiddenCanvas, false);
-
         hp_m14Text.text = $"HP-M14 - V{respawnCount}.0";
         informationWindow.SetActive(true);
         eventSystem.SetSelectedGameObject(informationMenuFirstSelected);
@@ -240,6 +250,7 @@ public class UIInstance : MonoBehaviour
         if (!informationWindow.activeSelf) return;
         //if (actualModuleGUI != null) StartCoroutine(UnselectModuleGUI(actualModuleGUI));
         SetCanvasOnDisplay(informationMenuHiddenCanvas, true);
+        _utilities.PlayUISound("UI-04");
         informationWindow.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         SettingPlayerState();
@@ -342,6 +353,7 @@ public class UIInstance : MonoBehaviour
     {
         if (!PlayerManager.instance.IsActive) return;
         if (pauseMenu.activeSelf) return;
+        _utilities.PlayUISound("UI-02");
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(pauseMenuFirstSelected);
         SettingPlayerState();
@@ -355,6 +367,7 @@ public class UIInstance : MonoBehaviour
     public void ClosingPauseMenu(InputAction.CallbackContext ctx)
     {
         if (!pauseMenu.activeSelf) return;
+        _utilities.PlayUISound("UI-04");
         pauseMenu.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
         SettingPlayerState();
@@ -408,6 +421,7 @@ public class UIInstance : MonoBehaviour
     public void ClosingOptionMenu(InputAction.CallbackContext ctx)
     {
         if (!optionMenu.activeSelf) return;
+        _utilities.PlayUISound("UI-04");
         optionMenu.SetActive(false);
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(optionButton);
@@ -494,7 +508,58 @@ public class UIInstance : MonoBehaviour
             GameManager.instance.inputs.UI.OpenInformationMenu.Enable();
         }
     }
+
+    void Update()
+    {
+        if (_inTimerEvent)
+        {
+            if (_timerEventValue > 0)
+            {
+                       _timerEventValue -= Time.deltaTime;
+                            _timerEvent.text = Mathf.RoundToInt(_timerEventValue).ToString();
+            }
+            else
+            {
+                DeactivateTimerUI();
+                
+            }
+     
+        }
+    }
+public void ActivateTimerUI(ListenerTriggerTimer listenerTriggerTimer)
+{
+_timerEventUI.SetActive(true);
+_inTimerEvent = true;
+_timerEventValue = listenerTriggerTimer._eventTimers[listenerTriggerTimer._eventTimers.Length - 1].Time;
+_timerEvent.text = _timerEventValue.ToString();
 }
+
+public void DeactivateTimerUI()
+{
+    _inTimerEvent = false; 
+    _timerEventUI.SetActive(false);
+    
+}
+
+public void ActivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
+{
+    _batteriesCountUI.SetActive(true);
+    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
+}
+
+public void DeactivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
+{
+    _batteriesCountUI.SetActive(false);
+}
+
+
+
+public void UpdateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
+{
+    _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
+}
+}
+
 
 public enum InGameCanvasType
 {
