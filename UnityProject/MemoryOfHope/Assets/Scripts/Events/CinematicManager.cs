@@ -79,8 +79,12 @@ public class CinematicManager : MonoBehaviour
     public void LaunchCinematic(int index)
     {
         _fadeInOut.Play("BeginFade");
-
+        PlayerManager.instance.speedEffect.gameObject.SetActive(false);
         _skipSlider.value = 0;
+        
+        UIInstance.instance.SetCanvasOnDisplay(_canvasOutCinematic, false);
+        UIInstance.instance.SetCanvasOnDisplay(_canvasInCinematic, true);
+        
         StartCoroutine(WaitForLoadCinematic(index));
     }
 
@@ -89,8 +93,7 @@ public class CinematicManager : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         MainCameraController.Instance.MainCamera.enabled = false;
         _director.playableAsset = AllCinematics[index];
-        UIInstance.instance.SetCanvasOnDisplay(_canvasOutCinematic, false);
-        UIInstance.instance.SetCanvasOnDisplay(_canvasInCinematic, true);
+        
         InCutScene = true;
         _director.Play();
     }
@@ -100,6 +103,8 @@ public class CinematicManager : MonoBehaviour
         _fadeInOut.Play("EndFade");
         DialogueManager.Instance.EndDialogue();
         DialogueManager.Instance.StopAllCoroutines();
+        PlayerManager.instance.speedEffect.gameObject.SetActive(true);
+
         StartCoroutine(WaitForLoadGamePhase());
     }
 

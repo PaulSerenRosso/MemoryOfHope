@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 6725060030925692718}
   - component: {fileID: 2201645785281637263}
   - component: {fileID: 6006267814195861478}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: 'Shield '
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -383,12 +383,13 @@ MonoBehaviour:
   _mesh: {fileID: 6546855627693250739}
   _collider: {fileID: 6725060030925692718}
   MaxLaserCharge: 100
+  _laserCharge: 0
   _reloadShieldAudioSource: {fileID: 6006267814195861478}
   _shieldDamageEvent:
     m_PersistentCalls:
       m_Calls: []
-  LaserChargeCost: 10
   LaserChargeRegeneration: 15
+  LaserChargeCost: 10
   Laser: {fileID: 1735945226244798610}
   Mirror: {fileID: 696764172249142509}
   inputLaser: 0
@@ -663,7 +664,7 @@ GameObject:
   - component: {fileID: 696764172249142509}
   - component: {fileID: 5026034841179207460}
   - component: {fileID: 866879702564848415}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: PlayerMirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +714,7 @@ MonoBehaviour:
   _reloadLaserAudioSource: {fileID: 866879702564848415}
   Yoffset: 1
   _shield: {fileID: 2201645785281637263}
-  laserColor: {r: 0, g: 0, b: 0, a: 0}
+  laserColor: {r: 1, g: 0, b: 0, a: 1}
   prismObtained: 0
 --- !u!136 &5026034841179207460
 CapsuleCollider:
@@ -1013,18 +1014,26 @@ MonoBehaviour:
   - {fileID: 7226099581146458020}
   - {fileID: 8587865940063536777}
   - {fileID: 8256235213664230015}
-  money: 0
-  hasGlitch: 0
-  _takeDamageEvent:
+  TriggerGlitchWall:
+    m_PersistentCalls:
+      m_Calls: []
+  HasGlitchEvent:
     m_PersistentCalls:
       m_Calls: []
   MainAudioSource: {fileID: 1433364424683010403}
   CheckPointsReached:
   - {fileID: 0}
   CurrentListenerActivate: {fileID: 0}
+  speedEffect: {fileID: 0}
   defaultMaxHealthPlayer: 12
   healthPlayer: 12
+  _takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealthPlayer: 12
+  _getHeartItemEvent:
+    m_PersistentCalls:
+      m_Calls: []
   isDeadPlayer: 0
   _timeDeath: 2
   _timeRespawn: 2
@@ -1064,7 +1073,7 @@ MonoBehaviour:
   playerRb: {fileID: 7226099581146458016}
   playerAnimator: {fileID: 7708360703391377901}
   hopeCape: {fileID: 2100000, guid: 84a9c76881d09254f89a73cb60305e0c, type: 2}
-  glitchColor: {r: 1, g: 1, b: 1, a: 0}
+  glitchColor: {r: 1, g: 1, b: 1, a: 1}
   isGlitching: 0
   attackModule: {fileID: 7226099581146458022}
   defaultGravity: 20
@@ -1189,7 +1198,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpTutorial: {fileID: 0}
+  jumpTutorial: {fileID: 11400000, guid: d2184512df414c24092c2c965a679411, type: 2}
 --- !u!114 &7226099581146458022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,7 +1360,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   currentIndexAttack: 0
-  attackTutorial: {fileID: 0}
+  attackTutorial: {fileID: 11400000, guid: 7978e789bc92a994c969eb44851ad962, type: 2}
 --- !u!114 &7649947021829257087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,6 +1400,10 @@ MonoBehaviour:
   _shield: {fileID: 2201645785281637263}
   _activationTime: 0.5
   rotationSpeed: 0.3
+  prismTutorial: {fileID: 11400000, guid: d80112084aaef6848986e084f975971b, type: 2}
+  _prismPerformedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &423913510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,7 +1520,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   interactionColor: {r: 0, g: 0.18409586, b: 1, a: 1}
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
-  interactionTutorial: {fileID: 0}
+  interactionTutorial: {fileID: 11400000, guid: eb55c30aa5bc1e6458df4e2fe0d29a29, type: 2}
 --- !u!114 &423913511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1544,7 +1557,7 @@ MonoBehaviour:
   joystickDirection: {x: 0, y: 0, z: 0}
   moveVector: {x: 0, y: 0, z: 0}
   inputCam: {x: 0, y: 0}
-  range: 15
+  range: 10
   _feedbackMoveObject:
     m_PersistentCalls:
       m_Calls: []
@@ -1704,6 +1717,10 @@ MonoBehaviour:
   speedDash: 20
   speedRotation: 0.5
   cooldownDash: 0.5
+  _dashPerformedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dashTutorial: {fileID: 11400000, guid: 4ee2e2b9986ed2b48be9cfff3e6d12e0, type: 2}
 --- !u!114 &8509076338704852473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2180,10 +2197,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2268152091713842151, guid: b9cd41d2314ad04418788cc62f6da304, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 122
-      objectReference: {fileID: 0}
     - target: {fileID: 5076618733137551201, guid: b9cd41d2314ad04418788cc62f6da304, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2269,7 +2282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885518862247, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735041, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: m_RootOrder
@@ -2333,7 +2346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735042, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: IsActive
@@ -2345,23 +2358,27 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 6.86
+      value: 39.5
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: 1.01
+      value: -3.413
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 8.61
+      value: 19.55
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: RayLayer.m_Bits
-      value: 1574903
+      value: 1574399
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: DirectionSource.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5776440475107683610, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
