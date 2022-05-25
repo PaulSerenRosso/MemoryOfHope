@@ -4,14 +4,29 @@ using UnityEngine;
 public class HM_PauseVulnerableAttack : EnemyState
 {
     [Header("Parameters")]
-    [Range(0, 1)] [SerializeField] private float durationBeforeAttack;
-    
+     [SerializeField] private float durationBeforeShockWave;
+    [SerializeField] private float durationBeforeCharge;
+
+    private int rand;
     private float timer;
+    private float currentTime;
     
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
         Debug.Log("HM is about to attack !");
 
+        rand = Random.Range(0, 2);
+        if (rand == 0)
+        {
+            currentTime = durationBeforeShockWave;
+            enemyMachine.enemyManager.Animator.Play("ShockWave");
+        }
+        else
+        {
+            enemyMachine.enemyManager.Animator.SetBool("EndCharge", false);
+            currentTime = durationBeforeCharge;
+            enemyMachine.enemyManager.Animator.Play("BeginCharge");
+        }
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }
@@ -20,10 +35,10 @@ public class HM_PauseVulnerableAttack : EnemyState
     {
         timer += Time.deltaTime;
         
-        if (ConditionState.Timer(durationBeforeAttack, timer))
+        if (ConditionState.Timer(currentTime, timer))
         {
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
-            if (Random.Range(0, 2) == 0)
+            if (rand == 0)
             {
                 enemy.SwitchState(enemy.vulnerableShockwaveState);
             }

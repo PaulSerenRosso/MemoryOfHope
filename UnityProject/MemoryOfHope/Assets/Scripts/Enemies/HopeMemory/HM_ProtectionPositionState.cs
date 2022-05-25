@@ -5,7 +5,7 @@ using UnityEngine;
 public class HM_ProtectionPositionState : EnemyState
 {
     private Vector3 initialPos;
-    
+    //timer dans la start 
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;

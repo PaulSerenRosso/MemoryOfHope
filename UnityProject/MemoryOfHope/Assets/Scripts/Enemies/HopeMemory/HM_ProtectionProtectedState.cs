@@ -22,7 +22,7 @@ public class HM_ProtectionProtectedState : EnemyState
         {
             if (!tower.isDead) return;
         }
-        
+        enemyMachine.enemyManager.Animator.SetBool("IsProtected", false);
         machine.SwitchState(machine.vulnerableDefaultState);
     }
 }

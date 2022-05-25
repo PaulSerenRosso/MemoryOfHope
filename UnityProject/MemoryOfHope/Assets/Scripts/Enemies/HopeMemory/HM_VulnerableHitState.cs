@@ -5,7 +5,7 @@ using UnityEngine;
 public class HM_VulnerableHitState : EnemyState
 {
     [Header("Parameters")]
-    [Range(0, 1)] [SerializeField] private float durationHitStunned;
+    [SerializeField] private float durationHitStunned;
 
     [SerializeField] private float drag;
     
