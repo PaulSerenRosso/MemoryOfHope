@@ -15,9 +15,18 @@ MonoBehaviour:
   AudioMixer: {fileID: 24100000, guid: 28ec2dbf47ec09047b8a686129558e8b, type: 2}
   _transitionMusics: []
   _transitionAmbiances:
-  - FinalAudio: {fileID: 0}
-    SpeedToMinVolume: 0
-    SpeedToMaxVolume: 0
+  - name: ToSpawn
+    FinalAudio: {fileID: 8300000, guid: bf9d7845c54c0514b82c2f9ec613b863, type: 3}
+    SpeedToMinVolume: 0.2
+    SpeedToMaxVolume: 0.2
+  - name: ToJungle
+    FinalAudio: {fileID: 8300000, guid: 16c9277f347dc9848b2b99adff312229, type: 3}
+    SpeedToMinVolume: 0.2
+    SpeedToMaxVolume: 0.2
+  - name: ToRuins
+    FinalAudio: {fileID: 8300000, guid: bf8a32d8eaf99fb47bf9fb7c5ab7618e, type: 3}
+    SpeedToMinVolume: 0.2
+    SpeedToMaxVolume: 0.2
   _UISoundList:
   - AudioClip: {fileID: 8300000, guid: b34324753b6e61e45878d4a998fc9ff5, type: 3}
     Name: UI-01
