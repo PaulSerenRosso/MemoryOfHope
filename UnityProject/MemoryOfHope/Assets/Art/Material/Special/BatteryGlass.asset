@@ -10,56 +10,57 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11fbb352189210b408ccf9a29097145a, type: 3}
-  m_Name: M_HologramInstance
+  m_Name: BatteryGlass
   m_EditorClassIdentifier: 
-  master: {fileID: 2100000, guid: 9619de17760b14644a4dde053698db69, type: 2}
-  instance: {fileID: 1589644036117006111}
+  master: {fileID: 2100000, guid: 7c4ebc8316184374097c8dc0921e98a4, type: 2}
+  instance: {fileID: 960552299213084057}
   overrides:
-  - name: Color_9efd00263da04301a5e4fa086853c2db
+  - name: BatteryColor
     type: 0
     isKeyword: 0
-    colorValue: {r: 0.5882353, g: 1, b: 0.62910527, a: 0}
+    colorValue: {r: 0, g: 1, b: 0.37558436, a: 0}
     vectorValue: {x: 0, y: 0, z: 0, w: 0}
     floatValue: 0
     textureValue: {fileID: 0}
     active: 1
-  - name: Color_e2d6f04223004486b3edfee02472ab4e
-    type: 0
-    isKeyword: 0
-    colorValue: {r: 0.378471, g: 0.5943396, b: 0.43161693, a: 0}
-    vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    floatValue: 0
-    textureValue: {fileID: 0}
-    active: 1
-  - name: Color_e4ad0c26eafd4ec6863731abcd4aa1af
-    type: 0
-    isKeyword: 0
-    colorValue: {r: 0.6084906, g: 1, b: 0.686709, a: 0}
-    vectorValue: {x: 0, y: 0, z: 0, w: 0}
-    floatValue: 0
-    textureValue: {fileID: 0}
-    active: 1
---- !u!21 &1589644036117006111
+--- !u!21 &960552299213084057
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_HologramInstance
-  m_Shader: {fileID: -6465566751694194690, guid: d416cc812c30c1a40a40f9352262dfd7, type: 3}
-  m_ShaderKeywords: _RECEIVE_SHADOW_OFF
+  m_Name: BatteryGlass
+  m_Shader: {fileID: -6465566751694194690, guid: 9e1d8d5ae4c491141b5b8ebf227dc0de, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_7b8bca99f8e04435950b313a7cf13482:
-        m_Texture: {fileID: 2800000, guid: ba473c8d1e7c50f4f91e7bd85b182860, type: 3}
+    - Texture2D_493630ee39824f4db16ec7c180a61232:
+        m_Texture: {fileID: 2800000, guid: 65d8b21dd70456b458ed9f919aa9285d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_5da9c70c86774a3288522311788291ce:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_685652ac57054c9abbae76a09eeb2f42:
+        m_Texture: {fileID: 2800000, guid: ca3f7dec9dd5cca47a5ec3f9a235c41b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_8228105b84fa478a823d25f8e599969d:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_aba71874c1764ddcb29490bcbee71d74:
+        m_Texture: {fileID: 2800000, guid: 83a8d639afa1b35448da464ed14c0b3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -119,22 +120,29 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_0eec5107ec49434ba8517e1bbed7504b: 0
-    - Vector1_2df55512a78f4b1498572bf9ff7318cb: -0.5
-    - Vector1_a235e1fc4070492aa8afcee0a9dc4e97: 0.32
-    - Vector1_a7334e7790544a84bf96dff7b82403aa: 0.2
-    - Vector1_c6960a55b6b14fd8af91340d659efe85: 17.56
-    - Vector1_cd0b3af522114f2c8f9e9cf519067291: 1
+    - Boolean_0e2695e0774647dfbc96b79eb4538404: 0
+    - Boolean_56b12e90cb86425da95dc5c276b58ae4: 0
+    - Boolean_c351e9c13bce4ecf9abfff9156355fde: 0
+    - Boolean_dd690c88d51640c5bdb1d057e85a8aa3: 0
+    - Vector1_0a451759b51e4f559b69fac71c1c74ea: 1
+    - Vector1_26c7db5aa2964c53be8a057f07422291: 0
+    - Vector1_612e483d0c4f44e4b7b0b42f737dee60: 1
+    - Vector1_84dd6badd2ad4f3888ed4527b22ee98b: 1
+    - Vector1_bf0a77b0b13f45bb97cb111b316c521b: 0
+    - Vector1_c7fafbfeaa6c46d0a4eee61a20e7e1db: 0.861
+    - Vector1_cdbc194a11c44dc7b1e5336147e35fae: 1.14
+    - Vector1_d8f3e38b73d1410097cf71cee6045407: 1
+    - Vector1_f1c7e4a625224a06a09a22987aa90549: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -147,15 +155,16 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - Color_9efd00263da04301a5e4fa086853c2db: {r: 0.5882353, g: 1, b: 0.62910527, a: 0}
-    - Color_e2d6f04223004486b3edfee02472ab4e: {r: 0.378471, g: 0.5943396, b: 0.43161693, a: 0}
-    - Color_e4ad0c26eafd4ec6863731abcd4aa1af: {r: 0.6084906, g: 1, b: 0.686709, a: 0}
-    - Vector2_fcfe1e82ce0e40e8acc0d6d8a0e3f9da: {r: 1, g: 25, b: 0, a: 0}
+    - BatteryColor: {r: 1, g: 1, b: 1, a: 1}
+    - Color_012f7d03e182473489b9f0a0322dba9e: {r: 1, g: 1, b: 1, a: 0}
+    - Color_5294af0ea8cd4beb9fa3d0d871dd599d: {r: 0, g: 0, b: 0, a: 0}
+    - Color_b10fa79b8bcb4d2b9693800a79df035a: {r: 1, g: 1, b: 1, a: 0}
+    - Color_e573ae347ed942f98947ecf03c1db058: {r: 0.28862584, g: 0.7630337, b: 0.8867924, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
