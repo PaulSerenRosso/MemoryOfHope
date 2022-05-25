@@ -107,6 +107,7 @@ public class HM_StateMachine : EnemyMachine
     {
         base.OnHitByMelee();
 
+        if (BossPhaseManager.instance.currentPhase == null) return;
         if (BossPhaseManager.instance.currentPhase.phaseType != PhaseType.Vulnerable) return;
         if (CheckDamageAnimationStateEqualCurrentState())
         {

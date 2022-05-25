@@ -1,13 +1,13 @@
 using System;
-using UnityEditor;
 
 [Serializable]
 public class HM_ProtectionProtectedState : EnemyState
 {
     private HM_StateMachine machine;
-    
+
     public override void StartState(EnemyMachine enemyMachine)
-    { base.StartState(enemyMachine);
+    {
+        base.StartState(enemyMachine);
         enemyMachine.rb.isKinematic = false;
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
@@ -22,6 +22,7 @@ public class HM_ProtectionProtectedState : EnemyState
         {
             if (!tower.isDead) return;
         }
+
         enemyMachine.enemyManager.Animator.SetBool("IsProtected", false);
         machine.SwitchState(machine.vulnerableDefaultState);
     }

@@ -13,6 +13,7 @@ public class S_PausePursuitState : EnemyState
     { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
+        enemyMachine.attackArea.SetActive(true);
         timer = 0;
     }
     
