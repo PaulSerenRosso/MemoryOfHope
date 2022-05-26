@@ -48,6 +48,7 @@ public class TC_StateMachine : EnemyMachine
             else
             {
                 enemyManager.TakeDamage(_laserDamageAmount);
+                GameManager.instance.RumbleConstant(.2f, .4f, _damageLaserTime);
                 _damageLaserTimer = 0;
             }
         }

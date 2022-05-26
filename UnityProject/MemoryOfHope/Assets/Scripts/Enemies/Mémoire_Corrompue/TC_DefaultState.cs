@@ -4,13 +4,12 @@ using UnityEngine;
 public class TC_DefaultState : EnemyState
 {
     private Transform memoryTransform;
-    //[SerializeField] private Transform module;
-
-    [SerializeField] private Transform protectionWall;
+    public Transform protectionWall;
     [SerializeField] private float wallHeight;
 
     public override void StartState(EnemyMachine enemyMachine)
-    { base.StartState(enemyMachine);
+    {
+        base.StartState(enemyMachine);
         var enemy = (TC_StateMachine) enemyMachine;
 
         memoryTransform = enemy.isHopeCorruptedTower
@@ -20,25 +19,19 @@ public class TC_DefaultState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        //module.LookAt(memoryTransform);
-        //module.eulerAngles = new Vector3(-90, module.eulerAngles.y, 0);
-
         var towerPos = enemyMachine.transform.position;
 
         var enemyPos = memoryTransform.position;
 
-        // Scale
         float protectionWallSize = Vector3.Distance(towerPos, enemyPos);
         protectionWall.localScale =
             new Vector3(protectionWallSize, wallHeight, protectionWall.localScale.z);
         
-        // Position
         var localPos = (enemyPos + towerPos) * .5f;
-        //protectionWall.position = new Vector3(localPos.x, .5f * (protectionWall.localScale.y - 1), localPos.z);
         protectionWall.position = new Vector3(localPos.x, localPos.y, localPos.z);
-        protectionWall.localPosition = new Vector3(protectionWall.localPosition.x, .5f * (protectionWall.localScale.y - 1), protectionWall.localPosition.z);
+        protectionWall.localPosition = new Vector3(protectionWall.localPosition.x,
+            .5f * (protectionWall.localScale.y - 1), protectionWall.localPosition.z);
 
-        // Rotation
         float angle;
         var firstSegment = memoryTransform.position.z - enemyMachine.transform.position.z;
         var secondSegment = memoryTransform.position.x - enemyMachine.transform.position.x;

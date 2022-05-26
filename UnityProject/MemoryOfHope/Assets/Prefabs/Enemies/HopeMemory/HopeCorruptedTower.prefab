@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2436188648384167680}
-  - component: {fileID: 7437408164213089871}
+  - component: {fileID: 6568892021441559320}
   - component: {fileID: 1970830584279501767}
   - component: {fileID: 6385194377824274850}
   - component: {fileID: 962247880275140486}
@@ -131,10 +131,11 @@ Transform:
   m_Children:
   - {fileID: 1569892567552329790}
   - {fileID: 5702159270918907218}
+  - {fileID: 3581292904834563197}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7437408164213089871
+--- !u!114 &6568892021441559320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,13 +144,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4817488282789904246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f80e2908ec5fa4cb1be0551d9664f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7731e1d838b9c8748abec025cbaab834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeDeath: 0
+  _timeDeath: 2
   Animator: {fileID: 0}
-  healthEnemy: 1
-  maxHealthEnemy: 1
+  healthEnemy: 7
+  maxHealthEnemy: 7
   isDeadEnemy: 0
   canBeHitByMelee: 0
   canBeHitByLaser: 1
@@ -163,9 +164,10 @@ MonoBehaviour:
       m_Calls: []
   SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
   IsBaseEnemy: 0
-  damage: 1
+  damage: 0
   Machine: {fileID: 1970830584279501767}
   WaveListener: {fileID: 0}
+  deathEffect: {fileID: 3581292906280763920}
 --- !u!114 &1970830584279501767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f74a2b6fce4e649a2afa58fc9807bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 7437408164213089871}
+  enemyManager: {fileID: 6568892021441559320}
   PlayerKnockBackFactor: 2
   agent: {fileID: 0}
   rb: {fileID: 962247880275140486}
@@ -196,7 +198,7 @@ MonoBehaviour:
   _meleNoDamageEvent:
     m_PersistentCalls:
       m_Calls: []
-  _damageLaserTime: 0.1
+  _damageLaserTime: 0.05
   _laserDamageAmount: 1
   isHopeCorruptedTower: 1
   defaultState:
@@ -407,4 +409,75 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 65c8d9d9ec003a84e97cacaca80d8a6d, type: 3}
   m_PrefabInstance: {fileID: 1316134683637379029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1607232780998331559
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2436188648384167680}
+    m_Modifications:
+    - target: {fileID: 2881537808285634229, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881537808920391899, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+      propertyPath: m_Name
+      value: Explosion tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+--- !u!4 &3581292904834563197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2881537808920391898, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+  m_PrefabInstance: {fileID: 1607232780998331559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3581292906280763920 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2881537808285634231, guid: f3c7ce020705c4c999a14694837ff8b4, type: 3}
+  m_PrefabInstance: {fileID: 1607232780998331559}
   m_PrefabAsset: {fileID: 0}

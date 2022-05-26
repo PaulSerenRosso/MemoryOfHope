@@ -12,13 +12,10 @@ public class HM_ProtectionPositionState : EnemyState
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
         enemyMachine.rb.isKinematic = true;
-        // Tp le boss à sa position initiale
 
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
 
         initialPos = enemy.protectedPos;
-
-        enemy.isProtected = true;
 
         enemy.transform.position = initialPos;
         Debug.Log(enemy.transform.position + initialPos);
