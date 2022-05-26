@@ -15,8 +15,7 @@ public Transform viewFinder;
     public bool DistanceIsSet = true;
     public bool OffsetIsSet = true;
     public CameraZoomGameEvent CurrentZoom;
-
-    public bool IsFixedUpdate;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);

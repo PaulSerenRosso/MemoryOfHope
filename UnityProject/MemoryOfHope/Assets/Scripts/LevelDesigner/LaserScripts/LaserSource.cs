@@ -41,26 +41,26 @@ public class LaserSource : LaserMachine
         else _triggerByLaser = false;
     }
 
-    void Update()
+ 
+    public override void Update()
     {
-        if(_audioSource == null) return;
-        if (IsActive)
+        if (_audioSource != null)
         {
-            if (!_audioSource.isPlaying)
+            if (IsActive)
             {
-                _audioSource.Play();
+                if (!_audioSource.isPlaying)
+                {
+                    _audioSource.Play();
+                }
+            }
+            else 
+            {
+                if (_audioSource.isPlaying)
+                {
+                    _audioSource.Stop();
+                }
             }
         }
-        else 
-        {
-            if (_audioSource.isPlaying)
-            {
-                _audioSource.Stop();
-            }
-        }
-    }
-    public override void FixedUpdate()
-    {
         if (IsActive)
         {
             BeginLaser = beginSource.position;
@@ -83,6 +83,6 @@ public class LaserSource : LaserMachine
             LaserLine.enabled = false;
         }
 
-        base.FixedUpdate();
+        base.Update();
     }
 }

@@ -281,7 +281,6 @@ GameObject:
   - component: {fileID: 629276461624117481}
   - component: {fileID: 4042589108074825620}
   - component: {fileID: 6546855627693250739}
-  - component: {fileID: 6725060030925692718}
   - component: {fileID: 2201645785281637263}
   - component: {fileID: 6006267814195861478}
   m_Layer: 9
@@ -355,19 +354,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6725060030925692718
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3535948910770826506}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2201645785281637263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 6546855627693250739}
-  _collider: {fileID: 6725060030925692718}
   isTutorial: 0
   reloadTuto: {fileID: 11400000, guid: 7c3d745ca481bdd48bbd161c837305e1, type: 2}
   MaxLaserCharge: 100
@@ -1074,6 +1059,11 @@ MonoBehaviour:
   angleGround: 0.7
   currentNormalGround: {x: 0, y: 0, z: 0}
   _currentPositionMoveGround: {x: 0, y: 0, z: 0}
+  _rotationModuleMovePlateform:
+  - {fileID: 7226099581146458021}
+  - {fileID: 7226099581146458022}
+  - {fileID: 4272034707977539781}
+  _moveModule: {fileID: 7226099581146458020}
   stuckGround: 1
   onGround: 1
 --- !u!114 &7226099581146458020
@@ -1111,12 +1101,10 @@ MonoBehaviour:
   inputPressed: 0
   moveVector: {x: 0, y: 0, z: 0}
   defaultSpeedMovment: 5.3
-  defaultSpeedRotationOppositeRun: 0.3
-  defaultSpeedRotation: 0.4
-  toleranceRotation: 0.01
-  factorAngleOppositeRun: 1
-  airSpeedMovment: 0.3
-  maxAirSpeed: 3.79
+  _blendAnimationSpeed: 8
+  defaultSpeedRotation: 0.1
+  airSpeedMovment: 0.5
+  maxAirSpeed: 4
 --- !u!114 &7226099581146458021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,7 +1142,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   moveModule: {fileID: 7226099581146458020}
-  HeightJump: 1
+  HeightJump: 1.2
   MaxSpeedJump: 26
   speedEndJump: 6
   CurveJump:
@@ -1391,7 +1379,7 @@ MonoBehaviour:
   _playerMirror: {fileID: 696764172249142509}
   _shield: {fileID: 2201645785281637263}
   _activationTime: 0.5
-  rotationSpeed: 0.3
+  rotationSpeed: 0.05
   prismTutorial: {fileID: 11400000, guid: d80112084aaef6848986e084f975971b, type: 2}
   _prismPerformedEvent:
     m_PersistentCalls:
