@@ -281,7 +281,6 @@ GameObject:
   - component: {fileID: 629276461624117481}
   - component: {fileID: 4042589108074825620}
   - component: {fileID: 6546855627693250739}
-  - component: {fileID: 6725060030925692718}
   - component: {fileID: 2201645785281637263}
   - component: {fileID: 6006267814195861478}
   m_Layer: 9
@@ -313,7 +312,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3535948910770826506}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!23 &6546855627693250739
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -355,19 +354,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6725060030925692718
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3535948910770826506}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2201645785281637263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,22 +367,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 6546855627693250739}
-  _collider: {fileID: 6725060030925692718}
+  isTutorial: 0
+  reloadTuto: {fileID: 0}
   MaxLaserCharge: 100
   _laserCharge: 0
-  _reloadShieldAudioSource: {fileID: 6006267814195861478}
-  _shieldDamageEvent:
-    m_PersistentCalls:
-      m_Calls: []
   LaserChargeRegeneration: 15
   LaserChargeCost: 10
   Laser: {fileID: 1735945226244798610}
   Mirror: {fileID: 696764172249142509}
   inputLaser: 0
-  _health: 1
-  _maxHealth: 1
-  _isDead: 0
-  timeDeath: 5
 --- !u!82 &6006267814195861478
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1045,14 +1024,10 @@ MonoBehaviour:
       m_Calls: []
   hitDirection: {x: 0, y: 0, z: 0}
   knockbackStrength: 10
-  _blockedKnockbackStrength: 5
   hitDuration: 1
   isHit: 0
   _drag: 5
-  _blockedDrag: 3
   IsInvincible: 0
-  isBlocked: 0
-  blockedDuration: 0.5
   timeNotificationMaxHeart: 0
 --- !u!114 &7226099581146458023
 MonoBehaviour:
@@ -1070,6 +1045,7 @@ MonoBehaviour:
   activeModulesFixed: []
   currentModuleUpdate: 
   currentModuleFixed: 
+  _movmentModule: []
   playerRb: {fileID: 7226099581146458016}
   playerAnimator: {fileID: 7708360703391377901}
   hopeCape: {fileID: 2100000, guid: 84a9c76881d09254f89a73cb60305e0c, type: 2}
@@ -1082,6 +1058,12 @@ MonoBehaviour:
   currentVelocityWithUndo: {x: 0, y: 0, z: 0}
   angleGround: 0.7
   currentNormalGround: {x: 0, y: 0, z: 0}
+  _currentPositionMoveGround: {x: 0, y: 0, z: 0}
+  _rotationModuleMovePlateform:
+  - {fileID: 7226099581146458021}
+  - {fileID: 7226099581146458022}
+  - {fileID: 4272034707977539781}
+  _moveModule: {fileID: 7226099581146458020}
   stuckGround: 1
   onGround: 1
 --- !u!114 &7226099581146458020
@@ -1119,12 +1101,10 @@ MonoBehaviour:
   inputPressed: 0
   moveVector: {x: 0, y: 0, z: 0}
   defaultSpeedMovment: 5.3
-  defaultSpeedRotationOppositeRun: 0.3
-  defaultSpeedRotation: 0.4
-  toleranceRotation: 0.01
-  factorAngleOppositeRun: 1
-  airSpeedMovment: 0.3
-  maxAirSpeed: 3.79
+  _blendAnimationSpeed: 8
+  defaultSpeedRotation: 0.1
+  airSpeedMovment: 0.5
+  maxAirSpeed: 4
 --- !u!114 &7226099581146458021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,7 +1142,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   moveModule: {fileID: 7226099581146458020}
-  HeightJump: 1
+  HeightJump: 1.2
   MaxSpeedJump: 26
   speedEndJump: 6
   CurveJump:
@@ -1399,7 +1379,7 @@ MonoBehaviour:
   _playerMirror: {fileID: 696764172249142509}
   _shield: {fileID: 2201645785281637263}
   _activationTime: 0.5
-  rotationSpeed: 0.3
+  rotationSpeed: 0.05
   prismTutorial: {fileID: 11400000, guid: d80112084aaef6848986e084f975971b, type: 2}
   _prismPerformedEvent:
     m_PersistentCalls:
@@ -1756,6 +1736,7 @@ MonoBehaviour:
   neededModules:
   - {fileID: 7649947021829257087}
   inputPressed: 0
+  laserTutorial: {fileID: 0}
   _costLaserSound: {fileID: 0}
   _shield: {fileID: 2201645785281637263}
 --- !u!82 &1959456016
@@ -2358,15 +2339,15 @@ PrefabInstance:
       objectReference: {fileID: 3667388129059024551}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.x
-      value: 39.5
+      value: 6.86
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.y
-      value: -3.413
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: BeginLaser.z
-      value: 19.55
+      value: 8.61
       objectReference: {fileID: 0}
     - target: {fileID: 1762412885650735068, guid: 1749d819d182d754ab90c5a165c95434, type: 3}
       propertyPath: RayLayer.m_Bits

@@ -32,11 +32,13 @@ public class ShieldMirror : BaseMirror
         }
 
         _triggerByLaser = true;
+
         if (_shield.InputShield && !_shield.inputLaser)
         {
             LaserLineReceiver = laser.LaserLine;
             LaserLine.enabled = true;
             LaserLine.enabled = true;
+            
             Direction = transform.forward;
             Vector3 upOffset = PlayerController.instance.transform.TransformPoint(Vector3.up * Yoffset);
             BeginLaser = new Vector3(transform.position.x, upOffset.y, transform.position.z) +
@@ -60,9 +62,13 @@ public class ShieldMirror : BaseMirror
 
     public override void Cancel(LaserMachine laser)
     {
+        EndTrigger();
         _triggerByLaser = false;
         _currentSource = null;
         LaserLineReceiver = null;
+        BeginLaser = Vector3.zero;
+        Direction = Vector3.zero;
+        LaserLine.enabled = false;
         _reloadLaserAudioSource.Stop();
         if (prismObtained)
         {

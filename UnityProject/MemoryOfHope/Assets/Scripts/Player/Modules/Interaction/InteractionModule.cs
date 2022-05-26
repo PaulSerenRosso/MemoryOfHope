@@ -181,8 +181,8 @@ public class InteractionModule : Module
                                _cameraRightXZ * joystickDirection.x;
                     Vector2 rotationVector =
                         Vector3.RotateTowards(angleFoward, inputCam, rotateSpeed, 00f);
-                    PlayerController.instance.transform.rotation =
-                        Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+                    PlayerController.instance.playerRb.MoveRotation(
+                        Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg));
         }
        
 
