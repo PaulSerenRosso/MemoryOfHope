@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class CinematicManager : MonoBehaviour
@@ -18,7 +16,7 @@ public class CinematicManager : MonoBehaviour
 
     [SerializeField] private bool _inCutScene;
 
-    
+
     [SerializeField] Slider _skipSlider;
     [SerializeField] private float _skipSliderSpeed;
 
@@ -82,7 +80,7 @@ public class CinematicManager : MonoBehaviour
         _fadeInOut.Play("BeginFade");
         PlayerManager.instance.speedEffect.gameObject.SetActive(false);
         _skipSlider.value = 0;
-        
+
         UIInstance.instance.SetCanvasOnDisplay(_canvasOutCinematic, false);
         UIInstance.instance.SetCanvasOnDisplay(_canvasInCinematic, true);
         _skipSlider.transform.parent.gameObject.SetActive(true);
@@ -94,7 +92,7 @@ public class CinematicManager : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         MainCameraController.Instance.MainCamera.enabled = false;
         _director.playableAsset = AllCinematics[index];
-        
+
         InCutScene = true;
         _director.Play();
     }
@@ -121,9 +119,9 @@ public class CinematicManager : MonoBehaviour
         InCutScene = false;
     }
 
-    public void ActivateModuleFeedback(int index)
+    public void ActivateModuleFeedback(GameObject module) // A appeler au bon moment dans les cinématiques
     {
-        var module = modules[index];
-        // Pour chaque module, active le fx d'activation
+        var moduleAcquisition = module.GetComponent<ModuleAcquisition>();
+        moduleAcquisition.activateModuleEffect.Play();
     }
 }
