@@ -2663,7 +2663,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 205101455337208813, guid: e9d343c8d28f686498be88a08f89cd88, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 205101455337208813, guid: e9d343c8d28f686498be88a08f89cd88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15070,7 +15070,7 @@ Transform:
   - {fileID: 1107857234}
   - {fileID: 2068690514}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1588511410
 MonoBehaviour:
@@ -15523,6 +15523,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: _endTriggerListeners.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1659627625}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_ActivedActivatorsCount
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: _endTriggerListeners.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1659627624}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: _endTriggerListeners.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorLaserMultiple, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 81683508499934033, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+      propertyPath: Listeners.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 293941151937524234, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
       propertyPath: m_PolyMesh.m_Mesh
       value: 
@@ -16073,6 +16113,22 @@ PrefabInstance:
       objectReference: {fileID: 543549527}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+--- !u!1 &1659627624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 610776757758004407, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+  m_PrefabInstance: {fileID: 1659627623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1659627625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3885235922688228686, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
+  m_PrefabInstance: {fileID: 1659627623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659627624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e88bc0e8b2b6dd408a4a0cd6ad8b773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1659627631 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6797800726705827186, guid: b3cdba7cd430f0f4696e1bb1872cbb3b, type: 3}
@@ -19240,7 +19296,7 @@ Transform:
   - {fileID: 1975748833}
   - {fileID: 1480453871}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2008068775
 GameObject:

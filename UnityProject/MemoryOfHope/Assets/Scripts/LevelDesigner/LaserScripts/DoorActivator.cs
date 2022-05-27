@@ -10,7 +10,7 @@ public class DoorActivator : MonoBehaviour, IReturnable
 
     public Renderer[] glasses;
     public Color glassColorDeactivate;
-    
+
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -77,7 +77,6 @@ public class DoorActivator : MonoBehaviour, IReturnable
         {
             renderer.sharedMaterials[1].GetColor("BatteryColor");
             renderer.sharedMaterials[1].SetColor("BatteryColor", color);
-
         }
     }
 }
