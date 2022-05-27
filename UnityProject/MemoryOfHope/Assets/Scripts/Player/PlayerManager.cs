@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour, Damageable
 {
@@ -270,9 +268,10 @@ public class PlayerManager : MonoBehaviour, Damageable
                 index = i;
             }
         }
-
+        
         transform.position = CheckPointsReached[index].SpawnPosition.position;
         transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
+        Camera.main.transform.localEulerAngles = CheckPointsReached[index].cameraRotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
         Debug.Log("Respawn");

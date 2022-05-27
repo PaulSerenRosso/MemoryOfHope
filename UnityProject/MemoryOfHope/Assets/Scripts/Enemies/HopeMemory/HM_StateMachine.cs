@@ -51,6 +51,13 @@ public class HM_StateMachine : EnemyMachine
         protectedPos = transform.position;
     }
 
+    public override void Update()
+    {
+        base.Update();
+        if (!BossPhaseManager.instance.hasBattleBegun) return;
+        UIInstance.instance.bossLifeGauge.value = enemyManager.health;
+    }
+
     public void ActivateBehaviour()
     {
         currentState = vulnerableDefaultState;
