@@ -7,12 +7,16 @@ public class MoveModule : Module
     private Vector2 inputVector;
     public Vector3 moveVector;
    public float defaultSpeedMovment;
-    [SerializeField] private float defaultSpeedRotationOppositeRun;
-    [SerializeField] private float defaultSpeedRotation;
-    [SerializeField] private float toleranceRotation;
-    [SerializeField] private float factorAngleOppositeRun;
- 
 
+   private float _blendAnimationFactor;
+   [SerializeField]
+   private float _blendAnimationSpeed;
+    [SerializeField] private float defaultSpeedRotation;
+ 
+  
+
+
+    private Vector3 currentRotation;
     private AudioClip _runSound; 
     private bool canMove;
     [SerializeField] private float airSpeedMovment;
@@ -88,7 +92,7 @@ public class MoveModule : Module
         inputCam = _cameraForwardXZ * inputVector.y +
                    _cameraRightXZ * inputVector.x;
    
-     
+       canMove = true;
         
         moveVector.x = inputCam.x;
         moveVector.z = inputCam.y;
@@ -96,24 +100,9 @@ public class MoveModule : Module
         {
             Vector2 angleForward = new Vector2(transform.forward.x,
                 transform.forward.z);
-            float differenceDir = (angleForward - inputCam.normalized).magnitude;
-            if (factorAngleOppositeRun < differenceDir)
-            {
-                canMove = false;
-            }
-
-            if (!canMove && differenceDir < toleranceRotation)
-                canMove = true;
-            if (canMove)
-            {
+            
                 MoveGround(angleForward);
-            }
-            else
-            {
-                if(PlayerManager.instance.MainAudioSource.isPlaying)
-                    PlayerManager.instance.MainAudioSource.Stop();
-                Rotate(angleForward);
-            }
+
         }
         else
         {
@@ -123,12 +112,32 @@ public class MoveModule : Module
         }
     }
 
+    private void Update()
+    {
+        if (isPerformed)
+        {
+            if (_blendAnimationFactor < inputCam.magnitude)
+            {
+                _blendAnimationFactor += _blendAnimationSpeed * Time.deltaTime;
+                PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", _blendAnimationFactor);
+            }
+        }
+        else
+        {
+            if (_blendAnimationFactor > 0)
+            {
+                _blendAnimationFactor -= _blendAnimationSpeed * Time.deltaTime;
+                PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", _blendAnimationFactor);
+            }
+        }
+    }
+
     public override void Release()
     {
+    
         if(PlayerManager.instance.MainAudioSource.isPlaying)
             PlayerManager.instance.MainAudioSource.Stop();
         isPerformed = false;
-        PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
     }
 
     void MoveGround(Vector3 angleForward)
@@ -140,10 +149,11 @@ public class MoveModule : Module
         }
         moveVector *= defaultSpeedMovment;
         PlayerController.instance.currentVelocityWithUndo += moveVector;
-        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputCam, defaultSpeedRotation * 2, 00f);
+        Vector2 rotationVector = Vector3.SmoothDamp(angleForward, inputCam, ref currentRotation, defaultSpeedRotation );
+    
         PlayerController.instance.playerRb.rotation =
             Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-        PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", inputCam.magnitude);
+      
         
     }
 
@@ -157,14 +167,5 @@ public class MoveModule : Module
         PlayerController.instance.playerRb.velocity = new Vector3(rbVelocityXZ.x,
             PlayerController.instance.playerRb.velocity.y, rbVelocityXZ.z);
     }
-
-    void Rotate(Vector3 angleForward)
-    {
-        float currentOppositeRotationSpeed;
-        currentOppositeRotationSpeed = defaultSpeedRotationOppositeRun;
-        Vector2 rotationVector = Vector3.RotateTowards(angleForward, inputCam, currentOppositeRotationSpeed, 00f);
-        PlayerController.instance.playerRb.rotation =
-            Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
-        PlayerController.instance.playerAnimator.SetFloat("movmentSpeed", 0);
-    }
+    
 }

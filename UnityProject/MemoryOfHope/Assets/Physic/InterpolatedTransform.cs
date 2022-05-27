@@ -24,7 +24,7 @@ public class InterpolatedTransform : MonoBehaviour
     }
 
     void FixedUpdate() {
-     
+        
         TransformData newestTransform = m_lastTransforms[m_newTransformIndex];
         transform.localPosition = newestTransform.position;
         transform.localRotation = newestTransform.rotation;

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class ShieldManager : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _mesh;
-    [SerializeField] private Collider _collider;
+   
 
     public bool isTutorial;
     [SerializeField] private TutorialGameEvent reloadTuto;
@@ -51,12 +51,13 @@ public class ShieldManager : MonoBehaviour
         get { return _inputShield; }
         set
         {
+            
             _inputShield = value;
             
           //  if (!isDead)
             //{
                 _mesh.enabled = value;
-                _collider.enabled = value;
+            
             //}
         }
     }

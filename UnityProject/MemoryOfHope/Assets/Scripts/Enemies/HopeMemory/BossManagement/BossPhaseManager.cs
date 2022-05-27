@@ -132,7 +132,10 @@ public class BossPhaseManager : MonoBehaviour
                     var box = puzzlesBoxes[i];
                     var posY = box.position.y;
                     var trs = box.GetComponentsInChildren<Transform>();
-                    foreach (var tr in trs) tr.localPosition = Vector3.zero;
+                    foreach (var tr in trs)
+                    {
+                        if(tr.gameObject.CompareTag("Ground")) tr.localPosition = Vector3.zero;
+                    }
                     box.position = towersInitPos[i].position;
                     box.position = new Vector3(box.position.x, posY, box.position.z);
 
@@ -151,7 +154,10 @@ public class BossPhaseManager : MonoBehaviour
                 {
                     var posY = box.position.y;
                     var trs = box.GetComponentsInChildren<Transform>();
-                    foreach (var tr in trs) tr.localPosition = Vector3.zero;
+                    foreach (var tr in trs)
+                    {
+                        if(tr.gameObject.CompareTag("Ground")) tr.localPosition = Vector3.zero;
+                    }
                     var randomPos = transformRandom[Random.Range(0, transformRandom.Count)];
                     box.position = randomPos.position;
                     box.position = new Vector3(box.position.x, posY, box.position.z);
@@ -166,9 +172,7 @@ public class BossPhaseManager : MonoBehaviour
 
     public void OnBossDeath()
     {
-        Debug.Log("Boss vaincu");
         UIInstance.instance.SetBossDisplay(bossStateMachine.enemyManager, false);
-
         currentPhase = null;
 
         foreach (var enemy in allEnemiesInBossRoom)
@@ -179,6 +183,7 @@ public class BossPhaseManager : MonoBehaviour
         }
 
         PlayerManager.instance.IsActive = false;
+        PlayerController.instance.playerRb.velocity = Vector3.zero;
     }
 }
 

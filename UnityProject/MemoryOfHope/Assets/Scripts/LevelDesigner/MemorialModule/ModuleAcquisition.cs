@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class ModuleAcquisition : CheckPoint
 {
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem notActivatedEffect;
     [SerializeField] private Module[] moduleToLearn;
+    public ParticleSystem activateModuleEffect;
 
     public override void Activate()
     {
@@ -15,8 +14,11 @@ public class ModuleAcquisition : CheckPoint
         {
             PlayerManager.instance.AddModule(module);
         }
-        particleSystem.Stop();
-
+        notActivatedEffect.Stop();
+        
+        // Pour l'instant : le fx se lance directement (mais à terme dans CinematicManager)
+        activateModuleEffect.Play();
+        
         base.Activate();
     }
 }
