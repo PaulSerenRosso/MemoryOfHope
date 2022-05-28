@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckPoint : ListenerActivate
 {
     public Transform SpawnPosition;
-
+    public Vector3 cameraRotation;
 
     public override void Raise()
     {
