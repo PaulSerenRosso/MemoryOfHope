@@ -48,7 +48,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     public int damage;
     public EnemyMachine Machine;
     public ListenerWaveEnemy WaveListener;
-
+    
     #endregion
 
     #region Main Functions
