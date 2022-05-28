@@ -16,6 +16,8 @@ public class S_StateMachine : EnemyMachine
     [SerializeField] int _laserDamageAmount;
     [Range(1, 15)] public float detectionDistance;
     [Range(1, 15)] public float pursuitDistance;
+    
+    public ParticleSystem hazardousEffect;
 
     #endregion
 

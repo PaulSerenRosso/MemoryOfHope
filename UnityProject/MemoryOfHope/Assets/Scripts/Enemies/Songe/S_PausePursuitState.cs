@@ -15,6 +15,8 @@ public class S_PausePursuitState : EnemyState
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
+        S_StateMachine enemy = (S_StateMachine) enemyMachine;
+        enemy.hazardousEffect.Play();
         timer = 0;
     }
 

@@ -8,7 +8,6 @@ public class S_ApparitionState : EnemyState
     private float durationBeforePursuit;
 
     [SerializeField] private Collider[] _colliders;
-    [SerializeField] private MeshRenderer _attackMesh;
     private float timer;
 
     public override void StartState(EnemyMachine enemyMachine)
@@ -32,8 +31,6 @@ public class S_ApparitionState : EnemyState
             {
                 _colliders[i].enabled = true;
             }
-
-            _attackMesh.enabled = true;
             enemy.SwitchState(enemy.pausePursuitState);
         }
     }
