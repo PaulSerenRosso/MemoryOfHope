@@ -5,7 +5,12 @@ public class DoorActivator : MonoBehaviour, IReturnable
 {
     [SerializeField] private DoorLaserMultiple currentDoor;
 
-  public UnityEvent ActiveEvent;
+    public UnityEvent ActiveEvent;
+    public UnityEvent DeactiveEvent;
+
+    public Renderer[] glasses;
+    public Color glassColorDeactivate;
+
     public virtual bool IsReturnLaser
     {
         get { return _triggerByLaser; }
@@ -22,6 +27,8 @@ public class DoorActivator : MonoBehaviour, IReturnable
 
     public LaserMachine _currentSource;
     private bool _triggerByLaser;
+
+    [SerializeField] private ParticleSystem particles;
 
     public void StartReturnableFeedBack()
     {
@@ -42,6 +49,10 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
+            particles.Stop();
+            ChangeColor(glassColorDeactivate);
+            currentDoor.ActivedActivatorsCount--;
+            DeactiveEvent?.Invoke();
             _triggerByLaser = false;
             _currentSource = null;
         }
@@ -51,9 +62,21 @@ public class DoorActivator : MonoBehaviour, IReturnable
     {
         if (currentDoor.IsActive)
         {
+            particles.Play();
+            ChangeColor(Color.white);
+            currentDoor.ActivedActivatorsCount++;
             _triggerByLaser = true;
             _currentSource = laser;
             currentDoor.CheckActivator();
+        }
+    }
+
+    public void ChangeColor(Color color)
+    {
+        foreach (var renderer in glasses)
+        {
+            renderer.sharedMaterials[1].GetColor("BatteryColor");
+            renderer.sharedMaterials[1].SetColor("BatteryColor", color);
         }
     }
 }

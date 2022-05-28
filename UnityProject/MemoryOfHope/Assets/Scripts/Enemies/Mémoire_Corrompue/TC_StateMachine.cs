@@ -48,6 +48,7 @@ public class TC_StateMachine : EnemyMachine
             else
             {
                 enemyManager.TakeDamage(_laserDamageAmount);
+                GameManager.instance.RumbleConstant(.2f, .4f, _damageLaserTime);
                 _damageLaserTimer = 0;
             }
         }
@@ -61,11 +62,13 @@ public class TC_StateMachine : EnemyMachine
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-
+/*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = true;
+            
         }
+        */
     }
 
     public override void OnTriggerStay(Collider other)
@@ -74,10 +77,12 @@ public class TC_StateMachine : EnemyMachine
 
     public override void OnTriggerExit(Collider other)
     {
+        /*
         if (other.CompareTag("Shield"))
         {
             enemyManager.isBlocked = false;
         }
+        */
     }
 
     public override void OnCollisionEnter(Collision other)

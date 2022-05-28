@@ -28,7 +28,7 @@ public class MC_ShockWaveState : EnemyState
         {
             enemyMachine.attackArea.SetActive(false);
             MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
-            enemyMachine.enemyManager.isBlocked = false;
+          //  enemyMachine.enemyManager.isBlocked = false;
             enemy.SwitchState(enemy.positionState);
         }
     }

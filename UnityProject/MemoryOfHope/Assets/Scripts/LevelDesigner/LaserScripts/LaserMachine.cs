@@ -22,7 +22,7 @@ public class LaserMachine : MonoBehaviour
     private bool checkIfStartReturnable;
 
 
-    public virtual void FixedUpdate()
+    public virtual void Update()
     {
   
         if (IsActive)

@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class ShieldManager : MonoBehaviour, Damageable
+public class ShieldManager : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _mesh;
-    [SerializeField] private Collider _collider;
+   
 
     public bool isTutorial;
     [SerializeField] private TutorialGameEvent reloadTuto;
@@ -13,8 +13,9 @@ public class ShieldManager : MonoBehaviour, Damageable
     public float MaxLaserCharge;
     public float _laserCharge;
 
-    [SerializeField] private AudioSource _reloadShieldAudioSource;
-    [SerializeField] private UnityEvent _shieldDamageEvent;
+  //  [SerializeField] private AudioSource _reloadShieldAudioSource;
+  
+  //  [SerializeField] private UnityEvent _shieldDamageEvent;
 
 
     public float LaserCharge
@@ -37,7 +38,7 @@ public class ShieldManager : MonoBehaviour, Damageable
 
     private void OnValidate()
     {
-        _health = _maxHealth;
+       // _health = _maxHealth;
     }
 
     public LaserSource Laser;
@@ -50,23 +51,25 @@ public class ShieldManager : MonoBehaviour, Damageable
         get { return _inputShield; }
         set
         {
+            
             _inputShield = value;
-            if (!isDead)
-            {
+            
+          //  if (!isDead)
+            //{
                 _mesh.enabled = value;
-                _collider.enabled = value;
-            }
+            
+            //}
         }
     }
 
-    [SerializeField] private int _health;
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private bool _isDead;
+ //   [SerializeField] private int _health;
+   // [SerializeField] private int _maxHealth;
+    // [SerializeField] private bool _isDead;
 
-    [SerializeField] private float timeDeath;
-    private float timerDeath;
+   // [SerializeField] private float timeDeath;
+    //private float timerDeath;
 
-    public int health
+  /*  public int health
     {
         get { return _health; }
         set { _health = value; }
@@ -109,7 +112,7 @@ public class ShieldManager : MonoBehaviour, Damageable
         Laser.IsActive = false;
         _collider.enabled = false;
     }
-
+  
     private void Update()
     {
         
@@ -139,4 +142,5 @@ public class ShieldManager : MonoBehaviour, Damageable
 
         
     }
+    */
 }

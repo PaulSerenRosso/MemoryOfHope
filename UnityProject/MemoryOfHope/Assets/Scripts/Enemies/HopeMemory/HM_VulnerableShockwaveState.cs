@@ -30,7 +30,7 @@ public class HM_VulnerableShockwaveState : EnemyState
         {
             enemyMachine.attackArea.SetActive(false);
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
-            enemyMachine.enemyManager.isBlocked = false;
+           // enemyMachine.enemyManager.isBlocked = false;
             enemy.SwitchState(enemy.cooldownState);
         }
     }

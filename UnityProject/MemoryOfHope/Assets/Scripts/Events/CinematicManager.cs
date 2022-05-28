@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class CinematicManager : MonoBehaviour
@@ -17,6 +15,8 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] private InGameCanvasType[] _canvasInCinematic;
 
     [SerializeField] private bool _inCutScene;
+
+    private bool _isEndCinematic;
 
     [SerializeField] Slider _skipSlider;
     [SerializeField] private float _skipSliderSpeed;
@@ -48,11 +48,16 @@ public class CinematicManager : MonoBehaviour
         {
             if (_isPressSkipInput)
             {
-                _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
-                if (_skipSlider.value >= _skipSlider.maxValue)
+                if (_isEndCinematic)
                 {
-                    EndCinematic();
+                       _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
+                                    if (_skipSlider.value >= _skipSlider.maxValue)
+                                    {
+                                        Debug.Log("djqsbonsdofijdf jaoif jdfjoidj f");
+                                        EndCinematic();
+                                    }
                 }
+             
             }
         }
     }
@@ -81,10 +86,11 @@ public class CinematicManager : MonoBehaviour
         _fadeInOut.Play("BeginFade");
         PlayerManager.instance.speedEffect.gameObject.SetActive(false);
         _skipSlider.value = 0;
-        
+
+        _isEndCinematic = false; 
         UIInstance.instance.SetCanvasOnDisplay(_canvasOutCinematic, false);
         UIInstance.instance.SetCanvasOnDisplay(_canvasInCinematic, true);
-        
+        _skipSlider.transform.parent.gameObject.SetActive(true);
         StartCoroutine(WaitForLoadCinematic(index));
     }
 
@@ -93,18 +99,20 @@ public class CinematicManager : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         MainCameraController.Instance.MainCamera.enabled = false;
         _director.playableAsset = AllCinematics[index];
-        
+
         InCutScene = true;
         _director.Play();
     }
 
     public void EndCinematic()
     {
+        _isEndCinematic = true;
         _fadeInOut.Play("EndFade");
         DialogueManager.Instance.EndDialogue();
         DialogueManager.Instance.StopAllCoroutines();
+        Debug.Log("dfsmjkjdmjdkljdfqsjdfqsmjdfqsmj");
         PlayerManager.instance.speedEffect.gameObject.SetActive(true);
-
+        _skipSlider.transform.parent.gameObject.SetActive(false);
         StartCoroutine(WaitForLoadGamePhase());
     }
 
@@ -120,9 +128,9 @@ public class CinematicManager : MonoBehaviour
         InCutScene = false;
     }
 
-    public void ActivateModuleFeedback(int index)
+    public void ActivateModuleFeedback(GameObject module) // A appeler au bon moment dans les cinématiques
     {
-        var module = modules[index];
-        // Pour chaque module, active le fx d'activation
+        var moduleAcquisition = module.GetComponent<ModuleAcquisition>();
+        moduleAcquisition.activateModuleEffect.Play();
     }
 }

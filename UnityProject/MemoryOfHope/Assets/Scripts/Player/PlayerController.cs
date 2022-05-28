@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<int> currentModuleUpdate;
     [SerializeField] private List<int> currentModuleFixed;
 
+
     [SerializeField] private List<Module> _movmentModule;
+
     #endregion
 
     #region PlayerComponent
@@ -75,10 +78,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 _velocityMoveGround;
     private bool _previousPositionSet;
     private Vector3 _playerlocalPositionMoveGround;
-  
-Transform _moveGround;
-
+    [SerializeField] private List<Module> _rotationModuleMovePlateform;
+    [SerializeField] private MoveModule _moveModule;
+    bool _isPerformedRotationModuleMovePlateform = false;
+    Transform _moveGround;
+    private Vector3 _playerLocalRotationMovePlateform;
     private bool _useCheckGround;
+    private bool _playerLocalRotationMovePlateformIsSet;
 
 
     private Vector3 currentNormalWall;
@@ -168,19 +174,16 @@ Transform _moveGround;
 
     void CalculateUndoVelocity()
     {
-     
-                    physicsFactor = oldVelocity - playerRb.velocity;
-            
-            
-                    if (physicsFactor.magnitude <= undoVelocity.magnitude)
-                    {
-                        undoVelocity += physicsFactor;
-                        finalVelocity += undoVelocity;
-                    }
-            
-                    undoVelocity = Vector3.zero;
-        
+        physicsFactor = oldVelocity - playerRb.velocity;
 
+
+        if (physicsFactor.magnitude <= undoVelocity.magnitude)
+        {
+            undoVelocity += physicsFactor;
+            finalVelocity += undoVelocity;
+        }
+
+        undoVelocity = Vector3.zero;
     }
 
     void CalculateCurrentVelocity()
@@ -216,15 +219,47 @@ Transform _moveGround;
     {
         if (!_inMoveGround) return;
 
+        _isPerformedRotationModuleMovePlateform = false;
+        if (_playerLocalRotationMovePlateformIsSet)
+        {  
+            transform.forward = _moveGround.TransformDirection(_playerLocalRotationMovePlateform);
+        }
+        if (!_moveModule.inputPressed)
+        {
+            for (int i = 0; i < _rotationModuleMovePlateform.Count; i++)
+            {
+                if (_rotationModuleMovePlateform[i].isPerformed)
+                {
+                    _isPerformedRotationModuleMovePlateform = true;
+                  
+                    break;
+                }
+            }
+
+            if (!_isPerformedRotationModuleMovePlateform)
+            {
+                _playerLocalRotationMovePlateform = _moveGround.InverseTransformDirection(transform.forward);
+                _playerLocalRotationMovePlateformIsSet = true; 
+            }
+            else
+            {
+                _playerLocalRotationMovePlateformIsSet = false;
+            }
+        }
+        else
+        {
+            _playerLocalRotationMovePlateformIsSet = false;
+        }
+
         if (_previousPositionSet)
         {
-            _velocityMoveGround =  _moveGround.transform.TransformPoint( _playerlocalPositionMoveGround ) -
-                                   _currentPositionMoveGround;;
+            _velocityMoveGround = _moveGround.transform.TransformPoint(_playerlocalPositionMoveGround) -
+                                  _currentPositionMoveGround;
+            ;
             _currentPositionMoveGround = playerRb.position;
             _playerlocalPositionMoveGround = _moveGround.InverseTransformPoint(_currentPositionMoveGround);
             _velocityMoveGround /= Time.deltaTime;
             currentVelocityWithUndo += _velocityMoveGround;
-        
         }
 
         else
@@ -236,12 +271,13 @@ Transform _moveGround;
         }
     }
 
+   
     public void SetMoveGround(Transform moveGround)
     {
         _moveGround = moveGround;
         _inMoveGround = true;
+        _playerLocalRotationMovePlateformIsSet = false; 
         _previousPositionSet = false;
-       
     }
 
     public void ResetMoveGround()
@@ -253,32 +289,28 @@ Transform _moveGround;
     void CheckNormals()
     {
         playerRb.velocity += finalVelocity;
- 
+
         oldVelocity = playerRb.velocity;
 
 
         if (onGround && stuckGround)
         {
-            
             projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalGround).normalized;
             alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
             projectionRB *= alignedSpeed;
-          
-            
-                playerRb.velocity = projectionRB;
-            
+
+
+            playerRb.velocity = projectionRB;
         }
         else if (!onGround && currentWall != null)
         {
             if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
             {
-                
                 projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
                 alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
                 projectionRB *= alignedSpeed;
 
                 playerRb.velocity = projectionRB;
-                
             }
         }
     }
@@ -485,5 +517,8 @@ Transform _moveGround;
                 activeModulesUpdate[i].Cancel();
             }
         }
+
+        finalVelocity = Vector3.zero;
+        playerRb.velocity = Vector3.zero;
     }
 }

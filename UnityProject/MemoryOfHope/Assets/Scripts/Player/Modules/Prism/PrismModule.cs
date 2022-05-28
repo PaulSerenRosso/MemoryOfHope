@@ -64,7 +64,7 @@ public class PrismModule : Module
             return false; // Ne peut pas faire le prisme si le joueur est knockback
         }
 
-        if (!PlayerController.instance.onGround || (_shield.isDead && !isActivate)) return false;
+        if (!PlayerController.instance.onGround/* || (_shield.isDead && !isActivate)*/) return false;
         return true;
     }
 
@@ -92,13 +92,14 @@ public class PrismModule : Module
             isTutorial = false;
             prismTutorial.RemoveTutorial();
         }
-        
+        /*
         if (_shield.isDead)
         {
             Release();
 
             return;
         }
+        */
 
         if (!isPerformed)
         {
@@ -111,6 +112,7 @@ public class PrismModule : Module
 
         isActivate = true;
         _shield.InputShield = true;
+       
 
         if (!joystickPressed)
             return;
@@ -126,8 +128,8 @@ public class PrismModule : Module
                    _cameraRightXZ * _joystickDirection.x;
         Vector2 rotationVector =
             Vector3.RotateTowards(angleFoward, inputCam, rotationSpeed, 00f);
-        PlayerController.instance.transform.rotation =
-            Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg);
+        PlayerController.instance.playerRb.MoveRotation( Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg)); 
+           
     }
 
     public override void Release()

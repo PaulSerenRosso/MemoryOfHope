@@ -26,7 +26,7 @@ public class PA_AttackState : EnemyState
         {
             enemyMachine.attackArea.SetActive(false);
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;  
-            enemyMachine.enemyManager.isBlocked = false;
+         //   enemyMachine.enemyManager.isBlocked = false;
             enemy.SwitchState(enemy.pursuitState);
         }
     }

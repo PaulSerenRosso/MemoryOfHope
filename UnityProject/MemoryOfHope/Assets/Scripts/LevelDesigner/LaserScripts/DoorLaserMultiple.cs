@@ -5,15 +5,33 @@ using UnityEngine.Events;
 
 public class DoorLaserMultiple : MonoBehaviour
 {
-    [SerializeField]
-    private List<DoorActivator> _allActivators;
+   
+    public List<DoorActivator> _allActivators;
     [SerializeField]
     private MeshRenderer _meshRenderer;
 
+    [SerializeField]
+    private UnityEvent updateActivatorCount;
+    
+    private int _activedActivatorCount;
+    public int ActivedActivatorsCount
+    {
+        get
+        {
+            return _activedActivatorCount; 
+        }
+        set
+        {
+            _activedActivatorCount = value;
+            updateActivatorCount?.Invoke();
+            
+        }
+    }
     [SerializeField] private AudioSource _audioSource;
     [SerializeField]
     private Collider _collider;
-    
+
+    [SerializeField] private ParticleSystem breakDoor;
 
     [SerializeField] private UnityEvent _activateEvent;
     public bool IsActive;
@@ -28,6 +46,7 @@ public class DoorLaserMultiple : MonoBehaviour
         if (IsActive)
         {
             _activateEvent?.Invoke();
+            breakDoor.Play();
             _meshRenderer.enabled = false;
             _collider.enabled = false;
             _audioSource.enabled = false; 

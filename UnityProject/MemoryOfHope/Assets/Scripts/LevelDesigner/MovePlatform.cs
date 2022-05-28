@@ -14,7 +14,8 @@ public class MovePlatform : MonoBehaviour
 
             MainCameraController.Instance.transform.parent = _groundPlatform;
             PlayerController.instance.SetMoveGround(_groundPlatform);
-            PlayerController.instance.playerRb.velocity = Vector3.zero;
+        
+            PlayerController.instance.CancelAllModules();
          
         }
     }
@@ -24,7 +25,6 @@ public class MovePlatform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             MainCameraController.Instance.transform.parent = null;
-            MainCameraController.Instance.IsFixedUpdate = false ;
             PlayerController.instance.ResetMoveGround();
          
         }

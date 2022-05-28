@@ -11,6 +11,7 @@ public class HM_CooldownState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         base.StartState(enemyMachine);
         Debug.Log("cooldown après attack...");
         enemyMachine.agent.isStopped = true;

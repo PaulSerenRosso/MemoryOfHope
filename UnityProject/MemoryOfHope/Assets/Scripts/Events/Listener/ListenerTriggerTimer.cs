@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ListenerTriggerTimer : ListenerTrigger
 {
-    [SerializeField] private EventTimer[] _eventTimers;
+ public EventTimer[] _eventTimers;
     private int _currentTimerIndex;
     private bool _timerIsActive;
     private float _currentTimer;

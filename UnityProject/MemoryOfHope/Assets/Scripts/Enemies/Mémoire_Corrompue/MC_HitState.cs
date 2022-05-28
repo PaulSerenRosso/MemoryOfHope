@@ -40,7 +40,7 @@ public class MC_HitState : EnemyState // State quand le Songe est attaqué
         
         if (ConditionState.Timer(durationHitStunned, timer))
         {
-            enemyMachine.enemyManager.isBlocked = false; 
+            //enemyMachine.enemyManager.isBlocked = false; 
             MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
             enemyMachine.agent.enabled = true;
             enemyMachine.rb.drag = 0;

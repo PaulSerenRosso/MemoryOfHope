@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     public int healthEnemy;
     public int maxHealthEnemy;
     public bool isDeadEnemy;
-    public bool isBlocked;
+//    public bool isBlocked;
     public bool canBeHitByMelee;
     public bool canBeHitByLaser;
     public bool canBeKnockback;
@@ -48,7 +48,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     public int damage;
     public EnemyMachine Machine;
     public ListenerWaveEnemy WaveListener;
-
+    
     #endregion
 
     #region Main Functions
