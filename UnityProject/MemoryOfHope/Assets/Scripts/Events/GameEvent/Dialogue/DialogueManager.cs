@@ -46,6 +46,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator LaunchDialogue()
     {
+    
 
         for (int i = 0; i < CurrentDialogue.Lines.Count; i++)
         {
@@ -77,6 +78,7 @@ public class DialogueManager : MonoBehaviour
     void UpdateLine()
     {
         _dialogueWindows.gameObject.SetActive(true);
+   
         string currentCharacterName = SettingsManager.instance.gameLanguage == Language.English
             ? CurrentLine.CharacterProfil.EnglishName
             : CurrentLine.CharacterProfil.FrenchName;

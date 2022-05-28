@@ -11,7 +11,7 @@ public class ListenerWaveEnemy : MonoBehaviour
     [SerializeField] private List<CheckIndexEnemiesList> checkEnemyCount;
 
     // Start is called before the first frame update
-    void OnValidate()
+    void Start()
     {
         for (int i = 0; i < _allEnemies.Count; i++)
         {
