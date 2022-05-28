@@ -8,7 +8,6 @@ public class S_HidingState : EnemyState
     private float durationBeforeHiding;
 
     [SerializeField] private Collider[] _colliders;
-    [SerializeField] private MeshRenderer _attackMesh;
     private float timer;
 
     public override void StartState(EnemyMachine enemyMachine)
@@ -18,7 +17,8 @@ public class S_HidingState : EnemyState
         enemyMachine.enemyManager.Animator.Play("Despawn");
         enemyMachine.agent.isStopped = true;
         enemyMachine.attackArea.SetActive(true);
-
+        S_StateMachine enemy = (S_StateMachine) enemyMachine;
+        enemy.hazardousEffect.Stop();
         timer = 0;
     }
 
@@ -33,7 +33,6 @@ public class S_HidingState : EnemyState
                 _colliders[i].enabled = false;
             }
 
-            _attackMesh.enabled = false;
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.defaultState);
         }
