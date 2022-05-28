@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     //ajouter du knockbackforce pour l'ennemy au joueur
     public int damage;
     public EnemyMachine Machine;
-    public ListenerWaveEnemy WaveListener;
+    public ListenerWaveEnemy WaveListener ;
 
     #endregion
 
