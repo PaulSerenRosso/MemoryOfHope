@@ -16,7 +16,7 @@ public class ActivateModule : Module
         if (!base.Conditions()) return false;
         if (PlayerManager.instance.CurrentListenerActivate == null) return false;
        
-        Debug.Log("bonsoir à tous");
+
         isPerformed = true;
         return true;
     }

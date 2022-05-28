@@ -48,12 +48,11 @@ public class CinematicManager : MonoBehaviour
         {
             if (_isPressSkipInput)
             {
-                if (_isEndCinematic)
+                if (!_isEndCinematic)
                 {
                        _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
                                     if (_skipSlider.value >= _skipSlider.maxValue)
                                     {
-                                        Debug.Log("djqsbonsdofijdf jaoif jdfjoidj f");
                                         EndCinematic();
                                     }
                 }
