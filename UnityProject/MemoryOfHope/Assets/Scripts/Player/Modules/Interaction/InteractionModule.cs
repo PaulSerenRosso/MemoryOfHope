@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -16,8 +15,8 @@ public class InteractionModule : Module
 
     [SerializeField] private AudioClip _selectAudioClip;
     [SerializeField] private AudioClip _canSelectAudioClip;
-    
- [SerializeField] UnityEvent _interactionPerformedEvent;
+
+    [SerializeField] UnityEvent _interactionPerformedEvent;
     [Range(2, 10)] public float rayLength;
     [SerializeField] private LayerMask interactiveObjectLayer;
 
@@ -28,14 +27,12 @@ public class InteractionModule : Module
     private bool joystickIsPressed;
     public TutorialGameEvent selectionTutorial;
 
-    public Gradient interactionLineGradient;
-    public Gradient defaultGradient;
     public Color interactionColor;
     public Color defaultColor;
 
     private bool isTutorial;
     [SerializeField] private TutorialGameEvent interactionTutorial;
-    
+
     public override void LinkModule()
     {
         GameManager.instance.inputs.Player.InteractionModule.started += InputPressed;
@@ -116,7 +113,6 @@ public class InteractionModule : Module
                     {
                         interactive.AudioSource.PlayOneShot(_selectAudioClip);
                         interaction.Select();
-                        
                     }
                 }
             }
@@ -153,14 +149,14 @@ public class InteractionModule : Module
 
     public override void Execute()
     {
-        if(!isPerformed)
+        if (!isPerformed)
             _interactionPerformedEvent?.Invoke();
         if (isTutorial)
         {
             isTutorial = false;
             interactionTutorial.RemoveTutorial();
         }
-        
+
         if (selectedObject != null) return;
 
         isPerformed = true;
@@ -169,22 +165,22 @@ public class InteractionModule : Module
         PlayerController.instance.playerAnimator.SetBool("InPrism", true);
         if (joystickIsPressed)
         {
-             Vector2 angleFoward = new Vector2(transform.forward.x,
-                        transform.forward.z);
-                    Vector2 _cameraForwardXZ;
-                    Vector2 _cameraRightXZ;
-                    _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
-                        MainCameraController.Instance.transform.forward.z).normalized;
-                    _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
-                        MainCameraController.Instance.transform.right.z).normalized;
-                    inputCam = _cameraForwardXZ * joystickDirection.y +
-                               _cameraRightXZ * joystickDirection.x;
-                    Vector2 rotationVector =
-                        Vector3.RotateTowards(angleFoward, inputCam, rotateSpeed, 00f);
-                    PlayerController.instance.playerRb.MoveRotation(
-                        Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg));
+            Vector2 angleFoward = new Vector2(transform.forward.x,
+                transform.forward.z);
+            Vector2 _cameraForwardXZ;
+            Vector2 _cameraRightXZ;
+            _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+                MainCameraController.Instance.transform.forward.z).normalized;
+            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
+                MainCameraController.Instance.transform.right.z).normalized;
+            inputCam = _cameraForwardXZ * joystickDirection.y +
+                       _cameraRightXZ * joystickDirection.x;
+            Vector2 rotationVector =
+                Vector3.RotateTowards(angleFoward, inputCam, rotateSpeed, 00f);
+            PlayerController.instance.playerRb.MoveRotation(
+                Quaternion.Euler(Vector3.up * Mathf.Atan2(rotationVector.x, rotationVector.y) * Mathf.Rad2Deg));
         }
-       
+
 
         line.positionCount = 2;
         line.SetPosition(0, raycastOrigin.transform.position);
@@ -193,21 +189,23 @@ public class InteractionModule : Module
         if (Physics.Raycast(raycastOrigin.position, transform.forward, out var hit, rayLength, interactiveObjectLayer))
         {
             if (currentTargetedObject != null)
-            { currentTargetedObject.GetComponent<Outline>().enabled = false;}
+            {
+                currentTargetedObject.GetComponent<Outline>().enabled = false;
+            }
             else
             {
                 AudioSource audioSource = hit.transform.GetComponent<InteractiveObjectData>().AudioSource;
                 audioSource.PlayOneShot(_canSelectAudioClip);
             }
+
             selectionTutorial.SetTutorial();
             line.SetPosition(1, hit.point);
-            
-            currentTargetedObject = hit.transform.gameObject;
-            
-            currentTargetedObject.GetComponent<Outline>().enabled = true;
-            
-            GameManager.instance.RumbleConstant(.1f, .1f, .1f);
 
+            currentTargetedObject = hit.transform.gameObject;
+
+            currentTargetedObject.GetComponent<Outline>().enabled = true;
+
+            GameManager.instance.RumbleConstant(.1f, .1f, .1f);
         }
         else
         {

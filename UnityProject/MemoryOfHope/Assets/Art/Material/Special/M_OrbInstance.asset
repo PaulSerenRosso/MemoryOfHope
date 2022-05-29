@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &-899677325833862633
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_OrbInstance
+  m_Shader: {fileID: -6465566751694194690, guid: 7a8dae8fa9c5e8648a2a114f44d6c5ec, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_66b0a8e7166547cc8ab29ddc54b33c8c: 3.11
+    - Vector1_8cb8282dceca4ac18b94f28a1d5fd7b1: 1
+    - Vector1_b0f7ac4cc851416b8dd4683379ad10bb: 0.1
+    - Vector1_b77dc0803a224757ab7bab2aa6ed6a19: 1
+    - Vector1_f80430aed91e41d6b4c785425084fe9a: 15.13
+    - Vector1_fbf917904eca402faf0add60d565e704: 0.3
+    m_Colors:
+    - Color_6a97584d15894db5aaa010a2c7b9f662: {r: 1, g: 0.45056847, b: 0.1660378, a: 0}
+    - Color_b1eb68953e8143b6b8043c03b738f8cc: {r: 1, g: 0.18490571, b: 0.30581427, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fbb352189210b408ccf9a29097145a, type: 3}
+  m_Name: M_OrbInstance
+  m_EditorClassIdentifier: 
+  master: {fileID: 2100000, guid: 00330a3fff3c337459fb995328416188, type: 2}
+  instance: {fileID: -899677325833862633}
+  overrides:
+  - name: Color_b1eb68953e8143b6b8043c03b738f8cc
+    type: 0
+    isKeyword: 0
+    colorValue: {r: 1, g: 0.18490571, b: 0.30581427, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 0}
+    active: 1
+  - name: Color_6a97584d15894db5aaa010a2c7b9f662
+    type: 0
+    isKeyword: 0
+    colorValue: {r: 1, g: 0.45056847, b: 0.1660378, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 0}
+    active: 1

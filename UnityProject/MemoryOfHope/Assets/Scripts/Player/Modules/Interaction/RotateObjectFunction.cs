@@ -13,7 +13,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
         GameManager.instance.inputs.Player.InteractionRotate.canceled += InputReleased;
         isLinked = true;
     }
-    
+
     private void OnDisable()
     {
         UnlinkModule();
@@ -25,12 +25,12 @@ public class RotateObjectFunction : InteractiveObjectFunction
         GameManager.instance.inputs.Player.InteractionRotate.performed -= InputPressed;
         GameManager.instance.inputs.Player.InteractionRotate.canceled -= InputReleased;
     }
-    
+
     public override void InputPressed(InputAction.CallbackContext ctx)
     {
         inputPressed = true;
     }
-    
+
     public override void InputReleased(InputAction.CallbackContext ctx)
     {
         inputPressed = false;
@@ -44,35 +44,35 @@ public class RotateObjectFunction : InteractiveObjectFunction
         if (timer <= 0)
         {
             data.transform.Rotate(0, data.rotationDegree, 0);
-            
+
             timer = time;
         }
 
         timer -= Time.deltaTime;
     }
-    
+
     public override void Select()
     {
         base.Select();
-        
+
         Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
         var interactive = (InteractiveObjectData) component;
-        
+
         data = (RotateObjectData) interactive;
         if (!data.AudioSource.isPlaying)
         {
             data.AudioSource.Play();
         }
-        
+
         data.tutorial.SetTutorial();
         interactionModule.line.startColor = interactionModule.interactionColor;
         interactionModule.line.endColor = interactionModule.interactionColor;
         data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<RotateObjectData>();
-            
+
         // Selection feedbacks
-        
+
         data.rb.isKinematic = false;
     }
 
@@ -80,8 +80,8 @@ public class RotateObjectFunction : InteractiveObjectFunction
     {
         if (data != null)
         {
-                data.AudioSource.Stop();
-            
+            data.AudioSource.Stop();
+
             data.tutorial.RemoveTutorial();
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
@@ -89,15 +89,14 @@ public class RotateObjectFunction : InteractiveObjectFunction
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
         }
-        
+
         // Deselection feedbacks
 
         base.Deselect();
     }
-    
+
     public override void Release()
     {
         timer = 0;
     }
 }
-
