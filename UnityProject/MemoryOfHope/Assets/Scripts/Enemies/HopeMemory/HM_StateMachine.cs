@@ -96,9 +96,9 @@ public class HM_StateMachine : EnemyMachine
         if (BossPhaseManager.instance.currentPhase.phaseType != PhaseType.Vulnerable) return;
         if (CheckDamageAnimationStateEqualCurrentState())
         {
-                enemyManager.Animator.Play("Damage");
                     if (_isCurrentAttackKnockback)
                     {
+                enemyManager.Animator.Play("Damage");
                         SwitchState(vulnerableHitState);
                     }
         }
