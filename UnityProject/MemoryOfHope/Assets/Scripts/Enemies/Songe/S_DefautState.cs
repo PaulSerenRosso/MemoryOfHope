@@ -10,10 +10,11 @@ public class S_DefautState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         base.StartState(enemyMachine);
+        if(enemyMachine.agent.enabled)
         enemyMachine.agent.isStopped = true;
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         detectionDistance = enemy.detectionDistance;
-        initialPos = enemy.initialPosition;
+        initialPos = enemy.initialPosition; enemyMachine.agent.enabled = false;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -23,6 +24,7 @@ public class S_DefautState : EnemyState
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.apparitionState);
+            
         }
     }
 }

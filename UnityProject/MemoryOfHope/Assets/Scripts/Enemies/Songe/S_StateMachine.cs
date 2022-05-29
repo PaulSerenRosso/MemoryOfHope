@@ -77,8 +77,11 @@ public class S_StateMachine : EnemyMachine
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
+        if (_isCurrentAttackKnockback)
+        {
         enemyManager.Animator.Play("Damage");
-        if (_isCurrentAttackKnockback) SwitchState(hitState);
+            SwitchState(hitState);
+        }
     }
 
     #endregion

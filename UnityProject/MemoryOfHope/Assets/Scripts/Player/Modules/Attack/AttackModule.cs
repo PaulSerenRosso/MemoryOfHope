@@ -53,7 +53,7 @@ public class AttackModule : Module
         for (int i = 0; i < attackList.Count; i++)
         {
             attackList[i].attackPlayerCollider.enabled = false;
-            attackList[i].attackPlayerCollider.renderer.SetActive(false);
+            attackList[i].attackPlayerCollider.rendererAttack.SetActive(false);
             attackList[i].attackPlayerCollider.currentDamage = 0;
         }
 
@@ -169,8 +169,8 @@ public class AttackModule : Module
     {
         if (attackTimer >= attackList[currentIndexAttack].startTimeActivateAttack)
         {
-            attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = true;
-            attackList[currentIndexAttack].attackPlayerCollider.renderer.SetActive(true);
+            attackList[currentIndexAttack].attackPlayerCollider.colliderAttack.enabled = true;
+            attackList[currentIndexAttack].attackPlayerCollider.rendererAttack.SetActive(true);
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage;
             currentStateCombo = StateCombo.InDamage;
         }
@@ -180,8 +180,8 @@ public class AttackModule : Module
     {
         if (attackTimer >= attackList[currentIndexAttack].endTimeActivateAttack)
         {
-            attackList[currentIndexAttack].attackPlayerCollider.collider.enabled = false;
-            attackList[currentIndexAttack].attackPlayerCollider.renderer.SetActive(false);
+            attackList[currentIndexAttack].attackPlayerCollider.colliderAttack.enabled = false;
+            attackList[currentIndexAttack].attackPlayerCollider.rendererAttack.SetActive(false);
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = 0;
 
             canMove = false;

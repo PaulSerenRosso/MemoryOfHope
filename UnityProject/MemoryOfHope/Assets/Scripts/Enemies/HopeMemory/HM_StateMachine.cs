@@ -4,10 +4,12 @@ using System.Collections.Generic;
 public class HM_StateMachine : EnemyMachine
 {
     private List<EnemyState> damageAnimationState = new List<EnemyState>();
+
     #region States
 
     [Header("Vulnerable State")]
     public HM_VulnerableDefaultState vulnerableDefaultState = new HM_VulnerableDefaultState();
+
     public HM_VulnerableMoveState vulnerableMoveState = new HM_VulnerableMoveState();
     public HM_VulnerableChargeState vulnerableChargeState = new HM_VulnerableChargeState();
     public HM_CooldownState cooldownState = new HM_CooldownState();
@@ -18,21 +20,22 @@ public class HM_StateMachine : EnemyMachine
 
     [Header("Protection State")]
     public HM_ProtectionDefaultState protectionDefaultState = new HM_ProtectionDefaultState();
+
     public HM_ProtectionPositionState protectionPositionState = new HM_ProtectionPositionState();
     public HM_ProtectionProtectedState protectionProtectedState = new HM_ProtectionProtectedState();
     public HM_PauseProtectionPosition pauseProtectionPosition = new HM_PauseProtectionPosition();
-    
+
     #endregion
 
     public List<EnemyManager> associatedTowers = new List<EnemyManager>();
-    
+
     public int nextLifeThreshold;
     public Vector3 protectedPos;
-    
+
     public bool isActive;
 
     public GameObject chargeArea;
-    
+
     public float attackAreaLength;
     public float attackAreaHeight;
 
@@ -40,11 +43,14 @@ public class HM_StateMachine : EnemyMachine
 
     void Awake()
     {
+        /*
         damageAnimationState.Add(vulnerableMoveState);
         damageAnimationState.Add(pauseVulnerableMove);
         damageAnimationState.Add(vulnerableDefaultState);
         damageAnimationState.Add(vulnerableHitState);
+        */
     }
+
     public override void Start()
     {
         isActive = false;
@@ -84,25 +90,27 @@ public class HM_StateMachine : EnemyMachine
             tower.gameObject.SetActive(false);
             associatedTowers.Remove(tower);
         }
-        
+
         isActive = false;
     }
 
     public override void OnHitByMelee()
     {
+        if (BossPhaseManager.instance.currentPhase == null) return;
+        if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected) return;
+        
         base.OnHitByMelee();
 
-        if (BossPhaseManager.instance.currentPhase == null) return;
-        if (BossPhaseManager.instance.currentPhase.phaseType != PhaseType.Vulnerable) return;
+        /*
         if (CheckDamageAnimationStateEqualCurrentState())
         {
+            if (_isCurrentAttackKnockback)
+            {
                 enemyManager.Animator.Play("Damage");
-                    if (_isCurrentAttackKnockback)
-                    {
-                        SwitchState(vulnerableHitState);
-                    }
+                SwitchState(vulnerableHitState);
+            }
         }
-    
+        */
     }
 
     bool CheckDamageAnimationStateEqualCurrentState()
@@ -125,9 +133,9 @@ public class HM_StateMachine : EnemyMachine
     public override void OnTriggerEnter(Collider other)
     {
         if (!isActive) return;
-        
+
         currentState.OnTriggerEnterState(this, other);
-        
+
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
             hitDirection = -(PlayerController.instance.transform.position - transform.position);

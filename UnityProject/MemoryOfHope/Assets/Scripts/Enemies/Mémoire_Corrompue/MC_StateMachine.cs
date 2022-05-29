@@ -42,8 +42,11 @@ public class MC_StateMachine : EnemyMachine
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
-        enemyManager.Animator.Play("Damage");
-        if (_isCurrentAttackKnockback) SwitchState(hitState);
+        if (_isCurrentAttackKnockback)
+        {
+              enemyManager.Animator.Play("Damage");
+                    SwitchState(hitState);
+        }
     }
 
     public bool IsProtected()
