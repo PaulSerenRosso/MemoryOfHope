@@ -14,7 +14,9 @@ public class S_ApparitionState : EnemyState
     {
         base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsSpawn", true);
+        if(enemyMachine.agent.enabled)
         enemyMachine.agent.isStopped = true;
+        enemyMachine.agent.enabled = false;
         timer = 0;
     }
 
@@ -26,7 +28,7 @@ public class S_ApparitionState : EnemyState
         {
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemyMachine.enemyManager.Animator.SetBool("IsSpawn", false);
-
+ enemyMachine.agent.enabled = true;
             for (int i = 0; i < _colliders.Length; i++)
             {
                 _colliders[i].enabled = true;

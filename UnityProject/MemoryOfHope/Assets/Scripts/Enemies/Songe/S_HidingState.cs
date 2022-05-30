@@ -15,7 +15,9 @@ public class S_HidingState : EnemyState
         base.StartState(enemyMachine);
 
         enemyMachine.enemyManager.Animator.Play("Despawn");
+        if(enemyMachine.agent.enabled)
         enemyMachine.agent.isStopped = true;
+     
         enemyMachine.attackArea.SetActive(true);
         S_StateMachine enemy = (S_StateMachine) enemyMachine;
         enemy.hazardousEffect.Stop();

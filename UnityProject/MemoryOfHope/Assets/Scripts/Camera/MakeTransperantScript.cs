@@ -8,14 +8,14 @@ public class MakeTransperantScript : MonoBehaviour
     [SerializeField] private List<Iam_InTheWay> currentlyInTheWay;
     [SerializeField] private List<Iam_InTheWay> alreadyTransperant;
     [SerializeField] private Transform player;
-    private Transform camera;
+    private Transform cam;
 
     private void Awake()
     {
         currentlyInTheWay = new List<Iam_InTheWay>();
         alreadyTransperant = new List<Iam_InTheWay>();
 
-        camera = this.gameObject.transform;
+        cam = this.gameObject.transform;
     }
 
     private void Update()
@@ -32,10 +32,10 @@ public class MakeTransperantScript : MonoBehaviour
 
         currentlyInTheWay.Clear();
 
-        float cameraPlayerDistance = Vector3.Magnitude(camera.position - player.position);
+        float cameraPlayerDistance = Vector3.Magnitude(cam.position - player.position);
 
-        Ray ray1_Forward = new Ray(camera.position, player.position - camera.position);
-        Ray ray1_Backward = new Ray(player.position, camera.position - player.position);
+        Ray ray1_Forward = new Ray(cam.position, player.position - cam.position);
+        Ray ray1_Backward = new Ray(player.position, cam.position - player.position);
 
         var hits1_Forward = Physics.RaycastAll(ray1_Forward, cameraPlayerDistance);
         var hits1_Backward = Physics.RaycastAll(ray1_Forward, cameraPlayerDistance);

@@ -58,8 +58,9 @@ public class LaserModule : Module
         isLinked = true;
         isTutorial = true;
         UIInstance.instance.LaserSlider.gameObject.SetActive(true);
-        UIInstance.instance.LaserSlider.value = _shield.LaserCharge;
+        _shield._laserCharge = _shield.MaxLaserCharge;
         UIInstance.instance.LaserSlider.maxValue = _shield.MaxLaserCharge;
+        UIInstance.instance.LaserSlider.value = _shield.LaserCharge;
     }
 
     private void OnDisable()

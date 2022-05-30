@@ -12,8 +12,10 @@ public class MoveModule : Module
    [SerializeField]
    private float _blendAnimationSpeed;
     [SerializeField] private float defaultSpeedRotation;
- 
-  
+
+
+    [SerializeField]
+    private GameObject _fxDust;
 
 
     private Vector3 currentRotation;
@@ -135,9 +137,11 @@ public class MoveModule : Module
     public override void Release()
     {
     
+        
         if(PlayerManager.instance.MainAudioSource.isPlaying)
             PlayerManager.instance.MainAudioSource.Stop();
         isPerformed = false;
+        _fxDust.SetActive(false);
     }
 
     void MoveGround(Vector3 angleForward)
@@ -147,6 +151,8 @@ public class MoveModule : Module
             PlayerManager.instance.MainAudioSource.clip = _runSound;
             PlayerManager.instance.MainAudioSource.Play();
         }
+        if(!_fxDust.activeSelf)
+        _fxDust.SetActive(true);
         moveVector *= defaultSpeedMovment;
         PlayerController.instance.currentVelocityWithUndo += moveVector;
         Vector2 rotationVector = Vector3.SmoothDamp(angleForward, inputCam, ref currentRotation, defaultSpeedRotation );
@@ -159,6 +165,8 @@ public class MoveModule : Module
 
     void MoveAir()
     {
+        if(_fxDust.activeSelf)
+        _fxDust.SetActive(false);
         moveVector *= airSpeedMovment;
         Vector3 rbVelocityXZ =
             Vector3.ClampMagnitude(

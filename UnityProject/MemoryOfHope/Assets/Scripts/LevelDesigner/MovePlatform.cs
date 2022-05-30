@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MovePlatform : MonoBehaviour
@@ -5,7 +6,8 @@ public class MovePlatform : MonoBehaviour
     [SerializeField]
     private Transform _groundPlatform;
 
-   
+
+ 
 
     private void OnTriggerEnter(Collider other)
     {
