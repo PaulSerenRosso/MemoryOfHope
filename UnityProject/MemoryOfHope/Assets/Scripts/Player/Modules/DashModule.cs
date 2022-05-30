@@ -152,6 +152,7 @@ public class DashModule : Module
             dashZoom.LaunchZoom();
         }
 
+        PlayerController.instance.IsProjectWallVelocity = false;
         isPerformed = true;
         oldHealth = PlayerManager.instance.health;
         PlayerController.instance.useGravity = false;
@@ -169,6 +170,7 @@ public class DashModule : Module
 
     void EndDash()
     {
+        PlayerController.instance.IsProjectWallVelocity = true;
         PlayerController.instance.playerAnimator.SetBool("isDash", false);
         timerDash = 0;
         isPerformed = false;

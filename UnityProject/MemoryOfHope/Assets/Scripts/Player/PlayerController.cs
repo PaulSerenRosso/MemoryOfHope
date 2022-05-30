@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<int> currentModuleFixed;
 
 
+
     [SerializeField] private List<Module> _movmentModule;
 
     #endregion
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 currentNormalGround;
     private Collider currentGround;
     private Collider currentWall;
-
+    public bool IsProjectWallVelocity = true;
     bool _inMoveGround;
     private Vector3 _previousPositionMoveGround;
     public Vector3 _currentPositionMoveGround;
@@ -302,14 +303,17 @@ public class PlayerController : MonoBehaviour
 
             playerRb.velocity = projectionRB;
         }
-        else if (!onGround && currentWall != null)
+        else if (!onGround && currentWall != null && IsProjectWallVelocity)
         {
             if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
             {
                 projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
+                
                 alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
+              
                 projectionRB *= alignedSpeed;
 
+                
                 playerRb.velocity = projectionRB;
             }
         }

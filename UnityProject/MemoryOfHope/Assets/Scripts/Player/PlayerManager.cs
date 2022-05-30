@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -116,6 +117,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         }*/
 
         instance = this;
+     
     }
 
     #endregion
@@ -123,6 +125,8 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #region Main Functions
+
+   
 
     private void Start()
     {
