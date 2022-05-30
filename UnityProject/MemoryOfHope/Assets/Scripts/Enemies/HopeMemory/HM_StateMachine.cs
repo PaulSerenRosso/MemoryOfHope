@@ -75,6 +75,11 @@ public class HM_StateMachine : EnemyMachine
 
     public void DeactivateBehaviour()
     {
+        enemyManager.Animator.SetBool("IsMove",  false);
+        enemyManager.Animator.SetBool("IsProtected",  false);
+        enemyManager.Animator.SetBool("EndCharge",  false);
+        enemyManager.Animator.SetBool("EndTp",  false);
+
         currentState = null;
         attackArea.SetActive(false);
         chargeArea.SetActive(false);
