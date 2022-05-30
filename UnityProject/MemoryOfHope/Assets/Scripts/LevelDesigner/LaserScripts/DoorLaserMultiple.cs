@@ -49,7 +49,7 @@ public class DoorLaserMultiple : MonoBehaviour
             breakDoor.Play();
             _meshRenderer.enabled = false;
             _collider.enabled = false;
-            _audioSource.enabled = false; 
+            //_audioSource.enabled = false; 
             IsActive = false;
         }
         

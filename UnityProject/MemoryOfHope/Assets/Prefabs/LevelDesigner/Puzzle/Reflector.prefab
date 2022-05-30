@@ -314,7 +314,19 @@ MonoBehaviour:
     m_Bits: 1574911
   StartReturnableEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 561459899586619138}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 3ba83c46877b00943ac896169dd74a8b, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   LaserLineReceiver: {fileID: 0}
   _currentSource: {fileID: 0}
   otherEntry: {fileID: 2034183626317830623}
@@ -439,7 +451,19 @@ MonoBehaviour:
     m_Bits: 1574911
   StartReturnableEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 561459899586619138}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 3ba83c46877b00943ac896169dd74a8b, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   LaserLineReceiver: {fileID: 0}
   _currentSource: {fileID: 0}
   otherEntry: {fileID: 6360137016235090355}
@@ -687,14 +711,14 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -731,7 +755,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -761,7 +785,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -819,8 +843,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   AudioSource: {fileID: 561459899586619138}
-  defaultMaterial: {fileID: 2100000, guid: f84613431e9708f48858f18cf155753d, type: 2}
-  selectedMaterial: {fileID: 2100000, guid: 0ae20ca44c6c2fe46aa55c16459fb5f0, type: 2}
   rb: {fileID: 8323484677250859978}
   interactiveParticleSystem: {fileID: 5009566942922384194}
   tutorial: {fileID: 11400000, guid: e1bb5afa203c6734e9ccf476ab86952c, type: 2}

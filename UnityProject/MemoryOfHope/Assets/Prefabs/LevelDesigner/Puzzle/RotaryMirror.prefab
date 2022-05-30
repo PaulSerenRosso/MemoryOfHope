@@ -392,6 +392,38 @@ PrefabInstance:
       propertyPath: RayLayer.m_Bits
       value: 1574399
       objectReference: {fileID: 0}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5679434555293970918}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.AudioSource, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ba83c46877b00943ac896169dd74a8b, type: 3}
+    - target: {fileID: 7771732485157920379, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
+      propertyPath: StartReturnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7771732485501257777, guid: fccb922c72bdf2747b3408a06646ea46, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
@@ -480,14 +512,14 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -524,7 +556,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -554,7 +586,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HeartItem : MonoBehaviour
 {
     private bool isObtained;
+
+    public UnityEvent obtention;
     
     public void GetItem()
     {
