@@ -10,6 +10,8 @@ public class MC_StateMachine : EnemyMachine
 
     public bool isProtected;
 
+    public Animation protectionWall;
+
     #region States
 
     public MC_DefaultState defaultState = new MC_DefaultState();
@@ -36,6 +38,9 @@ public class MC_StateMachine : EnemyMachine
     {
         initialPos = transform.position;
         currentState = defaultState;
+        protectionWall.gameObject.SetActive(true);
+        protectionWall.Play("WallFadeIn");
+        isProtected = IsProtected();
         base.Start();
     }
 
@@ -44,8 +49,8 @@ public class MC_StateMachine : EnemyMachine
         base.OnHitByMelee();
         if (_isCurrentAttackKnockback)
         {
-              enemyManager.Animator.Play("Damage");
-                    SwitchState(hitState);
+            enemyManager.Animator.Play("Damage");
+            SwitchState(hitState);
         }
     }
 
@@ -59,6 +64,7 @@ public class MC_StateMachine : EnemyMachine
             }
         }
 
+        protectionWall.Play("WallFadeOut");
         return false;
     }
 
@@ -73,8 +79,8 @@ public class MC_StateMachine : EnemyMachine
             hitDirection = transform.position - PlayerController.instance.transform.position;
             hitDirection = -(PlayerController.instance.transform.position - transform.position);
             OnHitByMelee();
-            if(enemyManager.isDead)
-            Debug.Log("tatatatata");
+            if (enemyManager.isDead)
+                Debug.Log("tatatatata");
         }
 /*
         if (other.CompareTag("Shield"))

@@ -35,6 +35,7 @@ public class HM_StateMachine : EnemyMachine
     public bool isActive;
 
     public GameObject chargeArea;
+    public Animation protectionWall;
 
     public float attackAreaLength;
     public float attackAreaHeight;
@@ -55,6 +56,7 @@ public class HM_StateMachine : EnemyMachine
     {
         isActive = false;
         protectedPos = transform.position;
+        protectionWall.Play("WallFadeOut");
     }
 
     public override void Update()
@@ -69,6 +71,7 @@ public class HM_StateMachine : EnemyMachine
         currentState = vulnerableDefaultState;
         UIInstance.instance.SetBossDisplay(enemyManager, true);
         agent.enabled = true;
+        protectionWall.gameObject.SetActive(true);
         base.Start();
         isActive = true;
     }
@@ -95,6 +98,7 @@ public class HM_StateMachine : EnemyMachine
             tower.gameObject.SetActive(false);
             associatedTowers.Remove(tower);
         }
+        protectionWall.gameObject.SetActive(false);
 
         isActive = false;
     }

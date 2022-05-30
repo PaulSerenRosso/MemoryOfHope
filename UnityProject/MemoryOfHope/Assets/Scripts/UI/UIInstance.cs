@@ -78,8 +78,10 @@ public class UIInstance : MonoBehaviour
     [SerializeField] private GameObject _timerEventUI;
     [SerializeField] private TextMeshProUGUI _timerEvent;
 
-    [Header("Boss Canvas")] public Slider bossLifeGauge;
+    [Header("Boss Canvas")] 
+    public Slider bossLifeGauge;
     public Image fillImage;
+    public Color bossSliderColor;
 
     [Header("Navigation")] public EventSystem eventSystem;
 
@@ -476,7 +478,7 @@ public class UIInstance : MonoBehaviour
         switch (type)
         {
             case PhaseType.Vulnerable:
-                fillImage.color = Color.red;
+                fillImage.color = bossSliderColor;
                 break;
             case PhaseType.Protected:
                 fillImage.color = Color.grey;

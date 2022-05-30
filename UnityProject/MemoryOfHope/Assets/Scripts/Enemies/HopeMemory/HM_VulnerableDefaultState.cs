@@ -17,8 +17,6 @@ public class HM_VulnerableDefaultState : EnemyState
         enemyMachine.attackArea.SetActive(false);
         base.StartState(enemyMachine);
         HM_StateMachine enemy = (HM_StateMachine) enemyMachine;
-
-        enemy.chargeArea.SetActive(false);
         
         enemy.nextLifeThreshold = enemy.enemyManager.health -
                                   ((VulnerablePhaseSO) BossPhaseManager.instance.currentPhase).damageToInflict;
