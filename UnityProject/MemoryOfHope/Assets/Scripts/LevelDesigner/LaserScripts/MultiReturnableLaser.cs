@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MultiReturnableLaser : MonoBehaviour,IReturnable
+public class MultiReturnableLaser : MonoBehaviour, IReturnable
 {
-    [SerializeField]
-    private List<LaserSource> _allExits;
+    [SerializeField] private List<LaserSource> _allExits;
     public LineRenderer LaserLineReceiver;
-    public UnityEvent StartReturnableEvent; 
-    
-    public  void Cancel(LaserMachine laser)
+    public UnityEvent StartReturnableEvent;
+
+    public void Cancel(LaserMachine laser)
     {
-        _triggerByLaser = false; 
+        _triggerByLaser = false;
         _currentSource = null;
         LaserLineReceiver = null;
-        for (int i = 0; i < _allExits.Count ; i++)
+        for (int i = 0; i < _allExits.Count; i++)
         {
             _allExits[i].IsActive = false;
         }
@@ -25,49 +24,44 @@ public class MultiReturnableLaser : MonoBehaviour,IReturnable
     public bool IsActive;
     private bool _triggerByLaser;
     private LaserMachine _currentSource;
+
     public virtual bool IsReturnLaser
     {
-        get
-        {
-            return _triggerByLaser;
-        }
+        get { return _triggerByLaser; }
         set { _triggerByLaser = value; }
     }
 
     public bool IsActiveReturnable
     {
         get => IsActive;
-        set
-        {
-            IsActive = value ; 
-         
-        } 
+        set { IsActive = value; }
     }
 
     public void StartReturnableFeedBack()
     {
-   StartReturnableEvent?.Invoke();
+        StartReturnableEvent?.Invoke();
     }
 
-    public LaserMachine CurrentSource { get=>_currentSource; set => _currentSource = value; }
+    public LaserMachine CurrentSource
+    {
+        get => _currentSource;
+        set => _currentSource = value;
+    }
 
-    public  void Returnable(LaserMachine laser, RaycastHit hit)
+    public void Returnable(LaserMachine laser, RaycastHit hit)
     {
         LaserLineReceiver.SetPosition(0, hit.point);
     }
 
     public void StartReturnable(LaserMachine laser, RaycastHit hit)
     {
-        _triggerByLaser = true; 
-        _currentSource = laser ;
+        _triggerByLaser = true;
+        _currentSource = laser;
         LaserLineReceiver = laser.LaserLine;
         Returnable(laser, hit);
-        for (int i = 0; i < _allExits.Count ; i++)
+        for (int i = 0; i < _allExits.Count; i++)
         {
             _allExits[i].IsActive = true;
         }
     }
-
-
-
 }
