@@ -13,7 +13,6 @@ public class HM_ProtectionProtectedState : EnemyState
         enemyMachine.agent.isStopped = true;
         enemyMachine.enemyManager.canBeHitByMelee = false;
         machine = (HM_StateMachine) enemyMachine;
-        machine.chargeArea.SetActive(true);
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -24,6 +23,7 @@ public class HM_ProtectionProtectedState : EnemyState
         }
 
         enemyMachine.enemyManager.Animator.SetBool("IsProtected", false);
+        machine.protectionWall.Play("WallFadeOut");
         machine.SwitchState(machine.vulnerableDefaultState);
     }
 }

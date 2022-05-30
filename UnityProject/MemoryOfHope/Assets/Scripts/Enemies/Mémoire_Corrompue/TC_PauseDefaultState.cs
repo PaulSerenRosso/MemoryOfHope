@@ -5,12 +5,13 @@ public class TC_PauseDefaultState : EnemyState
 {
     [Header("Parameters")] [SerializeField]
     private float pauseApparition;
-
+    [SerializeField] private Animation wallAnim;
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     {
         timer = 0f;
+        wallAnim.Play("WallFadeInTower");
         base.StartState(enemyMachine);
     }
 

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &-1384858644277171496
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_MUR_LASErInstance
+  m_Shader: {fileID: -6465566751694194690, guid: 6c2caa03ff4c2844880316ab66fec7d0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_13edd16b63384fe8a0c6ce949a778051:
+        m_Texture: {fileID: 2800000, guid: 460fc7ca5debccf408d52cc3af5c5600, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_ba4c9f5fca3a434287eec2f4be6777ee:
+        m_Texture: {fileID: 2800000, guid: e78c7e86d51d654428bcd60df3f49a5d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_1e8e7f8928874c54a48539bdb39eca9e: 1
+    - Vector1_4b2c3bea8c4a4dc5b8e7c5653486a197: 0
+    - Vector1_78896208c1e442adb8c0d0569959bb52: 7
+    - Vector1_9ae9f752806a4955a93506b0302ffc4c: 1
+    - Vector1_c68443fbb7dd4874959bd771798a6d6f: 0
+    m_Colors:
+    - Color_9582fead279a479f944a383f768e0cb0: {r: 11.181761, g: 4.104044, b: 2.107557, a: 0}
+    - Vector2_78c0a9393e4749268baf80668e0c4580: {r: 1, g: 0, b: 0, a: 0}
+    - Vector2_c4398d5374214ec892ee6284f1f4428f: {r: 1.5, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fbb352189210b408ccf9a29097145a, type: 3}
+  m_Name: FX_MUR_LASErInstance
+  m_EditorClassIdentifier: 
+  master: {fileID: 2100000, guid: 6273a99237c7a074eaf42d89c16ad38b, type: 2}
+  instance: {fileID: -1384858644277171496}
+  overrides:
+  - name: Color_9582fead279a479f944a383f768e0cb0
+    type: 5
+    isKeyword: 0
+    colorValue: {r: 11.181761, g: 4.104046, b: 2.107557, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 0}
+    active: 1
