@@ -5,7 +5,7 @@ public class InteractiveObjectData : MonoBehaviour
     public InteractionType type;
     public AudioSource AudioSource;
     public Rigidbody rb;
-    public Renderer renderer;
+    public Renderer[] renderer;
     public Material defaultMaterial;
     public Material selectedMaterial;
     public ParticleSystem interactiveParticleSystem;

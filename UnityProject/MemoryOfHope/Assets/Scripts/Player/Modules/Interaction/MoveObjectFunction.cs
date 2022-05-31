@@ -98,8 +98,14 @@ public class MoveObjectFunction : InteractiveObjectFunction
         var interactive = (InteractiveObjectData) component;
 
         data = (MoveObjectData) interactive;
-        
-        data.renderer.material = data.selectedMaterial;
+
+        foreach (var r in data.renderer)
+        {
+            for (int i = 0; i < r.materials.Length; i++)
+            {
+                r.materials[i] = data.selectedMaterial;
+            }
+        }
 
         data.tutorial.SetTutorial();
 
@@ -133,8 +139,14 @@ public class MoveObjectFunction : InteractiveObjectFunction
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
-            data.renderer.material = data.defaultMaterial;
 
+            foreach (var r in data.renderer)
+            {
+                for (int i = 0; i < r.materials.Length; i++)
+                {
+                    r.materials[i] = data.defaultMaterial;
+                }
+            }
         }
 
         // Deselection feedbacks

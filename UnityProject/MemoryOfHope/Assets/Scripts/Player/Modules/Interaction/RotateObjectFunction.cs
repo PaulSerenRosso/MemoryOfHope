@@ -59,10 +59,17 @@ public class RotateObjectFunction : InteractiveObjectFunction
         Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
         var interactive = (InteractiveObjectData) component;
 
-        
+
         data = (RotateObjectData) interactive;
-        
-        data.renderer.material = data.selectedMaterial;
+
+        foreach (var r in data.renderer)
+        {
+            for (int i = 0; i < r.materials.Length; i++)
+            {
+                r.materials[i] = data.selectedMaterial;
+            }
+        }
+
         data.tutorial.SetTutorial();
 
         data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
@@ -84,7 +91,13 @@ public class RotateObjectFunction : InteractiveObjectFunction
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
-            data.renderer.material = data.defaultMaterial;
+            foreach (var r in data.renderer)
+            {
+                for (int i = 0; i < r.materials.Length; i++)
+                {
+                    r.materials[i] = data.defaultMaterial;
+                }
+            }
         }
 
         // Deselection feedbacks
