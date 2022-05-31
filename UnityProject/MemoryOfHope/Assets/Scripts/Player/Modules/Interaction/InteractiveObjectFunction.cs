@@ -10,7 +10,6 @@ public class InteractiveObjectFunction : Module
     public Vector3 moveVector;
     public Vector2 inputCam;
 
-
     public override void LinkModule()
     {
     }

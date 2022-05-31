@@ -53,7 +53,7 @@ public class DoorLaser : MonoBehaviour, IReturnable
         {
             _meshRenderer.enabled = false;
             _collider.enabled = false;
-            _audioSource.enabled = false;
+            //_audioSource.enabled = false;
             breakDoorParticleSystem.Play();
         }
 

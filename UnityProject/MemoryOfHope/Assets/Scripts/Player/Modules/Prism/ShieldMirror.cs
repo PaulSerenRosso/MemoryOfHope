@@ -5,6 +5,7 @@ public class ShieldMirror : BaseMirror
 {
     [Header("ShieldMirror Variables")] [SerializeField]
     private float _offsetDistanceBeginPosition;
+
     [SerializeField] private AudioSource _reloadLaserAudioSource;
     [SerializeField] private float Yoffset;
     [SerializeField] private ShieldManager _shield;
@@ -15,14 +16,12 @@ public class ShieldMirror : BaseMirror
 
     public override void Returnable(LaserMachine laser, RaycastHit hit)
     {
-    
-            if (!_reloadLaserAudioSource.isPlaying)
-            {
-                _reloadLaserAudioSource.Play();
-                    
-            }
-                
-        
+        if (!_reloadLaserAudioSource.isPlaying)
+        {
+            _reloadLaserAudioSource.Play();
+        }
+
+
         _shield.LaserCharge += Time.deltaTime * _shield.LaserChargeRegeneration;
 
         if (prismObtained)
@@ -38,7 +37,7 @@ public class ShieldMirror : BaseMirror
             LaserLineReceiver = laser.LaserLine;
             LaserLine.enabled = true;
             LaserLine.enabled = true;
-            
+
             Direction = transform.forward;
             Vector3 upOffset = PlayerController.instance.transform.TransformPoint(Vector3.up * Yoffset);
             BeginLaser = new Vector3(transform.position.x, upOffset.y, transform.position.z) +
@@ -81,7 +80,5 @@ public class ShieldMirror : BaseMirror
     {
         _triggerByLaser = true;
         _currentSource = laser;
-     
-        
     }
 }

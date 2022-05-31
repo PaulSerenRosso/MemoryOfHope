@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class SceneManager : MonoBehaviour
 
     public void LoadingSceneAsync(int index)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(index);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
     }
 
     public void UnloadingSceneAsync(int index)

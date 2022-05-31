@@ -6,6 +6,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
     private RotateObjectData data;
     [SerializeField] private float timer = 0;
     [SerializeField] private float time;
+    [SerializeField] private AudioClip rotateSound;
 
     public override void LinkModule()
     {
@@ -44,7 +45,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
         if (timer <= 0)
         {
             data.transform.Rotate(0, data.rotationDegree, 0);
-
+            data.AudioSource.PlayOneShot(rotateSound);
             timer = time;
         }
 
@@ -57,17 +58,26 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
         Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
         var interactive = (InteractiveObjectData) component;
-
+        
         data = (RotateObjectData) interactive;
-        if (!data.AudioSource.isPlaying)
+
+        foreach (var r in data.renderer)
         {
-            data.AudioSource.Play();
+            var mats = r.materials;
+            for (int i = 0; i < mats.Length; i++)
+            {
+                mats[i] = data.selectedMaterial;
+            }
+
+            r.materials = mats;
         }
 
         data.tutorial.SetTutorial();
-        interactionModule.line.startColor = interactionModule.interactionColor;
-        interactionModule.line.endColor = interactionModule.interactionColor;
-        data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
+
+        data.GetComponent<Outline>().enabled = true;
+
+
+        //data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<RotateObjectData>();
 
@@ -80,14 +90,24 @@ public class RotateObjectFunction : InteractiveObjectFunction
     {
         if (data != null)
         {
-            data.AudioSource.Stop();
-
             data.tutorial.RemoveTutorial();
             data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+
+            //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
+            foreach (var r in data.renderer)
+            {
+                var mats = r.materials;
+                for (int i = 0; i < mats.Length; i++)
+                {
+                    mats[i] = data.defaultMaterial;
+                }
+
+                r.materials = mats;
+            }
         }
 
         // Deselection feedbacks

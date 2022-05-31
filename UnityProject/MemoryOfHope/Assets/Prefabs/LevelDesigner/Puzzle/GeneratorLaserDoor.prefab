@@ -169,6 +169,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2565984266544625075}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 594788f1f68be78408e4597d625bc0f5, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2565984266544625075}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: f71d43d247bdbaa4ca007504e649e820, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   IsActive: 1
 --- !u!82 &2565984266544625075
 AudioSource:
@@ -189,7 +213,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -226,7 +250,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -256,7 +280,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -454,6 +478,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 859819c372cd9294b9ca605f17568b2b, type: 3}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
 --- !u!4 &403227508157365244 stripped
@@ -539,6 +579,22 @@ PrefabInstance:
     - target: {fileID: 2922850209512863319, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8300000, guid: 859819c372cd9294b9ca605f17568b2b, type: 3}
+    - target: {fileID: 8431059266359770888, guid: 68e68443179809e41bb2347f47f44a90, type: 3}
+      propertyPath: ActiveEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68e68443179809e41bb2347f47f44a90, type: 3}

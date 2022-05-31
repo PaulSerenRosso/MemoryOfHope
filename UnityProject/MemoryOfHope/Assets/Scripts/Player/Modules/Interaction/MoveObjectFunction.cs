@@ -98,10 +98,22 @@ public class MoveObjectFunction : InteractiveObjectFunction
         var interactive = (InteractiveObjectData) component;
 
         data = (MoveObjectData) interactive;
+
+        foreach (var r in data.renderer)
+        {
+            var mats = r.materials;
+            for (int i = 0; i < mats.Length; i++)
+            {
+                mats[i] = data.selectedMaterial;
+            }
+
+            r.materials = mats;
+        }
+
         data.tutorial.SetTutorial();
 
-        data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
-
+        data.GetComponent<Outline>().enabled = false;
+        
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<MoveObjectData>();
 
@@ -125,11 +137,22 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
             data.AudioSource.Stop();
 
-            data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            //data.GetComponent<Outline>().enabled = false;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
+
+            foreach (var r in data.renderer)
+            {
+                var mats = r.materials;
+                for (int i = 0; i < mats.Length; i++)
+                {
+                    mats[i] = data.defaultMaterial;
+                }
+
+                r.materials = mats;
+            }
         }
 
         // Deselection feedbacks
