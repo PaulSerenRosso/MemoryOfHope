@@ -138,6 +138,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
             data.AudioSource.Stop();
 
             //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            //data.GetComponent<Outline>().enabled = false;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();

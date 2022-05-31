@@ -74,7 +74,8 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
         data.tutorial.SetTutorial();
 
-        data.GetComponent<Outline>().enabled = false;
+        data.GetComponent<Outline>().enabled = true;
+
 
         //data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
@@ -90,7 +91,10 @@ public class RotateObjectFunction : InteractiveObjectFunction
         if (data != null)
         {
             data.tutorial.RemoveTutorial();
+            data.GetComponent<Outline>().enabled = false;
+
             //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
