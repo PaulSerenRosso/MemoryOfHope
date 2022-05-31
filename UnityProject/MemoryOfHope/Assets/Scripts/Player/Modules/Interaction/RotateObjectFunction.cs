@@ -67,8 +67,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
         data.renderer.material = data.selectedMaterial;
         data.tutorial.SetTutorial();
-        interactionModule.line.startColor = interactionModule.interactionColor;
-        interactionModule.line.endColor = interactionModule.interactionColor;
+
         data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<RotateObjectData>();
