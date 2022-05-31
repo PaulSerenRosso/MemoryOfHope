@@ -101,16 +101,19 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
         foreach (var r in data.renderer)
         {
-            for (int i = 0; i < r.materials.Length; i++)
+            var mats = r.materials;
+            for (int i = 0; i < mats.Length; i++)
             {
-                r.materials[i] = data.selectedMaterial;
+                mats[i] = data.selectedMaterial;
             }
+
+            r.materials = mats;
         }
 
         data.tutorial.SetTutorial();
 
-        data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
-
+        data.GetComponent<Outline>().enabled = false;
+        
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<MoveObjectData>();
 
@@ -134,18 +137,20 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
             data.AudioSource.Stop();
 
-            data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
 
             foreach (var r in data.renderer)
             {
-                for (int i = 0; i < r.materials.Length; i++)
+                var mats = r.materials;
+                for (int i = 0; i < mats.Length; i++)
                 {
-                    r.materials[i] = data.defaultMaterial;
+                    mats[i] = data.defaultMaterial;
                 }
+
+                r.materials = mats;
             }
         }
 

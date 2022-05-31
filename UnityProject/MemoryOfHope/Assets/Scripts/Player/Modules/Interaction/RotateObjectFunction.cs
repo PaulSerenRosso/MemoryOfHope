@@ -58,21 +58,25 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
         Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
         var interactive = (InteractiveObjectData) component;
-
-
+        
         data = (RotateObjectData) interactive;
 
         foreach (var r in data.renderer)
         {
-            for (int i = 0; i < r.materials.Length; i++)
+            var mats = r.materials;
+            for (int i = 0; i < mats.Length; i++)
             {
-                r.materials[i] = data.selectedMaterial;
+                mats[i] = data.selectedMaterial;
             }
+
+            r.materials = mats;
         }
 
         data.tutorial.SetTutorial();
 
-        data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
+        data.GetComponent<Outline>().enabled = false;
+
+        //data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
         data = interactionModule.selectedObject.GetComponent<RotateObjectData>();
 
@@ -86,17 +90,19 @@ public class RotateObjectFunction : InteractiveObjectFunction
         if (data != null)
         {
             data.tutorial.RemoveTutorial();
-            data.GetComponent<Outline>().enabled = false;
-            data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
             foreach (var r in data.renderer)
             {
-                for (int i = 0; i < r.materials.Length; i++)
+                var mats = r.materials;
+                for (int i = 0; i < mats.Length; i++)
                 {
-                    r.materials[i] = data.defaultMaterial;
+                    mats[i] = data.defaultMaterial;
                 }
+
+                r.materials = mats;
             }
         }
 
