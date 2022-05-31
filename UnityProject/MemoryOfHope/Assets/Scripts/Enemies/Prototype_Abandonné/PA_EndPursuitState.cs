@@ -12,6 +12,7 @@ public class PA_EndPursuitState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {     base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = false;
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         timer = 0;
     }
 

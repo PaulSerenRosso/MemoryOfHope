@@ -377,6 +377,7 @@ public class UIInstance : MonoBehaviour
 
     public void GoingBackMainMenu()
     {
+        GameManager.instance.IsFirstScreen = false; 
         SceneManager.instance.LoadingScene(1);
     }
 
