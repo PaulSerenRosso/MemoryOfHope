@@ -17,6 +17,18 @@ public class AttackModule : Module
     private bool isTutorial;
     [SerializeField] private TutorialGameEvent attackTutorial;
 
+    private void Start()
+    {
+        for (int i = 0; i < attackList.Count; i++)
+        {
+            for (int j = 0; j <   attackList[i].attackPlayerCollider.particleSystem.Length; j++)
+            {
+                attackList[i].attackPlayerCollider.particleSystem[j].Stop();
+            }
+            
+        }
+    }
+
     enum StateCombo
     {
         Begin,
@@ -172,6 +184,10 @@ public class AttackModule : Module
             attackList[currentIndexAttack].attackPlayerCollider.colliderAttack.enabled = true;
             attackList[currentIndexAttack].attackPlayerCollider.rendererAttack.SetActive(true);
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = attackList[currentIndexAttack].damage;
+            for (int j = 0; j <   attackList[currentIndexAttack].attackPlayerCollider.particleSystem.Length; j++)
+            {
+                attackList[currentIndexAttack].attackPlayerCollider.particleSystem[j].Play();
+            }
             currentStateCombo = StateCombo.InDamage;
         }
     }
@@ -182,6 +198,10 @@ public class AttackModule : Module
         {
             attackList[currentIndexAttack].attackPlayerCollider.colliderAttack.enabled = false;
             attackList[currentIndexAttack].attackPlayerCollider.rendererAttack.SetActive(false);
+            for (int j = 0; j <   attackList[currentIndexAttack].attackPlayerCollider.particleSystem.Length; j++)
+            {
+                attackList[currentIndexAttack].attackPlayerCollider.particleSystem[j].Stop();
+            }
             attackList[currentIndexAttack].attackPlayerCollider.currentDamage = 0;
 
             canMove = false;
