@@ -58,12 +58,14 @@ public class RotateObjectFunction : InteractiveObjectFunction
         Component component = interactionModule.selectedObject.GetComponent(typeof(InteractiveObjectData));
         var interactive = (InteractiveObjectData) component;
 
+        
         data = (RotateObjectData) interactive;
         if (!data.AudioSource.isPlaying)
         {
             data.AudioSource.Play();
         }
 
+        data.renderer.material = data.selectedMaterial;
         data.tutorial.SetTutorial();
         interactionModule.line.startColor = interactionModule.interactionColor;
         interactionModule.line.endColor = interactionModule.interactionColor;
@@ -88,6 +90,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
+            data.renderer.material = data.defaultMaterial;
         }
 
         // Deselection feedbacks
