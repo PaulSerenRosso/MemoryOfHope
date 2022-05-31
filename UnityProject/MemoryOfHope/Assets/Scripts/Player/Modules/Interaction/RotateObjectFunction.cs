@@ -6,6 +6,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
     private RotateObjectData data;
     [SerializeField] private float timer = 0;
     [SerializeField] private float time;
+    [SerializeField] private AudioClip rotateSound;
 
     public override void LinkModule()
     {
@@ -44,7 +45,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
         if (timer <= 0)
         {
             data.transform.Rotate(0, data.rotationDegree, 0);
-
+            data.AudioSource.PlayOneShot(rotateSound);
             timer = time;
         }
 
@@ -60,11 +61,7 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
         
         data = (RotateObjectData) interactive;
-        if (!data.AudioSource.isPlaying)
-        {
-            data.AudioSource.Play();
-        }
-
+        
         data.renderer.material = data.selectedMaterial;
         data.tutorial.SetTutorial();
 
@@ -81,8 +78,6 @@ public class RotateObjectFunction : InteractiveObjectFunction
     {
         if (data != null)
         {
-            data.AudioSource.Stop();
-
             data.tutorial.RemoveTutorial();
             data.GetComponent<Outline>().enabled = false;
             data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
