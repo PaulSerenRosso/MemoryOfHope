@@ -11,6 +11,7 @@ public class PA_PausePursuitState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {    base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         timer = 0;
     }
     

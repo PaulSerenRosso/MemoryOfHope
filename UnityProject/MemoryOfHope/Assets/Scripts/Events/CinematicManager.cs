@@ -109,7 +109,6 @@ public class CinematicManager : MonoBehaviour
         _fadeInOut.Play("EndFade");
         DialogueManager.Instance.EndDialogue();
         DialogueManager.Instance.StopAllCoroutines();
-        Debug.Log("dfsmjkjdmjdkljdfqsjdfqsmjdfqsmj");
         PlayerManager.instance.speedEffect.gameObject.SetActive(true);
         _skipSlider.transform.parent.gameObject.SetActive(false);
         StartCoroutine(WaitForLoadGamePhase());
