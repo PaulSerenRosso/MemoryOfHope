@@ -50,13 +50,12 @@ public class CinematicManager : MonoBehaviour
             {
                 if (!_isEndCinematic)
                 {
-                       _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
-                                    if (_skipSlider.value >= _skipSlider.maxValue)
-                                    {
-                                        EndCinematic();
-                                    }
+                    _skipSlider.value += Time.deltaTime * _skipSliderSpeed;
+                    if (_skipSlider.value >= _skipSlider.maxValue)
+                    {
+                        EndCinematic();
+                    }
                 }
-             
             }
         }
     }
@@ -86,7 +85,7 @@ public class CinematicManager : MonoBehaviour
         PlayerManager.instance.speedEffect.gameObject.SetActive(false);
         _skipSlider.value = 0;
 
-        _isEndCinematic = false; 
+        _isEndCinematic = false;
         UIInstance.instance.SetCanvasOnDisplay(_canvasOutCinematic, false);
         UIInstance.instance.SetCanvasOnDisplay(_canvasInCinematic, true);
         _skipSlider.transform.parent.gameObject.SetActive(true);

@@ -77,6 +77,11 @@ public class DialogueManager : MonoBehaviour
 
     void UpdateLine()
     {
+        foreach (var c in CharacterAudioSourcesDic)
+        {
+            c.Value.Stop();
+        }
+        
         _dialogueWindows.gameObject.SetActive(true);
    
         string currentCharacterName = SettingsManager.instance.gameLanguage == Language.English
@@ -101,10 +106,12 @@ public class DialogueManager : MonoBehaviour
 
    public void EndDialogue()
     {
+        /*
         foreach (var c in CharacterAudioSourcesDic)
         {
             c.Value.Stop();
         }
+        */
     
         InGameDialogue = false;
         InCinematicDialogue = false;

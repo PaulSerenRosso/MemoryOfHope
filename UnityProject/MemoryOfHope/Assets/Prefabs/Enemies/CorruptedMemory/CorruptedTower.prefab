@@ -88,7 +88,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 2139765f263788d4ba3aebd271224b94, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: e639b79f49bd9c043b2cca724501f4a8, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -156,11 +156,8 @@ MonoBehaviour:
         m_Calls: []
     protectionWall: {fileID: 1780793082423530313}
     wallHeight: 5
-  pauseDefaultState:
-    _startState:
-      m_PersistentCalls:
-        m_Calls: []
-    pauseApparition: 0
+    _animationTime: 1
+    _wallCollider: {fileID: 6809277836488958680}
     wallAnim: {fileID: 2796042708075106974}
 --- !u!208 &2632466857282296114
 NavMeshObstacle:
@@ -215,7 +212,7 @@ AudioSource:
   m_GameObject: {fileID: 463977871868140408}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 28ec2dbf47ec09047b8a686129558e8b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

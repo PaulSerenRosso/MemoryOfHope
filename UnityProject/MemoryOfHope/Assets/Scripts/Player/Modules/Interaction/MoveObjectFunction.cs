@@ -47,7 +47,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
     public override void Execute()
     {
         base.Execute();
-
+        
         if (!data.AudioSource.isPlaying)
         {
             data.AudioSource.Play();

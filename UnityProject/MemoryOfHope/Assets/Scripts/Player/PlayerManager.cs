@@ -124,9 +124,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #region Main Functions
-
-   
-
+    
     private void Start()
     {
         IsActive = true;
@@ -179,7 +177,10 @@ public class PlayerManager : MonoBehaviour, Damageable
             PlayerController.instance.playerRb.velocity = Vector3.zero;
         }
 
-        isHit = false;
+        if (!isDead)
+        {
+            isHit = false;
+        }
     }
 
     void KnockBack(EnemyManager enemy, float drag, float strengh)
@@ -289,6 +290,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         IsActive = true;
        
         isDead = false;
+        isHit = false;
     }
 
     #endregion
