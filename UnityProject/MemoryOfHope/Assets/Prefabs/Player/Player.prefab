@@ -1306,10 +1306,11 @@ MonoBehaviour:
   - {fileID: 7226099581146458022}
   neededModules: []
   inputPressed: 0
+  inputVector: {x: 0, y: 0}
   moveVector: {x: 0, y: 0, z: 0}
   defaultSpeedMovment: 5.3
   _blendAnimationSpeed: 8
-  defaultSpeedRotation: 0.1
+  defaultSpeedRotation: 0.2
   _fxDust: {fileID: 3691208326794896168}
   airSpeedMovment: 0.5
   maxAirSpeed: 4
@@ -1421,10 +1422,10 @@ MonoBehaviour:
   neededModules: []
   inputPressed: 0
   attackList:
-  - startTimeActivateAttack: 0.2
-    endTimeActivateAttack: 0.3
-    startTimeCombo: 0.3
-    endTimeCombo: 0.8
+  - startTimeActivateAttack: 0.3
+    endTimeActivateAttack: 0.45
+    startTimeCombo: 0.45
+    endTimeCombo: 1.2
     damage: 1
     maxSpeedDashAttack: 0.5
     speedDashAttackCurve:
@@ -1469,10 +1470,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - startTimeActivateAttack: 0.2
-    endTimeActivateAttack: 0.3
-    startTimeCombo: 0.3
-    endTimeCombo: 0.8
+  - startTimeActivateAttack: 0.3
+    endTimeActivateAttack: 0.45
+    startTimeCombo: 0.45
+    endTimeCombo: 1.2
     damage: 1
     maxSpeedDashAttack: 0.5
     speedDashAttackCurve:
@@ -1517,10 +1518,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - startTimeActivateAttack: 0.2
-    endTimeActivateAttack: 0.3
-    startTimeCombo: 0.3
-    endTimeCombo: 0.8
+  - startTimeActivateAttack: 0.3
+    endTimeActivateAttack: 0.45
+    startTimeCombo: 0.45
+    endTimeCombo: 1.2
     damage: 1
     maxSpeedDashAttack: 5
     speedDashAttackCurve:
@@ -1584,6 +1585,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   currentIndexAttack: 0
+  _moveModule: {fileID: 7226099581146458020}
   attackTutorial: {fileID: 11400000, guid: 7978e789bc92a994c969eb44851ad962, type: 2}
 --- !u!114 &7649947021829257087
 MonoBehaviour:

@@ -10,6 +10,7 @@ public class MC_PositionState : EnemyState
     [Range(1, 15)] [SerializeField] private float minDistance;
     [Range(10, 25)] [SerializeField] private float maxDistanceFromTower;
     
+    [SerializeField] private float cooldownDurationProtected;
     [SerializeField] private float cooldownDuration;
     private float timer;
 
@@ -19,6 +20,7 @@ public class MC_PositionState : EnemyState
     { base.StartState(enemyMachine);
         towersPositions.Clear();
         enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
+        enemyMachine.enemyManager.Animator.SetBool("IsDetect", true);
         // On stock la position des tours corrompues associées à l'ennemi
         MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
         foreach (var tower in enemy.corruptedTowers)
@@ -46,10 +48,12 @@ public class MC_PositionState : EnemyState
             enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         }
         
-        if (timer <= cooldownDuration) timer += Time.deltaTime;
+        
+       
         
         if (towersPositions.Count == 0) // Pas de tour
-        {
+        { 
+            if (timer <= cooldownDuration) timer += Time.deltaTime;
             enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
 
             if (ConditionState.Timer(cooldownDuration, timer))
@@ -72,9 +76,10 @@ public class MC_PositionState : EnemyState
         }
         else
         {
+            if (timer <= cooldownDurationProtected) timer += Time.deltaTime;
             foreach (var pos in towersPositions)
             {
-                if (ConditionState.Timer(cooldownDuration, timer))
+                if (ConditionState.Timer(cooldownDurationProtected, timer))
                 {
                     if (ConditionState.CheckDistance(enemyMachine.transform.position, 
                         PlayerController.instance.transform.position, minDistance)) // Si le joueur est trop proche : attaque

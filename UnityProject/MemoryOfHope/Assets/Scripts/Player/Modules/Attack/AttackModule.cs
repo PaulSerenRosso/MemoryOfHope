@@ -14,9 +14,11 @@ public class AttackModule : Module
     private bool canMove;
     private StateCombo currentStateCombo;
 
+    [SerializeField]
+    private MoveModule _moveModule;
     private bool isTutorial;
     [SerializeField] private TutorialGameEvent attackTutorial;
-
+    private Vector2 inputCam;
     private void Start()
     {
         for (int i = 0; i < attackList.Count; i++)
@@ -103,6 +105,7 @@ public class AttackModule : Module
             isTutorial = false;
             attackTutorial.RemoveTutorial();
         }
+        
 
         if (inCombo) return;
         inCombo = true;
@@ -114,6 +117,18 @@ public class AttackModule : Module
 
     public void CantCancel()
     {
+        if (_moveModule.inputPressed)
+        {
+            Vector2 _cameraForwardXZ;
+            Vector2 _cameraRightXZ;
+            _cameraForwardXZ = new Vector3(MainCameraController.Instance.transform.forward.x,
+                MainCameraController.Instance.transform.forward.z).normalized;
+            _cameraRightXZ = new Vector3(MainCameraController.Instance.transform.right.x,
+                MainCameraController.Instance.transform.right.z).normalized;
+            inputCam = _cameraForwardXZ * _moveModule.inputVector.y +
+                       _cameraRightXZ * _moveModule.inputVector.x;
+            PlayerController.instance.playerRb.MoveRotation(Quaternion.Euler(Vector3.up * Mathf.Atan2(inputCam.x, inputCam.y) * Mathf.Rad2Deg));
+        }
         attackList[currentIndexAttack].FeedBackEvent?.Invoke();
         currentStateCombo = StateCombo.WaitDamage;
     }
@@ -237,6 +252,7 @@ public class AttackModule : Module
             attackTimer = 0;
             currentIndexAttack++;
             currentStateCombo = StateCombo.CantCancel;
+           
             PlayerController.instance.playerAnimator.SetInteger("comboCount", currentIndexAttack + 1);
         }
     }

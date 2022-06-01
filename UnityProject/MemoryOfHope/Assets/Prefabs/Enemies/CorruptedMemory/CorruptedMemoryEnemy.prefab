@@ -300,14 +300,15 @@ MonoBehaviour:
     _startState:
       m_PersistentCalls:
         m_Calls: []
-    detectionDistance: 14
+    detectionDistance: 17
   positionState:
     _startState:
       m_PersistentCalls:
         m_Calls: []
     minDistance: 9
     maxDistanceFromTower: 0
-    cooldownDuration: 4
+    cooldownDurationProtected: 3.5
+    cooldownDuration: 1.8
     towersPositions: []
   shockWaveState:
     _startState:
@@ -331,7 +332,7 @@ MonoBehaviour:
     _startState:
       m_PersistentCalls:
         m_Calls: []
-    durationHitStunned: 1
+    durationHitStunned: 0.1
     drag: 5
   pausePositionState:
     _startState:
@@ -359,8 +360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeDeath: 5
   Animator: {fileID: 4413018929077880882}
-  healthEnemy: 8
-  maxHealthEnemy: 8
+  healthEnemy: 20
+  maxHealthEnemy: 20
   isDeadEnemy: 0
   canBeHitByMelee: 1
   canBeHitByLaser: 0
