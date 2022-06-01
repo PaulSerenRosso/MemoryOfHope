@@ -13,7 +13,6 @@ public class HM_CooldownState : EnemyState
     {
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         base.StartState(enemyMachine);
-        Debug.Log("cooldown après attack...");
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }

@@ -33,12 +33,8 @@ public class LaserMachine : MonoBehaviour
                     LaserLine.enabled = true;
                 _ray = new Ray(BeginLaser, Direction);
 
-                Debug.DrawRay(_ray.origin, _ray.direction * MaxDistance, Color.green);
                 if (Physics.Raycast(_ray, out _hit, MaxDistance, RayLayer))
                 {
-                    Debug.DrawRay(_ray.origin, _ray.direction * MaxDistance, Color.red);
-
-
                     if (_returnableObject == _hit.collider.gameObject)
                         TriggerSameObject();
                     else

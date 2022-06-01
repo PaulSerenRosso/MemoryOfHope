@@ -47,7 +47,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
     public override void Execute()
     {
         base.Execute();
-
+        
         if (!data.AudioSource.isPlaying)
         {
             data.AudioSource.Play();
@@ -98,16 +98,12 @@ public class MoveObjectFunction : InteractiveObjectFunction
         var interactive = (InteractiveObjectData) component;
 
         data = (MoveObjectData) interactive;
+        
+        
 
         foreach (var r in data.renderer)
         {
-            var mats = r.materials;
-            for (int i = 0; i < mats.Length; i++)
-            {
-                mats[i] = data.selectedMaterial;
-            }
-
-            r.materials = mats;
+            r.material = data.selectedMaterial;
         }
 
         data.tutorial.SetTutorial();
@@ -145,13 +141,7 @@ public class MoveObjectFunction : InteractiveObjectFunction
 
             foreach (var r in data.renderer)
             {
-                var mats = r.materials;
-                for (int i = 0; i < mats.Length; i++)
-                {
-                    mats[i] = data.defaultMaterial;
-                }
-
-                r.materials = mats;
+                r.material = data.defaultMaterial;
             }
         }
 

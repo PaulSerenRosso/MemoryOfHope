@@ -95,7 +95,6 @@ public class EnemyMachine : MonoBehaviour
     {
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
-            Debug.Log("hits by fists");
             if (!enemyManager.isDead)
             {
                 OnHitByMelee();

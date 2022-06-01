@@ -3,17 +3,18 @@ using UnityEngine;
 [System.Serializable]
 public class HM_PauseVulnerableAttack : EnemyState
 {
-    [Header("Parameters")]
-     [SerializeField] private float durationBeforeShockWave;
+    [Header("Parameters")] [SerializeField]
+    private float durationBeforeShockWave;
+
     [SerializeField] private float durationBeforeCharge;
 
     private int rand;
     private float timer;
     private float currentTime;
-    
+
     public override void StartState(EnemyMachine enemyMachine)
-    { base.StartState(enemyMachine);
-        Debug.Log("HM is about to attack !");
+    {
+        base.StartState(enemyMachine);
 
         rand = Random.Range(0, 2);
         if (rand == 0)
@@ -27,14 +28,15 @@ public class HM_PauseVulnerableAttack : EnemyState
             currentTime = durationBeforeCharge;
             enemyMachine.enemyManager.Animator.Play("BeginCharge");
         }
+
         enemyMachine.agent.isStopped = true;
         timer = 0;
     }
-    
+
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         timer += Time.deltaTime;
-        
+
         if (ConditionState.Timer(currentTime, timer))
         {
             HM_StateMachine enemy = (HM_StateMachine) enemyMachine;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -125,9 +124,8 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #region Main Functions
-
-   
-
+    
+    
     private void Start()
     {
         IsActive = true;
@@ -169,6 +167,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             */
 
             isHit = true;
+            yield return new WaitForEndOfFrame();
             PlayerController.instance.playerAnimator.Play("Hit");
             KnockBack(enemy, _drag, knockbackStrength);
             int damage = enemy.damage;
@@ -179,7 +178,10 @@ public class PlayerManager : MonoBehaviour, Damageable
             PlayerController.instance.playerRb.velocity = Vector3.zero;
         }
 
-        isHit = false;
+        if (!isDead)
+        {
+            isHit = false;
+        }
     }
 
     void KnockBack(EnemyManager enemy, float drag, float strengh)
@@ -190,7 +192,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         knockback.Normalize();
         knockback *= strengh * enemy.Machine.PlayerKnockBackFactor;
 
-        Debug.DrawRay(transform.position, knockback, Color.yellow, 1f);
 
         PlayerController.instance.currentVelocity += knockback;
         PlayerController.instance.playerRb.drag = drag;
@@ -200,7 +201,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         GameManager.instance.RumbleConstant(.3f, .7f, .4f);
         _takeDamageEvent?.Invoke();
-        StartCoroutine(Feedbacks.instance.ChromaticAberrationFeedback());
+        Feedbacks.instance.ChromaticAberrationFunction();
         if (isDead) return;
         health -= damages;
 
@@ -221,7 +222,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         transform.position = locationTransform.position;
         transform.rotation = locationTransform.rotation;
         Time.timeScale = 1;
-        Debug.Log(locationTransform.position);
     }
 
     public void Heal(int heal)
@@ -242,6 +242,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         GameManager.instance.RumbleConstant(.6f, .9f, .7f);
 
+        PlayerController.instance.playerAnimator.Play("Death");
         health = 0;
         UIInstance.instance.DisplayHealth();
         StartCoroutine(DeathTime());
@@ -278,14 +279,16 @@ public class PlayerManager : MonoBehaviour, Damageable
         Camera.main.transform.localEulerAngles = CheckPointsReached[index].cameraRotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
-        Debug.Log("Respawn");
         UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
+        PlayerController.instance.playerAnimator.Play("Idle");
         UIInstance.instance.blackFilter.Play("FadeOut");
         yield return new WaitForSeconds(1);
         IsActive = true;
+       
         isDead = false;
+        isHit = false;
     }
 
     #endregion

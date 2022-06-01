@@ -19,12 +19,14 @@ public class TC_DefaultState : EnemyState
         memoryTransform = enemy.isHopeCorruptedTower
             ? BossPhaseManager.instance.bossStateMachine.transform
             : enemyMachine.GetComponent<CorruptedTowerManager>().linkedCorruptedMemory;
-        enemyMachine.StartCoroutine(WaitForUpdate());
+        
+        enemy.StartCoroutine(WaitForUpdate());
     }
 
     IEnumerator WaitForUpdate()
     {
 
+       
         wallAnim.Play("WallFadeInTower");
         _wallCollider.enabled = false;
         

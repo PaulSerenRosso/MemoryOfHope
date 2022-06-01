@@ -21,6 +21,8 @@ public class Feedbacks : MonoBehaviour
     [SerializeField] private float teleportationDuration;
     public ChromaticAberration chromaticAberration;
 
+    
+    
     private void Start()
     {
         Initialization();
@@ -31,9 +33,14 @@ public class Feedbacks : MonoBehaviour
         canChromatic = true;
     }
 
+    public void ChromaticAberrationFunction()
+    {
+        if (!canChromatic) return;
+        StartCoroutine(ChromaticAberrationFeedback());
+    }
+
     public IEnumerator ChromaticAberrationFeedback()
     {
-        if (!canChromatic) yield return 0;
         canChromatic = false;
         
         volume.profile.TryGet(out chromaticAberration);

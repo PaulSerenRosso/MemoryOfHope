@@ -308,7 +308,7 @@ MonoBehaviour:
     minDistance: 9
     maxDistanceFromTower: 0
     cooldownDurationProtected: 3.5
-    cooldownDuration: 1.8
+    cooldownDuration: 1
     towersPositions: []
   shockWaveState:
     _startState:
@@ -319,7 +319,7 @@ MonoBehaviour:
           m_MethodName: PlayOneShot
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: e7fa77073911e8248b2fd84b3f144aba, type: 3}
+            m_ObjectArgument: {fileID: 8300000, guid: 1fa40e856fcacff4eb119756cc1e1fe3, type: 3}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     durationHitStunned: 0.1
-    drag: 5
+    drag: 10
   pausePositionState:
     _startState:
       m_PersistentCalls:
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeDeath: 5
   Animator: {fileID: 4413018929077880882}
-  healthEnemy: 20
-  maxHealthEnemy: 20
+  healthEnemy: 10
+  maxHealthEnemy: 10
   isDeadEnemy: 0
   canBeHitByMelee: 1
   canBeHitByLaser: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 27b483c7caf6fed4283848d113200b8e, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 40cfe90b696f1954bba6fae8a44310d9, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: d58f656c43fab2548812128d7b88b935, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: e639b79f49bd9c043b2cca724501f4a8, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -437,7 +437,7 @@ AudioSource:
   m_GameObject: {fileID: 3140074238959305929}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 28ec2dbf47ec09047b8a686129558e8b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

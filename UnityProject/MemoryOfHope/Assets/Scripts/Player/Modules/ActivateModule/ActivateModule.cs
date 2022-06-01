@@ -15,7 +15,7 @@ public class ActivateModule : Module
     {
         if (!base.Conditions()) return false;
         if (PlayerManager.instance.CurrentListenerActivate == null) return false;
-       
+
 
         isPerformed = true;
         return true;
@@ -52,12 +52,11 @@ public class ActivateModule : Module
 
     public override void Execute()
     {
-    if(!PlayerManager.instance.CurrentListenerActivate)
-        return;
-        Debug.Log(PlayerManager.instance.CurrentListenerActivate);
+        if (!PlayerManager.instance.CurrentListenerActivate)
+            return;
         PlayerManager.instance.CurrentListenerActivate.Activate();
- 
-      PlayerManager.instance.CurrentListenerActivate = null;       
+
+        PlayerManager.instance.CurrentListenerActivate = null;
         isPerformed = false;
     }
 

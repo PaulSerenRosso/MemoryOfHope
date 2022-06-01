@@ -102,7 +102,6 @@ public class S_StateMachine : EnemyMachine
 
         if (other.CompareTag("Player") /*|| other.CompareTag("Shield")*/)
         {
-            Debug.Log("Songe hits the player");
             hitDirection = transform.position - PlayerController.instance.transform.position;
             SwitchState(pauseHitState);
         }

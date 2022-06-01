@@ -8,7 +8,6 @@ public class CheckPoint : ListenerActivate
     public override void Raise()
     {
         base.Raise();
-        Debug.Log("Checkpoint");
     }
 
 

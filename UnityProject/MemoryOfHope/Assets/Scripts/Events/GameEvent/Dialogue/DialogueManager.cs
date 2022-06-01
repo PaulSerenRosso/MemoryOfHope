@@ -77,6 +77,11 @@ public class DialogueManager : MonoBehaviour
 
     void UpdateLine()
     {
+        foreach (var c in CharacterAudioSourcesDic)
+        {
+            c.Value.Stop();
+        }
+        
         _dialogueWindows.gameObject.SetActive(true);
    
         string currentCharacterName = SettingsManager.instance.gameLanguage == Language.English
@@ -86,8 +91,8 @@ public class DialogueManager : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         if (CurrentLine.VoiceLine != null && CharacterAudioSourcesDic.ContainsKey(CurrentLine.CharacterProfil.Character) )
         {
-            Debug.Log(CurrentLine.VoiceLine);
-            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine);
+            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].clip = CurrentLine.VoiceLine;
+            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].Play();
         }
     }
 
@@ -100,6 +105,13 @@ public class DialogueManager : MonoBehaviour
 
    public void EndDialogue()
     {
+        /*
+        foreach (var c in CharacterAudioSourcesDic)
+        {
+            c.Value.Stop();
+        }
+        */
+    
         InGameDialogue = false;
         InCinematicDialogue = false;
         _dialogueWindows.gameObject.SetActive(false);

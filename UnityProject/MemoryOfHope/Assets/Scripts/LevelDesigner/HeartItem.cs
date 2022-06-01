@@ -11,6 +11,7 @@ public class HeartItem : MonoBehaviour
     public void GetItem()
     {
         if (isObtained) return;
+        obtention?.Invoke();
         isObtained = true;
         PlayerManager.instance.maxHealth += 4;
         int lostHp = PlayerManager.instance.maxHealth - PlayerManager.instance.health;
