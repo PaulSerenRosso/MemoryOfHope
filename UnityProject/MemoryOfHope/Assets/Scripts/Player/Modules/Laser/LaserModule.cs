@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class LaserModule : Module
@@ -15,7 +16,8 @@ public class LaserModule : Module
     [SerializeField] private TutorialGameEvent laserTutorial;
     [SerializeField] private AudioClip _costLaserSound;
     [SerializeField] private ShieldManager _shield;
-
+    [SerializeField] private UnityEvent performedLaser;
+    
     public override void Cancel()
     {
         Release();
@@ -88,7 +90,12 @@ public class LaserModule : Module
 
     public override void Execute()
     {
-        isPerformed = true;
+        if (!isPerformed)
+        {
+            performedLaser?.Invoke();
+            isPerformed = true;
+        }
+        
         if (_shield.InputShield)
         {
             if (isTutorial)
