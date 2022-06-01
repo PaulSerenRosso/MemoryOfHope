@@ -441,6 +441,11 @@ public class PlayerController : MonoBehaviour
                 currentNormalWall = Vector3.zero;
             }
         }
+        if (other.gameObject.CompareTag("EnemyBlocker"))
+        {
+       
+            playerRb.velocity = Vector3.zero;
+        }
     }
 
     /*
