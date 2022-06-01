@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -6,7 +7,10 @@ public class TC_DefaultState : EnemyState
     private Transform memoryTransform;
     public Transform protectionWall;
     [SerializeField] private float wallHeight;
+    [SerializeField] private float _animationTime;
 
+    [SerializeField] private Collider _wallCollider;
+    [SerializeField] private Animation wallAnim;
     public override void StartState(EnemyMachine enemyMachine)
     {
         base.StartState(enemyMachine);
@@ -15,6 +19,17 @@ public class TC_DefaultState : EnemyState
         memoryTransform = enemy.isHopeCorruptedTower
             ? BossPhaseManager.instance.bossStateMachine.transform
             : enemyMachine.GetComponent<CorruptedTowerManager>().linkedCorruptedMemory;
+        enemyMachine.StartCoroutine(WaitForUpdate());
+    }
+
+    IEnumerator WaitForUpdate()
+    {
+
+        wallAnim.Play("WallFadeInTower");
+        _wallCollider.enabled = false;
+        
+        yield return new WaitForSeconds(_animationTime);
+        _wallCollider.enabled = true;
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

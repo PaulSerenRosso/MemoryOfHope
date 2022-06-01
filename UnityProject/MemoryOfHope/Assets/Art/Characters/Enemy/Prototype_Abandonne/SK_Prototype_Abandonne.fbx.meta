@@ -8,13 +8,13 @@ ModelImporter:
     second: Armature|0_Static
   - first:
       74: 4723146814002874508
-    second: Armature|Attack
+    second: Armature|Attack1
   - first:
       74: -6788532455012819382
     second: Armature|Damage
   - first:
       74: -1978303741906493279
-    second: Armature|Baseidle
+    second: Armature|Engageidle
   - first:
       74: -5751006064141795650
     second: Armature|SK_Prototype_Walk
@@ -23,7 +23,10 @@ ModelImporter:
     second: Armature|Baseidle
   - first:
       74: -9094548850860725266
-    second: Armature|Engageidle
+    second: Armature|Baseidle
+  - first:
+      74: -729247239487951332
+    second: Armature|Attack2
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -87,11 +90,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Attack
+      name: Armature|Attack1
       takeName: Armature|Attack
       internalID: 0
       firstFrame: 0
-      lastFrame: 43
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -145,7 +148,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Engageidle
+      name: Armature|Baseidle
       takeName: Armature|idle
       internalID: 0
       firstFrame: 4
@@ -203,11 +206,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Baseidle
+      name: Armature|Engageidle
       takeName: Armature|idle
       internalID: 0
       firstFrame: 62
       lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Attack2
+      takeName: Armature|Attack
+      internalID: 0
+      firstFrame: 20
+      lastFrame: 43
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

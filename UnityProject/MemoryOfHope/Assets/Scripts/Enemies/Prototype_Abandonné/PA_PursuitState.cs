@@ -21,8 +21,13 @@ public class PA_PursuitState : EnemyState
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, minDistance))
         {
-            PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
-            enemy.SwitchState(enemy.pauseAttackState);
+            Vector3 dirFromAtoB = (PlayerController.instance.transform.position - enemyMachine.transform.position).normalized;
+            float dotProd = Vector3.Dot(dirFromAtoB, enemyMachine.transform.forward);
+            if (dotProd >= 0.9f)
+            {
+                   PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
+                            enemy.SwitchState(enemy.pauseAttackState);
+            }
         }
         else if (!ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, maxDistance))

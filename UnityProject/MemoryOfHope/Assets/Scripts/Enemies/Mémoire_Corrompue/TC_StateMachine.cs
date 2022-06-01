@@ -18,15 +18,14 @@ public class TC_StateMachine : EnemyMachine
     #region States
 
     public TC_DefaultState defaultState = new TC_DefaultState();
-    public TC_PauseDefaultState pauseDefaultState = new TC_PauseDefaultState();
-
+    
     #endregion
 
     #region State Machine Main Functions
 
     public override void Start()
     {
-        currentState = pauseDefaultState;
+        currentState = defaultState;
         base.Start();
     }
 
