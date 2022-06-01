@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -200,7 +199,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         GameManager.instance.RumbleConstant(.3f, .7f, .4f);
         _takeDamageEvent?.Invoke();
-        StartCoroutine(Feedbacks.instance.ChromaticAberrationFeedback());
+        Feedbacks.instance.ChromaticAberrationFunction();
         if (isDead) return;
         health -= damages;
 
