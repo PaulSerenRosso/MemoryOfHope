@@ -87,7 +87,8 @@ public class DialogueManager : MonoBehaviour
         if (CurrentLine.VoiceLine != null && CharacterAudioSourcesDic.ContainsKey(CurrentLine.CharacterProfil.Character) )
         {
             Debug.Log(CurrentLine.VoiceLine);
-            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].PlayOneShot(CurrentLine.VoiceLine);
+            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].clip = CurrentLine.VoiceLine;
+            CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].Play();
         }
     }
 
@@ -100,6 +101,11 @@ public class DialogueManager : MonoBehaviour
 
    public void EndDialogue()
     {
+        foreach (var c in CharacterAudioSourcesDic)
+        {
+            c.Value.Stop();
+        }
+    
         InGameDialogue = false;
         InCinematicDialogue = false;
         _dialogueWindows.gameObject.SetActive(false);
