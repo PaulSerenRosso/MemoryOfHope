@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public bool IsFirstScreen;
     private void Awake()
     {
         if (instance is { })

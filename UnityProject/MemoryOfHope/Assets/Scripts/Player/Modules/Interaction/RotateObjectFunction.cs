@@ -63,18 +63,13 @@ public class RotateObjectFunction : InteractiveObjectFunction
 
         foreach (var r in data.renderer)
         {
-            var mats = r.materials;
-            for (int i = 0; i < mats.Length; i++)
-            {
-                mats[i] = data.selectedMaterial;
-            }
-
-            r.materials = mats;
+            r.material = data.selectedMaterial;
         }
 
         data.tutorial.SetTutorial();
 
-        data.GetComponent<Outline>().enabled = false;
+        data.GetComponent<Outline>().enabled = true;
+
 
         //data.GetComponent<Outline>().OutlineColor = interactionModule.interactionColor;
         data.interactiveParticleSystem.Stop();
@@ -90,19 +85,16 @@ public class RotateObjectFunction : InteractiveObjectFunction
         if (data != null)
         {
             data.tutorial.RemoveTutorial();
+            data.GetComponent<Outline>().enabled = false;
+
             //data.GetComponent<Outline>().OutlineColor = interactionModule.defaultColor;
+            
             data.rb.isKinematic = true;
             data.interactiveParticleSystem.transform.position = data.transform.position;
             data.interactiveParticleSystem.Play();
             foreach (var r in data.renderer)
             {
-                var mats = r.materials;
-                for (int i = 0; i < mats.Length; i++)
-                {
-                    mats[i] = data.defaultMaterial;
-                }
-
-                r.materials = mats;
+                r.material = data.defaultMaterial;
             }
         }
 

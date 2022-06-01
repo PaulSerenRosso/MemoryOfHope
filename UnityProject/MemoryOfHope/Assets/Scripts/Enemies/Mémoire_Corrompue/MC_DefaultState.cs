@@ -3,13 +3,14 @@ using UnityEngine;
 [System.Serializable]
 public class MC_DefaultState : EnemyState
 {
-    [Header("Parameters")] [Range(1, 15)] [SerializeField]
+    [Header("Parameters")] [Range(1, 20)] [SerializeField]
     public float detectionDistance;
 
 
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
+        enemyMachine.enemyManager.Animator.SetBool("IsDetect", false);
         enemyMachine.agent.isStopped = true;
     }
 

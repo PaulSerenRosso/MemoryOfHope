@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MoveModule : Module
 {
-    private Vector2 inputVector;
+    public Vector2 inputVector;
     public Vector3 moveVector;
    public float defaultSpeedMovment;
 

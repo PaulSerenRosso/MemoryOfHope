@@ -320,7 +320,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 3ba83c46877b00943ac896169dd74a8b, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 657e24912088e8e489f3bf1d01196f55, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -457,7 +457,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 3ba83c46877b00943ac896169dd74a8b, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 657e24912088e8e489f3bf1d01196f55, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -719,7 +719,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
@@ -814,11 +814,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 7556acf6faebfce429e631d415be1231, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -827,7 +827,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -860,7 +860,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -951,7 +951,6 @@ MonoBehaviour:
   rb: {fileID: 8323484677250859978}
   renderer:
   - {fileID: 2837963101642801561}
-  materialIndexes: 0000000001000000
   defaultMaterial: {fileID: 2100000, guid: b18df53ea5944d644862b271e30be016, type: 2}
   selectedMaterial: {fileID: 2100000, guid: 3dfb76384c55e45a6a402a0e16fad9a0, type: 2}
   interactiveParticleSystem: {fileID: 5009566942922384194}

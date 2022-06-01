@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,12 +27,14 @@ public class UIMainMenuManager : MonoBehaviour
 
     private Dictionary<MainMenuSection, GameObject> allSections = new Dictionary<MainMenuSection, GameObject>();
 
+    [SerializeField] private GameObject _videoBackground;
     public List<UIDisplayText> allTextsOnScreen;
 
     [SerializeField] private EventSystem eventSystem;
 
     public void Start()
     {
+        StartCoroutine(WaitForAnimation());
         Initialization();
         InitializationOption();
         SetTextLanguageOnDisplay();
@@ -39,10 +42,28 @@ public class UIMainMenuManager : MonoBehaviour
 
     private void Initialization()
     {
+        if (GameManager.instance.IsFirstScreen)
+        {
+            _videoBackground.SetActive(false);
+        }
+        else
+        {
+            _videoBackground.SetActive(true);
+        }
+        
         allSections.Add(MainMenuSection.MainSection, mainSection);
         allSections.Add(MainMenuSection.CreditsSection, creditsSection);
         allSections.Add(MainMenuSection.OptionsSection, optionsSection);
         actualSection = MainMenuSection.MainSection;
+    }
+
+    IEnumerator WaitForAnimation()
+    {
+        eventSystem.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
+        eventSystem.gameObject.SetActive(true);
+        GameManager.instance.inputs.MainMenuUI.Enable();
+        LinkInputs();
     }
 
     private void LinkInputs()
@@ -57,11 +78,7 @@ public class UIMainMenuManager : MonoBehaviour
         GameManager.instance.inputs.MainMenuUI.MainMenuGoLeft.performed -= GoingLeft;
     }
 
-    private void OnEnable()
-    {
-        GameManager.instance.inputs.MainMenuUI.Enable();
-        LinkInputs();
-    }
+
 
     private void OnDisable()
     {
@@ -175,8 +192,11 @@ public class UIMainMenuManager : MonoBehaviour
 
     public void OnPlayClick()
     {
+        
         if (SceneManager.instance == null) return;
         SceneManager.instance.LoadingScene(6);
+        if (GameManager.instance.IsFirstScreen)
+            SceneManager.instance.UnloadingSceneAsync(1);
     }
 
     public void LaunchSpecificScene(int index)

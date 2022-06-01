@@ -7,15 +7,17 @@ public class PA_AttackState : EnemyState
 {
     [Header("Parameters")]
     [Range(0, 2)] [SerializeField] private float durationAttack;
-    
+
+    [SerializeField] private ParticleSystem _particleSystem;
     private float timer;
     
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
-        enemyMachine.enemyManager.Animator.Play("Attack");
         enemyMachine.attackArea.SetActive(true);
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
         timer = 0;
+        _particleSystem.Play();
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)
@@ -28,6 +30,7 @@ public class PA_AttackState : EnemyState
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;  
          //   enemyMachine.enemyManager.isBlocked = false;
             enemy.SwitchState(enemy.pursuitState);
+            _particleSystem.Stop();
         }
     }
     

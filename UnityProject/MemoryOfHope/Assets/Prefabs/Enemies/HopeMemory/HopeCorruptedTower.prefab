@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7731e1d838b9c8748abec025cbaab834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeDeath: 2
+  _timeDeath: 1
   Animator: {fileID: 0}
   healthEnemy: 7
   maxHealthEnemy: 7
@@ -343,6 +343,7 @@ MonoBehaviour:
   Machine: {fileID: 1970830584279501767}
   WaveListener: {fileID: 0}
   deathEffect: {fileID: 3581292906280763920}
+  _animation: {fileID: 6677099253292894918}
 --- !u!114 &1970830584279501767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,11 +383,8 @@ MonoBehaviour:
         m_Calls: []
     protectionWall: {fileID: 5702159270918907218}
     wallHeight: 3.5
-  pauseDefaultState:
-    _startState:
-      m_PersistentCalls:
-        m_Calls: []
-    pauseApparition: 4
+    _animationTime: 4
+    _wallCollider: {fileID: 7537190623749929576}
     wallAnim: {fileID: 6677099253292894918}
 --- !u!114 &6385194377824274850
 MonoBehaviour:

@@ -1,10 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
 public class PA_PauseAttackState : EnemyState
 {
     [Header("Parameters")]
-    [Range(0, 1)] [SerializeField] private float durationBeforeAttack;
+    [Range(0, 5)] [SerializeField] private float durationBeforeAttack;
+    [Range(0, 5)] [SerializeField] private float durationBeforeAnimAttack;
     [SerializeField] private float rotateSpeed;
     
     [Header("Fixed variables")]
@@ -16,7 +18,24 @@ public class PA_PauseAttackState : EnemyState
     { base.StartState(enemyMachine);
         
         enemyMachine.agent.isStopped = true;
+        enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
         timer = 0;
+        enemyMachine.StartCoroutine(WaitForAnimationAttack(enemyMachine));
+
+
+    }
+
+    IEnumerator WaitForAnimationAttack(EnemyMachine enemyMachine)
+    {
+        yield return new WaitForSeconds(durationBeforeAnimAttack);
+                if (Random.Range(0, 2) == 0)
+                {
+                     enemyMachine.enemyManager.Animator.Play("Attack1");
+                }
+                else
+                {
+                    enemyMachine.enemyManager.Animator.Play("Attack2");
+                }
     }
     
     public override void UpdateState(EnemyMachine enemyMachine)

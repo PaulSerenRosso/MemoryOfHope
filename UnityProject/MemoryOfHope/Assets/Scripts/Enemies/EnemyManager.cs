@@ -28,7 +28,7 @@ public class EnemyManager : MonoBehaviour, Damageable
         set => isDeadEnemy = value;
     }
 
-    [SerializeField] private float _timeDeath;
+    [SerializeField] protected float _timeDeath;
     public Animator Animator;
     public int healthEnemy;
     public int maxHealthEnemy;
