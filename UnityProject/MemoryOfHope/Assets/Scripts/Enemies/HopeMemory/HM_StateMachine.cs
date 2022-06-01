@@ -44,12 +44,9 @@ public class HM_StateMachine : EnemyMachine
 
     void Awake()
     {
-        /*
-        damageAnimationState.Add(vulnerableMoveState);
-        damageAnimationState.Add(pauseVulnerableMove);
-        damageAnimationState.Add(vulnerableDefaultState);
-        damageAnimationState.Add(vulnerableHitState);
-        */
+        
+  
+        
     }
 
     public override void Start()
@@ -109,31 +106,11 @@ public class HM_StateMachine : EnemyMachine
         if (BossPhaseManager.instance.currentPhase.phaseType == PhaseType.Protected) return;
         
         base.OnHitByMelee();
-
-        /*
-        if (CheckDamageAnimationStateEqualCurrentState())
-        {
-            if (_isCurrentAttackKnockback)
-            {
-                enemyManager.Animator.Play("Damage");
-                SwitchState(vulnerableHitState);
-            }
-        }
-        */
+        
+        
     }
 
-    bool CheckDamageAnimationStateEqualCurrentState()
-    {
-        for (int i = 0; i < damageAnimationState.Count; i++)
-        {
-            if (damageAnimationState[i] == currentState)
-            {
-                return true;
-            }
-        }
 
-        return false;
-    }
 
     #endregion
 
@@ -147,7 +124,7 @@ public class HM_StateMachine : EnemyMachine
 
         if (other.CompareTag("PlayerFist") && !isHit) // Hit by the player
         {
-            hitDirection = -(PlayerController.instance.transform.position - transform.position);
+            hitDirection = -(PlayerController.instance.transform.position - transform.position); 
             OnHitByMelee();
         }
 

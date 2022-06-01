@@ -25,6 +25,7 @@ public class TC_DefaultState : EnemyState
     IEnumerator WaitForUpdate()
     {
 
+       
         wallAnim.Play("WallFadeInTower");
         _wallCollider.enabled = false;
         

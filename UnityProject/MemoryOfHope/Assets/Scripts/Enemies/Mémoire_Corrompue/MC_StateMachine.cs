@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MC_StateMachine : EnemyMachine
@@ -20,7 +21,7 @@ public class MC_StateMachine : EnemyMachine
     public MC_HitState hitState = new MC_HitState();
     public MC_PausePositionState pausePositionState = new MC_PausePositionState();
     public MC_PauseShockWaveState pauseShockWaveState = new MC_PauseShockWaveState();
-
+    private List<EnemyState> damageAnimationState = new List<EnemyState>();
     #endregion
 
     #region Gizmos
@@ -34,6 +35,15 @@ public class MC_StateMachine : EnemyMachine
 
     #region State Machine Main Functions
 
+    void Awake()
+    {
+        
+        damageAnimationState.Add(defaultState);
+        damageAnimationState.Add(positionState);
+        damageAnimationState.Add(pausePositionState);
+      
+        
+    }
     public override void Start()
     {
         initialPos = transform.position;
@@ -42,18 +52,31 @@ public class MC_StateMachine : EnemyMachine
         protectionWall.Play("WallFadeIn");
         isProtected = IsProtected();
         base.Start();
+        
     }
 
+    bool CheckDamageAnimationStateEqualCurrentState()
+    {
+        for (int i = 0; i < damageAnimationState.Count; i++)
+        {
+            if (damageAnimationState[i] == currentState)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public override void OnHitByMelee()
     {
         base.OnHitByMelee();
-        /*
+        
         if (_isCurrentAttackKnockback)
         {
             enemyManager.Animator.Play("Damage");
             SwitchState(hitState);
         }
-        */
+        
     }
 
     public bool IsProtected()

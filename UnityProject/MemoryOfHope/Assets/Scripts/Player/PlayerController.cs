@@ -176,8 +176,6 @@ public class PlayerController : MonoBehaviour
     void CalculateUndoVelocity()
     {
         physicsFactor = oldVelocity - playerRb.velocity;
-
-
         if (physicsFactor.magnitude <= undoVelocity.magnitude)
         {
             undoVelocity += physicsFactor;

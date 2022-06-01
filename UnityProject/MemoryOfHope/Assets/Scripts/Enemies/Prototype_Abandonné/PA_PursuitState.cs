@@ -8,6 +8,8 @@ public class PA_PursuitState : EnemyState
     [Range(1, 15)] [SerializeField] private float minDistance;
     [Range(1, 15)] [SerializeField] private float maxDistance;
     
+    [SerializeField]
+    private float rotationSpeed;
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
         enemyMachine.enemyManager.Animator.SetBool("IsMove", true);
@@ -17,13 +19,21 @@ public class PA_PursuitState : EnemyState
     public override void UpdateState(EnemyMachine enemyMachine)
     {
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
-        
+        Vector3 vectDist = PlayerController.instance.transform.position - enemyMachine.transform.position;
+        Vector3 dirFromAtoB = (vectDist).normalized;
+        Debug.Log(vectDist.magnitude);
+        if (vectDist.magnitude < 2f)
+        {
+              enemyMachine.transform.forward = Vector3.RotateTowards(enemyMachine.transform.forward, dirFromAtoB, rotationSpeed*Time.deltaTime, 00f);
+              Debug.Log("bonsoir à tous");
+        }
+     
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 
             PlayerController.instance.transform.position, minDistance))
         {
-            Vector3 dirFromAtoB = (PlayerController.instance.transform.position - enemyMachine.transform.position).normalized;
+          
             float dotProd = Vector3.Dot(dirFromAtoB, enemyMachine.transform.forward);
-            if (dotProd >= 0.9f)
+            if (dotProd >= 0.8f)
             {
                    PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
                             enemy.SwitchState(enemy.pauseAttackState);
