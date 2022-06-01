@@ -14,7 +14,6 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
     public override void StartState(EnemyMachine enemyMachine)
     {
         base.StartState(enemyMachine);
-        Debug.Log("bonsoir");
         enemyMachine.agent.enabled = true;
         enemyMachine.agent.isStopped = true;
         enemyMachine.agent.enabled = false;
@@ -24,7 +23,6 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
         knockback.Normalize();
         knockback *= enemyMachine.attackStrength;
         knockback /= enemyMachine.enemyWeigth;
-        Debug.DrawRay(enemyMachine.transform.position, knockback, Color.green, 1f);
         enemyMachine.rb.AddForce(knockback);
         enemyMachine.rb.drag = drag;
         

@@ -125,6 +125,7 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     #region Main Functions
     
+    
     private void Start()
     {
         IsActive = true;
@@ -191,7 +192,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         knockback.Normalize();
         knockback *= strengh * enemy.Machine.PlayerKnockBackFactor;
 
-        Debug.DrawRay(transform.position, knockback, Color.yellow, 1f);
 
         PlayerController.instance.currentVelocity += knockback;
         PlayerController.instance.playerRb.drag = drag;
@@ -222,7 +222,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         transform.position = locationTransform.position;
         transform.rotation = locationTransform.rotation;
         Time.timeScale = 1;
-        Debug.Log(locationTransform.position);
     }
 
     public void Heal(int heal)
@@ -280,7 +279,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         Camera.main.transform.localEulerAngles = CheckPointsReached[index].cameraRotation;
         EnemiesManager.Instance.RefreshBaseEnemies();
         _respawnEvent?.Invoke();
-        Debug.Log("Respawn");
         UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);

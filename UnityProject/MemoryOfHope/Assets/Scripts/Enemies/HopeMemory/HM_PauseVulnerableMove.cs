@@ -11,7 +11,6 @@ public class HM_PauseVulnerableMove : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         enemyMachine.enemyManager.Animator.SetBool("IsMove", false);
-        Debug.Log("Pause avant de move");
         base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = true;
         timer = 0;

@@ -26,8 +26,6 @@ public class MC_HitState : EnemyState // State quand le Songe est attaqué
         knockback *= enemyMachine.attackStrength;
         knockback /= enemyMachine.enemyWeigth;
         
-        Debug.DrawRay(enemyMachine.transform.position, knockback, Color.green, 1f);
-        
         enemyMachine.rb.AddForce(knockback);
         
         enemyMachine.rb.drag = drag;

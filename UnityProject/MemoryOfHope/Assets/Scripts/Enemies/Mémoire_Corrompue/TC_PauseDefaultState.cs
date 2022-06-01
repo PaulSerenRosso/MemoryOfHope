@@ -11,7 +11,6 @@ public class TC_PauseDefaultState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         timer = 0f;
-        Debug.Log("bonsoir  tous");
         wallAnim.Play("WallFadeInTower");
         base.StartState(enemyMachine);
     }
@@ -20,7 +19,6 @@ public class TC_PauseDefaultState : EnemyState
     {
         timer += Time.deltaTime;
 
-        Debug.Log(wallAnim.isPlaying);
         if (ConditionState.Timer(pauseApparition, timer))
         {
             TC_StateMachine machine = (TC_StateMachine) enemyMachine;

@@ -23,7 +23,6 @@ public class
         knockback.Normalize();
         knockback *= enemyMachine.attackStrength;
         knockback /= enemyMachine.enemyWeigth;
-        Debug.DrawRay(enemyMachine.transform.position, knockback, Color.green, 1f);
         enemyMachine.rb.AddForce(knockback);
         enemyMachine.rb.drag = drag;
         enemyMachine.enemyManager.Animator.Play("Damage");

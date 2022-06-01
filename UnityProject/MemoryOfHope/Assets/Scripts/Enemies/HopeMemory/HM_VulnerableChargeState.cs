@@ -14,8 +14,6 @@ public class HM_VulnerableChargeState : EnemyState
     
     public override void StartState(EnemyMachine enemyMachine)
     {
-       
-        Debug.Log("Charge attack !");
         base.StartState(enemyMachine);
         enemyMachine.agent.isStopped = false;
         enemyMachine.agent.stoppingDistance = 0;
@@ -52,7 +50,6 @@ public class HM_VulnerableChargeState : EnemyState
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("hits PJ with charge");
             timer = chargeDuration;
         }
     }

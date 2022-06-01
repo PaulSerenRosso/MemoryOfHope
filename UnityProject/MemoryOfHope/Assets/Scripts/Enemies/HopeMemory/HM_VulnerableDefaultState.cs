@@ -20,7 +20,6 @@ public class HM_VulnerableDefaultState : EnemyState
         
         enemy.nextLifeThreshold = enemy.enemyManager.health -
                                   ((VulnerablePhaseSO) BossPhaseManager.instance.currentPhase).damageToInflict;
-        Debug.Log($"next threshold : {enemy.nextLifeThreshold}");
         
         UIInstance.instance.SetBossLifeGauge(PhaseType.Vulnerable);
 

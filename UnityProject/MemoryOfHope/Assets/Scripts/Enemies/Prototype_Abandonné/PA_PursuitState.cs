@@ -21,11 +21,9 @@ public class PA_PursuitState : EnemyState
         enemyMachine.agent.SetDestination(PlayerController.instance.transform.position);
         Vector3 vectDist = PlayerController.instance.transform.position - enemyMachine.transform.position;
         Vector3 dirFromAtoB = (vectDist).normalized;
-        Debug.Log(vectDist.magnitude);
         if (vectDist.magnitude < 2f)
         {
               enemyMachine.transform.forward = Vector3.RotateTowards(enemyMachine.transform.forward, dirFromAtoB, rotationSpeed*Time.deltaTime, 00f);
-              Debug.Log("bonsoir à tous");
         }
      
         if (ConditionState.CheckDistance(enemyMachine.transform.position, 

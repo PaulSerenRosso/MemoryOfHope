@@ -326,7 +326,6 @@ public class UIInstance : MonoBehaviour
     public void SetNotification(string message, bool active)
     {
         notificationText.text = message;
-        Debug.Log("je suis lu");
         notificationBox.SetActive(active);
     }
 

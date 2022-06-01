@@ -43,7 +43,6 @@ public class S_EndPursuitState : EnemyState
         }
         if (enemyMachine.agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
-            Debug.Log("can't reach the player");
             S_StateMachine enemy = (S_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.pausePositionState);
         }

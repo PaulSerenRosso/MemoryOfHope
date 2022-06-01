@@ -18,7 +18,6 @@ public class HM_ProtectionPositionState : EnemyState
         initialPos = enemy.protectedPos;
 
         enemy.transform.position = initialPos;
-        Debug.Log(enemy.transform.position + initialPos);
 
         enemy.SwitchState(enemy.protectionProtectedState);
     }

@@ -38,7 +38,6 @@ public class MC_PositionState : EnemyState
 
     public override void UpdateState(EnemyMachine enemyMachine)
     {
-        Debug.Log(enemyMachine.agent.velocity);
         if (enemyMachine.agent.velocity == Vector3.zero)
         {
             enemyMachine.enemyManager.Animator.SetBool("IsMove", false);

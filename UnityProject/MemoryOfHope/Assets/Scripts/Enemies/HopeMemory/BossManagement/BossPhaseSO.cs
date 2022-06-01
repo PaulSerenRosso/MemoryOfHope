@@ -29,7 +29,6 @@ public class BossPhaseSO : ScriptableObject
     {
         allWaves.Remove(currentWave);
         if (allWaves.Count == 0) return;
-        Debug.Log("New wave !");
         currentWave = allWaves[0];
         currentWave.SpawningEnemies();
     }

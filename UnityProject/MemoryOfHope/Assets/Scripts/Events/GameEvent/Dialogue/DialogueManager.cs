@@ -91,7 +91,6 @@ public class DialogueManager : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         if (CurrentLine.VoiceLine != null && CharacterAudioSourcesDic.ContainsKey(CurrentLine.CharacterProfil.Character) )
         {
-            Debug.Log(CurrentLine.VoiceLine);
             CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].clip = CurrentLine.VoiceLine;
             CharacterAudioSourcesDic[CurrentLine.CharacterProfil.Character].Play();
         }
