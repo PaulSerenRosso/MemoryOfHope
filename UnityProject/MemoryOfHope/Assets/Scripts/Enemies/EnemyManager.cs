@@ -108,6 +108,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     IEnumerator WaitForLaunchAnimationDeath()
     {
         yield return new WaitForEndOfFrame();
+        
         Animator.Play("Death");
     }
 

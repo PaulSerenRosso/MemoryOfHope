@@ -168,6 +168,7 @@ public class PlayerManager : MonoBehaviour, Damageable
             */
 
             isHit = true;
+            yield return new WaitForEndOfFrame();
             PlayerController.instance.playerAnimator.Play("Hit");
             KnockBack(enemy, _drag, knockbackStrength);
             int damage = enemy.damage;
@@ -241,6 +242,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     {
         GameManager.instance.RumbleConstant(.6f, .9f, .7f);
 
+        PlayerController.instance.playerAnimator.Play("Death");
         health = 0;
         UIInstance.instance.DisplayHealth();
         StartCoroutine(DeathTime());
@@ -281,9 +283,11 @@ public class PlayerManager : MonoBehaviour, Damageable
         UIInstance.instance.respawnCount++;
         Heal(maxHealth);
         yield return new WaitForSeconds(_timeRespawn);
+        PlayerController.instance.playerAnimator.Play("Idle");
         UIInstance.instance.blackFilter.Play("FadeOut");
         yield return new WaitForSeconds(1);
         IsActive = true;
+       
         isDead = false;
     }
 
