@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: SoundUtilites
   m_EditorClassIdentifier: 
   AudioMixer: {fileID: 24100000, guid: 28ec2dbf47ec09047b8a686129558e8b, type: 2}
-  _transitionMusics: []
+  _transitionMusics:
+  - name: MainMenu
+    FinalAudio: {fileID: 0}
+    SpeedToMinVolume: 0
+    SpeedToMaxVolume: 0
+  - name: Spawn
+    FinalAudio: {fileID: 8300000, guid: c3004ed1397d694488eb59cf7804b5c8, type: 3}
+    SpeedToMinVolume: 0.4
+    SpeedToMaxVolume: 0.4
+  - name: MainRegion
+    FinalAudio: {fileID: 8300000, guid: 1548f16594e34eb40a0af05771832b6f, type: 3}
+    SpeedToMinVolume: 0.4
+    SpeedToMaxVolume: 0.4
   _transitionAmbiances:
   - name: ToSpawn
     FinalAudio: {fileID: 8300000, guid: 6879c7f2c87273c4a9339eee3e77a488, type: 3}
