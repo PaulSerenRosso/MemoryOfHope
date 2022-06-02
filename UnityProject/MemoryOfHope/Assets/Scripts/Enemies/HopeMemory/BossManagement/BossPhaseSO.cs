@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class BossPhaseSO : ScriptableObject
@@ -12,8 +13,11 @@ public class BossPhaseSO : ScriptableObject
     public PhaseType phaseType;
     public float rotatingSphereSpeed;
 
+    public UnityEvent phaseEvent;
+
     public virtual void SetPhase()
     {
+        phaseEvent?.Invoke();
         allWaves.Clear();
         currentWave = null;
         foreach (var wave in allWavesSO)
