@@ -20,13 +20,13 @@ public class HM_PauseVulnerableAttack : EnemyState
         if (rand == 0)
         {
             currentTime = durationBeforeShockWave;
-            enemyMachine.enemyManager.Animator.Play("ShockWave");
+            enemyMachine.enemyManager.Animator.SetBool("IsShock", true);
         }
         else
         {
             enemyMachine.enemyManager.Animator.SetBool("EndCharge", false);
             currentTime = durationBeforeCharge;
-            enemyMachine.enemyManager.Animator.Play("BeginCharge");
+            enemyMachine.enemyManager.Animator.SetBool("IsCharge", true);
         }
 
         enemyMachine.agent.isStopped = true;
@@ -43,10 +43,12 @@ public class HM_PauseVulnerableAttack : EnemyState
             if (rand == 0)
             {
                 enemy.SwitchState(enemy.vulnerableShockwaveState);
+                enemyMachine.enemyManager.Animator.SetBool("IsShock",  false);
             }
             else
             {
                 enemy.SwitchState(enemy.vulnerableChargeState);
+                enemyMachine.enemyManager.Animator.SetBool("IsCharge", false);
             }
         }
     }

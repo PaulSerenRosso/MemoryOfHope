@@ -25,4 +25,5 @@ public class PA_PausePursuitState : EnemyState
             enemy.SwitchState(enemy.pursuitState);
         }
     }
+
 }

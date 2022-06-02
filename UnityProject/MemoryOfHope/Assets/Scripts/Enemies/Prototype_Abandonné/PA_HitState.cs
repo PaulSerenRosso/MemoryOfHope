@@ -41,6 +41,7 @@ public class PA_HitState : EnemyState // State quand le Prototype Abandonné est
             enemyMachine.rb.isKinematic = true;
             enemyMachine.rb.velocity = Vector3.zero;
             enemy.SwitchState(enemy.pursuitState);
+            enemy.enemyManager.Animator.SetBool("IsDamage", false);
             //enemyMachine.attackStrength = 0;
         }
     }
