@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemiesManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class EnemiesManager : MonoBehaviour
 
     public List<EnemySetter> enemiesSetter;
 
+    public List<ListenerWaveEnemy> WaveEnemiesList;
     public void RefreshBaseEnemies()
     {
         for (int i = 0; i < BaseEnemies.Count; i++)
@@ -39,6 +41,10 @@ public class EnemiesManager : MonoBehaviour
             if (!enemy.gameObject.activeSelf) continue;
             enemy.TakeDamage(enemy.maxHealth);
             enemy.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < WaveEnemiesList.Count; i++)
+        {
+            WaveEnemiesList[i].Awake();
         }
 
         BossPhaseManager.instance.BattleRefresh();
