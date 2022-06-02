@@ -73,7 +73,8 @@ public class MC_StateMachine : EnemyMachine
         
         if (_isCurrentAttackKnockback)
         {
-            enemyManager.Animator.Play("Damage");
+            enemyManager.Animator.SetBool("IsDamage", true);
+            currentState.CancelHit(this);
             SwitchState(hitState);
         }
         

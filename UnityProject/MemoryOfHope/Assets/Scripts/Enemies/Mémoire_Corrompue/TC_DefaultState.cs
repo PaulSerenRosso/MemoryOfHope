@@ -14,6 +14,7 @@ public class TC_DefaultState : EnemyState
     public override void StartState(EnemyMachine enemyMachine)
     {
         base.StartState(enemyMachine);
+        _wallCollider.gameObject.SetActive(true);
         var enemy = (TC_StateMachine) enemyMachine;
 
         memoryTransform = enemy.isHopeCorruptedTower
@@ -32,6 +33,7 @@ public class TC_DefaultState : EnemyState
         
         yield return new WaitForSeconds(_animationTime);
         _wallCollider.enabled = true;
+        Debug.Log("bonsorifdsqfdf");
     }
 
     public override void UpdateState(EnemyMachine enemyMachine)

@@ -184,7 +184,7 @@ public class InteractionModule : Module
 
         line.positionCount = 2;
         line.SetPosition(0, raycastOrigin.transform.position);
-        line.SetPosition(1, transform.position + transform.forward * rayLength);
+        line.SetPosition(1, raycastOrigin.transform.position + transform.forward * rayLength);
 
         if (Physics.Raycast(raycastOrigin.position, transform.forward, out var hit, rayLength, interactiveObjectLayer))
         {

@@ -14,6 +14,7 @@ public class PA_PauseAttackState : EnemyState
     private float timer;
     [SerializeField] private Transform lookAtTransform;
 
+    private int rand = 0; 
     public override void StartState(EnemyMachine enemyMachine)
     { base.StartState(enemyMachine);
         
@@ -28,13 +29,14 @@ public class PA_PauseAttackState : EnemyState
     IEnumerator WaitForAnimationAttack(EnemyMachine enemyMachine)
     {
         yield return new WaitForSeconds(durationBeforeAnimAttack);
-                if (Random.Range(0, 2) == 0)
+        rand = Random.Range(0, 2);
+                if (rand == 0)
                 {
-                     enemyMachine.enemyManager.Animator.Play("Attack1");
+                     enemyMachine.enemyManager.Animator.SetBool("IsAttack1", true);
                 }
                 else
                 {
-                    enemyMachine.enemyManager.Animator.Play("Attack2");
+                    enemyMachine.enemyManager.Animator.SetBool("IsAttack2", true);
                 }
     }
     
@@ -50,8 +52,30 @@ public class PA_PauseAttackState : EnemyState
         
         if (ConditionState.Timer(durationBeforeAttack, timer))
         {
+            if (rand == 0)
+            {
+                enemyMachine.enemyManager.Animator.SetBool("IsAttack1", false);
+            }
+            else
+            {
+                enemyMachine.enemyManager.Animator.SetBool("IsAttack2", false);
+            }
             PA_StateMachine enemy = (PA_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.attackState);
         }
+    }
+
+    public override void CancelHit(EnemyMachine enemyMachine)
+    {
+        base.CancelHit(enemyMachine);
+        if (rand == 0)
+        {
+            enemyMachine.enemyManager.Animator.SetBool("IsAttack1", false);
+        }
+        else
+        {
+            enemyMachine.enemyManager.Animator.SetBool("IsAttack2", false);
+        }
+        
     }
 }
