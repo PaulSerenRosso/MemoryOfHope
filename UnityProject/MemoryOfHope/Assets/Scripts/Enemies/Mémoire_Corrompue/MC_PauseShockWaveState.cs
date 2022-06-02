@@ -21,11 +21,11 @@ public class MC_PauseShockWaveState : EnemyState
         if (_rightAnimationAttack)
         {
             _rightAnimationAttack = false;
-            enemyMachine.enemyManager.Animator.Play("AttackRight");
+            enemyMachine.enemyManager.Animator.SetBool("IsAttackRight", true);
         }
         else
         {
-            enemyMachine.enemyManager.Animator.Play("AttackLeft");
+            enemyMachine.enemyManager.Animator.SetBool("IsAttackLeft", true); 
             _rightAnimationAttack = true;
         }
         
@@ -46,8 +46,29 @@ public class MC_PauseShockWaveState : EnemyState
 
         if (ConditionState.Timer(durationBeforeShockWave, timer))
         {
+            if (!_rightAnimationAttack)
+            {
+                enemyMachine.enemyManager.Animator.SetBool("IsAttackRight", false);
+            }
+            else
+            {
+                enemyMachine.enemyManager.Animator.SetBool("IsAttackLeft", false); 
+            }
             MC_StateMachine enemy = (MC_StateMachine) enemyMachine;
             enemy.SwitchState(enemy.shockWaveState);
+        }
+    }
+
+    public override void CancelHit(EnemyMachine enemyMachine)
+    {
+        base.CancelHit(enemyMachine);
+        if (!_rightAnimationAttack)
+        {
+            enemyMachine.enemyManager.Animator.SetBool("IsAttackRight", false);
+        }
+        else
+        {
+            enemyMachine.enemyManager.Animator.SetBool("IsAttackLeft", false); 
         }
     }
 }

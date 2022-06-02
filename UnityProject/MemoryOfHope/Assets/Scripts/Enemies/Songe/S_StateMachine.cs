@@ -79,7 +79,8 @@ public class S_StateMachine : EnemyMachine
         base.OnHitByMelee();
         if (_isCurrentAttackKnockback)
         {
-        enemyManager.Animator.Play("Damage");
+            enemyManager.Animator.SetBool("IsDamage", true);
+            currentState.CancelHit(this);
             SwitchState(hitState);
         }
     }

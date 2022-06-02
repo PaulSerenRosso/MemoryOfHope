@@ -11,7 +11,12 @@ public abstract class EnemyState
     {
         _startState?.Invoke();
     }
-    
+
+    public virtual void CancelHit(EnemyMachine enemyMachine)
+    {
+        
+    }
+
     public virtual void UpdateState(EnemyMachine enemyMachine)
     {
         
