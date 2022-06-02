@@ -88,7 +88,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     {
         isDead = true;
         _deathEvent?.Invoke();
-        if (Animator != null)
+        if (Animator != null && IsBaseEnemy)
         {
         Animator.SetBool("IsDamage", false);
         Animator.SetBool("IsDead", true);
