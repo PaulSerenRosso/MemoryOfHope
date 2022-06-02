@@ -1,26 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-437034236278324491
+--- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 11
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
+  m_Script: {fileID: 11500000, guid: 11fbb352189210b408ccf9a29097145a, type: 3}
+  m_Name: MI_Cable
   m_EditorClassIdentifier: 
-  version: 4
---- !u!21 &2100000
+  master: {fileID: 2100000, guid: 7c867b6ff6b86554db1cd6ef4ea63277, type: 2}
+  instance: {fileID: 2058962672267735029}
+  overrides:
+  - name: Texture2D_989997a6f1f94ca4a93e6982291d318d
+    type: 4
+    isKeyword: 0
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 2800000, guid: 048e11fdd8fecb64ea1c5716eb473747, type: 3}
+    active: 1
+  - name: Texture2D_681fefa5d94f44c088d204d59417106e
+    type: 4
+    isKeyword: 0
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 2800000, guid: 546d7a09a0040e049a94e2c784aaf9a0, type: 3}
+    active: 1
+  - name: Texture2D_6cc75d15023d47d88e72aa9ff0ef1de7
+    type: 4
+    isKeyword: 0
+    colorValue: {r: 0, g: 0, b: 0, a: 0}
+    vectorValue: {x: 0, y: 0, z: 0, w: 0}
+    floatValue: 0
+    textureValue: {fileID: 2800000, guid: 24ed1ea3dd7f5264d81f11ef8b269acf, type: 3}
+    active: 1
+--- !u!21 &2058962672267735029
 Material:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Body
+  m_Name: MI_Cable
   m_Shader: {fileID: -6465566751694194690, guid: bf0a9e8a3113b02499c5f08fdb9b8a73, type: 3}
   m_ShaderKeywords: _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP
   m_LightmapFlags: 2
@@ -33,15 +59,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_681fefa5d94f44c088d204d59417106e:
-        m_Texture: {fileID: 2800000, guid: c0de295a148850f4484b0fec4a18d2ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 546d7a09a0040e049a94e2c784aaf9a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_6cc75d15023d47d88e72aa9ff0ef1de7:
-        m_Texture: {fileID: 2800000, guid: d09ad8dafa4286548baaa3b72405a529, type: 3}
+        m_Texture: {fileID: 2800000, guid: 24ed1ea3dd7f5264d81f11ef8b269acf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_989997a6f1f94ca4a93e6982291d318d:
-        m_Texture: {fileID: 2800000, guid: c0784cc5cc91d1343a0e526909954fbd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 048e11fdd8fecb64ea1c5716eb473747, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_aafcac92fe3e46e68eaa42d76cf2be46:
