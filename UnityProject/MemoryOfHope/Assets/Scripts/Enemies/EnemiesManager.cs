@@ -30,6 +30,7 @@ public class EnemiesManager : MonoBehaviour
             BaseEnemies[i].transform.position = BaseEnemies[i].SpawnPosition;
             BaseEnemies[i].transform.rotation = BaseEnemies[i].SpawnRotation;
             BaseEnemies[i].Heal(BaseEnemies[i].maxHealth);
+            BaseEnemies[i].isDead = false;
             BaseEnemies[i].Machine.Start();
         }
 
