@@ -45,6 +45,7 @@ public class MC_HitState : EnemyState // State quand le Songe est attaqué
             enemyMachine.rb.isKinematic = true;
             enemyMachine.rb.velocity = Vector3.zero;
             enemy.SwitchState(enemy.positionState);
+            enemy.enemyManager.Animator.SetBool("IsDamage", false);
             
         }
     }

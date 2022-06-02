@@ -6,6 +6,13 @@ public class HopeCorruptedMemoryManager : EnemyManager
     [SerializeField] private ParticleSystem deathEffect;
 
     [SerializeField] private Animation _animation;
+    public override void Start()
+    {
+        
+        base.Start();
+        
+    }
+
     public override void Death()
     {
         deathEffect.Play();

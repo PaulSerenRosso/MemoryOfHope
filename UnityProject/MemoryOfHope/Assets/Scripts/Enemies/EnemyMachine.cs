@@ -23,12 +23,23 @@ public class EnemyMachine : MonoBehaviour
     [SerializeField] private UnityEvent _meleDamageEvent;
     [SerializeField] private UnityEvent _meleNoDamageEvent;
 
+
     #endregion
 
     #region State Machine Main Functions
 
     public virtual void Start()
     {
+       if(enemyManager.Animator != null && enemyManager.IsBaseEnemy)
+        enemyManager.Animator.SetBool("IsDamage", false);
+       if (enemyManager.IsBaseEnemy)
+       {
+                   for (int i = 0;  i< enemyManager._colliders.Length; i++)
+                   {
+                       enemyManager._colliders[i].enabled = true;
+                   }
+       }
+
         currentState?.StartState(this);
     }
 
@@ -102,6 +113,10 @@ public class EnemyMachine : MonoBehaviour
         }
     }
 
+    public virtual void CancelHit()
+    {
+        
+    }
     public virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Laser") && !isHit) // Hit by laser

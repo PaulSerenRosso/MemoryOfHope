@@ -28,6 +28,7 @@ public class EnemyManager : MonoBehaviour, Damageable
         set => isDeadEnemy = value;
     }
 
+    [SerializeField] public Collider[] _colliders;
     [SerializeField] protected float _timeDeath;
     public Animator Animator;
     public int healthEnemy;
@@ -52,8 +53,7 @@ public class EnemyManager : MonoBehaviour, Damageable
     #endregion
 
     #region Main Functions
-
-    void Start()
+   public virtual void Start()
     {
         if (IsBaseEnemy)
         {
@@ -88,8 +88,17 @@ public class EnemyManager : MonoBehaviour, Damageable
     {
         isDead = true;
         _deathEvent?.Invoke();
+        if (Animator != null)
+        {
+        Animator.SetBool("IsDamage", false);
+        Animator.SetBool("IsDead", true);
+        }
         if (WaveListener != null)
             WaveListener.Raise(this);
+        for (int i = 0;  i< _colliders.Length; i++)
+        {
+            _colliders[i].enabled = false;
+        }
         if (Animator != null)
         {
             StartCoroutine(WaitForLaunchAnimationDeath());
@@ -108,8 +117,8 @@ public class EnemyManager : MonoBehaviour, Damageable
     IEnumerator WaitForLaunchAnimationDeath()
     {
         yield return new WaitForEndOfFrame();
-        
-        Animator.Play("Death");
+
+        Machine.currentState.CancelHit(Machine);
     }
 
     IEnumerator WaitForDeath()

@@ -25,7 +25,7 @@ public class
         knockback /= enemyMachine.enemyWeigth;
         enemyMachine.rb.AddForce(knockback);
         enemyMachine.rb.drag = drag;
-        enemyMachine.enemyManager.Animator.Play("Damage");
+      enemyMachine.enemyManager.Animator.SetBool("IsDamage", true);
         
         timer = 0;
     }
@@ -43,6 +43,7 @@ public class
             enemyMachine.rb.isKinematic = true;
             enemyMachine.rb.velocity = Vector3.zero;
             enemy.SwitchState(enemy.pursuitState);
+            enemy.enemyManager.Animator.SetBool("IsDamage", false);
             
         }
     }
