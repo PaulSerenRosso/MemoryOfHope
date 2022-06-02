@@ -52,6 +52,7 @@ public Transform viewFinder;
         if (!FovIsSet)
         {
             var mainFieldOfView = Camera.main.fieldOfView;
+            if (CurrentZoom == null) return;
             if (LerpZoom(mainFieldOfView, CurrentZoom.Fov, CurrentZoom.FovSpeed, out mainFieldOfView))
             {
                 FovIsSet = true;
