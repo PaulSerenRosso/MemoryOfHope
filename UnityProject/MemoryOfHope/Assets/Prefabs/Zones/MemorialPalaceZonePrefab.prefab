@@ -41753,7 +41753,7 @@ GameObject:
   - component: {fileID: 8918803700655674622}
   - component: {fileID: 8918803700655674623}
   - component: {fileID: 8918803700655674616}
-  - component: {fileID: 8918803700655674617}
+  - component: {fileID: 1555428476}
   m_Layer: 0
   m_Name: Cube (17)
   m_TagString: Ground
@@ -42040,8 +42040,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8918803700655674619}
   m_Mesh: {fileID: 0}
---- !u!64 &8918803700655674617
-MeshCollider:
+--- !u!65 &1555428476
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -42050,10 +42050,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4.007477, z: 28}
+  m_Center: {x: -1, y: 3.9962616, z: 16.5}
 --- !u!1 &8918803700668684765
 GameObject:
   m_ObjectHideFlags: 0
@@ -67200,14 +67199,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 527e80c969e87b844814b4e68ae761ea, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3e176f97312fd549a70dbf78778654f, type: 3}
---- !u!4 &1605307415203821121 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b3e176f97312fd549a70dbf78778654f, type: 3}
-  m_PrefabInstance: {fileID: 1282835313529147818}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2093296666163965179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b3e176f97312fd549a70dbf78778654f, type: 3}
+  m_PrefabInstance: {fileID: 1282835313529147818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1605307415203821121 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b3e176f97312fd549a70dbf78778654f, type: 3}
   m_PrefabInstance: {fileID: 1282835313529147818}
   m_PrefabAsset: {fileID: 0}
 --- !u!82 &1555428470
@@ -67219,10 +67218,10 @@ AudioSource:
   m_GameObject: {fileID: 2093296666163965179}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1557984503027543947, guid: 28ec2dbf47ec09047b8a686129558e8b, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -67318,6 +67317,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d690220f0991d443bb8828f5dd60d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &784532058665299526
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093296666163965179}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1575826464998790710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71301,6 +71396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cec23d892bbb56428e75c0396e9ec74, type: 3}
+--- !u!1 &460753928851592902 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9095804872860506289, guid: 2cec23d892bbb56428e75c0396e9ec74, type: 3}
+  m_PrefabInstance: {fileID: 8673412911211646583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3719619014436783337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5458533033294793374, guid: 2cec23d892bbb56428e75c0396e9ec74, type: 3}
@@ -71314,11 +71414,6 @@ Transform:
 --- !u!1 &716475257934738605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8191846948513315546, guid: 2cec23d892bbb56428e75c0396e9ec74, type: 3}
-  m_PrefabInstance: {fileID: 8673412911211646583}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &460753928851592902 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9095804872860506289, guid: 2cec23d892bbb56428e75c0396e9ec74, type: 3}
   m_PrefabInstance: {fileID: 8673412911211646583}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &1555428471
@@ -76460,17 +76555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11f0d95545d96547ad818becf7db136, type: 3}
---- !u!114 &3980097735829061558 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5546694745361190767, guid: f11f0d95545d96547ad818becf7db136, type: 3}
+--- !u!82 &6366332503330440554 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2565984266544625075, guid: f11f0d95545d96547ad818becf7db136, type: 3}
   m_PrefabInstance: {fileID: 8918803699961884889}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e88bc0e8b2b6dd408a4a0cd6ad8b773, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6859653274866282754 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2663763701593866715, guid: f11f0d95545d96547ad818becf7db136, type: 3}
@@ -76482,16 +76571,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69a931c55df41b4c97ca0085232208a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &6366332503330440554 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2565984266544625075, guid: f11f0d95545d96547ad818becf7db136, type: 3}
-  m_PrefabInstance: {fileID: 8918803699961884889}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9105568155526032001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403227508798265944, guid: f11f0d95545d96547ad818becf7db136, type: 3}
   m_PrefabInstance: {fileID: 8918803699961884889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3980097735829061558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5546694745361190767, guid: f11f0d95545d96547ad818becf7db136, type: 3}
+  m_PrefabInstance: {fileID: 8918803699961884889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e88bc0e8b2b6dd408a4a0cd6ad8b773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2579531804681388670 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6343779896454656679, guid: f11f0d95545d96547ad818becf7db136, type: 3}
@@ -77346,15 +77441,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 212.375
+      value: 190.375
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 13.5625
+      value: 11.0625
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 210.3125
+      value: -796.6875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
@@ -78096,15 +78191,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672357232725, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: BeginLaser.x
-      value: 263.7724
+      value: 241.7724
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672357232725, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: BeginLaser.y
-      value: 8.371
+      value: 5.871
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672357232725, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: BeginLaser.z
-      value: 176.5
+      value: -830.5
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672464135082, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: m_Name
@@ -78168,15 +78263,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672891629897, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: BeginLaser.x
-      value: 263.009
+      value: 241.009
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672891629897, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: BeginLaser.y
-      value: 8.371
+      value: 5.871
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672891629897, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: BeginLaser.z
-      value: 175.7412
+      value: -831.2588
       objectReference: {fileID: 0}
     - target: {fileID: 1483929672891629901, guid: 1f99b556dafa8b84b99055dddcfdf822, type: 3}
       propertyPath: m_LocalPosition.x
@@ -81193,15 +81288,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 250.5
+      value: 228.5
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 8.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 222
+      value: -785
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
@@ -81755,16 +81850,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 221313ceb9319d34b925f5837156580f, type: 3}
---- !u!4 &5898424698849548600 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3035037699195611121, guid: 221313ceb9319d34b925f5837156580f, type: 3}
-  m_PrefabInstance: {fileID: 8918803700288880329}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2753531355065013024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6769885075403484649, guid: 221313ceb9319d34b925f5837156580f, type: 3}
   m_PrefabInstance: {fileID: 8918803700288880329}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2753531354862036802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6769885075197385099, guid: 221313ceb9319d34b925f5837156580f, type: 3}
+  m_PrefabInstance: {fileID: 8918803700288880329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5898424698849548600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3035037699195611121, guid: 221313ceb9319d34b925f5837156580f, type: 3}
+  m_PrefabInstance: {fileID: 8918803700288880329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1555428475
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2753531354862036802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 3
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &8918803700289043150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82176,15 +82290,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 250.5
+      value: 228.5
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 8.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 195
+      value: -812
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
@@ -84036,15 +84150,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 246.50833
+      value: 224.50833
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 8.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 177.5
+      value: -829.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
@@ -87087,15 +87201,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 255.5
+      value: 233.5
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 13.5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 201
+      value: -806
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
@@ -93199,11 +93313,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2632466857282296114, guid: 7a4324429844a1e4dabee416886f9f65, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7a4324429844a1e4dabee416886f9f65, type: 3}
---- !u!1 &9058311001178478299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 463977871868140408, guid: 7a4324429844a1e4dabee416886f9f65, type: 3}
-  m_PrefabInstance: {fileID: 8918803701176864163}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7166160946816474858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1780793082423530313, guid: 7a4324429844a1e4dabee416886f9f65, type: 3}
@@ -93220,6 +93329,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e2f0729c6ae014fa39b239046c28fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9058311001178478299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 463977871868140408, guid: 7a4324429844a1e4dabee416886f9f65, type: 3}
+  m_PrefabInstance: {fileID: 8918803701176864163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!208 &8918803700549516141
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -93236,6 +93350,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!136 &1555428474
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058311001178478299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 3
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &8918803701179420084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94453,15 +94581,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 223.5
+      value: 201.5
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 3.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 162
+      value: -845
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
@@ -99819,15 +99947,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.x
-      value: 234.5
+      value: 212.5
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.y
-      value: 8.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8788951389043370125, guid: 8048635754fe5474697714042a3b1a96, type: 3}
       propertyPath: BeginLaser.z
-      value: 206
+      value: -801
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8048635754fe5474697714042a3b1a96, type: 3}
