@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class UIMainMenuManager : MonoBehaviour
 {
@@ -30,11 +29,14 @@ public class UIMainMenuManager : MonoBehaviour
     [SerializeField] private GameObject _videoBackground;
     public List<UIDisplayText> allTextsOnScreen;
 
+    [SerializeField] private UnityEvent openMainMenu;
+
     [SerializeField] private EventSystem eventSystem;
 
     public void Start()
     {
         StartCoroutine(WaitForAnimation());
+        openMainMenu?.Invoke();
         Initialization();
         InitializationOption();
         SetTextLanguageOnDisplay();
