@@ -192,9 +192,8 @@ public class UIMainMenuManager : MonoBehaviour
 
     public void OnPlayClick()
     {
-        
         if (SceneManager.instance == null) return;
-        SceneManager.instance.LoadingScene(6);
+        SceneManager.instance.LoadingScene(2);
         if (GameManager.instance.IsFirstScreen)
             SceneManager.instance.UnloadingSceneAsync(1);
     }

@@ -251,7 +251,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     IEnumerator DeathTime()
     {
         isDead = true;
-        IsActive = false;
+       IsActive = false; 
         _deathEvent?.Invoke();
         yield return new WaitForSeconds(_timeDeath);
         UIInstance.instance.blackFilter.Play("FadeIn");

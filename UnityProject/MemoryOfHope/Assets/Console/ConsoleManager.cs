@@ -23,6 +23,7 @@ public class ConsoleManager : MonoBehaviour
     public string[] InputFieldContent;
     public static ConsoleManager Instance;
 
+    
  private ConsoleCommand _currentCommand ;
     
 

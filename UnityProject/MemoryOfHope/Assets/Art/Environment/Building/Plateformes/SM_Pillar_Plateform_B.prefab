@@ -156,7 +156,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4563787458371226626}
   - component: {fileID: 3081690026292711891}
-  - component: {fileID: 4927176877108038668}
+  - component: {fileID: 1391591724202129532}
+  - component: {fileID: 2856315495352985112}
   m_Layer: 6
   m_Name: SM_Pillar_Plateform_B
   m_TagString: Ground
@@ -207,8 +208,8 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1406712872128110211}
   m_Enabled: 1
---- !u!64 &4927176877108038668
-MeshCollider:
+--- !u!65 &1391591724202129532
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -217,10 +218,22 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7885074837881766785, guid: 777aacf892c4fc04da9c78a70bc22936, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 5, z: 2}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!65 &2856315495352985112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755443743279929016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 1, z: 3}
+  m_Center: {x: 0, y: 4.3, z: 0}
 --- !u!1 &4005724430372791439
 GameObject:
   m_ObjectHideFlags: 0

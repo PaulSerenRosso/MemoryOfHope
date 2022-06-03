@@ -51,6 +51,14 @@ public class ListenerWaveEnemy : MonoBehaviour
         
     }
 
+    public void  EndRaise()
+    {
+        for (int i = 0; i < _currentEnemies.Count; i++)
+        {
+            _currentEnemies[i].WaveListener = null;
+        }
+    }
+
     [Serializable]
     public class CheckIndexEnemiesList
     {
