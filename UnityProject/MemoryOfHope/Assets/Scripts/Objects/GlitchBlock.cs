@@ -47,10 +47,10 @@ public class GlitchBlock : MonoBehaviour
         PlayerController.instance.hopeCape.SetColor("Color_Hope", Color.black);
 
         anim.Play("GlitchFlowerClose");
+        _openGlitchEvent?.Invoke();
 
         yield return new WaitForSeconds(1);
 
-        _openGlitchEvent?.Invoke();
         isGlitchAvailable = true;
     }
 }
