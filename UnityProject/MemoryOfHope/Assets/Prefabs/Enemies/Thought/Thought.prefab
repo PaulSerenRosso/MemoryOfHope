@@ -249,7 +249,7 @@ MonoBehaviour:
   - {fileID: 8187002710246371109}
   - {fileID: 8187002711624987921}
   - {fileID: 8187002710995966528}
-  _timeDeath: 2.1
+  _timeDeath: 3
   Animator: {fileID: 4574660470204127452}
   healthEnemy: 1
   maxHealthEnemy: 1
@@ -268,6 +268,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 56905e7ae917ad64ba46c653d5277149, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4240731782863932353}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -681,8 +693,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4513064046484602094, guid: 398d6ea7f9bfb4817a7ccb3243ed5d51, type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513064046484602094, guid: 398d6ea7f9bfb4817a7ccb3243ed5d51, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513064046484602094, guid: 398d6ea7f9bfb4817a7ccb3243ed5d51, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513064046484602094, guid: 398d6ea7f9bfb4817a7ccb3243ed5d51, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4513064046812830845, guid: 398d6ea7f9bfb4817a7ccb3243ed5d51, type: 3}
       propertyPath: playOnAwake

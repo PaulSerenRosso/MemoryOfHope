@@ -8,22 +8,32 @@ public class ListenerWaveEnemy : MonoBehaviour
 {
     [SerializeField]
     private List<EnemyManager> _allEnemies;
+    [SerializeField]
+    private List<EnemyManager> _currentEnemies;
     [SerializeField] private List<CheckIndexEnemiesList> checkEnemyCount;
 
+    
     // Start is called before the first frame update
-    void Start()
+  public void Awake()
     {
-        for (int i = 0; i < _allEnemies.Count; i++)
+        _currentEnemies.Clear();
+        _currentEnemies.AddRange(_allEnemies);
+        for (int i = 0; i < _currentEnemies.Count; i++)
         {
-            _allEnemies[i].WaveListener = this;
+            _currentEnemies[i].WaveListener = this;
         }
+    }
+
+   void Start()
+    {
+        EnemiesManager.Instance.WaveEnemiesList.Add(this);
     }
     public void Raise(EnemyManager enemy)
     {
         for (int i = 0; i < checkEnemyCount.Count; i++)
         {
 
-            if (_allEnemies.Count == checkEnemyCount[i].Index+1)
+            if (_currentEnemies.Count == checkEnemyCount[i].Index+1)
             {
           
                 checkEnemyCount[i]?.Event.Invoke();   
@@ -33,7 +43,11 @@ public class ListenerWaveEnemy : MonoBehaviour
           
         }
         enemy.WaveListener = null;
-        _allEnemies.Remove(enemy);
+        _currentEnemies.Remove(enemy);
+        if (_currentEnemies.Count == 0)
+        {
+            EnemiesManager.Instance.WaveEnemiesList.Remove(this);
+        }
         
     }
 
