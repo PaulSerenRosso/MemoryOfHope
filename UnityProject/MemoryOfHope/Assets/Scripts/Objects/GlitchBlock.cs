@@ -13,6 +13,7 @@ public class GlitchBlock : MonoBehaviour
     [SerializeField] private UnityEvent _closeGlitchEvent;
     [SerializeField] private UnityEvent _openGlitchEvent;
 
+    [SerializeField] private Animation anim;
     private void Start()
     {
         feedback.Stop();
@@ -29,6 +30,7 @@ public class GlitchBlock : MonoBehaviour
 
     IEnumerator CollectingGlitch()
     {
+        anim.Play("Scene");
         feedback.Play();
         isGlitchAvailable = false;
         GameManager.instance.RumbleConstant(.2f, .6f, .5f);
@@ -44,6 +46,7 @@ public class GlitchBlock : MonoBehaviour
         PlayerController.instance.isGlitching = false;
         PlayerController.instance.hopeCape.SetColor("Color_Hope", Color.black);
 
+        anim.Play("GlitchFlowerClose");
 
         yield return new WaitForSeconds(1);
 
