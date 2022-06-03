@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class HM_StateMachine : EnemyMachine
 {
@@ -40,6 +41,9 @@ public class HM_StateMachine : EnemyMachine
     public float attackAreaLength;
     public float attackAreaHeight;
 
+    [SerializeField] private UnityEvent bossMusic;
+    [SerializeField] private UnityEvent defaultMusic;
+
     #region State Machine Main Functions
 
     void Awake()
@@ -65,6 +69,7 @@ public class HM_StateMachine : EnemyMachine
 
     public void ActivateBehaviour()
     {
+        bossMusic?.Invoke();
         currentState = vulnerableDefaultState;
         UIInstance.instance.SetBossDisplay(enemyManager, true);
         agent.enabled = true;
@@ -96,7 +101,7 @@ public class HM_StateMachine : EnemyMachine
             associatedTowers.Remove(tower);
         }
         protectionWall.gameObject.SetActive(false);
-
+        defaultMusic?.Invoke();
         isActive = false;
     }
 
