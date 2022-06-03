@@ -63,6 +63,12 @@ public class EnemyManager : MonoBehaviour, Damageable
         }
     }
 
+   public void DesactivateBaseEnemy()
+   {
+       EnemiesManager.Instance.BaseEnemies.Remove(this);
+       
+   }
+
     public void TakeDamage(int damages)
     {
         if (isDead) return;
