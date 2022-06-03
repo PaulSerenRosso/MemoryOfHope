@@ -68,14 +68,12 @@ public class PA_PauseAttackState : EnemyState
     public override void CancelHit(EnemyMachine enemyMachine)
     {
         base.CancelHit(enemyMachine);
-        if (rand == 0)
-        {
+     
             enemyMachine.enemyManager.Animator.SetBool("IsAttack1", false);
-        }
-        else
-        {
-            enemyMachine.enemyManager.Animator.SetBool("IsAttack2", false);
-        }
         
+       
+            enemyMachine.enemyManager.Animator.SetBool("IsAttack2", false);
+        
+    
     }
 }
