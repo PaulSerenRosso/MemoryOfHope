@@ -32,9 +32,8 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public List<CheckPoint> CheckPointsReached;
     public ListenerActivate CurrentListenerActivate;
-    
-    public ParticleSystem speedEffect;
 
+    public ParticleSystem speedEffect;
 
     #endregion
 
@@ -80,15 +79,19 @@ public class PlayerManager : MonoBehaviour, Damageable
     #region TakeDamage
 
     [Header("TakeDamage")] public Vector3 hitDirection;
+
     [SerializeField] private float knockbackStrength;
-  //  [SerializeField] private float _blockedKnockbackStrength;
+
+    //  [SerializeField] private float _blockedKnockbackStrength;
     [SerializeField] private float hitDuration;
     public bool isHit = false;
+
     [SerializeField] private float _drag;
-   // [SerializeField] private float _blockedDrag;
+
+    // [SerializeField] private float _blockedDrag;
     public bool IsInvincible;
-   // public bool isBlocked;
-   // [SerializeField] float blockedDuration;
+    // public bool isBlocked;
+    // [SerializeField] float blockedDuration;
 
     #endregion
 
@@ -116,7 +119,6 @@ public class PlayerManager : MonoBehaviour, Damageable
         }*/
 
         instance = this;
-     
     }
 
     #endregion
@@ -124,8 +126,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     #endregion
 
     #region Main Functions
-    
-    
+
     private void Start()
     {
         IsActive = true;
@@ -251,7 +252,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     IEnumerator DeathTime()
     {
         isDead = true;
-       IsActive = false; 
+        IsActive = false;
         _deathEvent?.Invoke();
         yield return new WaitForSeconds(_timeDeath);
         UIInstance.instance.blackFilter.Play("FadeIn");
@@ -273,7 +274,7 @@ public class PlayerManager : MonoBehaviour, Damageable
                 index = i;
             }
         }
-        
+
         transform.position = CheckPointsReached[index].SpawnPosition.position;
         transform.rotation = CheckPointsReached[index].SpawnPosition.rotation;
         Camera.main.transform.localEulerAngles = CheckPointsReached[index].cameraRotation;
@@ -286,7 +287,7 @@ public class PlayerManager : MonoBehaviour, Damageable
         UIInstance.instance.blackFilter.Play("FadeOut");
         yield return new WaitForSeconds(1);
         IsActive = true;
-       
+
         isDead = false;
         isHit = false;
     }
@@ -313,11 +314,10 @@ public class PlayerManager : MonoBehaviour, Damageable
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") /*&& !isBlocked */&& !isHit)
+        if (other.CompareTag("Enemy") /*&& !isBlocked */ && !isHit)
         {
             CheckEnemyTrigger(other);
         }
-
         CheckEventTriggerEnter(other);
     }
 
@@ -338,9 +338,9 @@ public class PlayerManager : MonoBehaviour, Damageable
     private void CheckShockwaveTrigger(Collider other, float length, float height, EnemyManager enemy)
     {
         var sphere = (SphereCollider) other;
-        
+
         var distance = Vector3.Magnitude(other.transform.position - transform.position);
-        
+
         if (!(distance > sphere.radius - length)) return;
         if (!(transform.position.y < height)) return;
 
@@ -356,8 +356,9 @@ public class PlayerManager : MonoBehaviour, Damageable
         if (type == typeof(MC_StateMachine)) // Si l'attaque est une shock wave
         {
             var machine = other.GetComponentInParent<MC_StateMachine>();
-            CheckShockwaveTrigger(other, machine.attackAreaLength,machine.attackArea.transform.position.y + machine.attackAreaHeight, machine.enemyManager);
-            
+            CheckShockwaveTrigger(other, machine.attackAreaLength,
+                machine.attackArea.transform.position.y + machine.attackAreaHeight, machine.enemyManager);
+
             //CheckShockWaveTrigger(other, enemy);
             return;
         }
@@ -367,8 +368,9 @@ public class PlayerManager : MonoBehaviour, Damageable
             if (enemy.Machine.attackArea.activeSelf) // Si le collider de l'attaque est activé = c'est une shockwave
             {
                 var machine = other.GetComponentInParent<HM_StateMachine>();
-                CheckShockwaveTrigger(other, machine.attackAreaLength,machine.attackArea.transform.position.y + machine.attackAreaHeight, machine.enemyManager);
-                
+                CheckShockwaveTrigger(other, machine.attackAreaLength,
+                    machine.attackArea.transform.position.y + machine.attackAreaHeight, machine.enemyManager);
+
                 return;
             }
             // C'est la charge
@@ -453,8 +455,7 @@ public class PlayerManager : MonoBehaviour, Damageable
     private void OnCollisionStay(Collision other)
     {
     }
-
-
+    
     private void OnCollisionExit(Collision other)
     {
     }
