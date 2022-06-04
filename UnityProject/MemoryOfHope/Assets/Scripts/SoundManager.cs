@@ -16,8 +16,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _ambianceSource;
 
-    [SerializeField]
-    private SoundUtilities Utilities;
+    public SoundUtilities Utilities;
     private float _maxVolumeMusic;
     private float _maxVolumeAmbiance;
     private float _currentMaxValue;
@@ -25,11 +24,20 @@ public class SoundManager : MonoBehaviour
     private TransitionSoundClass _currentTransition;
     private bool _inTransition;
 
+    [SerializeField]
+    private List<string> _keys;
     void Start()
     {
         for (int i = 0; i < Utilities._UISoundList.Count; i++)
         {
             _UISounds.Add(Utilities._UISoundList[i].Name, Utilities._UISoundList[i].AudioClip);
+        }
+    
+
+
+        for (int i = 0; i < _keys.Count; i++)
+        {
+                PlayerPrefs.SetFloat(_keys[i], 1);
         }
         _maxVolumeAmbiance = _ambianceSource.volume;
         _maxVolumeMusic = _musicSource.volume;
