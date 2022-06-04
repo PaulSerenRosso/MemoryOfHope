@@ -15,5 +15,6 @@ public class SoundSliderSetUpScene : MonoBehaviour
         {
            SoundManager.instance.SoundSliders.Add(_soundSlidersList[i].Name, _soundSlidersList[i].Slider);
         }
+        SoundManager.instance.Utilities.SetAudioSliders();
     }
 }

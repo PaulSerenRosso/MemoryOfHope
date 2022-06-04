@@ -30,6 +30,7 @@ public class SoundUtilities : ScriptableObject
     {
         AudioMixer.SetFloat(groupName, Mathf.Log10(SoundManager.instance.SoundSliders[groupName].value)*20);
         PlayerPrefs.SetFloat(groupName,SoundManager.instance.SoundSliders[groupName].value );
+        Debug.Log("bonsoir à tous les coucou");
     }
 
     public void SetAudioSliders()
@@ -38,6 +39,7 @@ public class SoundUtilities : ScriptableObject
         foreach (var soundSlider in SoundManager.instance.SoundSliders)
         {
             soundSlider.Value.value = PlayerPrefs.GetFloat(soundSlider.Key); 
+
         }
 
      
