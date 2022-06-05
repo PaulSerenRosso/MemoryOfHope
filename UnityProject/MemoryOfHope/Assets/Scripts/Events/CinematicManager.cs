@@ -31,6 +31,12 @@ public class CinematicManager : MonoBehaviour
         GameManager.instance.inputs.UI.SkipCinematic.canceled += CancelCinematic;
     }
 
+    public void EndGame()
+    {
+        Application.Quit();
+        Debug.Log("Lazarus disabled");
+    }
+    
     void SkipCinematic(InputAction.CallbackContext context)
     {
         _isPressSkipInput = true;
