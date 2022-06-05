@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7818340806762707662}
   - component: {fileID: 2152643704998696736}
   - component: {fileID: 3821826663842205284}
-  - component: {fileID: 5839431940119184028}
+  - component: {fileID: 1595273417834868513}
   m_Layer: 19
   m_Name: CorruptedTower
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   - {fileID: 7818340806762707662}
   - {fileID: 6809277836488958680}
   - {fileID: 4055716859629612558}
-  _timeDeath: 2
+  _timeDeath: 1
   Animator: {fileID: 0}
   healthEnemy: 10
   maxHealthEnemy: 10
@@ -98,6 +98,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1595273417834868513}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MCTower_Death
           m_BoolArgument: 0
         m_CallState: 2
   _damageEvent:
@@ -304,22 +316,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &5839431940119184028
-Animation:
+--- !u!95 &1595273417834868513
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463977871868140408}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 765145bafdf23db4aa76a22a4077e7aa, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 765145bafdf23db4aa76a22a4077e7aa, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c4ce1f1649c5ff4686aa2c0497000db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1368114412086641979
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +508,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -899677325833862633, guid: a8f50488267e5644b8cf97bfbf797e32, type: 2}
+  - {fileID: 2100000, guid: 78196dc985779d245a21abb7c38c9b5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -788,7 +803,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8541ce16e2660804e9d083e03d99c885, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -2646942581047194553, guid: 64574a8649235014b85fa1dc080bfe60, type: 2}
+      objectReference: {fileID: 5814821849627064276, guid: 9d86bdba95116604487e8a25da0f5803, type: 2}
     - target: {fileID: 919132149155446097, guid: 8541ce16e2660804e9d083e03d99c885, type: 3}
       propertyPath: m_Name
       value: SM_Tour_Corrompue_socle
@@ -893,7 +908,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: fb2fbbd386452624eaadc8e579b72dbb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -2646942581047194553, guid: 64574a8649235014b85fa1dc080bfe60, type: 2}
+      objectReference: {fileID: 5814821849627064276, guid: 9d86bdba95116604487e8a25da0f5803, type: 2}
     - target: {fileID: 919132149155446097, guid: fb2fbbd386452624eaadc8e579b72dbb, type: 3}
       propertyPath: m_Name
       value: SM_Tour_Corrompue_socle_Tour

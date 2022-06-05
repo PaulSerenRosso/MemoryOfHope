@@ -26,6 +26,7 @@ public class ListenerTrigger : MonoBehaviour
 
     void Start()
     {
+        if(_collider != null)
         _isActiveTrigger = _collider.enabled;
     }
 
