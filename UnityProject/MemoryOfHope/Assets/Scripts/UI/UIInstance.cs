@@ -545,12 +545,15 @@ public void DeactivateTimerUI()
 
 public void ActivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
+    
+    Debug.Log("testaaaaaa");
     _batteriesCountUI.SetActive(true);
     _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
 }
 
 public void DeactivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
+    Debug.Log("testaaaaaafdsqjfkmdsqjfmlkqdsjf");
     _batteriesCountUI.SetActive(false);
 }
 
