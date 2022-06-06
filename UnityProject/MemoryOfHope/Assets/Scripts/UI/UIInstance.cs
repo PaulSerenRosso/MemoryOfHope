@@ -459,7 +459,7 @@ public class UIInstance : MonoBehaviour
 
     public void OnSfxChange(Slider sfx)
     {
-        Debug.Log(sfx.value);
+        
     } // Quand la valeur de l'audio (SFX) est changée
 
     #endregion
@@ -546,14 +546,14 @@ public void DeactivateTimerUI()
 public void ActivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
     
-    Debug.Log("testaaaaaa");
+   
     _batteriesCountUI.SetActive(true);
     _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
 }
 
 public void DeactivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
-    Debug.Log("testaaaaaafdsqjfkmdsqjfmlkqdsjf");
+
     _batteriesCountUI.SetActive(false);
 }
 
