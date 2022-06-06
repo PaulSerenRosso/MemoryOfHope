@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private List<int> currentModuleUpdate;
     [SerializeField] private List<int> currentModuleFixed;
 
-
-
     [SerializeField] private List<Module> _movmentModule;
 
     #endregion
@@ -102,12 +100,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        /*if (instance is { })
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }*/
-
         instance = this;
     }
 
@@ -142,8 +134,6 @@ public class PlayerController : MonoBehaviour
             CheckModuleUpdate();
             CheckCurrentModuleUpdate();
         }
-
-        // CheckNearestObject();
     }
 
     void FixedUpdate()
@@ -186,8 +176,6 @@ public class PlayerController : MonoBehaviour
     }
 
     void CalculateCurrentVelocity()
-
-
     {
         if (currentVelocity != Vector3.zero)
         {
@@ -220,9 +208,10 @@ public class PlayerController : MonoBehaviour
 
         _isPerformedRotationModuleMovePlateform = false;
         if (_playerLocalRotationMovePlateformIsSet)
-        {  
+        {
             transform.forward = _moveGround.TransformDirection(_playerLocalRotationMovePlateform);
         }
+
         if (!_moveModule.inputPressed)
         {
             for (int i = 0; i < _rotationModuleMovePlateform.Count; i++)
@@ -230,7 +219,7 @@ public class PlayerController : MonoBehaviour
                 if (_rotationModuleMovePlateform[i].isPerformed)
                 {
                     _isPerformedRotationModuleMovePlateform = true;
-                  
+
                     break;
                 }
             }
@@ -238,7 +227,7 @@ public class PlayerController : MonoBehaviour
             if (!_isPerformedRotationModuleMovePlateform)
             {
                 _playerLocalRotationMovePlateform = _moveGround.InverseTransformDirection(transform.forward);
-                _playerLocalRotationMovePlateformIsSet = true; 
+                _playerLocalRotationMovePlateformIsSet = true;
             }
             else
             {
@@ -270,12 +259,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
+
     public void SetMoveGround(Transform moveGround)
     {
         _moveGround = moveGround;
         _inMoveGround = true;
-        _playerLocalRotationMovePlateformIsSet = false; 
+        _playerLocalRotationMovePlateformIsSet = false;
         _previousPositionSet = false;
     }
 
@@ -306,12 +295,12 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Angle(playerRb.velocity, currentNormalWall) >= 90)
             {
                 projectionRB = Vector3.ProjectOnPlane(playerRb.velocity, currentNormalWall).normalized;
-                
+
                 alignedSpeed = Vector3.Dot(playerRb.velocity, projectionRB);
-              
+
                 projectionRB *= alignedSpeed;
 
-                
+
                 playerRb.velocity = projectionRB;
             }
         }
@@ -441,9 +430,9 @@ public class PlayerController : MonoBehaviour
                 currentNormalWall = Vector3.zero;
             }
         }
+
         if (other.gameObject.CompareTag("EnemyBlocker"))
         {
-       
             playerRb.velocity = Vector3.zero;
         }
     }

@@ -10,12 +10,12 @@ public class CheckPoint : ListenerActivate
         base.Raise();
     }
 
-
     public override void Activate()
     {
-        IsActiveTrigger = false; 
+        IsActiveTrigger = false;
+        cameraRotation = Camera.main.gameObject.transform.localEulerAngles;
         PlayerManager.instance.CheckPointsReached.Add(this);
-       
+
         base.Activate();
     }
 }

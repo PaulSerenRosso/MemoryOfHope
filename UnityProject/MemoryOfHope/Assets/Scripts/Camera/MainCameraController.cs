@@ -6,7 +6,7 @@ using UnityEngine;
 public class MainCameraController : MonoBehaviour
 {
     public static MainCameraController Instance;
-public Transform viewFinder;
+    public Transform viewFinder;
     public float Distance;
     [SerializeField] Vector3 offSet;
 
@@ -15,7 +15,7 @@ public Transform viewFinder;
     public bool DistanceIsSet = true;
     public bool OffsetIsSet = true;
     public CameraZoomGameEvent CurrentZoom;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
@@ -24,13 +24,11 @@ public Transform viewFinder;
 
     void LateUpdate()
     {
-   
         if (CurrentZoom != null)
             Zoom();
-       
+
         transform.position = viewFinder.position + offSet - transform.forward * Distance;
     }
-
 
 
     void Zoom()
@@ -51,8 +49,9 @@ public Transform viewFinder;
 
         if (!FovIsSet)
         {
-            var mainFieldOfView = Camera.main.fieldOfView;
             if (CurrentZoom == null) return;
+
+            var mainFieldOfView = Camera.main.fieldOfView;
             if (LerpZoom(mainFieldOfView, CurrentZoom.Fov, CurrentZoom.FovSpeed, out mainFieldOfView))
             {
                 FovIsSet = true;

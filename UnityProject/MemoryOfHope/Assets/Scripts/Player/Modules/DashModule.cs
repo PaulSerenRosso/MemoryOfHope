@@ -23,9 +23,6 @@ public class DashModule : Module
     private bool isTutorial;
     [SerializeField] private TutorialGameEvent dashTutorial;
 
-    [SerializeField] private CameraZoomGameEvent dashZoom;
-    [SerializeField] private CameraZoomGameEvent defaultZoom;
-
     void Update()
     {
         if (!isPerformed)
@@ -149,7 +146,6 @@ public class DashModule : Module
         {
             _dashPerformedEvent?.Invoke();
             PlayerManager.instance.speedEffect.Play();
-            dashZoom.LaunchZoom();
         }
 
         PlayerController.instance.IsProjectWallVelocity = false;
@@ -175,7 +171,6 @@ public class DashModule : Module
         timerDash = 0;
         isPerformed = false;
         PlayerController.instance.useGravity = true;
-        defaultZoom.LaunchZoom();
 
     }
 }
