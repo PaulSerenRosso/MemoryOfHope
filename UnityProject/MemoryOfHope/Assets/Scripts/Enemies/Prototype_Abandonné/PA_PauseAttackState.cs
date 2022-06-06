@@ -71,7 +71,7 @@ public class PA_PauseAttackState : EnemyState
      
             enemyMachine.enemyManager.Animator.SetBool("IsAttack1", false);
         
-       
+            enemyMachine.StopAllCoroutines();
             enemyMachine.enemyManager.Animator.SetBool("IsAttack2", false);
         
     

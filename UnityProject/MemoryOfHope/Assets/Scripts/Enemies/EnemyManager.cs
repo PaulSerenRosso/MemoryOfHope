@@ -33,7 +33,9 @@ public class EnemyManager : MonoBehaviour, Damageable
     public Animator Animator;
     public int healthEnemy;
     public int maxHealthEnemy;
+
     public bool isDeadEnemy;
+
 //    public bool isBlocked;
     public bool canBeHitByMelee;
     public bool canBeHitByLaser;
@@ -49,11 +51,12 @@ public class EnemyManager : MonoBehaviour, Damageable
     public int damage;
     public EnemyMachine Machine;
     public ListenerWaveEnemy WaveListener;
-    
+
     #endregion
 
     #region Main Functions
-   public virtual void Start()
+
+    public virtual void Start()
     {
         if (IsBaseEnemy)
         {
@@ -63,11 +66,10 @@ public class EnemyManager : MonoBehaviour, Damageable
         }
     }
 
-   public void DesactivateBaseEnemy()
-   {
-       EnemiesManager.Instance.BaseEnemies.Remove(this);
-       
-   }
+    public void DesactivateBaseEnemy()
+    {
+        EnemiesManager.Instance.BaseEnemies.Remove(this);
+    }
 
     public void TakeDamage(int damages)
     {
@@ -92,19 +94,22 @@ public class EnemyManager : MonoBehaviour, Damageable
 
     public virtual void Death()
     {
+        if (isDead) return;
         isDead = true;
         _deathEvent?.Invoke();
         if (Animator != null)
         {
-        Animator.SetBool("IsDamage", false);
-        Animator.SetBool("IsDead", true);
+            Animator.SetBool("IsDamage", false);
+            Animator.SetBool("IsDead", true);
         }
+
         if (WaveListener != null)
             WaveListener.Raise(this);
-        for (int i = 0;  i< _colliders.Length; i++)
+        for (int i = 0; i < _colliders.Length; i++)
         {
             _colliders[i].enabled = false;
         }
+
         if (Animator != null)
         {
             StartCoroutine(WaitForLaunchAnimationDeath());

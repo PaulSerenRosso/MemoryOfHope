@@ -357,6 +357,7 @@ public class UIInstance : MonoBehaviour
         _utilities.PlayUISound("UI-02");
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(pauseMenuFirstSelected);
+        Time.timeScale = 0;
         SettingPlayerState();
     }
 
@@ -371,6 +372,7 @@ public class UIInstance : MonoBehaviour
         _utilities.PlayUISound("UI-04");
         pauseMenu.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
+        Time.timeScale = 1;
         SettingPlayerState();
     }
 
@@ -459,7 +461,7 @@ public class UIInstance : MonoBehaviour
 
     public void OnSfxChange(Slider sfx)
     {
-        Debug.Log(sfx.value);
+        
     } // Quand la valeur de l'audio (SFX) est changée
 
     #endregion
@@ -546,14 +548,14 @@ public void DeactivateTimerUI()
 public void ActivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
     
-    Debug.Log("testaaaaaa");
+   
     _batteriesCountUI.SetActive(true);
     _batteriesCount.text = doorLaserMultiple.ActivedActivatorsCount + " / "+doorLaserMultiple._allActivators.Count;
 }
 
 public void DeactivateBatteriesCount(DoorLaserMultiple doorLaserMultiple)
 {
-    Debug.Log("testaaaaaafdsqjfkmdsqjfmlkqdsjf");
+
     _batteriesCountUI.SetActive(false);
 }
 
