@@ -352,6 +352,7 @@ public class UIInstance : MonoBehaviour
 
     public void OpeningPauseMenu()
     {
+        Time.timeScale = 0;
         if (!PlayerManager.instance.IsActive) return;
         if (pauseMenu.activeSelf) return;
         _utilities.PlayUISound("UI-02");
@@ -371,6 +372,7 @@ public class UIInstance : MonoBehaviour
         _utilities.PlayUISound("UI-04");
         pauseMenu.SetActive(false);
         eventSystem.SetSelectedGameObject(null);
+        Time.timeScale = 1;
         SettingPlayerState();
     }
 
