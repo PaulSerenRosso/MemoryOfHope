@@ -24,11 +24,17 @@ public class CinematicManager : MonoBehaviour
     private bool _isPressSkipInput;
 
     [SerializeField] private GameObject[] modules;
-
+    private bool _lastCinematic;
     private void Start()
     {
         GameManager.instance.inputs.UI.SkipCinematic.performed += SkipCinematic;
         GameManager.instance.inputs.UI.SkipCinematic.canceled += CancelCinematic;
+    }
+    public void LastCinematic()
+    {
+        _skipSlider.transform.parent.gameObject.SetActive(false);
+        _isEndCinematic = true; 
+        
     }
 
     public void EndGame()
@@ -39,6 +45,7 @@ public class CinematicManager : MonoBehaviour
     
     void SkipCinematic(InputAction.CallbackContext context)
     {
+        if(!_isEndCinematic)
         _isPressSkipInput = true;
     }
 
