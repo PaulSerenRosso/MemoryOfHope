@@ -35,6 +35,7 @@ public class UIMainMenuManager : MonoBehaviour
 
     public void Start()
     {
+   Time.timeScale = 1;
         StartCoroutine(WaitForAnimation());
         openMainMenu?.Invoke();
         Initialization();
